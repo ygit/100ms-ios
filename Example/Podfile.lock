@@ -1,0 +1,27 @@
+PODS:
+  - GoogleWebRTC (1.1.31999)
+  - HMSVideo (0.2.0):
+    - GoogleWebRTC (= 1.1.31999)
+    - jetfire
+  - jetfire (0.1.5)
+
+DEPENDENCIES:
+  - HMSVideo (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - GoogleWebRTC
+    - jetfire
+
+EXTERNAL SOURCES:
+  HMSVideo:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  GoogleWebRTC: b39a78c4f5cc6b0323415b9233db03a2faa7b0f0
+  HMSVideo: 26c14a77ce094f5bdcfd06162fc954f86952927d
+  jetfire: 60c16cd6ae0282928e24203eb93f03b89c1929ce
+
+PODFILE CHECKSUM: 8a4763b4adea3ff402ba09ec59344644223a7c21
+
+COCOAPODS: 1.9.3
