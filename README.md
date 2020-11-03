@@ -17,7 +17,7 @@ pod 'HMSVideo', '~> 0.8.0'
 
 ## Quick start
 
-Checkout example app at [https://github.com/100mslive/hmsvideo-ios/Example](https://github.com/100mslive/hmsvideo-ios/Example)
+Checkout example app at [https://github.com/100mslive/hmsvideo-ios/tree/master/Example](https://github.com/100mslive/hmsvideo-ios/tree/master/Example)
 
 ## Concepts
 
