@@ -13,10 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface HMSPeer : NSObject
 @property (nonatomic, copy, readonly) NSString * peerId;
 @property (nonatomic, copy, readonly) NSString * name;
-@property (nonatomic, copy, nullable) NSString * authToken;
+@property (nonatomic, copy, readonly) NSString * _Nullable authToken;
 
-- (instancetype)initWithName:(NSString *)name;
-- (instancetype)initWithName:(NSString *)name peerId:(NSString *)peerId;
+- (instancetype)initWithName:(NSString *)name authToken:(NSString *)authToken;
+
 @end
 
 NS_ASSUME_NONNULL_END

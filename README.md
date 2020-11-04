@@ -38,8 +38,7 @@ This will instantiate an `HMSClient` object
 
 ```swift
 //Create an HMSPeer instance for local peer
-let peer = HMSPeer(name: userName)
-peer.authToken = "Inset your token here"
+let peer = HMSPeer(name: userName, authToken: "INSERT TOKEN HERE")
 
 let config = HMSClientConfig()
 //config.endpoint = "Override endpoint URL if needed"

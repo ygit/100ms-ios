@@ -28,9 +28,7 @@ class MeetingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let peer = HMSPeer(name: userName)
-        peer.authToken = "INSERT TOKEN HERE"
-        
+        let peer = HMSPeer(name: userName, authToken: "INSERT TOKEN HERE")        
         let config = HMSClientConfig()
 
         client = HMSClient(peer: peer, config: config)
