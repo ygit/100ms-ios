@@ -64,12 +64,28 @@ class MeetingViewController: UIViewController {
             // update UI if needed
         }
         
-
-        client.connect {  [weak self] (status, error) in
+        client.onConnect = { [weak self] in
             DispatchQueue.main.async {
                 self?.join()
             }
         }
+        
+        client.onDisconnect = { [weak self] error in
+            DispatchQueue.main.async {
+                self?.showDisconnectError(error)
+            }
+        }
+        
+
+        client.connect()
+    }
+    
+    func showDisconnectError(_ error: Error?) {
+        let alertController = UIAlertController(title: "Error", message: "Connection lost: \(error?.localizedDescription ?? "Unknown")", preferredStyle: .alert)
+                
+        let action1 = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(action1)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

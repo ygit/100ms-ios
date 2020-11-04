@@ -1,4 +1,4 @@
-# Getting Started - iOS SDK v0.8.0
+# v0.8.0  iOS SDK - Getting Started
 
 Here you will find everything you need to build experiences with video using 100ms iOS SDK. Dive into our SDKs, quick starts, add real-time video, voice, and screen sharing to your web and mobile applications.
 
@@ -52,34 +52,6 @@ Click [here](https://www.notion.so/Token-Generation-42b0f9d078224db4bf934608829a
 
 Use `wss://conf.brytecam.com` as endpoint URL for production and `wss://staging.brytecam.com` as endpoint URL for staging
 
-## Connect
-
----
-
-After instantiating `HMSClient`, connect to 100ms' server
-
-```swift
-//The client will connect to the WebSocket channel provided through the config
-client.connect { (success, error) in
-    //check for error and join a room if needed         
-}
-```
-
-## Join a room
-
----
-
-```swift
-//Pass the unique id for the room here as a String
-let room = HMSRoom(roomId: roomName)
-
-client.join(room) { (success, error) in
-    //check for error and publish a local stream
-}
-```
-
-Generate a unique `roomid` for each session to avoid conflicts
-
 ## Setup listeners
 
 ---
@@ -106,7 +78,42 @@ client.onStreamRemove = { (room, streamInfo)  in
 client.onBroadcast = { (room, peer, message) in
     // update UI if needed
 }
+
+client.onConnect = { 
+		// Client connected, this is a good place to call join(room)
+}
+
+client.onDisconnect = { error in 
+		// Connection lost or could not be established. 
+		// Good place to retry or show an error to the user.
+}
 ```
+
+## Connect
+
+---
+
+After instantiating `HMSClient`, connect to 100ms' server
+
+```swift
+//The client will connect to the WebSocket channel provided through the config
+client.connect
+```
+
+## Join a room
+
+---
+
+```swift
+//Pass the unique id for the room here as a String
+let room = HMSRoom(roomId: roomName)
+
+client.join(room) { (success, error) in
+    //check for error and publish a local stream
+}
+```
+
+Generate a unique `roomid` for each session to avoid conflicts
 
 ## Create and Get local camera/mic streams
 

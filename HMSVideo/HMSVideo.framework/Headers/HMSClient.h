@@ -31,19 +31,21 @@ typedef NS_ENUM(NSUInteger, HMSLogLevel) {
 
 @interface HMSClient : NSObject
 
-@property(nonatomic, copy) void (^onPeerJoin)(HMSRoom *, HMSPeer *);
-@property(nonatomic, copy) void (^onPeerLeave)(HMSRoom *, HMSPeer *);
-@property(nonatomic, copy) void (^onStreamAdd)(HMSRoom *, HMSPeer *, HMSStreamInfo *);
-@property(nonatomic, copy) void (^onStreamRemove)(HMSRoom *, HMSStreamInfo *);
-@property(nonatomic, copy) void (^onBroadcast)(HMSRoom *, HMSPeer *, NSDictionary *);
-@property(nonatomic, copy) void (^onDisconnect)(NSError *_Nullable);
+@property(nonatomic, copy, nullable) void (^onPeerJoin)(HMSRoom *, HMSPeer *);
+@property(nonatomic, copy, nullable) void (^onPeerLeave)(HMSRoom *, HMSPeer *);
+@property(nonatomic, copy, nullable) void (^onStreamAdd)(HMSRoom *, HMSPeer *, HMSStreamInfo *);
+@property(nonatomic, copy, nullable) void (^onStreamRemove)(HMSRoom *, HMSStreamInfo *);
+@property(nonatomic, copy, nullable) void (^onBroadcast)(HMSRoom *, HMSPeer *, NSDictionary *);
+@property(nonatomic, copy, nullable) void (^onDisconnect)(NSError *_Nullable);
+@property(nonatomic, copy, nullable) void (^onConnect)(void);
+
 @property(nonatomic, assign) HMSLogLevel logLevel;
-@property(nonatomic, strong) NSObject<HMSLogger> *logger;
+@property(nonatomic, strong, nullable) NSObject<HMSLogger> *logger;
 
 - (instancetype)initWithPeer:(HMSPeer *)peer;
 - (instancetype)initWithPeer:(HMSPeer *)peer config:(HMSClientConfig *_Nullable)config;
 
-- (void)connect:(__nullable HMSOperationStatusHandler)completionHandler;
+- (void)connect;
 - (void)disconnect;
 
 - (void)join:(HMSRoom *)room completion:(__nullable HMSOperationStatusHandler)completionHandler;
