@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) HMSVideoResolution resolution;
 @property (nonatomic, assign) NSInteger bitrate;
 @property (nonatomic, assign) NSInteger frameRate;
+@property (nonatomic, assign) NSInteger audioBitrate;
 @property (nonatomic, assign) BOOL shouldPublishAudio;
 @property (nonatomic, assign) BOOL shouldPublishVideo;
 @end

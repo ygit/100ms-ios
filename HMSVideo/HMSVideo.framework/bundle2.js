@@ -162,6 +162,26 @@ let WebRTCTransport = /** @class */ (() => {
             return sdp_transform_1.write(session);
         }
   
+        bitrateModify(sdp, audioBitrate, videoBitrate) {
+            var session = sdp_transform_1.parse(sdp);
+
+            var audioIndex = session.media.findIndex(({ type }) => type === 'audio');
+            if (audioIndex != -1) {
+              if (audioBitrate != null)  {
+                session.media[audioIndex].bandwidth = [{"type": "AS", "limit": `${audioBitrate}`}];
+              }
+            }
+
+            var videoIdx = session.media.findIndex(({ type }) => type === 'video');
+
+            if (videoIdx != -1) {
+              if (videoBitrate != null)  {
+                session.media[videoIdx].bandwidth = [{"type": "AS", "limit": `${videoBitrate}`}];
+              }
+            }
+
+            return sdp_transform_1.write(session);
+        }
   
     }
     return WebRTCTransport;
