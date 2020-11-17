@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HMSCommonDefs.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HMSVideoCapturer : NSObject
-
 - (void)startCapture;
 - (void)stopCapture;
 - (void)switchCamera;

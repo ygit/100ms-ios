@@ -52,6 +52,7 @@ typedef NS_ENUM(NSUInteger, HMSLogLevel) {
 - (void)leave:(HMSRoom *)room completion:(__nullable HMSOperationStatusHandler)completionHandler;
 
 - (HMSStream *)getLocalStream:(HMSMediaStreamConstraints *)constraints;
+- (BOOL)applyConstraints:(HMSMediaStreamConstraints *)constraints toLocalStream:(HMSStream *)stream error:(NSError **)error;
 
 - (void)publish:(HMSStream *)stream room:(HMSRoom *)room completion:(__nullable HMSStreamResultHandler)completionHandler;
 - (void)unpublish:(HMSStream *)stream room:(HMSRoom *)room completion:(__nullable HMSOperationStatusHandler)completionHandler;

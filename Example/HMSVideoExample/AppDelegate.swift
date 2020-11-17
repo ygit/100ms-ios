@@ -2,8 +2,7 @@
 //  AppDelegate.swift
 //  HMSVideo
 //
-//  Created by Dmitry Fedoseyev on 09/10/2020.
-//  Copyright (c) 2020 HMSVideo. All rights reserved.
+//  Copyright (c) 2020 100ms. All rights reserved.
 //
 
 import UIKit

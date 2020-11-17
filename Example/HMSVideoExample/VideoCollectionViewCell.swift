@@ -2,8 +2,7 @@
 //  VideoCollectionViewCell.swift
 //  HMSVideo
 //
-//  Created by Dmitry Fedoseyev on 19.09.2020.
-//  Copyright © 2020 100ms. All rights reserved.
+//  Copyright (c) 2020 100ms. All rights reserved.
 //
 
 import UIKit

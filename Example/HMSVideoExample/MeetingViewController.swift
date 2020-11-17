@@ -2,8 +2,7 @@
 //  MeetingViewController.swift
 //  HMSVideo
 //
-//  Created by Dmitry Fedoseyev on 09/10/2020.
-//  Copyright (c) 2020 HMSVideo. All rights reserved.
+//  Copyright (c) 2020 100ms. All rights reserved.
 //
 
 import UIKit
@@ -25,11 +24,36 @@ class MeetingViewController: UIViewController {
     var remoteStreams = [HMSStream]()
     var room: HMSRoom!
     
+    var token: String?
+    let endpoint: String = "wss://conf.brytecam.com/ws"
+    let tokenServerURL: String = "Insert sample token server url here"
+    
+    var peerId = UUID().uuidString
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let peer = HMSPeer(name: userName, authToken: "INSERT TOKEN HERE")        
+        UIApplication.shared.isIdleTimerDisabled = true
+        
+        fetchToken { [weak self] (token) in
+            DispatchQueue.main.async {
+                self?.token = token
+                if (token == nil) {
+                    self?.showTokenFailedError()
+                } else {
+                    self?.connect()
+                }
+            }
+        }
+    }
+        
+    
+    func connect() {
+        guard let token = token else { return }
+        let peer = HMSPeer(name: userName, authToken: token)
+
         let config = HMSClientConfig()
+        config.endpoint = endpoint
 
         client = HMSClient(peer: peer, config: config)
         client.logLevel = HMSLogLevel.verbose
@@ -86,8 +110,17 @@ class MeetingViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    func showTokenFailedError() {
+        let alertController = UIAlertController(title: "Error", message: "Could not fetch token.", preferredStyle: .alert)
+                
+        let action1 = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(action1)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         if isMovingFromParent {
+            UIApplication.shared.isIdleTimerDisabled = false
             cleanup()
         }
     }
@@ -197,6 +230,78 @@ class MeetingViewController: UIViewController {
             print("Cleanup done")
         }
     }
+    
+    func fetchToken(completion: @escaping (String?)->Void) {
+        guard let endpointUrl = URL(string: endpoint) else {
+            completion(nil)
+            return
+        }
+
+        guard let subDomain = endpointUrl.host?.components(separatedBy: ".").first else {
+            completion(nil)
+            return
+        }
+        
+        
+        let parameters = ["room_id": roomName,
+                          "peer_id": peerId,
+                          "env" : subDomain
+        ]
+
+        //create the url with URL
+        guard let url = URL(string: tokenServerURL) else {
+            completion(nil)
+            return
+        }
+
+        //create the session object
+        let session = URLSession.shared
+
+        //now create the URLRequest object using the url object
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST" //set http method as POST
+
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted) // pass dictionary to nsdata object and set it as request body
+        } catch let error {
+            print(error.localizedDescription)
+            completion(nil)
+            return
+        }
+
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+
+        //create dataTask using the session object to send data to the server
+        let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+
+            guard error == nil else {
+                print("\(String(describing: error))")
+                completion(nil)
+                return
+            }
+
+            guard let data = data else {
+                print("No data received")
+                completion(nil)
+                return
+            }
+
+            do {
+                //create json object from data
+                if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
+                    if let token = json["token"] as? String {
+                        completion(token)
+                    } else {
+                        completion(nil)
+                    }
+                }
+            } catch let error {
+                print(error.localizedDescription)
+            }
+        })
+        task.resume()
+    }
 }
 
 extension MeetingViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -218,11 +323,9 @@ extension MeetingViewController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var result = CGSize.zero
         
-        let targetWidth = (collectionView.frame.size.width - 20) / 2.0
-        
-        result.width = targetWidth
-        result.height = result.width * 9 / 16
-        
+        result.width = floor(collectionView.frame.size.width / 2.0)
+        result.height = floor(collectionView.frame.size.height / 2.0)
+
         return result
     }
 }

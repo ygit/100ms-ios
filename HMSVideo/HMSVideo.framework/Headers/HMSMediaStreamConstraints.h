@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HMSMediaStreamConstraints : NSObject
+@interface HMSMediaStreamConstraints : NSObject <NSCopying>
 @property (nonatomic, assign) HMSVideoCodec codec;
 @property (nonatomic, assign) HMSVideoResolution resolution;
 @property (nonatomic, assign) NSInteger bitrate;
