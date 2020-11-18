@@ -25,7 +25,6 @@ class MeetingViewController: UIViewController {
     var room: HMSRoom!
     
     var token: String?
-    let endpoint: String = "wss://conf.brytecam.com/ws"
     let tokenServerURL: String = "Insert sample token server url here"
     
     var peerId = UUID().uuidString
@@ -53,7 +52,6 @@ class MeetingViewController: UIViewController {
         let peer = HMSPeer(name: userName, authToken: token)
 
         let config = HMSClientConfig()
-        config.endpoint = endpoint
 
         client = HMSClient(peer: peer, config: config)
         client.logLevel = HMSLogLevel.verbose
@@ -232,20 +230,8 @@ class MeetingViewController: UIViewController {
     }
     
     func fetchToken(completion: @escaping (String?)->Void) {
-        guard let endpointUrl = URL(string: endpoint) else {
-            completion(nil)
-            return
-        }
-
-        guard let subDomain = endpointUrl.host?.components(separatedBy: ".").first else {
-            completion(nil)
-            return
-        }
-        
-        
         let parameters = ["room_id": roomName,
-                          "peer_id": peerId,
-                          "env" : subDomain
+                          "peer_id": peerId
         ]
 
         //create the url with URL
