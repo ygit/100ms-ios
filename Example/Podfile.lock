@@ -1,9 +1,7 @@
 PODS:
   - GoogleWebRTC (1.1.31999)
-  - HMSVideo (0.8.3):
+  - HMSVideo (0.8.4):
     - GoogleWebRTC (= 1.1.31999)
-    - jetfire
-  - jetfire (0.1.5)
 
 DEPENDENCIES:
   - HMSVideo (from `../`)
@@ -11,7 +9,6 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - GoogleWebRTC
-    - jetfire
 
 EXTERNAL SOURCES:
   HMSVideo:
@@ -19,8 +16,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   GoogleWebRTC: b39a78c4f5cc6b0323415b9233db03a2faa7b0f0
-  HMSVideo: 0d820ab5be5e4cda0174eed660e96cf8c1c793ba
-  jetfire: 60c16cd6ae0282928e24203eb93f03b89c1929ce
+  HMSVideo: 704d883840c0c3b1abaf02553d14080d0394e614
 
 PODFILE CHECKSUM: 8a4763b4adea3ff402ba09ec59344644223a7c21
 

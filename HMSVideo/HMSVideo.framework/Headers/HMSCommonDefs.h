@@ -21,9 +21,24 @@ typedef NS_ENUM(NSUInteger, HMSVideoCodec) {
 typedef NS_ENUM(NSUInteger, HMSVideoResolution) {
     kHMSVideoResolutionQVGA,
     kHMSVideoResolutionVGA,
-    kHMSVideoResolutionSHD,
+    kHMSVideoResolutionQHD,
     kHMSVideoResolutionHD,
     kHMSVideoResolutionFullHD
 };
+
+typedef NS_ENUM(NSUInteger, HMSLogLevel) {
+    kHMSLogLevelOff = 0,
+    kHMSLogLevelError = 1,
+    kHMSLogLevelWarning = 2,
+    kHMSLogLevelInfo = 3,
+    kHMSLogLevelVerbose = 4
+};
+
+@protocol HMSLogger <NSObject>
+@property (nonatomic, assign) HMSLogLevel logLevel;
+
+- (void)logMessage:(NSString * __nonnull)message withLogLevel:(HMSLogLevel)level;
+@end
+
 
 #endif /* HMSCommonDefs_h */

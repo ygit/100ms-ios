@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'HMSVideo'
-  s.version          = '0.8.3'
+  s.version          = '0.8.4'
   s.summary          = 'HMSVideo Videoconferencing iOS SDK'
 
   s.description      = <<-DESC
@@ -17,7 +17,7 @@ TODO: Add long description of the pod here.
 
   s.homepage         = 'https://github.com/100mslive/hmsvideo-ios/'
   s.license          = { :type => 'Commercial'}
-  s.author           = { 'Dmitry Fedoseyev' => 'dmitry@brytecam.com' }
+  s.author           = { 'Dmitry Fedoseyev' => 'dmitry@100ms.live' }
   s.source           = { :git => 'https://github.com/100mslive/hmsvideo-ios.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '10.0'
@@ -26,7 +26,6 @@ TODO: Add long description of the pod here.
   s.public_header_files = 'HMSVideo/HMSVideo.framework/Headers/*.h'
   s.vendored_frameworks = 'HMSVideo/HMSVideo.framework'
   
-  s.dependency 'jetfire'
   s.dependency 'GoogleWebRTC', '1.1.31999'
   s.pod_target_xcconfig = {
    'ENABLE_BITCODE' => 'NO'

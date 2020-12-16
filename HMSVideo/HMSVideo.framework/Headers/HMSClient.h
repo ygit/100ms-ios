@@ -19,15 +19,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^HMSStreamResultHandler)(HMSStream * _Nullable stream, NSError * _Nullable error);
 
-typedef NS_ENUM(NSUInteger, HMSLogLevel) {
-    kHMSLogLevelOff = 0,
-    kHMSLogLevelError = 1,
-    kHMSLogLevelVerbose = 2
+typedef NS_ENUM(NSUInteger, HMSVideoConnectionState) {
+    kHMSVideoConnectionStateReady,
+    kHMSVideoConnectionStateConnecting,
+    kHMSVideoConnectionStateConnected,
+    kHMSVideoConnectionStateDisconnected,
+    kHMSVideoConnectionStateFailed
 };
-
-@protocol HMSLogger <NSObject>
-- (void)logMessage:(NSString *)message withLogLevel:(HMSLogLevel)level;
-@end
 
 @interface HMSClient : NSObject
 
@@ -38,6 +36,9 @@ typedef NS_ENUM(NSUInteger, HMSLogLevel) {
 @property(nonatomic, copy, nullable) void (^onBroadcast)(HMSRoom *, HMSPeer *, NSDictionary *);
 @property(nonatomic, copy, nullable) void (^onDisconnect)(NSError *_Nullable);
 @property(nonatomic, copy, nullable) void (^onConnect)(void);
+
+@property(nonatomic, readonly) HMSVideoConnectionState connectionState;
+
 
 @property(nonatomic, assign) HMSLogLevel logLevel;
 @property(nonatomic, strong, nullable) NSObject<HMSLogger> *logger;
@@ -52,7 +53,7 @@ typedef NS_ENUM(NSUInteger, HMSLogLevel) {
 - (void)leave:(HMSRoom *)room completion:(__nullable HMSOperationStatusHandler)completionHandler;
 
 - (HMSStream *)getLocalStream:(HMSMediaStreamConstraints *)constraints;
-- (BOOL)applyConstraints:(HMSMediaStreamConstraints *)constraints toLocalStream:(HMSStream *)stream error:(NSError **)error;
+- (BOOL)applyConstraints:(HMSMediaStreamConstraints *)constraints toLocalStream:(HMSStream *)stream error:(NSError **)error NS_SWIFT_NAME(applyConstraints(_:to:));
 
 - (void)publish:(HMSStream *)stream room:(HMSRoom *)room completion:(__nullable HMSStreamResultHandler)completionHandler;
 - (void)unpublish:(HMSStream *)stream room:(HMSRoom *)room completion:(__nullable HMSOperationStatusHandler)completionHandler;

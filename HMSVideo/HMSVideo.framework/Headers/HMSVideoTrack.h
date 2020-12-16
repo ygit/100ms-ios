@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HMSVideoTrack : NSObject
 @property (nonatomic, copy, readonly) NSString *streamId;
+@property (nonatomic, readonly) NSString *trackId;
 @property (nonatomic, assign) BOOL enabled;
 @end
 

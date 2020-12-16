@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HMSVideoView : UIView
 
-- (void)setVideoTrack:(HMSVideoTrack *)track;
+- (void)setVideoTrack:(HMSVideoTrack * __nullable)track;
 
 @end
 

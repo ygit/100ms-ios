@@ -322,13 +322,11 @@
 				"${PODS_ROOT}/Target Support Files/Pods-HMSVideo_Example/Pods-HMSVideo_Example-frameworks.sh",
 				"${PODS_ROOT}/GoogleWebRTC/Frameworks/frameworks/WebRTC.framework",
 				"${PODS_ROOT}/../../HMSVideo/HMSVideo.framework",
-				"${BUILT_PRODUCTS_DIR}/jetfire/jetfire.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WebRTC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HMSVideo.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jetfire.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
