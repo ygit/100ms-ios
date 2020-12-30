@@ -49,7 +49,7 @@ client = HMSClient(peer: peer, config: config)
 
 Click [here](https://www.notion.so/Token-Generation-42b0f9d078224db4bf934608829a8b53) to see how to generate your token
 
-Use `wss://conf.brytecam.com` as endpoint URL for production and `wss://staging.brytecam.com` as endpoint URL for staging
+Use `wss://prod-in.100ms.live` as endpoint URL for production and `wss://staging-in.100ms.live` as endpoint URL for staging
 
 ## Setup listeners
 
