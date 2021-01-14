@@ -52,6 +52,7 @@ class MeetingViewController: UIViewController {
         let peer = HMSPeer(name: userName, authToken: token)
 
         let config = HMSClientConfig()
+        config.endpoint = "wss://prod-in.100ms.live/ws"
 
         client = HMSClient(peer: peer, config: config)
         client.logLevel = HMSLogLevel.verbose
