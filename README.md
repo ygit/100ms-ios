@@ -1,4 +1,4 @@
-# v0.8.0  iOS SDK - Getting Started
+# v0.9.0  iOS SDK - Getting Started
 
 Here you will find everything you need to build experiences with video using 100ms iOS SDK. Dive into our SDKs, quick starts, add real-time video, voice, and screen sharing to your web and mobile applications.
 
@@ -13,7 +13,7 @@ Here you will find everything you need to build experiences with video using 100
 
 [CocoaPods](https://cocoapods.org/) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate Brytecam SDK into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
-pod 'HMSVideo', '~> 0.8.0'
+pod 'HMSVideo', '~> 0.9.0'
 
 ## Quick start
 
@@ -49,7 +49,7 @@ client = HMSClient(peer: peer, config: config)
 
 Click [here](https://www.notion.so/Token-Generation-42b0f9d078224db4bf934608829a8b53) to see how to generate your token
 
-Use `wss://prod-in.100ms.live` as endpoint URL for production and `wss://staging-in.100ms.live` as endpoint URL for staging
+Use `wss://prod-in.100ms.live/ws` as endpoint URL for production and `wss://staging-in.100ms.live/ws` as endpoint URL for staging
 
 ## Setup listeners
 
@@ -70,7 +70,7 @@ client.onStreamAdd = { (room, peer, streamInfo)  in
     // Subscribe to the stream if needed
 }
 
-client.onStreamRemove = { (room, streamInfo)  in
+client.onStreamRemove = { (room, peer, streamInfo)  in
     // Remove remote stream view if needed
 }
 
@@ -156,7 +156,7 @@ device, the system terminates your app.
 
 ---
 
-**This will not be covered by v0.8 SDK. Coming soon.**
+**This will not be covered by v0.9 SDK. Coming soon.**
 
 ## Display local stream
 

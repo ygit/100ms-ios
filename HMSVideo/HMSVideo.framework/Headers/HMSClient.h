@@ -32,7 +32,7 @@ typedef NS_ENUM(NSUInteger, HMSVideoConnectionState) {
 @property(nonatomic, copy, nullable) void (^onPeerJoin)(HMSRoom *, HMSPeer *);
 @property(nonatomic, copy, nullable) void (^onPeerLeave)(HMSRoom *, HMSPeer *);
 @property(nonatomic, copy, nullable) void (^onStreamAdd)(HMSRoom *, HMSPeer *, HMSStreamInfo *);
-@property(nonatomic, copy, nullable) void (^onStreamRemove)(HMSRoom *, HMSStreamInfo *);
+@property(nonatomic, copy, nullable) void (^onStreamRemove)(HMSRoom *, HMSPeer *, HMSStreamInfo *);
 @property(nonatomic, copy, nullable) void (^onBroadcast)(HMSRoom *, HMSPeer *, NSDictionary *);
 @property(nonatomic, copy, nullable) void (^onDisconnect)(NSError *_Nullable);
 @property(nonatomic, copy, nullable) void (^onConnect)(void);
@@ -52,7 +52,7 @@ typedef NS_ENUM(NSUInteger, HMSVideoConnectionState) {
 - (void)join:(HMSRoom *)room completion:(__nullable HMSOperationStatusHandler)completionHandler;
 - (void)leave:(HMSRoom *)room completion:(__nullable HMSOperationStatusHandler)completionHandler;
 
-- (HMSStream *)getLocalStream:(HMSMediaStreamConstraints *)constraints;
+- (HMSStream *_Nullable)getLocalStream:(HMSMediaStreamConstraints *)constraints error:(NSError **)error;
 - (BOOL)applyConstraints:(HMSMediaStreamConstraints *)constraints toLocalStream:(HMSStream *)stream error:(NSError **)error NS_SWIFT_NAME(applyConstraints(_:to:));
 
 - (void)publish:(HMSStream *)stream room:(HMSRoom *)room completion:(__nullable HMSStreamResultHandler)completionHandler;
@@ -63,6 +63,8 @@ typedef NS_ENUM(NSUInteger, HMSVideoConnectionState) {
 - (void)unsubscribe:(HMSStream *)stream room:(HMSRoom *)room completion:(__nullable HMSOperationStatusHandler)completionHandler;
 
 - (void)broadcast:(NSDictionary *)message room:(HMSRoom *)room completion:(__nullable HMSOperationStatusHandler)completionHandler;
+
+- (void)rtcStatsForTrack:(HMSVideoTrack *)track completion:(void (^)(NSString *))completionHandler;
 
 @end
 

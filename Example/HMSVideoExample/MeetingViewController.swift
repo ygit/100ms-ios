@@ -26,6 +26,7 @@ class MeetingViewController: UIViewController {
     
     var token: String?
     let tokenServerURL: String = "Insert sample token server url here"
+    let endpointURL: String = "wss://prod-in.100ms.live/ws"
     
     var peerId = UUID().uuidString
     
@@ -52,7 +53,7 @@ class MeetingViewController: UIViewController {
         let peer = HMSPeer(name: userName, authToken: token)
 
         let config = HMSClientConfig()
-        config.endpoint = "wss://prod-in.100ms.live/ws"
+        config.endpoint = endpointURL
 
         client = HMSClient(peer: peer, config: config)
         client.logLevel = HMSLogLevel.verbose
@@ -75,7 +76,7 @@ class MeetingViewController: UIViewController {
             }
         }
         
-        client.onStreamRemove = { [weak self] (room, streamInfo)  in
+        client.onStreamRemove = { [weak self] (room, peer, streamInfo)  in
             DispatchQueue.main.async {
                 self?.removeVideoTrack(for: streamInfo.streamId)
             }
@@ -133,7 +134,9 @@ class MeetingViewController: UIViewController {
         constraints.frameRate = 25
         constraints.resolution = .QVGA
 
-        let localStream = client.getLocalStream(constraints)
+        guard let localStream = try? client.getLocalStream(constraints) else {
+            return;
+        }
         
         client.publish(localStream, room: room, completion: { [weak self] (stream, error) in
             guard let stream = stream else { return }
@@ -231,8 +234,21 @@ class MeetingViewController: UIViewController {
     }
     
     func fetchToken(completion: @escaping (String?)->Void) {
+        guard let endpointUrl = URL(string: endpointURL) else {
+            completion(nil)
+            return
+        }
+
+        guard let subDomain = endpointUrl.host?.components(separatedBy: ".").first else {
+            completion(nil)
+            return
+        }
+        
+        
         let parameters = ["room_id": roomName,
-                          "peer_id": peerId
+                          "user_name": userName,
+                          "role": "guest",
+                          "env" : subDomain
         ]
 
         //create the url with URL

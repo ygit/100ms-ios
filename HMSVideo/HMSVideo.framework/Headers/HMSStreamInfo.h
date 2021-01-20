@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HMSStreamInfo : NSObject
 @property (nonatomic, copy, readonly) NSString *streamId;
+@property (nonatomic, copy, readonly) NSString *peerId;
 @end
 
 NS_ASSUME_NONNULL_END
