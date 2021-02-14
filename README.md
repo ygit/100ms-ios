@@ -20,19 +20,19 @@ To get started with the sample application follow these steps:
 
 1. Open the `HMSVideo_Example` target from the `HMSVideoExample.xcworkspace` in Xcode and go to `Signing & Capabilities` tab
 
-![Xcode settings](Images/screen1.png?raw=true)
+![Xcode settings](Example/Images/screen1.png?raw=true)
 
 2. Replace the Bundle identifier value with something unique to your org, and select a Team for code signing.
 
 3. Open `MeetingViewController.swift`
 
-![Controller code](Images/screen2.png?raw=true)
+![Controller code](Example/Images/screen2.png?raw=true)
 
 4. Replace the tokenServerURL constant value with the correct url ([see instructions below for token api server generation](#token-generation))
 
 5. Build and run the app
 
-![App screen](Images/app.jpg?raw=true)
+![App screen](Example/Images/app.jpg?raw=true)
 
 ### Token Generation
 
