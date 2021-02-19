@@ -14,6 +14,7 @@
 #import "HMSCommonDefs.h"
 #import "HMSStreamInfo.h"
 #import "HMSClientConfig.h"
+#import "HMSAudioLevelInfo.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -36,6 +37,7 @@ typedef NS_ENUM(NSUInteger, HMSVideoConnectionState) {
 @property(nonatomic, copy, nullable) void (^onBroadcast)(HMSRoom *, HMSPeer *, NSDictionary *);
 @property(nonatomic, copy, nullable) void (^onDisconnect)(NSError *_Nullable);
 @property(nonatomic, copy, nullable) void (^onConnect)(void);
+@property(nonatomic, copy, nullable) void (^onAudioLevelInfo)(NSArray<HMSAudioLevelInfo *> *);
 
 @property(nonatomic, readonly) HMSVideoConnectionState connectionState;
 
@@ -63,6 +65,9 @@ typedef NS_ENUM(NSUInteger, HMSVideoConnectionState) {
 - (void)unsubscribe:(HMSStream *)stream room:(HMSRoom *)room completion:(__nullable HMSOperationStatusHandler)completionHandler;
 
 - (void)broadcast:(NSDictionary *)message room:(HMSRoom *)room completion:(__nullable HMSOperationStatusHandler)completionHandler;
+
+- (void)startAudioLevelMonitor:(NSTimeInterval)interval;
+- (void)stopAudioLevelMonitor;
 
 - (void)rtcStatsForTrack:(HMSVideoTrack *)track completion:(void (^)(NSString *))completionHandler;
 

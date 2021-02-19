@@ -9,6 +9,8 @@
 #ifndef HMSCommonDefs_h
 #define HMSCommonDefs_h
 
+@class HMSError;
+
 typedef void (^HMSOperationStatusHandler)(BOOL isSuccess, NSError * _Nullable error);
 typedef void (^HMSRequestCompletionHandler)(id _Nullable result, NSError * _Nullable error);
 
@@ -32,6 +34,13 @@ typedef NS_ENUM(NSUInteger, HMSLogLevel) {
     kHMSLogLevelWarning = 2,
     kHMSLogLevelInfo = 3,
     kHMSLogLevelVerbose = 4
+};
+
+typedef NS_ENUM(NSInteger, HMSAnalyticsEventLevel) {
+    kHMSAnalyticsEventLevelOff,
+    kHMSAnalyticsEventLevelError,
+    kHMSAnalyticsEventLevelInfo,
+    kHMSAnalyticsEventLevelVerbose
 };
 
 @protocol HMSLogger <NSObject>

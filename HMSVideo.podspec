@@ -8,17 +8,17 @@
 
 Pod::Spec.new do |s|
   s.name             = 'HMSVideo'
-  s.version          = '0.9.1'
+  s.version          = '0.10.1'
   s.summary          = 'HMSVideo Videoconferencing iOS SDK'
 
   s.description      = <<-DESC
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/100mslive/hmsvideo-ios/'
-  s.license          = { :type => 'Commercial'}
+  s.homepage         = 'https://github.com/100mslive/100ms-ios/'
+  s.license          = { :type => 'MIT'}
   s.author           = { 'Dmitry Fedoseyev' => 'dmitry@100ms.live' }
-  s.source           = { :git => 'https://github.com/100mslive/hmsvideo-ios.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/100mslive/100ms-ios.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '10.0'
 

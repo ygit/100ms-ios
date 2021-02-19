@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface HMSStreamInfo : NSObject
 @property (nonatomic, copy, readonly) NSString *streamId;
 @property (nonatomic, copy, readonly) NSString *peerId;
+@property (nonatomic, readonly) BOOL isScreen;
 @end
 
 NS_ASSUME_NONNULL_END

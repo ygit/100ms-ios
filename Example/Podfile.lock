@@ -1,6 +1,6 @@
 PODS:
   - GoogleWebRTC (1.1.31999)
-  - HMSVideo (0.9.1):
+  - HMSVideo (0.10.1):
     - GoogleWebRTC (= 1.1.31999)
 
 DEPENDENCIES:
@@ -16,7 +16,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   GoogleWebRTC: b39a78c4f5cc6b0323415b9233db03a2faa7b0f0
-  HMSVideo: 872a91df7e484aed946c055e3de018b456166c8b
+  HMSVideo: c4426f9dbf65251626eb17b56bc9e56f4dfedfac
 
 PODFILE CHECKSUM: 8a4763b4adea3ff402ba09ec59344644223a7c21
 

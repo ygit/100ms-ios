@@ -10,7 +10,8 @@ import HMSVideo
 
 class MeetingViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
-
+    @IBOutlet weak var speakerLabel: UILabel!
+    
     var client: HMSClient!
     var roomName: String!
     var userName: String!
@@ -22,13 +23,14 @@ class MeetingViewController: UIViewController {
     var videoTracks = [HMSVideoTrack]()
     var localStream: HMSStream?
     var remoteStreams = [HMSStream]()
+    var localPeer: HMSPeer!
+    var peers = [String: HMSPeer]()
     var room: HMSRoom!
     
     var token: String?
     let tokenServerURL: String = "Insert sample token server url here"
     let endpointURL: String = "wss://prod-in.100ms.live/ws"
     
-    var peerId = UUID().uuidString
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,12 +52,12 @@ class MeetingViewController: UIViewController {
     
     func connect() {
         guard let token = token else { return }
-        let peer = HMSPeer(name: userName, authToken: token)
+        localPeer = HMSPeer(name: userName, authToken: token)
 
         let config = HMSClientConfig()
         config.endpoint = endpointURL
 
-        client = HMSClient(peer: peer, config: config)
+        client = HMSClient(peer: localPeer, config: config)
         client.logLevel = HMSLogLevel.verbose
         
         self.room = HMSRoom(roomId: roomName)
@@ -98,8 +100,24 @@ class MeetingViewController: UIViewController {
             }
         }
         
+        client.onAudioLevelInfo = { [weak self] (infoArray) in
+            self?.updateAudioLevels(levels: infoArray)
+        }
+        
 
         client.connect()
+    }
+    
+    func updateAudioLevels(levels: [HMSAudioLevelInfo]) {
+        guard let topLevel = levels.first else {
+            return;
+        }
+        
+        guard let peer = peers[topLevel.streamId] else {
+            return
+        }
+        
+        speakerLabel.text = "Speaking: \(peer.name)";
     }
     
     func showDisconnectError(_ error: Error?) {
@@ -138,6 +156,10 @@ class MeetingViewController: UIViewController {
             return;
         }
         
+        peers[localStream.streamId] = localPeer
+
+        client.startAudioLevelMonitor(0.5);
+        
         client.publish(localStream, room: room, completion: { [weak self] (stream, error) in
             guard let stream = stream else { return }
             
@@ -160,6 +182,8 @@ class MeetingViewController: UIViewController {
     }
     
     func subscribe(room: HMSRoom, peer: HMSPeer, streamInfo: HMSStreamInfo) {
+        peers[streamInfo.streamId] = peer
+        
         client.subscribe(streamInfo, room: room, completion: { [weak self]  (stream, error) in
             DispatchQueue.main.async {
                 guard let stream = stream else { return }
@@ -195,6 +219,14 @@ class MeetingViewController: UIViewController {
     @IBAction func videoMute(_ sender: Any) {
         guard let track = self.localVideoTrack else { return }
         track.enabled = !track.enabled
+        
+        if (!track.enabled) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) { [weak self] in
+                self?.localStream?.videoCapturer?.stopCapture()
+            }
+        } else {
+            localStream?.videoCapturer?.startCapture()
+        }
     }
     
     @IBAction func camSwitch(_ sender: Any) {
@@ -206,30 +238,13 @@ class MeetingViewController: UIViewController {
         guard let client = client else {
             return
         }
-        
-        let dispatchGroup = DispatchGroup()
                 
-        if let localStream = localStream {
-            dispatchGroup.enter()
-            client.unpublish(localStream, room: room) { (success, error) in
-                dispatchGroup.leave()
-            }
-        }
+        videoCapturer?.stopCapture()
         
-        remoteStreams.forEach { (stream) in
-            dispatchGroup.enter()
-            client.unsubscribe(stream, room: room) { (success, error) in
-                dispatchGroup.leave()
-            }
-        }
+        client.leave(room)
         
-        dispatchGroup.enter()
-        client.leave(room) { (success, error) in
-            dispatchGroup.leave()
-        }
-        
-        dispatchGroup.notify(queue: .main) {
-            print("Cleanup done")
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+            client.disconnect()
         }
     }
     
