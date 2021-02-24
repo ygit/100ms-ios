@@ -26,6 +26,10 @@
 	<string>Camera use explanation</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Microphone use explanation</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
