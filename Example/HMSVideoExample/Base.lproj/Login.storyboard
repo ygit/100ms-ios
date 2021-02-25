@@ -95,6 +95,7 @@
         <!--Meeting View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="MeetingController" id="vXZ-lx-hvc" customClass="MeetingViewController" customModule="HMSVideo_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
@@ -178,15 +179,15 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="75C-6O-psa" secondAttribute="bottom" constant="10" id="0cO-PJ-oae"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="75C-6O-psa" secondAttribute="bottom" constant="10" id="3TY-vt-UhD"/>
                             <constraint firstItem="goB-m4-bdA" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="9QZ-Av-OWI"/>
+                            <constraint firstItem="yMo-Vt-KBe" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="J6P-Wq-bvK"/>
                             <constraint firstAttribute="trailing" secondItem="goB-m4-bdA" secondAttribute="trailing" id="QGV-9q-QUv"/>
                             <constraint firstItem="75C-6O-psa" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="22" id="SGh-Yf-E2l"/>
                             <constraint firstItem="75C-6O-psa" firstAttribute="top" secondItem="yMo-Vt-KBe" secondAttribute="bottom" id="WuS-CL-6r6"/>
                             <constraint firstItem="yMo-Vt-KBe" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="agA-xE-hjR"/>
                             <constraint firstAttribute="trailing" secondItem="yMo-Vt-KBe" secondAttribute="trailing" id="cGb-RU-eBs"/>
                             <constraint firstItem="75C-6O-psa" firstAttribute="top" secondItem="goB-m4-bdA" secondAttribute="bottom" id="lHr-0o-Rvv"/>
-                            <constraint firstItem="yMo-Vt-KBe" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="uMv-0F-VQr"/>
                             <constraint firstAttribute="trailing" secondItem="75C-6O-psa" secondAttribute="trailing" constant="22" id="xLm-Dj-Ogj"/>
                         </constraints>
                     </view>
@@ -196,9 +197,8 @@
                         <outlet property="speakerLabel" destination="qkf-QD-dL2" id="eFh-CR-FBJ"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1076" y="132.68365817091455"/>
+            <point key="canvasLocation" x="938" y="188"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2Qz-Tb-TXU">

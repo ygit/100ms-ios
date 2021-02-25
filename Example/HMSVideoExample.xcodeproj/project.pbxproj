@@ -11,12 +11,13 @@
 		1EA4F17E1C9A28E1631291A2 /* Pods_HMSVideo_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 573765C134F99AC8C2132D64 /* Pods_HMSVideo_Example.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* MeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* MeetingViewController.swift */; };
-		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
+		607FACDB1AFB9204008FA782 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Login.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		913AD4DC2516581A000FDF07 /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913AD4DB25165819000FDF07 /* VideoCollectionViewCell.swift */; };
 		913AD4DE251677DB000FDF07 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913AD4DD251677DB000FDF07 /* LoginViewController.swift */; };
+		ECDEE42E25E7A71A00DB468F /* Meeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECDEE42D25E7A71900DB468F /* Meeting.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +40,7 @@
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		607FACD71AFB9204008FA782 /* MeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingViewController.swift; sourceTree = "<group>"; };
-		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* HMSVideo_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HMSVideo_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,9 +49,10 @@
 		71C1B9C4B1C0291D024D29D7 /* Pods_HMSVideo_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HMSVideo_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		913AD4DB25165819000FDF07 /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
 		913AD4DD251677DB000FDF07 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		919A5545254FFF500033973E /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = LICENSE.md; path = ../LICENSE.md; sourceTree = "<group>"; };
 		9360531DA4B170754E7D94BF /* Pods-HMSVideo_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSVideo_Example.release.xcconfig"; path = "Target Support Files/Pods-HMSVideo_Example/Pods-HMSVideo_Example.release.xcconfig"; sourceTree = "<group>"; };
 		BADB1198BD96E24E9BFFB40B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		ECDEE42B25E7A6AE00DB468F /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		ECDEE42D25E7A71900DB468F /* Meeting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Meeting.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,13 +108,8 @@
 		607FACD21AFB9204008FA782 /* Example for HMSVideo */ = {
 			isa = PBXGroup;
 			children = (
-				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				913AD4DD251677DB000FDF07 /* LoginViewController.swift */,
-				607FACD71AFB9204008FA782 /* MeetingViewController.swift */,
-				913AD4DB25165819000FDF07 /* VideoCollectionViewCell.swift */,
-				607FACD91AFB9204008FA782 /* Main.storyboard */,
-				607FACDC1AFB9204008FA782 /* Images.xcassets */,
-				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
+				ECDEE43325E7A76700DB468F /* Login */,
+				ECDEE42C25E7A6C500DB468F /* Meeting */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 			);
 			name = "Example for HMSVideo";
@@ -122,6 +119,9 @@
 		607FACD31AFB9204008FA782 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
+				607FACDC1AFB9204008FA782 /* Images.xcassets */,
+				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD41AFB9204008FA782 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -149,7 +149,7 @@
 			children = (
 				0244AC5843648F6E5DA71878 /* HMSVideo.podspec */,
 				BADB1198BD96E24E9BFFB40B /* README.md */,
-				919A5545254FFF500033973E /* LICENSE.md */,
+				ECDEE42B25E7A6AE00DB468F /* LICENSE */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
@@ -163,6 +163,25 @@
 				14CAFAB81EB7F870B9E6C3BC /* Pods-HMSVideo_Tests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		ECDEE42C25E7A6C500DB468F /* Meeting */ = {
+			isa = PBXGroup;
+			children = (
+				607FACD71AFB9204008FA782 /* MeetingViewController.swift */,
+				913AD4DB25165819000FDF07 /* VideoCollectionViewCell.swift */,
+				ECDEE42D25E7A71900DB468F /* Meeting.storyboard */,
+			);
+			name = Meeting;
+			sourceTree = "<group>";
+		};
+		ECDEE43325E7A76700DB468F /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				913AD4DD251677DB000FDF07 /* LoginViewController.swift */,
+				607FACD91AFB9204008FA782 /* Login.storyboard */,
+			);
+			name = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,8 +272,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
+				607FACDB1AFB9204008FA782 /* Login.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
+				ECDEE42E25E7A71A00DB468F /* Meeting.storyboard in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,12 +386,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		607FACD91AFB9204008FA782 /* Main.storyboard */ = {
+		607FACD91AFB9204008FA782 /* Login.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				607FACDA1AFB9204008FA782 /* Base */,
 			);
-			name = Main.storyboard;
+			name = Login.storyboard;
 			sourceTree = "<group>";
 		};
 		607FACDE1AFB9204008FA782 /* LaunchScreen.xib */ = {
@@ -435,7 +455,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -486,7 +506,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

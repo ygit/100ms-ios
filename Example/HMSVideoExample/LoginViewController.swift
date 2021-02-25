@@ -22,7 +22,7 @@ class LoginViewController: UIViewController {
             return;
         }
         
-        guard let meetingController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MeetingController") as? MeetingViewController else {
+        guard let meetingController = UIStoryboard(name: "Meeting", bundle: nil).instantiateInitialViewController() as? MeetingViewController else {
             return
         }
         

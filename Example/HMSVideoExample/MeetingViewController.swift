@@ -28,8 +28,14 @@ class MeetingViewController: UIViewController {
     var room: HMSRoom!
     
     var token: String?
-    let tokenServerURL: String = "Insert sample token server url here"
+    let tokenServerURL: String = "https://ms-services-r9oucbp9pjl9.runkit.sh/?api=token"
     let endpointURL: String = "wss://prod-in.100ms.live/ws"
+    
+    private let sectionInsets = UIEdgeInsets(
+      top: 15.0,
+      left: 8.0,
+      bottom: 15.0,
+      right: 8.0)
     
     
     override func viewDidLoad() {
@@ -65,11 +71,11 @@ class MeetingViewController: UIViewController {
         collectionView.register(VideoCollectionViewCell.self, forCellWithReuseIdentifier: "videoCell")
         
         client.onPeerJoin = { (room, peer) in
-            // update UI if needed
+            self.collectionView.reloadData()
         }
         
         client.onPeerLeave = { (room, peer) in
-            // update UI if needed
+            self.collectionView.reloadData()
         }
         
         client.onStreamAdd = { [weak self] (room, peer, streamInfo)  in
@@ -85,7 +91,7 @@ class MeetingViewController: UIViewController {
         }
         
         client.onBroadcast = { (room, peer, message) in
-            // update UI if needed
+            self.collectionView.reloadData()
         }
         
         client.onConnect = { [weak self] in
@@ -322,7 +328,8 @@ class MeetingViewController: UIViewController {
     }
 }
 
-extension MeetingViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension MeetingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return videoTracks.count
     }
@@ -338,12 +345,46 @@ extension MeetingViewController: UICollectionViewDelegate, UICollectionViewDataS
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var result = CGSize.zero
-        
-        result.width = floor(collectionView.frame.size.width / 2.0)
-        result.height = floor(collectionView.frame.size.height / 2.0)
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//
+//        var size = CGSize.zero
+//
+//        let divider = CGFloat(min(videoTracks.count, 6))
+//
+//        size.width = collectionView.frame.size.width / divider
+//        size.height = collectionView.frame.size.height / divider
+//
+//        return size
+//    }
+}
 
-        return result
-    }
+extension MeetingViewController: UICollectionViewDelegateFlowLayout {
+    
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    sizeForItemAt indexPath: IndexPath
+  ) -> CGSize {
+    let paddingSpace = sectionInsets.left * 3
+    let availableWidth = view.frame.width - paddingSpace
+    let widthPerItem = availableWidth / 2
+    
+    return CGSize(width: widthPerItem, height: widthPerItem)
+  }
+  
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    insetForSectionAt section: Int
+  ) -> UIEdgeInsets {
+    return sectionInsets
+  }
+  
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    minimumLineSpacingForSectionAt section: Int
+  ) -> CGFloat {
+    return sectionInsets.left
+  }
 }
