@@ -8,23 +8,32 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-    @IBOutlet weak var roomNameField: UITextField!
-    @IBOutlet weak var userNameField: UITextField!
     
-    @IBOutlet weak var backgroundView: UIImageView!
-    @IBOutlet weak var stackView: UIStackView! 
     @IBOutlet weak var scrollView: UIScrollView!
+    
+    @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var meetingIDField: UITextField!
+    
+    
+    @IBOutlet weak var meetingNameField: UITextField!
+    @IBOutlet weak var recordSwitch: UISwitch!
     
     
     // MARK: - View Lifecycle
     
     override func viewDidLoad() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
+        handleKeyboard()
     }
     
     
     // MARK: - View Modifiers
+    
+    func handleKeyboard() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
+        
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_:))))
+    }
     
     @objc func keyboardWillShow(notification:NSNotification) {
 
@@ -46,8 +55,12 @@ class LoginViewController: UIViewController {
     
     // MARK: - Action Handlers
     
-    @IBAction func loginPressed(_ sender: Any) {
-        guard let roomName = roomNameField.text, let userName = userNameField.text, !userName.isEmpty, !roomName.isEmpty else {
+    @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
+        self.view.resignFirstResponder()
+    }
+    
+    @IBAction func joinNowTapped(_ sender: UIButton) {
+        guard let roomName = meetingIDField.text, let userName = nameField.text, !userName.isEmpty, !roomName.isEmpty else {
             let alertController = UIAlertController(title: "Alert", message: "Please fill in all fields.", preferredStyle: .alert)
             
             let action1 = UIAlertAction(title: "OK", style: .default)
@@ -64,5 +77,8 @@ class LoginViewController: UIViewController {
         meetingController.roomName = roomName
         meetingController.userName = userName
         navigationController?.pushViewController(meetingController, animated: true)
+    }
+    
+    @IBAction func startMeetingTapped(_ sender: UIButton) {
     }
 }

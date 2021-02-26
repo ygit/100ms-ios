@@ -38,7 +38,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OCL-uA-gn7">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="OCL-uA-gn7">
                                 <rect key="frame" x="0.0" y="172" width="375" height="468"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="UDb-3o-ia5">
@@ -82,6 +82,9 @@
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                     </preferredSymbolConfiguration>
                                                 </state>
+                                                <connections>
+                                                    <action selector="joinNowTapped:" destination="SMR-Mj-Sg7" eventType="touchUpInside" id="MCT-x7-uEu"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -120,6 +123,9 @@
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                     </preferredSymbolConfiguration>
                                                 </state>
+                                                <connections>
+                                                    <action selector="startMeetingTapped:" destination="SMR-Mj-Sg7" eventType="touchUpInside" id="hqc-9U-XK4"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -159,7 +165,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="WAo-RG-heA"/>
                     <connections>
-                        <outlet property="backgroundView" destination="pry-yg-EPI" id="nrK-aa-Kwt"/>
+                        <outlet property="meetingIDField" destination="oHK-xx-jcU" id="Nu3-8X-MKu"/>
+                        <outlet property="meetingNameField" destination="FHx-L6-4DO" id="wyC-9c-H1Y"/>
+                        <outlet property="nameField" destination="7HE-IK-4mD" id="CeL-Kk-7jP"/>
+                        <outlet property="recordSwitch" destination="KsG-jx-8PJ" id="TM7-sB-Ck9"/>
                         <outlet property="scrollView" destination="OCL-uA-gn7" id="l8l-i3-S5c"/>
                     </connections>
                 </viewController>
