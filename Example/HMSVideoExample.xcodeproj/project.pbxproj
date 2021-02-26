@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,6 +19,9 @@
 		EC462C9F25E95A4100BFF07C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC462C9C25E95A4100BFF07C /* AppDelegate.swift */; };
 		EC462CA025E95A4100BFF07C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC462C9D25E95A4100BFF07C /* Utilities.swift */; };
 		EC462CA125E95A4100BFF07C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC462C9E25E95A4100BFF07C /* Images.xcassets */; };
+		EC462CAE25E9606100BFF07C /* MeetingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC462CAD25E9606100BFF07C /* MeetingViewModel.swift */; };
+		EC462CB225E9616400BFF07C /* HMSWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC462CB125E9616400BFF07C /* HMSWrapper.swift */; };
+		EC462CB825E9629700BFF07C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC462CB725E9629700BFF07C /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +60,10 @@
 		EC462C9C25E95A4100BFF07C /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "Supporting Files/AppDelegate.swift"; sourceTree = "<group>"; };
 		EC462C9D25E95A4100BFF07C /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = "Supporting Files/Utilities.swift"; sourceTree = "<group>"; };
 		EC462C9E25E95A4100BFF07C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Supporting Files/Images.xcassets"; sourceTree = "<group>"; };
-		ECCBC9E325E8E16F007C501D /* HMSVideo_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HMSVideo_Example.entitlements; sourceTree = "<group>"; };
+		EC462CA825E95BC100BFF07C /* HMSVideo_Example.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = HMSVideo_Example.entitlements; path = "Supporting Files/HMSVideo_Example.entitlements"; sourceTree = "<group>"; };
+		EC462CAD25E9606100BFF07C /* MeetingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MeetingViewModel.swift; path = Meeting/MeetingViewModel.swift; sourceTree = "<group>"; };
+		EC462CB125E9616400BFF07C /* HMSWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HMSWrapper.swift; path = Meeting/HMSWrapper.swift; sourceTree = "<group>"; };
+		EC462CB725E9629700BFF07C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = "Supporting Files/Constants.swift"; sourceTree = "<group>"; };
 		ECDEE42B25E7A6AE00DB468F /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,7 +99,6 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
-				ECCBC9E325E8E16F007C501D /* HMSVideo_Example.entitlements */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for HMSVideo */,
 				607FACE81AFB9204008FA782 /* Tests */,
@@ -127,10 +132,12 @@
 			isa = PBXGroup;
 			children = (
 				EC462C9C25E95A4100BFF07C /* AppDelegate.swift */,
-				EC462C9E25E95A4100BFF07C /* Images.xcassets */,
+				EC462CB725E9629700BFF07C /* Constants.swift */,
 				EC462C9D25E95A4100BFF07C /* Utilities.swift */,
+				EC462C9E25E95A4100BFF07C /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD41AFB9204008FA782 /* Info.plist */,
+				EC462CA825E95BC100BFF07C /* HMSVideo_Example.entitlements */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -177,6 +184,8 @@
 			isa = PBXGroup;
 			children = (
 				EC462C9525E95A3200BFF07C /* MeetingViewController.swift */,
+				EC462CAD25E9606100BFF07C /* MeetingViewModel.swift */,
+				EC462CB125E9616400BFF07C /* HMSWrapper.swift */,
 				EC462C9425E95A3200BFF07C /* VideoCollectionViewCell.swift */,
 				EC462C8725E95A0B00BFF07C /* Meeting.storyboard */,
 			);
@@ -242,7 +251,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 1240;
-				ORGANIZATIONNAME = CocoaPods;
+				ORGANIZATIONNAME = 100ms;
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -258,7 +267,7 @@
 				};
 			};
 			buildConfigurationList = 607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "HMSVideoExample" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -387,10 +396,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC462C9F25E95A4100BFF07C /* AppDelegate.swift in Sources */,
+				EC462CB225E9616400BFF07C /* HMSWrapper.swift in Sources */,
 				EC462C9125E95A2800BFF07C /* LoginViewController.swift in Sources */,
+				EC462CAE25E9606100BFF07C /* MeetingViewModel.swift in Sources */,
 				EC462C9625E95A3200BFF07C /* VideoCollectionViewCell.swift in Sources */,
 				EC462CA025E95A4100BFF07C /* Utilities.swift in Sources */,
 				EC462C9725E95A3200BFF07C /* MeetingViewController.swift in Sources */,
+				EC462CB825E9629700BFF07C /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -549,7 +561,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -566,7 +579,10 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = HMSVideoExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yourorg.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -590,7 +606,10 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = HMSVideoExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yourorg.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -615,7 +634,11 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -633,7 +656,11 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;

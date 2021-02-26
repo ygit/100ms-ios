@@ -8,13 +8,20 @@
 import UIKit
 import HMSVideo
 
-class MeetingViewController: UIViewController {
+final class MeetingViewController: UIViewController {
+    
+    
+    private var viewModel: MeetingViewModel!
+    
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var speakerLabel: UILabel!
 
+    
+    
+    
+    
     var client: HMSClient!
-    var roomName: String!
-    var userName: String!
 
     var videoTrack: HMSVideoTrack?
     var localAudioTrack: HMSAudioTrack?
@@ -25,91 +32,54 @@ class MeetingViewController: UIViewController {
     var remoteStreams = [HMSStream]()
     var localPeer: HMSPeer!
     var peers = [String: HMSPeer]()
-    var room: HMSRoom!
+//    var room: HMSRoom!
 
-    var token: String?
-    let tokenServerURL: String = "https://ms-services-r9oucbp9pjl9.runkit.sh/?api=token"
-    let endpointURL: String = "wss://prod-in.100ms.live/ws"
+    
 
     private let sectionInsets = UIEdgeInsets(
       top: 15.0,
       left: 8.0,
       bottom: 15.0,
       right: 8.0)
+    
+    
+    // MARK: - View Lifecycle
+    
+    static func make(with endpoint: String, token: String, user: String, room: String) -> MeetingViewController? {
+        guard let viewController = UIStoryboard(name: Constants.meeting, bundle: nil).instantiateInitialViewController() as? MeetingViewController else {
+            return nil
+        }
 
+        viewController.viewModel = MeetingViewModel(endpoint: endpoint, token: token, user: user, room: room)
+        
+        return viewController
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         UIApplication.shared.isIdleTimerDisabled = true
-
-        fetchToken { [weak self] (token) in
-            DispatchQueue.main.async {
-                self?.token = token
-                if token == nil {
-                    self?.showTokenFailedError()
-                } else {
-                    self?.connect()
-                }
-            }
-        }
-    }
-
-    func connect() {
-        guard let token = token else { return }
-        localPeer = HMSPeer(name: userName, authToken: token)
-
-        let config = HMSClientConfig()
-        config.endpoint = endpointURL
-
-        client = HMSClient(peer: localPeer, config: config)
-        client.logLevel = HMSLogLevel.verbose
-
-        self.room = HMSRoom(roomId: roomName)
-
+        
         collectionView.register(VideoCollectionViewCell.self, forCellWithReuseIdentifier: "videoCell")
-
-        client.onPeerJoin = { (_, _) in
-            self.collectionView.reloadData()
+    
+        NotificationCenter.default.addObserver(forName: Constants.unpublishError, object: nil, queue: .main) { [weak self] notification in
+            
+            let alertController = UIAlertController(title: "Error", message: "Connection lost: \(error?.localizedDescription ?? "Unknown")", preferredStyle: .alert)
+            
+            let action1 = UIAlertAction(title: "OK", style: .default)
+            alertController.addAction(action1)
+            self?.present(alertController, animated: true, completion: nil)
         }
-
-        client.onPeerLeave = { (_, _) in
-            self.collectionView.reloadData()
-        }
-
-        client.onStreamAdd = { [weak self] (room, peer, streamInfo)  in
-            DispatchQueue.main.async {
-                self?.subscribe(room: room, peer: peer, streamInfo: streamInfo)
-            }
-        }
-
-        client.onStreamRemove = { [weak self] (_, _, streamInfo)  in
-            DispatchQueue.main.async {
-                self?.removeVideoTrack(for: streamInfo.streamId)
-            }
-        }
-
-        client.onBroadcast = { (_, _, _) in
-            self.collectionView.reloadData()
-        }
-
-        client.onConnect = { [weak self] in
-            DispatchQueue.main.async {
-                self?.join()
-            }
-        }
-
-        client.onDisconnect = { [weak self] error in
-            DispatchQueue.main.async {
-                self?.showDisconnectError(error)
-            }
-        }
-
-        client.onAudioLevelInfo = { [weak self] (infoArray) in
-            self?.updateAudioLevels(levels: infoArray)
-        }
-
-        client.connect()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        UIApplication.shared.isIdleTimerDisabled = false
+    }
+
+    
 
     func updateAudioLevels(levels: [HMSAudioLevelInfo]) {
         guard let topLevel = levels.first else {

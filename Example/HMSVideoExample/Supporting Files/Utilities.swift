@@ -28,3 +28,15 @@ class Utilities {
         view.layer.masksToBounds = true
     }
 }
+
+
+protocol ErrorProtocol: LocalizedError {
+    var title: String { get }
+    var code: Int? { get }
+}
+
+struct CustomError: ErrorProtocol {
+
+    var title: String = "Error"
+    var code: Int?
+}
