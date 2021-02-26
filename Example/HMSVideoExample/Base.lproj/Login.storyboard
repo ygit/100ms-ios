@@ -23,11 +23,15 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HMS" translatesAutoresizingMaskIntoConstraints="NO" id="pry-yg-EPI">
                                 <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100ms" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mZ0-Zk-1ca">
-                                <rect key="frame" x="0.0" y="52" width="375" height="64"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HMS" translatesAutoresizingMaskIntoConstraints="NO" id="C2U-dF-Uy4">
+                                <rect key="frame" x="20" y="52" width="64" height="64"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="TFX-5F-Pov"/>
+                                    <constraint firstAttribute="width" constant="64" id="CN5-yW-qkx"/>
+                                    <constraint firstAttribute="height" constant="64" id="WfE-uQ-tMe"/>
                                 </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100ms" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mrU-qd-8x0">
+                                <rect key="frame" x="92" y="52" width="258" height="64"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -35,13 +39,16 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="mZ0-Zk-1ca" firstAttribute="top" secondItem="Zky-Jr-DW7" secondAttribute="bottom" constant="8" symbolic="YES" id="63l-ZV-0jb"/>
+                            <constraint firstAttribute="trailing" secondItem="mrU-qd-8x0" secondAttribute="trailing" constant="25" id="31E-9L-8UU"/>
                             <constraint firstItem="au1-nU-61f" firstAttribute="top" secondItem="pry-yg-EPI" secondAttribute="bottom" id="BWD-Ex-Yse"/>
                             <constraint firstItem="pry-yg-EPI" firstAttribute="top" secondItem="Zky-Jr-DW7" secondAttribute="bottom" id="LBA-vq-Uk5"/>
+                            <constraint firstItem="mrU-qd-8x0" firstAttribute="top" secondItem="C2U-dF-Uy4" secondAttribute="top" id="c9e-gk-j9Y"/>
+                            <constraint firstItem="C2U-dF-Uy4" firstAttribute="top" secondItem="Zky-Jr-DW7" secondAttribute="bottom" constant="8" symbolic="YES" id="dZV-5G-aWR"/>
                             <constraint firstAttribute="trailing" secondItem="pry-yg-EPI" secondAttribute="trailing" id="dgp-gS-Jk6"/>
-                            <constraint firstAttribute="trailing" secondItem="mZ0-Zk-1ca" secondAttribute="trailing" id="nSb-iU-mG2"/>
+                            <constraint firstItem="mrU-qd-8x0" firstAttribute="leading" secondItem="C2U-dF-Uy4" secondAttribute="trailing" constant="8" symbolic="YES" id="faj-NG-TaI"/>
+                            <constraint firstItem="mrU-qd-8x0" firstAttribute="bottom" secondItem="C2U-dF-Uy4" secondAttribute="bottom" id="ksH-OP-ne9"/>
                             <constraint firstItem="pry-yg-EPI" firstAttribute="leading" secondItem="jQ1-tl-f6e" secondAttribute="leading" id="uGc-po-Wvl"/>
-                            <constraint firstItem="mZ0-Zk-1ca" firstAttribute="leading" secondItem="jQ1-tl-f6e" secondAttribute="leading" id="ymB-8d-411"/>
+                            <constraint firstItem="C2U-dF-Uy4" firstAttribute="leading" secondItem="jQ1-tl-f6e" secondAttribute="leading" constant="20" symbolic="YES" id="ylh-3S-Zua"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="WAo-RG-heA"/>
