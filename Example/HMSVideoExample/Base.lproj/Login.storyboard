@@ -39,7 +39,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bHb-kg-W5R">
-                                <rect key="frame" x="20" y="450" width="335" height="328"/>
+                                <rect key="frame" x="20" y="442" width="335" height="328"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7Uc-L5-TRx">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="48"/>
@@ -128,7 +128,7 @@
                             <constraint firstItem="mrU-qd-8x0" firstAttribute="top" secondItem="C2U-dF-Uy4" secondAttribute="top" id="bhS-xQ-n08"/>
                             <constraint firstItem="C2U-dF-Uy4" firstAttribute="leading" secondItem="jQ1-tl-f6e" secondAttribute="leading" constant="20" symbolic="YES" id="jjf-8D-Wvx"/>
                             <constraint firstAttribute="trailing" secondItem="mrU-qd-8x0" secondAttribute="trailing" constant="15" id="ypQ-Q3-0Dl"/>
-                            <constraint firstItem="au1-nU-61f" firstAttribute="top" secondItem="bHb-kg-W5R" secondAttribute="bottom" id="zUv-8S-TQJ"/>
+                            <constraint firstItem="au1-nU-61f" firstAttribute="top" secondItem="bHb-kg-W5R" secondAttribute="bottom" constant="8" symbolic="YES" id="zUv-8S-TQJ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="WAo-RG-heA"/>
