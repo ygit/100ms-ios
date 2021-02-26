@@ -17,6 +17,7 @@
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		913AD4DC2516581A000FDF07 /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913AD4DB25165819000FDF07 /* VideoCollectionViewCell.swift */; };
 		913AD4DE251677DB000FDF07 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913AD4DD251677DB000FDF07 /* LoginViewController.swift */; };
+		EC460A2D25E8F14A006C585D /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC460A2C25E8F14A006C585D /* Utilities.swift */; };
 		ECDEE42E25E7A71A00DB468F /* Meeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECDEE42D25E7A71900DB468F /* Meeting.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		913AD4DD251677DB000FDF07 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9360531DA4B170754E7D94BF /* Pods-HMSVideo_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSVideo_Example.release.xcconfig"; path = "Target Support Files/Pods-HMSVideo_Example/Pods-HMSVideo_Example.release.xcconfig"; sourceTree = "<group>"; };
 		BADB1198BD96E24E9BFFB40B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		EC460A2C25E8F14A006C585D /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		ECCBC9E325E8E16F007C501D /* HMSVideo_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HMSVideo_Example.entitlements; sourceTree = "<group>"; };
 		ECDEE42B25E7A6AE00DB468F /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		ECDEE42D25E7A71900DB468F /* Meeting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Meeting.storyboard; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD41AFB9204008FA782 /* Info.plist */,
+				EC460A2C25E8F14A006C585D /* Utilities.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 				913AD4DE251677DB000FDF07 /* LoginViewController.swift in Sources */,
 				913AD4DC2516581A000FDF07 /* VideoCollectionViewCell.swift in Sources */,
 				607FACD81AFB9204008FA782 /* MeetingViewController.swift in Sources */,
+				EC460A2D25E8F14A006C585D /* Utilities.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
