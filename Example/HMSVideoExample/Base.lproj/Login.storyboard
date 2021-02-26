@@ -4,6 +4,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,34 +23,112 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HMS" translatesAutoresizingMaskIntoConstraints="NO" id="pry-yg-EPI">
-                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                                <rect key="frame" x="20" y="44" width="355" height="734"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HMS" translatesAutoresizingMaskIntoConstraints="NO" id="C2U-dF-Uy4">
-                                <rect key="frame" x="20" y="52" width="64" height="64"/>
+                                <rect key="frame" x="20" y="44" width="64" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="64" id="CN5-yW-qkx"/>
                                     <constraint firstAttribute="height" constant="64" id="WfE-uQ-tMe"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100ms" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mrU-qd-8x0">
-                                <rect key="frame" x="92" y="52" width="258" height="64"/>
+                                <rect key="frame" x="92" y="44" width="268" height="64"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bHb-kg-W5R">
+                                <rect key="frame" x="20" y="450" width="335" height="328"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7Uc-L5-TRx">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="48"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3IR-ix-Tf0">
+                                                <rect key="frame" x="0.0" y="0.0" width="89.333333333333329" height="48"/>
+                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="iOS User" borderStyle="roundedRect" placeholder="Enter Name" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="7HE-IK-4mD">
+                                                <rect key="frame" x="97.333333333333329" y="0.0" width="237.66666666666669" height="48"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="namePhonePad" enablesReturnKeyAutomatically="YES" textContentType="name"/>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" priority="750" constant="48" id="sEK-hS-VVP"/>
+                                        </constraints>
+                                    </stackView>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Meeting ID" textAlignment="center" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="oHK-xx-jcU">
+                                        <rect key="frame" x="0.0" y="56" width="335" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" priority="750" constant="48" id="GrJ-Jj-GeB"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                        <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sLi-29-TEO">
+                                        <rect key="frame" x="0.0" y="112" width="335" height="48"/>
+                                        <color key="backgroundColor" systemColor="linkColor"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title=" Join Now">
+                                            <imageReference key="image" image="arrow.up.right.video" catalog="system" symbolScale="medium"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large" weight="heavy">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                            </preferredSymbolConfiguration>
+                                        </state>
+                                    </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Meeting Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FHx-L6-4DO">
+                                        <rect key="frame" x="0.0" y="168" width="335" height="48"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="namePhonePad" enablesReturnKeyAutomatically="YES" textContentType="name"/>
+                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="cc2-XY-bW8">
+                                        <rect key="frame" x="0.0" y="224" width="335" height="48"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Record Meeting" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iqm-l3-nQu">
+                                                <rect key="frame" x="0.0" y="12" width="247.66666666666666" height="24"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KsG-jx-8PJ">
+                                                <rect key="frame" x="255.66666666666671" y="8.6666666666666288" width="81.333333333333343" height="31"/>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M9x-jp-1dT">
+                                        <rect key="frame" x="0.0" y="280" width="335" height="48"/>
+                                        <color key="backgroundColor" systemColor="linkColor"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title=" Start a Meeting" image="video" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large" weight="black">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                            </preferredSymbolConfiguration>
+                                        </state>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="mrU-qd-8x0" secondAttribute="trailing" constant="25" id="31E-9L-8UU"/>
-                            <constraint firstItem="au1-nU-61f" firstAttribute="top" secondItem="pry-yg-EPI" secondAttribute="bottom" id="BWD-Ex-Yse"/>
-                            <constraint firstItem="pry-yg-EPI" firstAttribute="top" secondItem="Zky-Jr-DW7" secondAttribute="bottom" id="LBA-vq-Uk5"/>
-                            <constraint firstItem="mrU-qd-8x0" firstAttribute="top" secondItem="C2U-dF-Uy4" secondAttribute="top" id="c9e-gk-j9Y"/>
-                            <constraint firstItem="C2U-dF-Uy4" firstAttribute="top" secondItem="Zky-Jr-DW7" secondAttribute="bottom" constant="8" symbolic="YES" id="dZV-5G-aWR"/>
-                            <constraint firstAttribute="trailing" secondItem="pry-yg-EPI" secondAttribute="trailing" id="dgp-gS-Jk6"/>
-                            <constraint firstItem="mrU-qd-8x0" firstAttribute="leading" secondItem="C2U-dF-Uy4" secondAttribute="trailing" constant="8" symbolic="YES" id="faj-NG-TaI"/>
-                            <constraint firstItem="mrU-qd-8x0" firstAttribute="bottom" secondItem="C2U-dF-Uy4" secondAttribute="bottom" id="ksH-OP-ne9"/>
-                            <constraint firstItem="pry-yg-EPI" firstAttribute="leading" secondItem="jQ1-tl-f6e" secondAttribute="leading" id="uGc-po-Wvl"/>
-                            <constraint firstItem="C2U-dF-Uy4" firstAttribute="leading" secondItem="jQ1-tl-f6e" secondAttribute="leading" constant="20" symbolic="YES" id="ylh-3S-Zua"/>
+                            <constraint firstItem="bHb-kg-W5R" firstAttribute="leading" secondItem="jQ1-tl-f6e" secondAttribute="leading" constant="20" symbolic="YES" id="9e1-Iq-Phf"/>
+                            <constraint firstItem="bHb-kg-W5R" firstAttribute="top" relation="greaterThanOrEqual" secondItem="C2U-dF-Uy4" secondAttribute="bottom" constant="36" id="DNv-IR-mdH"/>
+                            <constraint firstItem="mrU-qd-8x0" firstAttribute="bottom" secondItem="C2U-dF-Uy4" secondAttribute="bottom" id="ENv-Bi-r99"/>
+                            <constraint firstAttribute="trailing" secondItem="bHb-kg-W5R" secondAttribute="trailing" constant="20" symbolic="YES" id="HS4-sm-qYW"/>
+                            <constraint firstItem="pry-yg-EPI" firstAttribute="leading" secondItem="jQ1-tl-f6e" secondAttribute="leading" constant="20" symbolic="YES" id="Igg-fB-civ"/>
+                            <constraint firstItem="pry-yg-EPI" firstAttribute="top" secondItem="Zky-Jr-DW7" secondAttribute="bottom" id="QJr-bQ-9uu"/>
+                            <constraint firstAttribute="trailing" secondItem="pry-yg-EPI" secondAttribute="trailing" id="SyP-6y-rsV"/>
+                            <constraint firstItem="C2U-dF-Uy4" firstAttribute="top" secondItem="Zky-Jr-DW7" secondAttribute="bottom" id="USt-HX-x7x"/>
+                            <constraint firstItem="au1-nU-61f" firstAttribute="top" secondItem="pry-yg-EPI" secondAttribute="bottom" id="UrM-sU-rhI"/>
+                            <constraint firstItem="mrU-qd-8x0" firstAttribute="leading" secondItem="C2U-dF-Uy4" secondAttribute="trailing" constant="8" symbolic="YES" id="a6W-uK-Jgb"/>
+                            <constraint firstItem="mrU-qd-8x0" firstAttribute="top" secondItem="C2U-dF-Uy4" secondAttribute="top" id="bhS-xQ-n08"/>
+                            <constraint firstItem="C2U-dF-Uy4" firstAttribute="leading" secondItem="jQ1-tl-f6e" secondAttribute="leading" constant="20" symbolic="YES" id="jjf-8D-Wvx"/>
+                            <constraint firstAttribute="trailing" secondItem="mrU-qd-8x0" secondAttribute="trailing" constant="15" id="ypQ-Q3-0Dl"/>
+                            <constraint firstItem="au1-nU-61f" firstAttribute="top" secondItem="bHb-kg-W5R" secondAttribute="bottom" id="zUv-8S-TQJ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="WAo-RG-heA"/>
@@ -80,6 +160,11 @@
     </scenes>
     <resources>
         <image name="HMS" width="341.33334350585938" height="341.33334350585938"/>
+        <image name="arrow.up.right.video" catalog="system" width="128" height="83"/>
+        <image name="video" catalog="system" width="128" height="83"/>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
