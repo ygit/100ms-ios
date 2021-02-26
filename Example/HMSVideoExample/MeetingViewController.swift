@@ -12,6 +12,7 @@ class MeetingViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var speakerLabel: UILabel!
     
+    
     var client: HMSClient!
     var roomName: String!
     var userName: String!
@@ -325,6 +326,13 @@ class MeetingViewController: UIViewController {
             }
         })
         task.resume()
+    }
+    
+    
+    // MARK: - Action Handlers
+    
+    @IBAction func backTapped(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

@@ -69,7 +69,7 @@
                                                     <constraint firstAttribute="height" priority="750" constant="48" id="sEK-hS-VVP"/>
                                                 </constraints>
                                             </stackView>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Meeting ID" textAlignment="center" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="oHK-xx-jcU">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Meeting ID" borderStyle="roundedRect" placeholder="Enter Meeting ID" textAlignment="center" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="oHK-xx-jcU">
                                                 <rect key="frame" x="0.0" y="112" width="335" height="48"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" priority="750" constant="48" id="GrJ-Jj-GeB"/>
@@ -104,7 +104,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Meeting Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FHx-L6-4DO">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Meeting Name" borderStyle="roundedRect" placeholder="Enter Meeting Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FHx-L6-4DO">
                                                 <rect key="frame" x="0.0" y="56" width="335" height="48"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="CG2-jx-KKr"/>
@@ -197,7 +197,7 @@
         <!--Navigation Controller-->
         <scene sceneID="2Qz-Tb-TXU">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="JHd-X7-1X6" sceneMemberID="viewController">
+                <navigationController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="JHd-X7-1X6" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OOd-DE-Z3f">
                         <autoresizingMask key="autoresizingMask"/>
