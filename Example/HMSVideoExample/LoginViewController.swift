@@ -6,17 +6,57 @@
 //
 
 import UIKit
+import QuartzCore
 
 class LoginViewController: UIViewController {
     
+    // MARK: - View Properties
+    
     @IBOutlet weak var scrollView: UIScrollView!
     
+    @IBOutlet weak var joinNowStackView: UIStackView! {
+        didSet {
+            if #available(iOS 11.0, *) {
+                joinNowStackView.layer.borderColor = UIColor(named: "Border")?.cgColor
+            } else {
+                joinNowStackView.layer.borderColor = UIColor.black.cgColor
+            }
+            joinNowStackView.layer.borderWidth = 1
+            joinNowStackView.layer.cornerRadius = 12
+            joinNowStackView.layer.masksToBounds = true
+        }
+    }
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var meetingIDField: UITextField!
+    @IBOutlet weak var joinNowButton: UIButton! {
+        didSet {
+            joinNowButton.layer.cornerRadius = 12
+            joinNowButton.layer.masksToBounds = true
+        }
+    }
     
+    @IBOutlet weak var startMeetingStackView: UIStackView! {
+        didSet {
+            if #available(iOS 11.0, *) {
+                startMeetingStackView.layer.borderColor = UIColor(named: "Border")?.cgColor
+            } else {
+                startMeetingStackView.layer.borderColor = UIColor.black.cgColor
+            }
+            
+            startMeetingStackView.layer.borderWidth = 1
+            startMeetingStackView.layer.cornerRadius = 12
+            startMeetingStackView.layer.masksToBounds = true
+        }
+    }
     
     @IBOutlet weak var meetingNameField: UITextField!
     @IBOutlet weak var recordSwitch: UISwitch!
+    @IBOutlet weak var startMeetingButton: UIButton! {
+        didSet {
+            startMeetingButton.layer.cornerRadius = 12
+            startMeetingButton.layer.masksToBounds = true
+        }
+    }
     
     
     // MARK: - View Lifecycle
