@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import QuartzCore
 
 class LoginViewController: UIViewController {
 
@@ -16,45 +15,43 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var joinNowStackView: UIStackView! {
         didSet {
-            if #available(iOS 11.0, *) {
-                joinNowStackView.layer.borderColor = UIColor(named: "Border")?.cgColor
-            } else {
-                joinNowStackView.layer.borderColor = UIColor.black.cgColor
-            }
-            joinNowStackView.layer.borderWidth = 1
-            joinNowStackView.layer.cornerRadius = 12
-            joinNowStackView.layer.masksToBounds = true
+            Utilities.applyBorder(on: joinNowStackView)
         }
     }
-    @IBOutlet weak var nameField: UITextField!
-    @IBOutlet weak var meetingIDField: UITextField!
+
+    @IBOutlet weak var nameField: UITextField! {
+        didSet {
+            Utilities.applyBorder(on: nameField)
+        }
+    }
+
+    @IBOutlet weak var meetingIDField: UITextField! {
+        didSet {
+            Utilities.drawCorner(on: meetingIDField)
+        }
+    }
+
     @IBOutlet weak var joinNowButton: UIButton! {
         didSet {
-            joinNowButton.layer.cornerRadius = 12
-            joinNowButton.layer.masksToBounds = true
+            Utilities.drawCorner(on: joinNowButton)
         }
     }
 
     @IBOutlet weak var startMeetingStackView: UIStackView! {
         didSet {
-            if #available(iOS 11.0, *) {
-                startMeetingStackView.layer.borderColor = UIColor(named: "Border")?.cgColor
-            } else {
-                startMeetingStackView.layer.borderColor = UIColor.black.cgColor
-            }
-
-            startMeetingStackView.layer.borderWidth = 1
-            startMeetingStackView.layer.cornerRadius = 12
-            startMeetingStackView.layer.masksToBounds = true
+            Utilities.applyBorder(on: startMeetingStackView)
         }
     }
 
-    @IBOutlet weak var meetingNameField: UITextField!
+    @IBOutlet weak var meetingNameField: UITextField! {
+        didSet {
+            Utilities.drawCorner(on: meetingNameField)
+        }
+    }
     @IBOutlet weak var recordSwitch: UISwitch!
     @IBOutlet weak var startMeetingButton: UIButton! {
         didSet {
-            startMeetingButton.layer.cornerRadius = 12
-            startMeetingButton.layer.masksToBounds = true
+            Utilities.drawCorner(on: startMeetingButton)
         }
     }
 
