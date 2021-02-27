@@ -1,5 +1,9 @@
 # 100ms Sample iOS App in Swift
 
+[![Version](https://img.shields.io/cocoapods/v/HMSVideo.svg?style=flat)](http://cocoapods.org/pods/HMSVideo)
+[![License](https://img.shields.io/cocoapods/l/HMSVideo.svg?style=flat)](http://cocoapods.org/pods/HMSVideo)
+[![Platform](https://img.shields.io/cocoapods/p/HMSVideo.svg?style=flat)](http://cocoapods.org/pods/HMSVideo)
+
 ## **Setup**
 
 This repository contains example code written in Swift.
