@@ -13,7 +13,7 @@ final class MeetingViewController: UIViewController {
 
     @IBOutlet weak var roomNameLabel: UILabel! {
         didSet {
-            roomNameLabel.text = viewModel.wrapper.roomName
+            roomNameLabel.text = viewModel.hmsInterface.roomName
             let bottomLine = CALayer()
             bottomLine.frame = CGRect(x: 0.0, y: roomNameLabel.frame.height - 1, width: roomNameLabel.frame.width, height: 1.0)
             bottomLine.backgroundColor = UIColor.black.cgColor
@@ -66,9 +66,12 @@ final class MeetingViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         if isMovingFromParent {
             UIApplication.shared.isIdleTimerDisabled = false
-            NotificationCenter.default.removeObserver(self)
             viewModel.cleanup()
         }
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     //    func updateAudioLevels(levels: [HMSAudioLevelInfo]) {
@@ -269,8 +272,9 @@ final class MeetingViewController: UIViewController {
     }
 
     func handleError() {
-        notificationObserver = NotificationCenter.default.addObserver(forName: Constants.hmsError, object: nil, queue: .main) {
-            [weak self] notification in
+        notificationObserver = NotificationCenter.default.addObserver(forName: Constants.hmsError,
+                                                                      object: nil,
+                                                                      queue: .main) { [weak self] notification in
 
             let message = notification.userInfo?["error"] as? String ?? "Client Error!"
 

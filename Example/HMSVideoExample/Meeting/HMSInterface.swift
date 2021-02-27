@@ -9,7 +9,7 @@
 import Foundation
 import HMSVideo
 
-final class HMSWrapper {
+final class HMSInterface {
 
     private let endpoint: String
     private let token: String

@@ -19,7 +19,7 @@
 		EC462CA025E95A4100BFF07C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC462C9D25E95A4100BFF07C /* Utilities.swift */; };
 		EC462CA125E95A4100BFF07C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC462C9E25E95A4100BFF07C /* Images.xcassets */; };
 		EC462CAE25E9606100BFF07C /* MeetingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC462CAD25E9606100BFF07C /* MeetingViewModel.swift */; };
-		EC462CB225E9616400BFF07C /* HMSWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC462CB125E9616400BFF07C /* HMSWrapper.swift */; };
+		EC462CB225E9616400BFF07C /* HMSInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC462CB125E9616400BFF07C /* HMSInterface.swift */; };
 		EC462CB825E9629700BFF07C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC462CB725E9629700BFF07C /* Constants.swift */; };
 		EC8C4ADA25EA4CDF00E90469 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8C4ADC25EA4CDF00E90469 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -60,7 +60,7 @@
 		EC462C9E25E95A4100BFF07C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Supporting Files/Images.xcassets"; sourceTree = "<group>"; };
 		EC462CA825E95BC100BFF07C /* HMSVideo_Example.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = HMSVideo_Example.entitlements; path = "Supporting Files/HMSVideo_Example.entitlements"; sourceTree = "<group>"; };
 		EC462CAD25E9606100BFF07C /* MeetingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MeetingViewModel.swift; path = Meeting/MeetingViewModel.swift; sourceTree = "<group>"; };
-		EC462CB125E9616400BFF07C /* HMSWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HMSWrapper.swift; path = Meeting/HMSWrapper.swift; sourceTree = "<group>"; };
+		EC462CB125E9616400BFF07C /* HMSInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HMSInterface.swift; path = Meeting/HMSInterface.swift; sourceTree = "<group>"; };
 		EC462CB725E9629700BFF07C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = "Supporting Files/Constants.swift"; sourceTree = "<group>"; };
 		EC8C4ADB25EA4CDF00E90469 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EC8C4AE025EA4CE100E90469 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -185,7 +185,7 @@
 			children = (
 				EC462C9525E95A3200BFF07C /* MeetingViewController.swift */,
 				EC462CAD25E9606100BFF07C /* MeetingViewModel.swift */,
-				EC462CB125E9616400BFF07C /* HMSWrapper.swift */,
+				EC462CB125E9616400BFF07C /* HMSInterface.swift */,
 				EC462C9425E95A3200BFF07C /* VideoCollectionViewCell.swift */,
 				EC462C8725E95A0B00BFF07C /* Meeting.storyboard */,
 			);
@@ -396,7 +396,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC462C9F25E95A4100BFF07C /* AppDelegate.swift in Sources */,
-				EC462CB225E9616400BFF07C /* HMSWrapper.swift in Sources */,
+				EC462CB225E9616400BFF07C /* HMSInterface.swift in Sources */,
 				EC462C9125E95A2800BFF07C /* LoginViewController.swift in Sources */,
 				EC462CAE25E9606100BFF07C /* MeetingViewModel.swift in Sources */,
 				EC462C9625E95A3200BFF07C /* VideoCollectionViewCell.swift in Sources */,

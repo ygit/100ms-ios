@@ -10,13 +10,13 @@ import UIKit
 
 final class MeetingViewModel: NSObject {
 
-    private(set) var wrapper: HMSWrapper
+    private(set) var hmsInterface: HMSInterface
 
     // MARK: - Initializers
 
     init(endpoint: String, token: String, user: String, room: String) {
 
-        wrapper = HMSWrapper(endpoint: endpoint, token: token, user: user, roomName: room) {
+        hmsInterface = HMSInterface(endpoint: endpoint, token: token, user: user, roomName: room) {
 
             // TODO: update UI
         }
@@ -34,18 +34,29 @@ final class MeetingViewModel: NSObject {
     // MARK: - Action Handlers
 
     func cleanup() {
-        wrapper.cleanup()
+        hmsInterface.cleanup()
     }
 }
 
 extension MeetingViewModel: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return hmsInterface.videoTracks.count
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.resuseIdentifier,
+                                                            for: indexPath) as? VideoCollectionViewCell,
+              indexPath.item < hmsInterface.videoTracks.count
+        else {
+            return UICollectionViewCell()
+        }
+        let track = hmsInterface.videoTracks[indexPath.item]
+
+        cell.videoView.setVideoTrack(track)
+
+        return cell
     }
 }
 
@@ -56,9 +67,7 @@ extension MeetingViewModel: UICollectionViewDelegate {
 extension MeetingViewController: UICollectionViewDelegateFlowLayout {
 
     var sectionInsets: UIEdgeInsets {
-        get {
-            UIEdgeInsets(top: 15.0, left: 8.0, bottom: 15.0, right: 8.0)
-        }
+        UIEdgeInsets(top: 15.0, left: 8.0, bottom: 15.0, right: 8.0)
     }
 
     func collectionView(
