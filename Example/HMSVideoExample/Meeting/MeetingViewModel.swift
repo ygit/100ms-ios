@@ -12,13 +12,13 @@ final class MeetingViewModel: NSObject,
                               UICollectionViewDataSource,
                               UICollectionViewDelegate,
                               UICollectionViewDelegateFlowLayout {
-    
 
     private var hms: HMSInterface!
 
     private weak var collectionView: UICollectionView!
+
+    private let sectionInsets = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
     
-    private let sectionInsets = UIEdgeInsets(top: 15.0, left: 8.0, bottom: 15.0, right: 8.0)
 
     // MARK: - Initializers
 
@@ -43,13 +43,9 @@ final class MeetingViewModel: NSObject,
         self.collectionView = collectionView
     }
 
+    
     // MARK: - View Modifiers
 
-    // MARK: - Action Handlers
-
-    func cleanup() {
-        hms.cleanup()
-    }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return hms.videoTracks.count
@@ -67,24 +63,30 @@ final class MeetingViewModel: NSObject,
 
         cell.videoView.setVideoTrack(track)
 
+        Utilities.applyBorder(on: cell)
+
         return cell
     }
-
-    
 
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        
+
+        let widthInsets = sectionInsets.left + sectionInsets.right
+        let heightInsets = sectionInsets.top + sectionInsets.bottom
+
         switch hms.videoTracks.count {
         case 1...3:
-            return CGSize(width: collectionView.frame.size.width,
-                          height: collectionView.frame.size.height / CGFloat(hms.videoTracks.count))
+            return CGSize(width: collectionView.frame.size.width - widthInsets,
+                          height: (collectionView.frame.size.height / CGFloat(hms.videoTracks.count)) - heightInsets)
+        case 4...5:
+            return CGSize(width: (collectionView.frame.size.width / 2) - widthInsets,
+                          height: (collectionView.frame.size.height / 2) - heightInsets)
         default:
-            return CGSize(width: collectionView.frame.size.width / 2,
-                          height: collectionView.frame.size.height / 3)
+            return CGSize(width: (collectionView.frame.size.width / 2) - widthInsets,
+                          height: (collectionView.frame.size.height / 3) - heightInsets)
         }
     }
 
@@ -102,5 +104,16 @@ final class MeetingViewModel: NSObject,
         minimumLineSpacingForSectionAt section: Int
     ) -> CGFloat {
         return sectionInsets.left
+    }
+    
+    
+    // MARK: - Action Handlers
+
+    func cleanup() {
+        hms.cleanup()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
     }
 }

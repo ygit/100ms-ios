@@ -16,13 +16,20 @@ final class HMSInterface {
     private let user: String
     private let roomName: String
 
+    private var updateUI: () -> Void
+
     private(set) var localPeer: HMSPeer!
     private(set) var client: HMSClient!
     private(set) var room: HMSRoom!
 
     private(set) var peers = [String: HMSPeer]()
     private(set) var remoteStreams = [HMSStream]()
-    private(set) var videoTracks = [HMSVideoTrack]()
+    private(set) var videoTracks = [HMSVideoTrack]() {
+        didSet {
+            updateUI()
+        }
+    }
+    
     private(set) var localStream: HMSStream?
     private(set) var localAudioTrack: HMSAudioTrack?
     private(set) var localVideoTrack: HMSVideoTrack?
@@ -30,13 +37,13 @@ final class HMSInterface {
 
     private(set) var speaker: String?
 
-    
     // MARK: - Setup Stream
 
     init(user: String, roomName: String, callback: @escaping () -> Void) {
 
         self.user = user
         self.roomName = roomName
+        self.updateUI = callback
 
         fetchToken { [weak self] token, error in
 
@@ -44,13 +51,10 @@ final class HMSInterface {
             else {
                 let error = error ?? CustomError(title: "Fetch Token Error")
                 NotificationCenter.default.post(name: Constants.hmsError, object: nil, userInfo: ["Error": error])
-                callback()
                 return
             }
 
-            self?.connect(with: token) {
-                callback()
-            }
+            self?.connect(with: token)
         }
     }
 
@@ -117,10 +121,11 @@ final class HMSInterface {
             completion(nil, CustomError(title: error.localizedDescription))
         }
     }
+    
 
     // MARK: - Stream Handlers
 
-    func connect(with token: String, update callback: @escaping () -> Void) {
+    func connect(with token: String) {
 
         localPeer = HMSPeer(name: user, authToken: token)
 
@@ -132,36 +137,31 @@ final class HMSInterface {
 
         room = HMSRoom(roomId: roomName)
 
-        client.onPeerJoin = { _, _ in
-            callback()
+        client.onPeerJoin = { room, peer in
+            
         }
 
-        client.onPeerLeave = { _, _ in
-            callback()
+        client.onPeerLeave = { room, peer in
+            
         }
 
         client.onStreamAdd = { room, peer, info in
 
-            self.subscribe(to: room, peer, with: info) {
-                callback()
-            }
+            self.subscribe(to: room, peer, with: info)
         }
 
-        client.onStreamRemove = { [weak self] _, _, info in
+        client.onStreamRemove = { [weak self] room, peer, info in
 
             self?.videoTracks.removeAll { $0.streamId == info.streamId }
-            callback()
         }
 
-        client.onBroadcast = { _, _, _ in
-            callback()
+        client.onBroadcast = { room, peer, data in
+            
         }
 
         client.onConnect = { [weak self] in
-            self?.client.join((self?.room)!) { _, _ in
-                self?.publish {
-                    callback()
-                }
+            self?.client.join((self?.room)!) { isSuccess, error in
+                self?.publish()
             }
         }
 
@@ -172,21 +172,16 @@ final class HMSInterface {
             NotificationCenter.default.post(name: Constants.hmsError,
                                             object: nil,
                                             userInfo: ["error": message])
-            callback()
         }
 
         client.onAudioLevelInfo = { levels in
             self.updateAudio(with: levels)
-            callback()
         }
 
         client.connect()
     }
 
-    func subscribe(to room: HMSRoom,
-                   _ peer: HMSPeer,
-                   with info: HMSStreamInfo,
-                   completion: @escaping () -> Void) {
+    func subscribe(to room: HMSRoom, _ peer: HMSPeer, with info: HMSStreamInfo) {
 
         peers[info.streamId] = peer
 
@@ -200,11 +195,10 @@ final class HMSInterface {
 
             self.remoteStreams.append(stream)
             self.videoTracks.append(videoTrack)
-            completion()
         }
     }
 
-    func publish(completion: @escaping () -> Void) {
+    func publish() {
 
         let constraints = HMSMediaStreamConstraints()
         constraints.shouldPublishAudio = true
@@ -222,16 +216,14 @@ final class HMSInterface {
 
         client.startAudioLevelMonitor(0.5)
 
-        client.publish(localStream, room: room) { stream, _ in
+        client.publish(localStream, room: room) { stream, error in
             guard let stream = stream else { return }
 
-            self.setupLocal(stream) {
-                completion()
-            }
+            self.setupLocal(stream)
         }
     }
 
-    func setupLocal(_ stream: HMSStream, completion: @escaping () -> Void) {
+    func setupLocal(_ stream: HMSStream) {
         localStream = stream
         videoCapturer = stream.videoCapturer
         localAudioTrack = stream.audioTracks?.first
@@ -241,7 +233,6 @@ final class HMSInterface {
 
         if let track = localVideoTrack {
             videoTracks.append(track)
-            completion()
         }
     }
 
