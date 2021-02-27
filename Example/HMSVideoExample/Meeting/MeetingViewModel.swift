@@ -18,7 +18,6 @@ final class MeetingViewModel: NSObject,
     private weak var collectionView: UICollectionView!
 
     private let sectionInsets = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
-    
 
     // MARK: - Initializers
 
@@ -43,9 +42,7 @@ final class MeetingViewModel: NSObject,
         self.collectionView = collectionView
     }
 
-    
     // MARK: - View Modifiers
-
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return hms.videoTracks.count
@@ -105,15 +102,14 @@ final class MeetingViewModel: NSObject,
     ) -> CGFloat {
         return sectionInsets.left
     }
-    
-    
+
     // MARK: - Action Handlers
 
     func cleanup() {
         hms.cleanup()
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+
     }
 }

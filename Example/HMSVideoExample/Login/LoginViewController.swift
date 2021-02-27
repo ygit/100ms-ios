@@ -109,11 +109,13 @@ final class LoginViewController: UIViewController {
 
         viewController.user = user
         viewController.roomName = roomName
+        viewController.flow = .join
 
         navigationController?.pushViewController(viewController, animated: true)
     }
 
     @IBAction private  func startMeetingTapped(_ sender: UIButton) {
+        // viewController.flow = .start
     }
 
     func showAlert(with message: String) {

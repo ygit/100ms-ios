@@ -22,7 +22,6 @@ class Utilities {
         view.layer.cornerRadius = 8
         view.layer.masksToBounds = true
     }
-    
 
     static func drawCorner(on view: UIView) {
         view.layer.cornerRadius = 8
@@ -43,4 +42,8 @@ struct CustomError: ErrorProtocol {
     var localizedDescription: String {
         title
     }
+}
+
+enum MeetingFlow {
+    case join, start
 }

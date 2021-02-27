@@ -29,7 +29,7 @@ final class HMSInterface {
             updateUI()
         }
     }
-    
+
     private(set) var localStream: HMSStream?
     private(set) var localAudioTrack: HMSAudioTrack?
     private(set) var localVideoTrack: HMSVideoTrack?
@@ -121,7 +121,6 @@ final class HMSInterface {
             completion(nil, CustomError(title: error.localizedDescription))
         }
     }
-    
 
     // MARK: - Stream Handlers
 
@@ -137,12 +136,12 @@ final class HMSInterface {
 
         room = HMSRoom(roomId: roomName)
 
-        client.onPeerJoin = { room, peer in
-            
+        client.onPeerJoin = { _, _ in
+
         }
 
-        client.onPeerLeave = { room, peer in
-            
+        client.onPeerLeave = { _, _ in
+
         }
 
         client.onStreamAdd = { room, peer, info in
@@ -150,17 +149,17 @@ final class HMSInterface {
             self.subscribe(to: room, peer, with: info)
         }
 
-        client.onStreamRemove = { [weak self] room, peer, info in
+        client.onStreamRemove = { [weak self] _, _, info in
 
             self?.videoTracks.removeAll { $0.streamId == info.streamId }
         }
 
-        client.onBroadcast = { room, peer, data in
-            
+        client.onBroadcast = { _, _, _ in
+
         }
 
         client.onConnect = { [weak self] in
-            self?.client.join((self?.room)!) { isSuccess, error in
+            self?.client.join((self?.room)!) { _, _ in
                 self?.publish()
             }
         }
@@ -216,7 +215,7 @@ final class HMSInterface {
 
         client.startAudioLevelMonitor(0.5)
 
-        client.publish(localStream, room: room) { stream, error in
+        client.publish(localStream, room: room) { stream, _ in
             guard let stream = stream else { return }
 
             self.setupLocal(stream)

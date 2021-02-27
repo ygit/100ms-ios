@@ -13,12 +13,15 @@ final class MeetingViewController: UIViewController {
 
     var user: String!
     var roomName: String!
+    var flow: MeetingFlow!
 
     private var viewModel: MeetingViewModel!
 
     @IBOutlet weak var roomNameLabel: UILabel! {
         didSet {
-            roomNameLabel.text = roomName
+            if flow != .join {
+                roomNameLabel.text = roomName
+            }
         }
     }
     @IBOutlet weak var collectionView: UICollectionView!
@@ -26,7 +29,6 @@ final class MeetingViewController: UIViewController {
 
     private weak var notificationObserver: NSObjectProtocol?
 
-    
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {

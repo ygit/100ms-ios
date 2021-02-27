@@ -94,7 +94,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kDS-UD-GQA"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="z3H-M7-jFt" firstAttribute="top" secondItem="ort-Dc-XtC" secondAttribute="bottom" constant="8" symbolic="YES" id="03g-PZ-boc"/>
                             <constraint firstItem="Fx3-mW-hsp" firstAttribute="leading" secondItem="kDS-UD-GQA" secondAttribute="leading" constant="15" id="0Ul-0T-cTr"/>
@@ -102,6 +102,7 @@
                             <constraint firstItem="DyH-bp-NTF" firstAttribute="top" secondItem="Fx3-mW-hsp" secondAttribute="bottom" constant="8" symbolic="YES" id="5fw-CX-8f5"/>
                             <constraint firstItem="kDS-UD-GQA" firstAttribute="trailing" secondItem="NKq-UE-p7N" secondAttribute="trailing" id="6G9-wL-MJg"/>
                             <constraint firstItem="kDS-UD-GQA" firstAttribute="trailing" secondItem="DyH-bp-NTF" secondAttribute="trailing" id="93z-Xv-J5z"/>
+                            <constraint firstItem="DyH-bp-NTF" firstAttribute="top" secondItem="kDS-UD-GQA" secondAttribute="top" id="CbS-ZC-lcO"/>
                             <constraint firstAttribute="trailing" secondItem="z3H-M7-jFt" secondAttribute="trailing" constant="15" id="IK3-wX-BqV"/>
                             <constraint firstItem="ort-Dc-XtC" firstAttribute="leading" secondItem="kDS-UD-GQA" secondAttribute="leading" constant="15" id="NzJ-i1-CJh"/>
                             <constraint firstItem="DyH-bp-NTF" firstAttribute="leading" secondItem="kDS-UD-GQA" secondAttribute="leading" id="OJf-s2-MkC"/>
@@ -113,6 +114,19 @@
                             <constraint firstItem="z3H-M7-jFt" firstAttribute="leading" secondItem="Dqf-yv-7Bl" secondAttribute="leading" constant="15" id="toL-Og-eLP"/>
                             <constraint firstItem="kDS-UD-GQA" firstAttribute="trailing" secondItem="Fx3-mW-hsp" secondAttribute="trailing" id="x37-c0-AUK"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="CbS-ZC-lcO"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact-widthClass=compact">
+                            <mask key="subviews">
+                                <exclude reference="Fx3-mW-hsp"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="CbS-ZC-lcO"/>
+                            </mask>
+                        </variation>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
