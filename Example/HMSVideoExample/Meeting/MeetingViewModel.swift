@@ -8,11 +8,17 @@
 
 import UIKit
 
-final class MeetingViewModel: NSObject {
+final class MeetingViewModel: NSObject,
+                              UICollectionViewDataSource,
+                              UICollectionViewDelegate,
+                              UICollectionViewDelegateFlowLayout {
+    
 
-    private(set) var hmsInterface: HMSInterface!
+    private var hms: HMSInterface!
 
     private weak var collectionView: UICollectionView!
+    
+    private let sectionInsets = UIEdgeInsets(top: 15.0, left: 8.0, bottom: 15.0, right: 8.0)
 
     // MARK: - Initializers
 
@@ -20,7 +26,7 @@ final class MeetingViewModel: NSObject {
 
         super.init()
 
-        hmsInterface = HMSInterface(user: user, roomName: room) {
+        hms = HMSInterface(user: user, roomName: room) {
             collectionView.reloadData()
         }
 
@@ -42,52 +48,44 @@ final class MeetingViewModel: NSObject {
     // MARK: - Action Handlers
 
     func cleanup() {
-        hmsInterface.cleanup()
+        hms.cleanup()
     }
-}
-
-extension MeetingViewModel: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return hmsInterface.videoTracks.count
+        return hms.videoTracks.count
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.resuseIdentifier,
                                                             for: indexPath) as? VideoCollectionViewCell,
-              indexPath.item < hmsInterface.videoTracks.count
+              indexPath.item < hms.videoTracks.count
         else {
             return UICollectionViewCell()
         }
-        let track = hmsInterface.videoTracks[indexPath.item]
+        let track = hms.videoTracks[indexPath.item]
 
         cell.videoView.setVideoTrack(track)
 
         return cell
     }
-}
 
-extension MeetingViewModel: UICollectionViewDelegate {
-
-}
-
-extension MeetingViewController: UICollectionViewDelegateFlowLayout {
-
-    var sectionInsets: UIEdgeInsets {
-        UIEdgeInsets(top: 15.0, left: 8.0, bottom: 15.0, right: 8.0)
-    }
+    
 
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        let paddingSpace = sectionInsets.left * 3
-        let availableWidth = view.frame.width - paddingSpace
-        let widthPerItem = availableWidth / 2
-
-        return CGSize(width: widthPerItem, height: widthPerItem)
+        
+        switch hms.videoTracks.count {
+        case 1...3:
+            return CGSize(width: collectionView.frame.size.width,
+                          height: collectionView.frame.size.height / CGFloat(hms.videoTracks.count))
+        default:
+            return CGSize(width: collectionView.frame.size.width / 2,
+                          height: collectionView.frame.size.height / 3)
+        }
     }
 
     func collectionView(

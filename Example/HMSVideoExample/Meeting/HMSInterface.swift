@@ -14,7 +14,7 @@ final class HMSInterface {
     // MARK: - Instance Properties
 
     private let user: String
-    let roomName: String
+    private let roomName: String
 
     private(set) var localPeer: HMSPeer!
     private(set) var client: HMSClient!
@@ -30,6 +30,7 @@ final class HMSInterface {
 
     private(set) var speaker: String?
 
+    
     // MARK: - Setup Stream
 
     init(user: String, roomName: String, callback: @escaping () -> Void) {

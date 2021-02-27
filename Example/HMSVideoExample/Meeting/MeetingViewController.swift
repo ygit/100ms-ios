@@ -15,12 +15,14 @@ final class MeetingViewController: UIViewController {
     var roomName: String!
 
     private var viewModel: MeetingViewModel!
+    
 
     @IBOutlet weak var roomNameLabel: UILabel! {
         didSet {
             roomNameLabel.text = roomName
             let bottomLine = CALayer()
-            bottomLine.frame = CGRect(x: 0.0, y: roomNameLabel.frame.height - 1, width: roomNameLabel.frame.width, height: 1.0)
+            bottomLine.frame = CGRect(x: 0, y: roomNameLabel.frame.height - 1,
+                                      width: roomNameLabel.frame.width, height: 1)
             bottomLine.backgroundColor = UIColor.black.cgColor
             roomNameLabel.layer.addSublayer(bottomLine)
         }
