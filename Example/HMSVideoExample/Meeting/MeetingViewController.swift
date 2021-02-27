@@ -8,9 +8,9 @@
 import UIKit
 
 final class MeetingViewController: UIViewController {
-    
+
     private var viewModel: MeetingViewModel!
-    
+
     @IBOutlet weak var roomNameLabel: UILabel! {
         didSet {
             roomNameLabel.text = viewModel.wrapper.roomName
@@ -21,12 +21,12 @@ final class MeetingViewController: UIViewController {
             roomNameLabel.layer.addSublayer(bottomLine)
         }
     }
-    
+
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var speakerLabel: UILabel!
-    
+
     private weak var notificationObserver: NSObjectProtocol?
-    
+
 //    var client: HMSClient!
 //
 //    var videoTrack: HMSVideoTrack?
@@ -39,33 +39,30 @@ final class MeetingViewController: UIViewController {
 //    var localPeer: HMSPeer!
 //    var peers = [String: HMSPeer]()
     //    var room: HMSRoom!
-    
-    
+
     // MARK: - View Lifecycle
-    
+
     static func make(with endpoint: String, token: String, user: String, room: String) -> MeetingViewController? {
         guard let viewController = UIStoryboard(name: Constants.meeting, bundle: nil)
                 .instantiateInitialViewController() as? MeetingViewController else {
             return nil
         }
-        
+
         viewController.viewModel = MeetingViewModel(endpoint: endpoint, token: token, user: user, room: room)
-        
+
         return viewController
     }
-    
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         UIApplication.shared.isIdleTimerDisabled = true
-        
+
         viewModel.setup(collectionView)
 
         handleError()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         if isMovingFromParent {
             UIApplication.shared.isIdleTimerDisabled = false
@@ -73,7 +70,7 @@ final class MeetingViewController: UIViewController {
             viewModel.cleanup()
         }
     }
-    
+
     //    func updateAudioLevels(levels: [HMSAudioLevelInfo]) {
     //        guard let topLevel = levels.first else {
     //            return
@@ -85,7 +82,7 @@ final class MeetingViewController: UIViewController {
     //
     //        speakerLabel.text = "Speaking: \(peer.name)"
     //    }
-    
+
     //    func showDisconnectError(_ error: Error?) {
     //        let alertController = UIAlertController(title: "Error", message: "Connection lost: \(error?.localizedDescription ?? "Unknown")", preferredStyle: .alert)
     //
@@ -93,7 +90,7 @@ final class MeetingViewController: UIViewController {
     //        alertController.addAction(action1)
     //        self.present(alertController, animated: true, completion: nil)
     //    }
-    
+
     //    func showTokenFailedError() {
     //        let alertController = UIAlertController(title: "Error", message: "Could not fetch token.", preferredStyle: .alert)
     //
@@ -101,7 +98,7 @@ final class MeetingViewController: UIViewController {
     //        alertController.addAction(action1)
     //        self.present(alertController, animated: true, completion: nil)
     //    }
-    
+
     //    func publish() {
     //        let constraints = HMSMediaStreamConstraints()
     //        constraints.shouldPublishAudio = true
@@ -127,7 +124,7 @@ final class MeetingViewController: UIViewController {
     //            }
     //        })
     //    }
-    
+
     //    func setupLocalStream(stream: HMSStream) {
     //        localStream = stream
     //        videoCapturer = stream.videoCapturer
@@ -153,13 +150,13 @@ final class MeetingViewController: UIViewController {
     //            }
     //        })
     //    }
-    
+
     //    func join() {
     //        client.join(room, completion: { [weak self] (_, _) in
     //            self?.publish()
     //        })
     //    }
-    
+
     //    func addVideoTrack(_ track: HMSVideoTrack) {
     //        videoTracks.append(track)
     //        collectionView.reloadData()
@@ -169,7 +166,7 @@ final class MeetingViewController: UIViewController {
     //        videoTracks.removeAll { $0.streamId == streamId }
     //        collectionView.reloadData()
     //    }
-    
+
 //    @IBAction func micMute(_ sender: Any) {
 //        guard let track = self.localAudioTrack else { return }
 //        track.enabled = !track.enabled
@@ -192,7 +189,7 @@ final class MeetingViewController: UIViewController {
 //        guard let capturer = self.videoCapturer else { return }
 //        capturer.switchCamera()
 //    }
-    
+
     //    func fetchToken(completion: @escaping (String?) -> Void) {
     //        guard let endpointUrl = URL(string: endpointURL) else {
     //            completion(nil)
@@ -264,33 +261,33 @@ final class MeetingViewController: UIViewController {
     //        })
     //        task.resume()
     //    }
-    
+
     // MARK: - Action Handlers
-    
+
     @IBAction func backTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
-    
+
     func handleError() {
         notificationObserver = NotificationCenter.default.addObserver(forName: Constants.hmsError, object: nil, queue: .main) {
             [weak self] notification in
-            
+
             let message = notification.userInfo?["error"] as? String ?? "Client Error!"
-            
+
             print("Error: ", message)
-            
+
             let alertController = UIAlertController(title: "Error",
                                                     message: message,
                                                     preferredStyle: .alert)
-            
+
             alertController.addAction(UIAlertAction(title: "OK", style: .default))
-            
+
             self?.present(alertController, animated: true, completion: nil)
         }
     }
 }
 
-//extension MeetingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+// extension MeetingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 //
 //    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        return videoTracks.count
@@ -306,7 +303,7 @@ final class MeetingViewController: UIViewController {
 //
 //        return cell
 //    }
-    
+
     //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     //
     //        var size = CGSize.zero
@@ -318,9 +315,9 @@ final class MeetingViewController: UIViewController {
     //
     //        return size
     //    }
-//}
+// }
 
-//extension MeetingViewController: UICollectionViewDelegateFlowLayout {
+// extension MeetingViewController: UICollectionViewDelegateFlowLayout {
 //    
 //    func collectionView(
 //        _ collectionView: UICollectionView,
@@ -349,4 +346,4 @@ final class MeetingViewController: UIViewController {
 //    ) -> CGFloat {
 //        return sectionInsets.left
 //    }
-//}
+// }
