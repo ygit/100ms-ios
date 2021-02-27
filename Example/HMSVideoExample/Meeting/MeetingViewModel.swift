@@ -74,14 +74,10 @@ final class MeetingViewModel: NSObject,
         let widthInsets = sectionInsets.left + sectionInsets.right
         let heightInsets = sectionInsets.top + sectionInsets.bottom
 
-        switch hms.videoTracks.count {
-        case 1...3:
+        if hms.videoTracks.count < 5 {
             return CGSize(width: collectionView.frame.size.width - widthInsets,
                           height: (collectionView.frame.size.height / CGFloat(hms.videoTracks.count)) - heightInsets)
-        case 4...5:
-            return CGSize(width: (collectionView.frame.size.width / 2) - widthInsets,
-                          height: (collectionView.frame.size.height / 2) - heightInsets)
-        default:
+        } else {
             return CGSize(width: (collectionView.frame.size.width / 2) - widthInsets,
                           height: (collectionView.frame.size.height / 3) - heightInsets)
         }

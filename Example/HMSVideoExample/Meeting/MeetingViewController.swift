@@ -245,9 +245,6 @@ final class MeetingViewController: UIViewController {
 
     // MARK: - Action Handlers
 
-    @IBAction func backTapped(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
-    }
 
     func handleError() {
         notificationObserver = NotificationCenter.default.addObserver(forName: Constants.hmsError,
@@ -266,6 +263,29 @@ final class MeetingViewController: UIViewController {
 
             self?.present(alertController, animated: true, completion: nil)
         }
+    }
+    
+    
+    @IBAction func volumeTapped(_ sender: UIButton) {
+    }
+    
+    @IBAction func switchCameraTapped(_ sender: UIButton) {
+    }
+    
+    @IBAction func editSettingsTapped(_ sender: UIButton) {
+    }
+    
+    @IBAction func videoTapped(_ sender: UIButton) {
+    }
+    
+    @IBAction func micTapped(_ sender: UIButton) {
+    }
+    
+    @IBAction func chatTapped(_ sender: UIButton) {
+    }
+    
+    @IBAction func disconnectTapped(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
