@@ -29,14 +29,17 @@ class Utilities {
     }
 }
 
-
 protocol ErrorProtocol: LocalizedError {
     var title: String { get }
     var code: Int? { get }
+    var localizedDescription: String { get }
+
 }
 
 struct CustomError: ErrorProtocol {
-
     var title: String = "Error"
     var code: Int?
+    var localizedDescription: String {
+        title
+    }
 }

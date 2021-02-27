@@ -18,21 +18,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLt-r5-lXR">
-                                <rect key="frame" x="15" y="44" width="25.5" height="34"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fx3-mW-hsp">
+                                <rect key="frame" x="15" y="44" width="399" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="wJs-Cy-bYG"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <color key="tintColor" systemColor="linkColor"/>
-                                <state key="normal" image="arrow.backward" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large" weight="black">
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                    </preferredSymbolConfiguration>
-                                </state>
-                                <connections>
-                                    <action selector="backTapped:" destination="mjG-Ba-if7" eventType="touchUpInside" id="1B4-wj-DBg"/>
-                                </connections>
-                            </button>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DyH-bp-NTF">
-                                <rect key="frame" x="0.0" y="86" width="414" height="694.5"/>
+                                <rect key="frame" x="0.0" y="84" width="414" height="696.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="X0O-qo-onW">
                                     <size key="itemSize" width="128" height="128"/>
@@ -94,22 +90,24 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="z3H-M7-jFt" firstAttribute="top" secondItem="ort-Dc-XtC" secondAttribute="bottom" constant="8" symbolic="YES" id="03g-PZ-boc"/>
+                            <constraint firstItem="Fx3-mW-hsp" firstAttribute="leading" secondItem="kDS-UD-GQA" secondAttribute="leading" constant="15" id="0Ul-0T-cTr"/>
                             <constraint firstItem="kDS-UD-GQA" firstAttribute="bottom" secondItem="z3H-M7-jFt" secondAttribute="bottom" id="1FJ-1M-vew"/>
-                            <constraint firstItem="DyH-bp-NTF" firstAttribute="top" secondItem="hLt-r5-lXR" secondAttribute="bottom" constant="8" symbolic="YES" id="2Wl-ml-sQJ"/>
+                            <constraint firstItem="DyH-bp-NTF" firstAttribute="top" secondItem="Fx3-mW-hsp" secondAttribute="bottom" constant="8" symbolic="YES" id="5fw-CX-8f5"/>
                             <constraint firstItem="ort-Dc-XtC" firstAttribute="top" secondItem="DyH-bp-NTF" secondAttribute="bottom" constant="8" symbolic="YES" id="8pN-s0-qj1"/>
                             <constraint firstItem="kDS-UD-GQA" firstAttribute="trailing" secondItem="DyH-bp-NTF" secondAttribute="trailing" id="93z-Xv-J5z"/>
                             <constraint firstAttribute="trailing" secondItem="z3H-M7-jFt" secondAttribute="trailing" constant="15" id="IK3-wX-BqV"/>
                             <constraint firstItem="ort-Dc-XtC" firstAttribute="leading" secondItem="kDS-UD-GQA" secondAttribute="leading" constant="15" id="NzJ-i1-CJh"/>
                             <constraint firstItem="DyH-bp-NTF" firstAttribute="leading" secondItem="kDS-UD-GQA" secondAttribute="leading" id="OJf-s2-MkC"/>
-                            <constraint firstItem="hLt-r5-lXR" firstAttribute="leading" secondItem="kDS-UD-GQA" secondAttribute="leading" constant="15" id="YX0-rO-zJB"/>
-                            <constraint firstItem="kDS-UD-GQA" firstAttribute="top" secondItem="hLt-r5-lXR" secondAttribute="top" id="gAj-D1-A1u"/>
+                            <constraint firstItem="kDS-UD-GQA" firstAttribute="top" secondItem="Fx3-mW-hsp" secondAttribute="top" id="UGv-l3-y2p"/>
                             <constraint firstItem="kDS-UD-GQA" firstAttribute="trailing" secondItem="ort-Dc-XtC" secondAttribute="trailing" constant="15" id="ngH-xm-uBG"/>
                             <constraint firstItem="z3H-M7-jFt" firstAttribute="leading" secondItem="Dqf-yv-7Bl" secondAttribute="leading" constant="15" id="toL-Og-eLP"/>
+                            <constraint firstItem="kDS-UD-GQA" firstAttribute="trailing" secondItem="Fx3-mW-hsp" secondAttribute="trailing" id="x37-c0-AUK"/>
                         </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="DyH-bp-NTF" id="pNW-T6-NPM"/>
+                        <outlet property="roomNameLabel" destination="Fx3-mW-hsp" id="M1U-NY-f8w"/>
                         <outlet property="speakerLabel" destination="ort-Dc-XtC" id="Ptg-Mx-gJs"/>
                     </connections>
                 </viewController>
@@ -119,10 +117,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrow.backward" catalog="system" width="128" height="98"/>
-        <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

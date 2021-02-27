@@ -9,17 +9,17 @@
 import Foundation
 import HMSVideo
 
-struct HMSWrapper {
-    
-    let endpoint: String
-    let token: String
-    let user: String
+final class HMSWrapper {
+
+    private let endpoint: String
+    private let token: String
+    private let user: String
     let roomName: String
-    
-    var localPeer: HMSPeer!
-    var client: HMSClient!
-    var room: HMSRoom!
-    
+
+    private(set) var localPeer: HMSPeer!
+    private(set) var client: HMSClient!
+    private(set) var room: HMSRoom!
+
     private(set) var peers = [String: HMSPeer]()
     private(set) var remoteStreams = [HMSStream]()
     private(set) var videoTracks = [HMSVideoTrack]()
@@ -27,60 +27,80 @@ struct HMSWrapper {
     private(set) var localAudioTrack: HMSAudioTrack?
     private(set) var localVideoTrack: HMSVideoTrack?
     private(set) var videoCapturer: HMSVideoCapturer?
-    
+
     private(set) var speaker: String?
-    
-    
-    
+
+    init(endpoint: String, token: String, user: String, roomName: String, callback: @escaping () -> Void) {
+
+        self.endpoint = endpoint
+        self.token = token
+        self.user = user
+        self.roomName = roomName
+
+        fetchToken { [weak self] token, error in
+
+            guard error == nil, let token = token
+            else {
+                let error = error ?? CustomError(title: "Fetch Token Error")
+                NotificationCenter.default.post(name: Constants.hmsError, object: nil, userInfo: ["Error": error])
+                callback()
+                return
+            }
+
+            self?.connect(with: token) {
+                callback()
+            }
+        }
+    }
+
     func fetchToken(completion: @escaping (String?, Error?) -> Void) {
-        
+
         guard let endpointURL = URL(string: endpoint),
               let tokenURL = URL(string: token),
               let subDomain = endpointURL.host?.components(separatedBy: ".").first
         else {
-            print(Constants.urlEmpty)
-            completion(nil, get(error: Constants.urlEmpty))
+            completion(nil, CustomError(title: Constants.urlEmpty))
             return
         }
-        
+
         let parameters = [  "room_id": roomName,
                             "user_name": user,
                             "role": "guest",
                             "env": subDomain    ]
-        
+
         var request = URLRequest(url: tokenURL)
         request.httpMethod = "POST"
-        
+
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
         } catch {
             print(error.localizedDescription)
-            completion(nil, get(error: error.localizedDescription))
+            completion(nil, CustomError(title: error.localizedDescription))
             return
         }
-        
+
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-        
-        URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
-            
-            parseToken(from: data, error: error) { (token, error) in
+
+        URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { [weak self] data, _, error in
+
+            self?.parseToken(from: data, error: error) { token, error in
                 DispatchQueue.main.async {
                     completion(token, error)
                 }
             }
-            
+
         }).resume()
     }
-    
+
     func parseToken(from data: Data?, error: Error?, completion: @escaping (String?, Error?) -> Void) {
-        
+
         guard error == nil, let data = data else {
-            print("\(String(describing: error))")
-            completion(nil, get(error: error!.localizedDescription))
+            let message = error?.localizedDescription ?? "Parse Token Error"
+            completion(nil, CustomError(title: message))
             return
         }
-        
+
         do {
             if let json = try JSONSerialization.jsonObject(with: data,
                                                            options: .mutableContainers) as? [String: Any] {
@@ -88,97 +108,101 @@ struct HMSWrapper {
                     completion(token, nil)
                 } else {
                     print(Constants.jsonError)
-                    completion(nil, get(error: Constants.jsonError))
+                    completion(nil, CustomError(title: Constants.jsonError))
                 }
             }
         } catch {
             print(error.localizedDescription)
-            completion(nil, get(error: error.localizedDescription))
+            completion(nil, CustomError(title: error.localizedDescription))
         }
     }
-    
-    
-    
-    mutating func connect(with token: String, update callback: @escaping () -> Void) {
-        
+
+    func connect(with token: String, update callback: @escaping () -> Void) {
+
         localPeer = HMSPeer(name: user, authToken: token)
-        
+
         let config = HMSClientConfig()
         config.endpoint = endpoint
-        
+
         client = HMSClient(peer: localPeer, config: config)
         client.logLevel = .verbose
-        
+
         room = HMSRoom(roomId: roomName)
-        
-        client.onPeerJoin = { room, peer in
+
+        client.onPeerJoin = { _, _ in
             callback()
         }
-        
-        client.onPeerLeave = { room, peer in
+
+        client.onPeerLeave = { _, _ in
             callback()
         }
-        
+
         client.onStreamAdd = { room, peer, info in
-            
+
             self.subscribe(to: room, peer, with: info) {
                 callback()
             }
         }
-        
-        client.onStreamRemove = { room, peer, info in
-            
-            videoTracks.removeAll { $0.streamId == info.streamId }
+
+        client.onStreamRemove = { [weak self] _, _, info in
+
+            self?.videoTracks.removeAll { $0.streamId == info.streamId }
             callback()
         }
-        
-        client.onBroadcast = { room, peer, data in
+
+        client.onBroadcast = { _, _, _ in
             callback()
         }
-        
-        client.onConnect = {
-            client.join(room) { succes, error in
-                self.publish() {
+
+        client.onConnect = { [weak self] in
+            self?.client.join((self?.room)!) { _, _ in
+                self?.publish {
                     callback()
                 }
             }
         }
-        
+
         client.onDisconnect = { error in
-            self.showDisconnectError(error)
+
+            let message = error?.localizedDescription ?? "Client disconnected!"
+
+            NotificationCenter.default.post(name: Constants.hmsError,
+                                            object: nil,
+                                            userInfo: ["error": message])
             callback()
         }
-        
+
         client.onAudioLevelInfo = { levels in
             self.updateAudio(with: levels)
             callback()
         }
-        
+
         client.connect()
     }
-    
-    
-    mutating func subscribe(to room: HMSRoom, _ peer: HMSPeer, with info: HMSStreamInfo,
-                            completion: @escaping () -> Void) {
-        
+
+    func subscribe(to room: HMSRoom,
+                   _ peer: HMSPeer,
+                   with info: HMSStreamInfo,
+                   completion: @escaping () -> Void) {
+
         peers[info.streamId] = peer
-        
-        client.subscribe(info, room: room) { (stream, error) in
-            
+
+        client.subscribe(info, room: room) { (stream, _) in
+
             guard let stream = stream,
                   let videoTrack = stream.videoTracks?.first
             else {
                 return
             }
-            
+
             self.remoteStreams.append(stream)
             self.videoTracks.append(videoTrack)
             completion()
         }
     }
-    
-    
-    mutating func publish(completion: @escaping () -> Void) {
+
+    func publish(completion: @escaping () -> Void) {
+
         let constraints = HMSMediaStreamConstraints()
         constraints.shouldPublishAudio = true
         constraints.shouldPublishVideo = true
@@ -195,41 +219,49 @@ struct HMSWrapper {
 
         client.startAudioLevelMonitor(0.5)
 
-        client.publish(localStream, room: room) { stream, error in
+        client.publish(localStream, room: room) { stream, _ in
             guard let stream = stream else { return }
-            
+
             self.setupLocal(stream) {
                 completion()
             }
         }
     }
-    
-    mutating func setupLocal(_ stream: HMSStream, completion: @escaping () -> Void) {
+
+    func setupLocal(_ stream: HMSStream, completion: @escaping () -> Void) {
         localStream = stream
         videoCapturer = stream.videoCapturer
         localAudioTrack = stream.audioTracks?.first
         localVideoTrack = stream.videoTracks?.first
 
         videoCapturer?.startCapture()
-        
+
         if let track = localVideoTrack {
             videoTracks.append(track)
             completion()
         }
     }
-    
-    mutating func updateAudio(with levels: [HMSAudioLevelInfo]) {
-        
+
+    func updateAudio(with levels: [HMSAudioLevelInfo]) {
+
         guard let topLevel = levels.first,
               let peer = peers[topLevel.streamId]
         else {
             return
         }
-        
+
         speaker = peer.name
     }
-    
-    func get(error message: String) -> Error {
-        return CustomError(title: message)
+
+    func cleanup() {
+        guard let client = client else {
+            return
+        }
+
+        videoCapturer?.stopCapture()
+
+        client.leave(room)
+
+        client.disconnect()
     }
 }
