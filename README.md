@@ -11,8 +11,9 @@ This repository contains example code written in Swift.
 ### **CocoaPods**
 
 1. Install [CocoaPods 1.7.5 or newer](https://guides.cocoapods.org/using/getting-started.html).
-2. Run `pod install` from the root directory of this project. CocoaPods will install `HMSVideo.framework` and then set up an `xcworkspace`.
-3. Open `HMSVideoExample.xcworkspace`.
+2. Add `pod 'HMSVideo'` to Podfile
+3. Run `pod install` from the root directory of this project. CocoaPods will install `HMSVideo.framework` and then set up an `xcworkspace`.
+4. Open `HMSVideoExample.xcworkspace`.
 
 Note: You may need to update the CocoaPods [Master Spec Repo](https://github.com/CocoaPods/Specs) by running `pod repo update master` in order to fetch the latest specs for HMSVideo.
 
