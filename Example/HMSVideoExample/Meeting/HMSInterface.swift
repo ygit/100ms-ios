@@ -180,6 +180,7 @@ final class HMSInterface {
         }
 
         client.connect()
+        client.startAudioLevelMonitor(0.5)
     }
 
     func subscribe(to room: HMSRoom, _ peer: HMSPeer, with info: HMSStreamInfo) {
@@ -207,7 +208,7 @@ final class HMSInterface {
         constraints.codec = .VP8
         constraints.bitrate = 256
         constraints.frameRate = 25
-        constraints.resolution = .QVGA
+        constraints.resolution = .fullHD
 
         guard let localStream = try? client.getLocalStream(constraints) else {
             return
@@ -246,8 +247,27 @@ final class HMSInterface {
         }
 
         speaker = peer.name
+        print("Speaker: ", speaker)
+    }
+    
+    func switchCamera() {
+        if let capturer = localStream?.videoCapturer {
+            capturer.switchCamera()
+        }
     }
 
+    func switchAudio(_ on: Bool) {
+        if let audioTrack = localStream?.audioTracks?.first {
+            audioTrack.enabled = on
+        }
+    }
+    
+    func switchVideo(_ on: Bool) {
+        if let videoTrack = localStream?.videoTracks?.first {
+            videoTrack.enabled = on
+        }
+    }
+    
     func cleanup() {
         guard let client = client else {
             return

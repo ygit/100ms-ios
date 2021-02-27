@@ -100,6 +100,18 @@ final class MeetingViewModel: NSObject,
     func cleanup() {
         hms.cleanup()
     }
+    
+    func switchCamera() {
+        hms.switchCamera()
+    }
+    
+    func switchAudio(on: Bool) {
+        hms.switchAudio(on)
+    }
+    
+    func switchVideo(on: Bool) {
+        hms.switchVideo(on)
+    }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 

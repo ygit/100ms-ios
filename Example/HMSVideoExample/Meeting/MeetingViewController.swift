@@ -25,7 +25,6 @@ final class MeetingViewController: UIViewController {
         }
     }
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var speakerLabel: UILabel!
 
     private weak var notificationObserver: NSObjectProtocol?
 
@@ -270,6 +269,7 @@ final class MeetingViewController: UIViewController {
     }
     
     @IBAction func switchCameraTapped(_ sender: UIButton) {
+        viewModel.switchCamera()
     }
     
     @IBAction func editSettingsTapped(_ sender: UIButton) {
@@ -277,17 +277,31 @@ final class MeetingViewController: UIViewController {
     
     @IBAction func videoTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
+        viewModel.switchVideo(on: sender.isSelected)
     }
     
     @IBAction func micTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
+        viewModel.switchAudio(on: sender.isSelected)
     }
     
     @IBAction func chatTapped(_ sender: UIButton) {
     }
     
     @IBAction func disconnectTapped(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        let alertController = UIAlertController(title: "Exit Call",
+                                                message: nil,
+                                                preferredStyle: .alert)
+
+        
+        alertController.addAction(UIAlertAction(title: "YES", style: .destructive) { (action) in
+            self.navigationController?.popViewController(animated: true)
+        })
+        
+        alertController.addAction(UIAlertAction(title: "NO", style: .cancel))
+
+        self.present(alertController, animated: true, completion: nil)
+
     }
 }
 
