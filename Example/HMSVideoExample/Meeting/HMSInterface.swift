@@ -122,6 +122,7 @@ final class HMSInterface {
         }
     }
 
+    
     // MARK: - Stream Handlers
 
     func connect(with token: String) {
@@ -136,30 +137,31 @@ final class HMSInterface {
 
         room = HMSRoom(roomId: roomName)
 
-        client.onPeerJoin = { _, _ in
-
+        client.onPeerJoin = { room, peer in
+            print("onPeerJoin: ", room.roomId, peer.name)
         }
 
-        client.onPeerLeave = { _, _ in
-
+        client.onPeerLeave = { room, peer in
+            print("onPeerLeave: ", room.roomId, peer.name)
         }
 
         client.onStreamAdd = { room, peer, info in
-
+            print("onStreamAdd: ", room.roomId, peer.name, info.streamId)
             self.subscribe(to: room, peer, with: info)
         }
 
-        client.onStreamRemove = { [weak self] _, _, info in
-
+        client.onStreamRemove = { [weak self] room, peer, info in
+            print("onStreamRemove: ", room.roomId, peer.name, info.streamId)
             self?.videoTracks.removeAll { $0.streamId == info.streamId }
         }
 
-        client.onBroadcast = { _, _, _ in
-
+        client.onBroadcast = { room, peer, data in
+            print("onBroadcast: ", room.roomId, peer.peerId, data)
         }
 
         client.onConnect = { [weak self] in
-            self?.client.join((self?.room)!) { _, _ in
+            self?.client.join((self?.room)!) { isSuccess, error in
+                print("client.join: ", isSuccess, error ?? "No Error")
                 self?.publish()
             }
         }
