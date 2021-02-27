@@ -27,6 +27,8 @@ struct Constants {
 
     static let meeting = "Meeting"
 
+    static let settings = "Settings"
+
     static let emptyFields = "Please fill in all fields!"
 
     static let meetingError = "Could not make Meeting View Controller!"

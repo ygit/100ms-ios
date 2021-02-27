@@ -50,14 +50,14 @@ final class MeetingViewModel: NSObject,
 
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.resuseIdentifier,
                                                             for: indexPath) as? VideoCollectionViewCell,
               indexPath.item < hms.videoTracks.count
         else {
             return UICollectionViewCell()
         }
-        
+
         let track = hms.videoTracks[indexPath.item]
 
         cell.videoView.setVideoTrack(track)
@@ -100,15 +100,15 @@ final class MeetingViewModel: NSObject,
     func cleanup() {
         hms.cleanup()
     }
-    
+
     func switchCamera() {
         hms.switchCamera()
     }
-    
+
     func switchAudio(on: Bool) {
         hms.switchAudio(on)
     }
-    
+
     func switchVideo(on: Bool) {
         hms.switchVideo(on)
     }

@@ -17,6 +17,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
 
         contentView.clipsToBounds = true
+        contentView.contentMode = .scaleAspectFit
 
         if videoView.superview == nil {
             contentView.addSubview(videoView)

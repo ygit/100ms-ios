@@ -122,7 +122,6 @@ final class HMSInterface {
         }
     }
 
-    
     // MARK: - Stream Handlers
 
     func connect(with token: String) {
@@ -247,9 +246,9 @@ final class HMSInterface {
         }
 
         speaker = peer.name
-        print("Speaker: ", speaker)
+        print("Speaker: ", peer.name)
     }
-    
+
     func switchCamera() {
         if let capturer = localStream?.videoCapturer {
             capturer.switchCamera()
@@ -261,13 +260,13 @@ final class HMSInterface {
             audioTrack.enabled = on
         }
     }
-    
+
     func switchVideo(_ on: Bool) {
         if let videoTrack = localStream?.videoTracks?.first {
             videoTrack.enabled = on
         }
     }
-    
+
     func cleanup() {
         guard let client = client else {
             return

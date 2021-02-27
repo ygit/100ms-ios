@@ -244,7 +244,6 @@ final class MeetingViewController: UIViewController {
 
     // MARK: - Action Handlers
 
-
     func handleError() {
         notificationObserver = NotificationCenter.default.addObserver(forName: Constants.hmsError,
                                                                       object: nil,
@@ -263,41 +262,47 @@ final class MeetingViewController: UIViewController {
             self?.present(alertController, animated: true, completion: nil)
         }
     }
-    
-    
+
     @IBAction func volumeTapped(_ sender: UIButton) {
     }
-    
+
     @IBAction func switchCameraTapped(_ sender: UIButton) {
         viewModel.switchCamera()
     }
-    
+
     @IBAction func editSettingsTapped(_ sender: UIButton) {
+
+        guard let viewController = UIStoryboard(name: Constants.settings, bundle: nil)
+                .instantiateInitialViewController() as? SettingsViewController
+        else {
+            return
+        }
+
+        present(viewController, animated: true)
     }
-    
+
     @IBAction func videoTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         viewModel.switchVideo(on: sender.isSelected)
     }
-    
+
     @IBAction func micTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         viewModel.switchAudio(on: sender.isSelected)
     }
-    
+
     @IBAction func chatTapped(_ sender: UIButton) {
     }
-    
+
     @IBAction func disconnectTapped(_ sender: UIButton) {
         let alertController = UIAlertController(title: "Exit Call",
                                                 message: nil,
                                                 preferredStyle: .alert)
 
-        
-        alertController.addAction(UIAlertAction(title: "YES", style: .destructive) { (action) in
+        alertController.addAction(UIAlertAction(title: "YES", style: .destructive) { (_) in
             self.navigationController?.popViewController(animated: true)
         })
-        
+
         alertController.addAction(UIAlertAction(title: "NO", style: .cancel))
 
         self.present(alertController, animated: true, completion: nil)
