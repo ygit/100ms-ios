@@ -107,6 +107,11 @@
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                             </preferredSymbolConfiguration>
                                         </state>
+                                        <state key="selected" image="video.slash.fill" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                            </preferredSymbolConfiguration>
+                                        </state>
                                         <connections>
                                             <action selector="videoTapped:" destination="mjG-Ba-if7" eventType="touchUpInside" id="fsv-nu-s1V"/>
                                         </connections>
@@ -114,6 +119,11 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hKQ-0T-b7l">
                                         <rect key="frame" x="99.666666666666686" y="8.6666666666666305" width="91.333333333333314" height="26.666666666666671"/>
                                         <state key="normal" image="mic.fill" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                            </preferredSymbolConfiguration>
+                                        </state>
+                                        <state key="selected" image="mic.slash.fill" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                             </preferredSymbolConfiguration>
@@ -213,10 +223,12 @@
         <image name="camera.rotate" catalog="system" width="128" height="94"/>
         <image name="message.fill" catalog="system" width="128" height="113"/>
         <image name="mic.fill" catalog="system" width="108" height="128"/>
+        <image name="mic.slash.fill" catalog="system" width="108" height="128"/>
         <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="phone.down.fill" catalog="system" width="128" height="52"/>
         <image name="speaker.wave.3" catalog="system" width="128" height="86"/>
         <image name="video.fill" catalog="system" width="128" height="82"/>
+        <image name="video.slash.fill" catalog="system" width="128" height="106"/>
         <systemColor name="separatorColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
