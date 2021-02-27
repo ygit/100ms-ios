@@ -9,15 +9,19 @@ import UIKit
 
 final class MeetingViewController: UIViewController {
 
+    // MARK: - View Properties
+
+    var user: String!
+    var roomName: String!
+
     private var viewModel: MeetingViewModel!
 
     @IBOutlet weak var roomNameLabel: UILabel! {
         didSet {
-            roomNameLabel.text = viewModel.hmsInterface.roomName
+            roomNameLabel.text = roomName
             let bottomLine = CALayer()
             bottomLine.frame = CGRect(x: 0.0, y: roomNameLabel.frame.height - 1, width: roomNameLabel.frame.width, height: 1.0)
             bottomLine.backgroundColor = UIColor.black.cgColor
-            //            roomNameLabel.borderStyle = UITextField.BorderStyle.none
             roomNameLabel.layer.addSublayer(bottomLine)
         }
     }
@@ -27,38 +31,14 @@ final class MeetingViewController: UIViewController {
 
     private weak var notificationObserver: NSObjectProtocol?
 
-//    var client: HMSClient!
-//
-//    var videoTrack: HMSVideoTrack?
-//    var localAudioTrack: HMSAudioTrack?
-//    var localVideoTrack: HMSVideoTrack?
-//    var videoCapturer: HMSVideoCapturer?
-//    var videoTracks = [HMSVideoTrack]()
-//    var localStream: HMSStream?
-//    var remoteStreams = [HMSStream]()
-//    var localPeer: HMSPeer!
-//    var peers = [String: HMSPeer]()
-    //    var room: HMSRoom!
-
     // MARK: - View Lifecycle
-
-    static func make(with endpoint: String, token: String, user: String, room: String) -> MeetingViewController? {
-        guard let viewController = UIStoryboard(name: Constants.meeting, bundle: nil)
-                .instantiateInitialViewController() as? MeetingViewController else {
-            return nil
-        }
-
-        viewController.viewModel = MeetingViewModel(endpoint: endpoint, token: token, user: user, room: room)
-
-        return viewController
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         UIApplication.shared.isIdleTimerDisabled = true
 
-        viewModel.setup(collectionView)
+        viewModel = MeetingViewModel(self.user, self.roomName, collectionView)
 
         handleError()
     }

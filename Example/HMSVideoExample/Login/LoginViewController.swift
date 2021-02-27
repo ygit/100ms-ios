@@ -94,22 +94,21 @@ final class LoginViewController: UIViewController {
     // MARK: - Action Handlers
 
     @IBAction private func joinNowTapped(_ sender: UIButton) {
-        guard let room = meetingIDField.text,
+        guard let roomName = meetingIDField.text,
               let user = nameField.text,
-              !user.isEmpty, !room.isEmpty
+              !user.isEmpty, !roomName.isEmpty
         else {
             showAlert(with: Constants.emptyFields)
             return
         }
 
-        guard let viewController = MeetingViewController.make(with: Constants.endpoint,
-                                                              token: Constants.token,
-                                                              user: user,
-                                                              room: room)
-        else {
-            showAlert(with: Constants.meetingError)
+        guard let viewController = UIStoryboard(name: Constants.meeting, bundle: nil)
+                .instantiateInitialViewController() as? MeetingViewController else {
             return
         }
+
+        viewController.user = user
+        viewController.roomName = roomName
 
         navigationController?.pushViewController(viewController, animated: true)
     }

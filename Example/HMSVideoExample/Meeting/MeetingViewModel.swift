@@ -10,23 +10,31 @@ import UIKit
 
 final class MeetingViewModel: NSObject {
 
-    private(set) var hmsInterface: HMSInterface
+    private(set) var hmsInterface: HMSInterface!
+
+    private weak var collectionView: UICollectionView!
 
     // MARK: - Initializers
 
-    init(endpoint: String, token: String, user: String, room: String) {
+    init(_ user: String, _ room: String, _ collectionView: UICollectionView) {
 
-        hmsInterface = HMSInterface(endpoint: endpoint, token: token, user: user, roomName: room) {
+        super.init()
 
-            // TODO: update UI
+        hmsInterface = HMSInterface(user: user, roomName: room) {
+            collectionView.reloadData()
         }
+
+        setup(collectionView)
     }
 
     func setup(_ collectionView: UICollectionView) {
+
         collectionView.register(VideoCollectionViewCell.self, forCellWithReuseIdentifier: Constants.resuseIdentifier)
 
         collectionView.dataSource = self
         collectionView.delegate = self
+
+        self.collectionView = collectionView
     }
 
     // MARK: - View Modifiers

@@ -11,10 +11,11 @@ import Foundation
 struct Constants {
 
     // MARK: - HMS Interface
-    
+
     static let token = "https://ms-services-r9oucbp9pjl9.runkit.sh/?api=token"
 
     static let endpoint = "wss://prod-in.100ms.live/ws"
+//    static let endpoint = "wss://qa-in.100ms.live/ws"
 
     static let urlEmpty = "Token & Endpoint URLs cannot be nil!"
 
@@ -22,7 +23,6 @@ struct Constants {
 
     static let hmsError = NSNotification.Name("HMS_ERROR")
 
-    
     // MARK: - View Constants
 
     static let meeting = "Meeting"

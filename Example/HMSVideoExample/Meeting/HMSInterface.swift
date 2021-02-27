@@ -11,8 +11,8 @@ import HMSVideo
 
 final class HMSInterface {
 
-    private let endpoint: String
-    private let token: String
+    // MARK: - Instance Properties
+
     private let user: String
     let roomName: String
 
@@ -30,10 +30,10 @@ final class HMSInterface {
 
     private(set) var speaker: String?
 
-    init(endpoint: String, token: String, user: String, roomName: String, callback: @escaping () -> Void) {
+    // MARK: - Setup Stream
 
-        self.endpoint = endpoint
-        self.token = token
+    init(user: String, roomName: String, callback: @escaping () -> Void) {
+
         self.user = user
         self.roomName = roomName
 
@@ -55,8 +55,8 @@ final class HMSInterface {
 
     func fetchToken(completion: @escaping (String?, Error?) -> Void) {
 
-        guard let endpointURL = URL(string: endpoint),
-              let tokenURL = URL(string: token),
+        guard let endpointURL = URL(string: Constants.endpoint),
+              let tokenURL = URL(string: Constants.token),
               let subDomain = endpointURL.host?.components(separatedBy: ".").first
         else {
             completion(nil, CustomError(title: Constants.urlEmpty))
@@ -117,12 +117,14 @@ final class HMSInterface {
         }
     }
 
+    // MARK: - Stream Handlers
+
     func connect(with token: String, update callback: @escaping () -> Void) {
 
         localPeer = HMSPeer(name: user, authToken: token)
 
         let config = HMSClientConfig()
-        config.endpoint = endpoint
+        config.endpoint = Constants.endpoint
 
         client = HMSClient(peer: localPeer, config: config)
         client.logLevel = .verbose
