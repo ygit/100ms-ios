@@ -11,6 +11,7 @@
 		1EA4F17E1C9A28E1631291A2 /* Pods_HMSVideo_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 573765C134F99AC8C2132D64 /* Pods_HMSVideo_Example.framework */; };
 		607FACDB1AFB9204008FA782 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Login.storyboard */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		EC02581325EB7479001293C2 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC02581525EB7479001293C2 /* Settings.storyboard */; };
 		EC462C8525E95A0B00BFF07C /* Meeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC462C8725E95A0B00BFF07C /* Meeting.storyboard */; };
 		EC462C9125E95A2800BFF07C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC462C9025E95A2800BFF07C /* LoginViewController.swift */; };
 		EC462C9625E95A3200BFF07C /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC462C9425E95A3200BFF07C /* VideoCollectionViewCell.swift */; };
@@ -22,7 +23,6 @@
 		EC462CB225E9616400BFF07C /* HMSInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC462CB125E9616400BFF07C /* HMSInterface.swift */; };
 		EC462CB825E9629700BFF07C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC462CB725E9629700BFF07C /* Constants.swift */; };
 		EC8C4ADA25EA4CDF00E90469 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8C4ADC25EA4CDF00E90469 /* LaunchScreen.storyboard */; };
-		ECA9BECB25EB6E3B0095C4FD /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA9BEC725EB6E3B0095C4FD /* Settings.storyboard */; };
 		ECA9BECC25EB6E3B0095C4FD /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA9BEC925EB6E3B0095C4FD /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +51,8 @@
 		71C1B9C4B1C0291D024D29D7 /* Pods_HMSVideo_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HMSVideo_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9360531DA4B170754E7D94BF /* Pods-HMSVideo_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSVideo_Example.release.xcconfig"; path = "Target Support Files/Pods-HMSVideo_Example/Pods-HMSVideo_Example.release.xcconfig"; sourceTree = "<group>"; };
 		BADB1198BD96E24E9BFFB40B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		EC02581425EB7479001293C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
+		EC02581925EB747D001293C2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Settings.strings; sourceTree = "<group>"; };
 		EC462C8425E95A0600BFF07C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Login.strings; sourceTree = "<group>"; };
 		EC462C8625E95A0B00BFF07C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Meeting.storyboard; sourceTree = "<group>"; };
 		EC462C8B25E95A0F00BFF07C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Meeting.strings; sourceTree = "<group>"; };
@@ -66,9 +68,7 @@
 		EC462CB725E9629700BFF07C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = "Supporting Files/Constants.swift"; sourceTree = "<group>"; };
 		EC8C4ADB25EA4CDF00E90469 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EC8C4AE025EA4CE100E90469 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		ECA9BEC825EB6E3B0095C4FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		ECA9BEC925EB6E3B0095C4FD /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		ECA9BED125EB6E710095C4FD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		ECDEE42B25E7A6AE00DB468F /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -190,7 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				ECA9BEC925EB6E3B0095C4FD /* SettingsViewController.swift */,
-				ECA9BEC725EB6E3B0095C4FD /* Settings.storyboard */,
+				EC02581525EB7479001293C2 /* Settings.storyboard */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -307,8 +307,8 @@
 			files = (
 				607FACDB1AFB9204008FA782 /* Login.storyboard in Resources */,
 				EC462CA125E95A4100BFF07C /* Images.xcassets in Resources */,
+				EC02581325EB7479001293C2 /* Settings.storyboard in Resources */,
 				EC8C4ADA25EA4CDF00E90469 /* LaunchScreen.storyboard in Resources */,
-				ECA9BECB25EB6E3B0095C4FD /* Settings.storyboard in Resources */,
 				EC462C8525E95A0B00BFF07C /* Meeting.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -451,6 +451,15 @@
 			name = Login.storyboard;
 			sourceTree = "<group>";
 		};
+		EC02581525EB7479001293C2 /* Settings.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC02581425EB7479001293C2 /* Base */,
+				EC02581925EB747D001293C2 /* en */,
+			);
+			name = Settings.storyboard;
+			sourceTree = "<group>";
+		};
 		EC462C8725E95A0B00BFF07C /* Meeting.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -468,15 +477,6 @@
 			);
 			name = LaunchScreen.storyboard;
 			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		ECA9BEC725EB6E3B0095C4FD /* Settings.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				ECA9BEC825EB6E3B0095C4FD /* Base */,
-				ECA9BED125EB6E710095C4FD /* en */,
-			);
-			name = Settings.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
