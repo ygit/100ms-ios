@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MediaPlayer
 
 final class MeetingViewController: UIViewController {
 
@@ -95,6 +96,11 @@ final class MeetingViewController: UIViewController {
     }
 
     @IBAction func volumeTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        let volumeView = MPVolumeView()
+        if let view = volumeView.subviews.first as? UISlider {
+            view.value = sender.isSelected ? 0.0 : 1.0
+        }
     }
 
     @IBAction func switchCameraTapped(_ sender: UIButton) {

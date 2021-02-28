@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mjG-Ba-if7">
-    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <device id="retina6_0" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -101,6 +101,7 @@
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                     </preferredSymbolConfiguration>
                                 </state>
+                                <state key="selected" image="volume.slash" catalog="system"/>
                                 <connections>
                                     <action selector="volumeTapped:" destination="mjG-Ba-if7" eventType="touchUpInside" id="RcD-fe-Ftj"/>
                                 </connections>
@@ -109,7 +110,10 @@
                                 <rect key="frame" x="0.0" y="766" width="390" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qXn-tX-gSM">
-                                        <rect key="frame" x="0.0" y="10.333333333333369" width="91.666666666666671" height="23.333333333333329"/>
+                                        <rect key="frame" x="8" y="0.0" width="87.666666666666671" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="2r2-nP-Ppa"/>
+                                        </constraints>
                                         <state key="normal" image="video.fill" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
@@ -125,7 +129,10 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hKQ-0T-b7l">
-                                        <rect key="frame" x="99.666666666666686" y="8.6666666666666305" width="91.333333333333314" height="26.666666666666671"/>
+                                        <rect key="frame" x="103.66666666666669" y="0.0" width="87.333333333333314" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="gnA-SC-CIG"/>
+                                        </constraints>
                                         <state key="normal" image="mic.fill" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
@@ -141,7 +148,10 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cxf-bq-abg">
-                                        <rect key="frame" x="199" y="9" width="91.666666666666686" height="26"/>
+                                        <rect key="frame" x="199" y="0.0" width="87.666666666666686" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="RA3-dL-P1E"/>
+                                        </constraints>
                                         <state key="normal" image="message.fill" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
@@ -152,7 +162,11 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dT1-Fg-dAU">
-                                        <rect key="frame" x="298.66666666666669" y="11" width="91.333333333333314" height="22"/>
+                                        <rect key="frame" x="294.66666666666669" y="0.0" width="87.333333333333314" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="MxJ-hy-oBa"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                         <color key="tintColor" systemColor="systemRedColor"/>
                                         <state key="normal" image="phone.down.fill" catalog="system">
                                             <color key="titleColor" systemColor="systemRedColor"/>
@@ -168,7 +182,9 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="0PR-Rz-GYz"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="90s-1w-V19"/>
                                 </constraints>
+                                <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="0.0" right="8"/>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="05R-Fu-pzL">
                                 <rect key="frame" x="206" y="44" width="44" height="44"/>
@@ -277,6 +293,7 @@
         <image name="square.bottomhalf.fill" catalog="system" width="128" height="114"/>
         <image name="video.fill" catalog="system" width="128" height="82"/>
         <image name="video.slash.fill" catalog="system" width="128" height="106"/>
+        <image name="volume.slash" catalog="system" width="124" height="128"/>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

@@ -25,9 +25,9 @@ class ParticipantsViewController: UIViewController {
         super.viewDidLoad()
 
     }
-    
+
     // MARK: - Action Handlers
-    
+
     @IBAction func closeTapped(_ sender: UIButton) {
         dismiss(animated: true)
     }
