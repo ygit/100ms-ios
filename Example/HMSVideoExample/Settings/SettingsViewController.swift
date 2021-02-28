@@ -10,6 +10,8 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
+    // MARK: - View Properties
+
     let defaultVideoSource = ["Front Facing", "Rear Facing"]
     let videoCodecs = ["H264", "VP8", "VP9"]
     let videoResolution = ["QVGA", "VGA", "QHD", "HD", "Full HD"]
@@ -23,34 +25,88 @@ class SettingsViewController: UIViewController {
 
     @IBOutlet weak var videoBitRatePicker: UIPickerView!
 
-    
-    @IBOutlet weak var defaultNameField: UITextField!
-    
-    @IBOutlet weak var publishVideoSwitch: UISwitch!
-    
-    @IBOutlet weak var publishAudioSwitch: UISwitch!
-    
-    @IBOutlet weak var maximumRowsSwitch: UITextField!
-    
-    @IBOutlet weak var audioPollDelayField: UITextField!
-    
-    @IBOutlet weak var silenceThresholdField: UITextField!
-    
-    @IBOutlet weak var mirrorMyVideoSwitch: UISwitch!
-    
-    @IBOutlet weak var showVideoPreviewSwitch: UISwitch!
-    
-    @IBOutlet weak var videoFrameRateField: UITextField!
-    
-    @IBOutlet weak var environmentField: UITextField! {
+    @IBOutlet weak var defaultNameField: UITextField! {
         didSet {
-            print(environmentField.text ?? "nil")
+            if let name = UserDefaults.standard.string(forKey: Constants.defaultName) {
+                defaultNameField.text = name
+            }
         }
     }
-    
-    
+
+    @IBOutlet weak var publishVideoSwitch: UISwitch! {
+        didSet {
+            if let isOn = UserDefaults.standard.object(forKey: Constants.publishVideo) as? Bool {
+                publishVideoSwitch.setOn(isOn, animated: false)
+            }
+        }
+    }
+
+    @IBOutlet weak var publishAudioSwitch: UISwitch! {
+        didSet {
+            if let isOn = UserDefaults.standard.object(forKey: Constants.publishAudio) as? Bool {
+                publishAudioSwitch.setOn(isOn, animated: false)
+            }
+        }
+    }
+
+    @IBOutlet weak var maximumRowsField: UITextField! {
+        didSet {
+            if let rows = UserDefaults.standard.string(forKey: Constants.maximumaRows) {
+                maximumRowsField.text = rows
+            }
+        }
+    }
+
+    @IBOutlet weak var audioPollDelayField: UITextField! {
+        didSet {
+            if let delay = UserDefaults.standard.string(forKey: Constants.audioPollDelay) {
+                audioPollDelayField.text = delay
+            }
+        }
+    }
+
+    @IBOutlet weak var silenceThresholdField: UITextField! {
+        didSet {
+            if let threshold = UserDefaults.standard.string(forKey: Constants.silenceThreshold) {
+                silenceThresholdField.text = threshold
+            }
+        }
+    }
+
+    @IBOutlet weak var mirrorMyVideoSwitch: UISwitch! {
+        didSet {
+            if let isOn = UserDefaults.standard.object(forKey: Constants.mirrorMyVideo) as? Bool {
+                mirrorMyVideoSwitch.setOn(isOn, animated: false)
+            }
+        }
+    }
+
+    @IBOutlet weak var showVideoPreviewSwitch: UISwitch! {
+        didSet {
+            if let isOn = UserDefaults.standard.object(forKey: Constants.showVideoPreview) as? Bool {
+                showVideoPreviewSwitch.setOn(isOn, animated: false)
+            }
+        }
+    }
+
+    @IBOutlet weak var videoFrameRateField: UITextField! {
+        didSet {
+            if let rate = UserDefaults.standard.string(forKey: Constants.videoFrameRate) {
+                videoFrameRateField.text = rate
+            }
+        }
+    }
+
+    @IBOutlet weak var environmentField: UITextField! {
+        didSet {
+            if let environment = UserDefaults.standard.string(forKey: Constants.environment) {
+                environmentField.text = environment
+            }
+        }
+    }
+
     // MARK: - View Lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -60,17 +116,68 @@ class SettingsViewController: UIViewController {
     // MARK: - View Modifiers
 
     func setupPickers() {
-        videoCodecPicker.selectRow(1, inComponent: 0, animated: false)
-        videoResolutionPicker.selectRow(2, inComponent: 0, animated: false)
-        videoBitRatePicker.selectRow(2, inComponent: 0, animated: false)
+
+        let userDefaults = UserDefaults.standard
+
+        let source = userDefaults.string(forKey: Constants.defaultVideoSource) ?? "Front Facing"
+        let sourceIndex = defaultVideoSource.firstIndex(of: source) ?? 0
+        videoSourcePicker.selectRow(sourceIndex, inComponent: 0, animated: false)
+
+        let codec = userDefaults.string(forKey: Constants.videoCodec) ?? "VP8"
+        let codecIndex = videoCodecs.firstIndex(of: codec) ?? 1
+        videoCodecPicker.selectRow(codecIndex, inComponent: 0, animated: false)
+
+        let resolution = userDefaults.string(forKey: Constants.videoResolution) ?? "QHD"
+        let resolutionIndex = videoResolution.firstIndex(of: resolution) ?? 2
+        videoResolutionPicker.selectRow(resolutionIndex, inComponent: 0, animated: false)
+
+        let bitrate = userDefaults.string(forKey: Constants.videoBitRate) ?? "Medium (512 kbps)"
+        let bitrateIndex = videoBitRate.firstIndex(of: bitrate) ?? 2
+        videoBitRatePicker.selectRow(bitrateIndex, inComponent: 0, animated: false)
     }
 
     // MARK: - Action Handlers
 
     @IBAction func closeTapped(_ sender: UIButton) {
+        save()
         self.dismiss(animated: true)
     }
+
+    func save() {
+        let userDefaults = UserDefaults.standard
+
+        userDefaults.set(!defaultNameField.text!.isEmpty ? defaultNameField.text : "iOS User",
+                         forKey: Constants.defaultName)
+        userDefaults.set(publishVideoSwitch.isOn, forKey: Constants.publishVideo)
+        userDefaults.set(publishAudioSwitch.isOn, forKey: Constants.publishAudio)
+        userDefaults.set(!maximumRowsField.text!.isEmpty ? maximumRowsField.text : "2",
+                         forKey: Constants.maximumaRows)
+        userDefaults.set(!audioPollDelayField.text!.isEmpty ? audioPollDelayField.text : "2",
+                         forKey: Constants.audioPollDelay)
+        userDefaults.set(!silenceThresholdField.text!.isEmpty ? silenceThresholdField.text : "0.01",
+                         forKey: Constants.silenceThreshold)
+        userDefaults.set(mirrorMyVideoSwitch.isOn, forKey: Constants.mirrorMyVideo)
+        userDefaults.set(showVideoPreviewSwitch.isOn, forKey: Constants.showVideoPreview)
+        userDefaults.set(!videoFrameRateField.text!.isEmpty ? videoFrameRateField.text : "25",
+                         forKey: Constants.videoFrameRate)
+        userDefaults.set(!environmentField.text!.isEmpty ? environmentField.text : "prod-in",
+                         forKey: Constants.environment)
+
+        let source = defaultVideoSource[videoSourcePicker.selectedRow(inComponent: 0)]
+        userDefaults.set(source, forKey: Constants.defaultVideoSource)
+
+        let codec = videoCodecs[videoCodecPicker.selectedRow(inComponent: 0)]
+        userDefaults.set(codec, forKey: Constants.videoCodec)
+
+        let resolution = videoResolution[videoResolutionPicker.selectedRow(inComponent: 0)]
+        userDefaults.set(resolution, forKey: Constants.videoResolution)
+
+        let bitrate = videoBitRate[videoBitRatePicker.selectedRow(inComponent: 0)]
+        userDefaults.set(bitrate, forKey: Constants.videoBitRate)
+    }
 }
+
+// MARK: - Picker View
 
 extension SettingsViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -107,7 +214,7 @@ extension SettingsViewController: UIPickerViewDelegate {
         case 3:
             return videoBitRate[row]
         default:
-            return ""
+            return nil
         }
     }
 }

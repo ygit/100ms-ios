@@ -34,4 +34,34 @@ struct Constants {
     static let meetingError = "Could not make Meeting View Controller!"
 
     static let resuseIdentifier = "Cell"
+
+    // MARK: - Settings
+
+    static let defaultName = "defaultName"
+
+    static let publishVideo = "publishVideo"
+
+    static let publishAudio = "publishAudio"
+
+    static let maximumaRows = "maximumaRows"
+
+    static let audioPollDelay = "audioPollDelay"
+
+    static let silenceThreshold = "silenceThreshold"
+
+    static let mirrorMyVideo = "mirrorMyVideo"
+
+    static let showVideoPreview = "showVideoPreview"
+
+    static let videoFrameRate = "videoFrameRate"
+
+    static let environment = "environment"
+
+    static let defaultVideoSource = "defaultVideoSource"
+
+    static let videoCodec = "videoCodec"
+
+    static let videoResolution = "videoResolution"
+
+    static let videoBitRate = "videoBitRate"
 }
