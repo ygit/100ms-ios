@@ -189,8 +189,8 @@
 		ECA9BEC425EB6E3B0095C4FD /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				ECA9BEC725EB6E3B0095C4FD /* Settings.storyboard */,
 				ECA9BEC925EB6E3B0095C4FD /* SettingsViewController.swift */,
+				ECA9BEC725EB6E3B0095C4FD /* Settings.storyboard */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
