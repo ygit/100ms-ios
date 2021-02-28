@@ -45,7 +45,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="videoCell" id="zr1-g1-0yK">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="Cell" id="zr1-g1-0yK">
                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Y20-62-Gng">
@@ -58,6 +58,7 @@
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dbh-7g-s3g">
                                 <rect key="frame" x="338" y="44" width="44" height="32"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Vpk-fd-0EB"/>
                                     <constraint firstAttribute="width" constant="44" id="ce5-xO-A4I"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -67,6 +68,16 @@
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                     </preferredSymbolConfiguration>
                                 </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Vpk-fd-0EB"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="Vpk-fd-0EB"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="editSettingsTapped:" destination="mjG-Ba-if7" eventType="touchUpInside" id="10q-zp-9Fk"/>
                                 </connections>

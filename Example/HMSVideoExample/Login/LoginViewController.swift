@@ -114,7 +114,7 @@ final class LoginViewController: UIViewController {
         viewController.user = user
         viewController.roomName = roomName
         viewController.flow = .join
-        
+
         save(user, roomName)
 
         navigationController?.pushViewController(viewController, animated: true)
@@ -133,18 +133,18 @@ final class LoginViewController: UIViewController {
 
         self.present(alertController, animated: true, completion: nil)
     }
-    
+
     func save(_ name: String, _ room: String, _ meeting: String? = nil) {
         let userDefaults = UserDefaults.standard
-        
+
         userDefaults.set(name, forKey: "name")
         userDefaults.set(room, forKey: "room")
-        
+
         if let meeting = meeting {
             userDefaults.set(meeting, forKey: "meeting")
         }
     }
-    
+
     @IBAction func settingsTapped(_ sender: UIButton) {
         guard let viewController = UIStoryboard(name: Constants.settings, bundle: nil)
                 .instantiateInitialViewController() as? SettingsViewController

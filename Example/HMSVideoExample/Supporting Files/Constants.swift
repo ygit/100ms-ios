@@ -33,5 +33,5 @@ struct Constants {
 
     static let meetingError = "Could not make Meeting View Controller!"
 
-    static let resuseIdentifier = "videoCell"
+    static let resuseIdentifier = "Cell"
 }
