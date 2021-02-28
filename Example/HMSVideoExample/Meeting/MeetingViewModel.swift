@@ -101,8 +101,9 @@ final class MeetingViewModel: NSObject,
                 return CGSize(width: collectionView.frame.size.width - widthInsets,
                               height: collectionView.frame.size.height - collectionView.frame.size.height / 4 - heightInsets)
             default:
-                return CGSize(width: collectionView.frame.size.width / 4 - widthInsets,
-                              height: collectionView.frame.size.height / 4 - heightInsets)
+                let rows = CGFloat(min(hms.videoTracks.count, 4))
+                return CGSize(width: collectionView.frame.size.width / rows - widthInsets,
+                              height: collectionView.frame.size.height / rows - heightInsets)
             }
         }
     }
