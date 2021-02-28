@@ -86,6 +86,8 @@ final class HMSInterface {
 
             self?.connect(with: token)
         }
+
+        observeSettingsUpdated()
     }
 
     func fetchToken(completion: @escaping (String?, Error?) -> Void) {
@@ -303,6 +305,29 @@ final class HMSInterface {
     func switchVideo(_ isOn: Bool) {
         if let videoTrack = localStream?.videoTracks?.first {
             videoTrack.enabled = isOn
+        }
+    }
+
+    func observeSettingsUpdated() {
+        _ = NotificationCenter.default.addObserver(forName: Constants.settingsUpdated,
+                                               object: nil,
+                                               queue: .main) { [weak self] _ in
+
+            let userDefaults = UserDefaults.standard
+
+            let constraints = HMSMediaStreamConstraints()
+
+            constraints.bitrate = userDefaults.object(forKey: Constants.videoBitRate) as? Int ?? 256
+            constraints.frameRate = userDefaults.object(forKey: Constants.videoFrameRate) as? Int ?? 25
+            constraints.resolution = self?.resolution ?? .QHD
+
+            do {
+                if let strongSelf = self, let stream = self?.localStream {
+                    try strongSelf.client.applyConstraints(constraints, to: stream)
+                }
+            } catch {
+                NotificationCenter.default.post(name: Constants.hmsError, object: nil, userInfo: ["Error": error])
+            }
         }
     }
 

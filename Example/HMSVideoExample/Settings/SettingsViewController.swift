@@ -140,6 +140,7 @@ class SettingsViewController: UIViewController {
 
     @IBAction func closeTapped(_ sender: UIButton) {
         save()
+        NotificationCenter.default.post(name: Constants.settingsUpdated, object: nil)
         self.dismiss(animated: true)
     }
 

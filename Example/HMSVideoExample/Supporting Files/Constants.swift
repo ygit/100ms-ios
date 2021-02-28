@@ -25,6 +25,8 @@ struct Constants {
 
     static let hmsError = NSNotification.Name("HMS_ERROR")
 
+    static let settingsUpdated = NSNotification.Name("SETTINGS_UPDATED")
+
     // MARK: - View Constants
 
     static let meeting = "Meeting"

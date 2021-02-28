@@ -26,8 +26,6 @@ final class MeetingViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
 
-    private weak var notificationObserver: NSObjectProtocol?
-
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
@@ -54,20 +52,20 @@ final class MeetingViewController: UIViewController {
     // MARK: - Action Handlers
 
     func handleError() {
-        notificationObserver = NotificationCenter.default.addObserver(forName: Constants.hmsError,
-                                                                      object: nil,
-                                                                      queue: .main) { [weak self] notification in
-
+        _ = NotificationCenter.default.addObserver(forName: Constants.hmsError,
+                                                   object: nil,
+                                                   queue: .main) { [weak self] notification in
+            
             let message = notification.userInfo?["error"] as? String ?? "Client Error!"
-
+            
             print("Error: ", message)
-
+            
             let alertController = UIAlertController(title: "Error",
                                                     message: message,
                                                     preferredStyle: .alert)
-
+            
             alertController.addAction(UIAlertAction(title: "OK", style: .default))
-
+            
             self?.present(alertController, animated: true, completion: nil)
         }
     }
