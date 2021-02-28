@@ -17,13 +17,12 @@ final class MeetingViewController: UIViewController {
 
     private var viewModel: MeetingViewModel!
 
-    @IBOutlet weak var roomNameLabel: UILabel! {
+    @IBOutlet weak var roomNameButton: UIButton! {
         didSet {
-            if flow != .join {
-                roomNameLabel.text = roomName
-            }
+            roomNameButton.setTitle(roomName, for: .normal)
         }
     }
+
     @IBOutlet weak var collectionView: UICollectionView!
 
     private weak var notificationObserver: NSObjectProtocol?
@@ -70,6 +69,17 @@ final class MeetingViewController: UIViewController {
 
             self?.present(alertController, animated: true, completion: nil)
         }
+    }
+
+    @IBAction func roomNameTapped(_ sender: UIButton) {
+        guard let viewController = UIStoryboard(name: Constants.participants, bundle: nil)
+                .instantiateInitialViewController() as? ParticipantsViewController else {
+            return
+        }
+
+        viewController.hms = viewModel.hms
+
+        present(viewController, animated: true)
     }
 
     @IBAction func switchLayoutTapped(_ sender: UIButton) {

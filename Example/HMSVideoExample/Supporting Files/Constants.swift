@@ -33,6 +33,8 @@ struct Constants {
 
     static let chat = "Chat"
 
+    static let participants = "Participants"
+
     static let emptyFields = "Please fill in all fields!"
 
     static let meetingError = "Could not make Meeting View Controller!"

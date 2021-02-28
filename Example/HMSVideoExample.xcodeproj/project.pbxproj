@@ -23,6 +23,8 @@
 		EC462CB225E9616400BFF07C /* HMSInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC462CB125E9616400BFF07C /* HMSInterface.swift */; };
 		EC462CB825E9629700BFF07C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC462CB725E9629700BFF07C /* Constants.swift */; };
 		EC8C4ADA25EA4CDF00E90469 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8C4ADC25EA4CDF00E90469 /* LaunchScreen.storyboard */; };
+		EC8E97DA25EBFEC6003A3FCD /* ParticipantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8E97D925EBFEC6003A3FCD /* ParticipantsViewController.swift */; };
+		EC8E97E325EBFF16003A3FCD /* Participants.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8E97E525EBFF16003A3FCD /* Participants.storyboard */; };
 		ECA9BECC25EB6E3B0095C4FD /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA9BEC925EB6E3B0095C4FD /* SettingsViewController.swift */; };
 		ECF26DA025EBDB5700BFB3B9 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF26D9F25EBDB5700BFB3B9 /* ChatViewController.swift */; };
 		ECF26DA925EBDBC300BFB3B9 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECF26DAB25EBDBC300BFB3B9 /* Chat.storyboard */; };
@@ -70,6 +72,9 @@
 		EC462CB725E9629700BFF07C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = "Supporting Files/Constants.swift"; sourceTree = "<group>"; };
 		EC8C4ADB25EA4CDF00E90469 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EC8C4AE025EA4CE100E90469 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		EC8E97D925EBFEC6003A3FCD /* ParticipantsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantsViewController.swift; sourceTree = "<group>"; };
+		EC8E97E425EBFF16003A3FCD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Participants.storyboard; sourceTree = "<group>"; };
+		EC8E97E925EBFF18003A3FCD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Participants.strings; sourceTree = "<group>"; };
 		ECA9BEC925EB6E3B0095C4FD /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		ECDEE42B25E7A6AE00DB468F /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		ECF26D9F25EBDB5700BFB3B9 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -191,6 +196,16 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		EC8E97D825EBFEB5003A3FCD /* Participants */ = {
+			isa = PBXGroup;
+			children = (
+				EC8E97D925EBFEC6003A3FCD /* ParticipantsViewController.swift */,
+				EC8E97E525EBFF16003A3FCD /* Participants.storyboard */,
+			);
+			name = Participants;
+			path = Meeting/Participants;
+			sourceTree = "<group>";
+		};
 		ECA9BEC425EB6E3B0095C4FD /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,6 +224,7 @@
 				EC462C9425E95A3200BFF07C /* VideoCollectionViewCell.swift */,
 				EC462C8725E95A0B00BFF07C /* Meeting.storyboard */,
 				ECF26D9E25EBDB3200BFB3B9 /* Chat */,
+				EC8E97D825EBFEB5003A3FCD /* Participants */,
 			);
 			name = Meeting;
 			sourceTree = "<group>";
@@ -321,6 +337,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC8E97E325EBFF16003A3FCD /* Participants.storyboard in Resources */,
 				ECF26DA925EBDBC300BFB3B9 /* Chat.storyboard in Resources */,
 				607FACDB1AFB9204008FA782 /* Login.storyboard in Resources */,
 				EC462CA125E95A4100BFF07C /* Images.xcassets in Resources */,
@@ -431,6 +448,7 @@
 				EC462CAE25E9606100BFF07C /* MeetingViewModel.swift in Sources */,
 				EC462C9625E95A3200BFF07C /* VideoCollectionViewCell.swift in Sources */,
 				EC462CA025E95A4100BFF07C /* Utilities.swift in Sources */,
+				EC8E97DA25EBFEC6003A3FCD /* ParticipantsViewController.swift in Sources */,
 				EC462C9725E95A3200BFF07C /* MeetingViewController.swift in Sources */,
 				EC462CB825E9629700BFF07C /* Constants.swift in Sources */,
 				ECF26DA025EBDB5700BFB3B9 /* ChatViewController.swift in Sources */,
@@ -492,6 +510,15 @@
 			);
 			name = LaunchScreen.storyboard;
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EC8E97E525EBFF16003A3FCD /* Participants.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC8E97E425EBFF16003A3FCD /* Base */,
+				EC8E97E925EBFF18003A3FCD /* en */,
+			);
+			name = Participants.storyboard;
 			sourceTree = "<group>";
 		};
 		ECF26DAB25EBDBC300BFB3B9 /* Chat.storyboard */ = {

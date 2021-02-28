@@ -17,7 +17,7 @@ final class MeetingViewModel: NSObject,
                               UICollectionViewDelegate,
                               UICollectionViewDelegateFlowLayout {
 
-    private var hms: HMSInterface!
+    private(set) var hms: HMSInterface!
 
     private weak var collectionView: UICollectionView!
 
@@ -99,8 +99,9 @@ final class MeetingViewModel: NSObject,
         case .portrait:
             switch indexPath.row {
             case 0:
+                let height = collectionView.frame.size.height
                 return CGSize(width: collectionView.frame.size.width - widthInsets,
-                              height: collectionView.frame.size.height - collectionView.frame.size.height / 4 - heightInsets)
+                              height: height - height / 4 - heightInsets)
             default:
                 let rows = CGFloat(min(hms.videoTracks.count, 4))
                 return CGSize(width: collectionView.frame.size.width / rows - widthInsets,

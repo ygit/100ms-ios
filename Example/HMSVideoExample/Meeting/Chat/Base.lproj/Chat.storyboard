@@ -17,25 +17,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WSA-L0-Zsn">
-                                <rect key="frame" x="345" y="41" width="55" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="iA5-MR-eJc"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                <state key="normal" title="Close"/>
-                                <connections>
-                                    <action selector="closeTapped:" destination="miU-fT-mpl" eventType="touchUpInside" id="tI0-hr-fHw"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x80-FJ-GeJ">
-                                <rect key="frame" x="178" y="44" width="58.5" height="41"/>
+                                <rect key="frame" x="178" y="44" width="58.5" height="33.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="9fl-FC-tEx">
-                                <rect key="frame" x="0.0" y="93" width="414" height="769"/>
+                                <rect key="frame" x="0.0" y="85.5" width="414" height="776.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="yJG-K0-sEM" detailTextLabel="hzR-gP-O7T" style="IBUITableViewCellStyleSubtitle" id="haD-1A-a94">
@@ -68,18 +57,28 @@
                                     <outlet property="delegate" destination="miU-fT-mpl" id="L28-fj-g4d"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cjX-ww-GBI">
+                                <rect key="frame" x="350" y="44" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="9HW-YX-dkz"/>
+                                    <constraint firstAttribute="height" constant="44" id="dy2-WI-mEb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <state key="normal" title="╳"/>
+                                <connections>
+                                    <action selector="closeTapped:" destination="miU-fT-mpl" eventType="touchUpInside" id="btn-WP-IFW"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="0sl-s8-x4X"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="9fl-FC-tEx" firstAttribute="top" secondItem="x80-FJ-GeJ" secondAttribute="bottom" constant="8" symbolic="YES" id="1Ae-tL-Sjb"/>
                             <constraint firstItem="x80-FJ-GeJ" firstAttribute="centerX" secondItem="aED-Ka-zya" secondAttribute="centerX" id="2Ib-62-2My"/>
-                            <constraint firstItem="0sl-s8-x4X" firstAttribute="top" secondItem="WSA-L0-Zsn" secondAttribute="top" constant="3" id="4fc-Z2-dSs"/>
-                            <constraint firstItem="WSA-L0-Zsn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="x80-FJ-GeJ" secondAttribute="trailing" constant="8" symbolic="YES" id="8wl-js-9bC"/>
-                            <constraint firstItem="0sl-s8-x4X" firstAttribute="trailing" secondItem="WSA-L0-Zsn" secondAttribute="trailing" constant="14" id="9kM-oU-QZK"/>
                             <constraint firstItem="9fl-FC-tEx" firstAttribute="leading" secondItem="0sl-s8-x4X" secondAttribute="leading" id="Hva-jO-VPI"/>
-                            <constraint firstItem="x80-FJ-GeJ" firstAttribute="bottom" secondItem="WSA-L0-Zsn" secondAttribute="bottom" id="Z0z-yv-8q5"/>
+                            <constraint firstItem="0sl-s8-x4X" firstAttribute="trailing" secondItem="cjX-ww-GBI" secondAttribute="trailing" constant="20" id="MfM-8h-mz3"/>
                             <constraint firstItem="0sl-s8-x4X" firstAttribute="trailing" secondItem="9fl-FC-tEx" secondAttribute="trailing" id="gCU-RM-Yl9"/>
+                            <constraint firstItem="cjX-ww-GBI" firstAttribute="top" secondItem="0sl-s8-x4X" secondAttribute="top" id="jOs-4n-yLo"/>
                             <constraint firstItem="x80-FJ-GeJ" firstAttribute="top" secondItem="0sl-s8-x4X" secondAttribute="top" id="tOV-Ql-8iK"/>
                             <constraint firstItem="0sl-s8-x4X" firstAttribute="bottom" secondItem="9fl-FC-tEx" secondAttribute="bottom" id="uOX-2e-AfN"/>
                         </constraints>
