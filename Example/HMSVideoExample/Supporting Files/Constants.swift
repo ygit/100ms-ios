@@ -14,7 +14,9 @@ struct Constants {
 
     static let token = "https://ms-services-r9oucbp9pjl9.runkit.sh/?api=token"
 
-    static let endpoint = "wss://" + (UserDefaults.standard.string(forKey: "environment") ?? "prod-in") + ".100ms.live/ws"
+    static let endpoint = "wss://" +
+        (UserDefaults.standard.string(forKey: "environment") ?? "prod-in") +
+        ".100ms.live/ws"
 //    static let endpoint = "wss://qa-in.100ms.live/ws"
 
     static let urlEmpty = "Token & Endpoint URLs cannot be nil!"
@@ -28,6 +30,8 @@ struct Constants {
     static let meeting = "Meeting"
 
     static let settings = "Settings"
+    
+    static let chat = "Chat"
 
     static let emptyFields = "Please fill in all fields!"
 

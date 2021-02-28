@@ -101,6 +101,12 @@ final class MeetingViewController: UIViewController {
     }
 
     @IBAction func chatTapped(_ sender: UIButton) {
+        guard let viewController = UIStoryboard(name: Constants.chat, bundle: nil)
+                .instantiateInitialViewController() as? ChatViewController else {
+            return
+        }
+        
+        present(viewController, animated: true)
     }
 
     @IBAction func disconnectTapped(_ sender: UIButton) {
