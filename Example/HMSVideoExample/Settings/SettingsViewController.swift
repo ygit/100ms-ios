@@ -10,12 +10,59 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
-    @IBOutlet weak var table: UITableView!
-    // MARK: - View Lifecycle
+    let defaultVideoSource = ["Front Facing", "Rear Facing"]
+    let videoCodecs = ["H264", "VP8", "VP9"]
+    let videoResolution = ["QVGA", "VGA", "QHD", "HD", "Full HD"]
+    let videoBitRate = ["Lowest (100 kbps)", "Low (256 kbps)", "Medium (512 kbps)", "High (1 mbps)", "LAN (4 mbps)"]
 
+    @IBOutlet weak var videoSourcePicker: UIPickerView!
+
+    @IBOutlet weak var videoCodecPicker: UIPickerView!
+
+    @IBOutlet weak var videoResolutionPicker: UIPickerView!
+
+    @IBOutlet weak var videoBitRatePicker: UIPickerView!
+
+    
+    @IBOutlet weak var defaultNameField: UITextField!
+    
+    @IBOutlet weak var publishVideoSwitch: UISwitch!
+    
+    @IBOutlet weak var publishAudioSwitch: UISwitch!
+    
+    @IBOutlet weak var maximumRowsSwitch: UITextField!
+    
+    @IBOutlet weak var audioPollDelayField: UITextField!
+    
+    @IBOutlet weak var silenceThresholdField: UITextField!
+    
+    @IBOutlet weak var mirrorMyVideoSwitch: UISwitch!
+    
+    @IBOutlet weak var showVideoPreviewSwitch: UISwitch!
+    
+    @IBOutlet weak var videoFrameRateField: UITextField!
+    
+    @IBOutlet weak var environmentField: UITextField! {
+        didSet {
+            print(environmentField.text ?? "nil")
+        }
+    }
+    
+    
+    // MARK: - View Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupPickers()
+    }
+
+    // MARK: - View Modifiers
+
+    func setupPickers() {
+        videoCodecPicker.selectRow(1, inComponent: 0, animated: false)
+        videoResolutionPicker.selectRow(2, inComponent: 0, animated: false)
+        videoBitRatePicker.selectRow(2, inComponent: 0, animated: false)
     }
 
     // MARK: - Action Handlers
@@ -25,61 +72,42 @@ class SettingsViewController: UIViewController {
     }
 }
 
-extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+extension SettingsViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        switch pickerView.tag {
         case 0:
-            return 2
+            return defaultVideoSource.count
         case 1:
-            return 5
+            return videoCodecs.count
         case 2:
-            return 2
+            return videoResolution.count
+        case 3:
+            return videoBitRate.count
         default:
             return 0
         }
     }
+}
 
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
+extension SettingsViewController: UIPickerViewDelegate {
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+
+        switch pickerView.tag {
         case 0:
-            return "General"
+            return defaultVideoSource[row]
         case 1:
-            return "Video"
+            return videoCodecs[row]
         case 2:
-            return "Audio"
+            return videoResolution[row]
+        case 3:
+            return videoBitRate[row]
         default:
             return ""
         }
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.resuseIdentifier) ?? UITableViewCell()
-
-        switch indexPath.section {
-        case 0:
-            switch indexPath.row {
-            case 0:
-                cell.textLabel?.text = "Default Name: "
-                
-            default:
-                cell.textLabel?.text = ""
-            }
-            
-            
-        case 1:
-            cell.textLabel?.text = "Video"
-        case 2:
-            cell.textLabel?.text = "Audio"
-        default:
-            print("Invalid indexpath")
-        }
-
-        return cell
     }
 }
