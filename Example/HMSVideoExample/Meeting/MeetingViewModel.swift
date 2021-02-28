@@ -105,12 +105,12 @@ final class MeetingViewModel: NSObject,
         hms.switchCamera()
     }
 
-    func switchAudio(on: Bool) {
-        hms.switchAudio(on)
+    func switchAudio(isOn: Bool) {
+        hms.switchAudio(isOn)
     }
 
-    func switchVideo(on: Bool) {
-        hms.switchVideo(on)
+    func switchVideo(isOn: Bool) {
+        hms.switchVideo(isOn)
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

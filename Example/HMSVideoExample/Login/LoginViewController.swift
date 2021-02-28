@@ -22,14 +22,14 @@ final class LoginViewController: UIViewController {
     @IBOutlet private weak var nameField: UITextField! {
         didSet {
             Utilities.applyBorder(on: nameField)
-            nameField.text = UserDefaults.standard.string(forKey: "name") ?? "iOS User"
+            nameField.text = UserDefaults.standard.string(forKey: Constants.defaultName) ?? "iOS User"
         }
     }
 
     @IBOutlet private weak var meetingIDField: UITextField! {
         didSet {
             Utilities.drawCorner(on: meetingIDField)
-            meetingIDField.text = UserDefaults.standard.string(forKey: "room") ?? "Enter Meeting ID"
+            meetingIDField.text = UserDefaults.standard.string(forKey: Constants.roomName) ?? "Enter Meeting ID"
 //            meetingIDField.text = "6033b4cb89a96e73b23d13dc"
         }
     }
@@ -156,8 +156,8 @@ final class LoginViewController: UIViewController {
     func save(_ name: String, _ room: String, _ meeting: String? = nil) {
         let userDefaults = UserDefaults.standard
 
-        userDefaults.set(name, forKey: "name")
-        userDefaults.set(room, forKey: "room")
+        userDefaults.set(name, forKey: Constants.defaultName)
+        userDefaults.set(room, forKey: Constants.roomName)
 
         if let meeting = meeting {
             userDefaults.set(meeting, forKey: "meeting")

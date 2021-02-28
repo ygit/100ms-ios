@@ -92,12 +92,12 @@ final class MeetingViewController: UIViewController {
 
     @IBAction func videoTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        viewModel.switchVideo(on: sender.isSelected)
+        viewModel.switchVideo(isOn: sender.isSelected)
     }
 
     @IBAction func micTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        viewModel.switchAudio(on: sender.isSelected)
+        viewModel.switchAudio(isOn: sender.isSelected)
     }
 
     @IBAction func chatTapped(_ sender: UIButton) {

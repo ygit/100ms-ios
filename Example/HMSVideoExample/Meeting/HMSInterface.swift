@@ -255,15 +255,15 @@ final class HMSInterface {
         }
     }
 
-    func switchAudio(_ on: Bool) {
+    func switchAudio(_ isOn: Bool) {
         if let audioTrack = localStream?.audioTracks?.first {
-            audioTrack.enabled = on
+            audioTrack.enabled = isOn
         }
     }
 
-    func switchVideo(_ on: Bool) {
+    func switchVideo(_ isOn: Bool) {
         if let videoTrack = localStream?.videoTracks?.first {
-            videoTrack.enabled = on
+            videoTrack.enabled = isOn
         }
     }
 

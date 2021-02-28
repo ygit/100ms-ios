@@ -39,6 +39,8 @@ struct Constants {
 
     static let defaultName = "defaultName"
 
+    static let roomName = "roomName"
+
     static let publishVideo = "publishVideo"
 
     static let publishAudio = "publishAudio"
