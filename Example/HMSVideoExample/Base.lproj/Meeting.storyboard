@@ -55,12 +55,14 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dbh-7g-s3g">
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dbh-7g-s3g">
                                 <rect key="frame" x="338" y="44" width="44" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="44" id="ce5-xO-A4I"/>
                                 </constraints>
-                                <state key="normal" image="pencil" catalog="system">
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <inset key="contentEdgeInsets" minX="8" minY="4" maxX="8" maxY="4"/>
+                                <state key="normal" image="settings">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                     </preferredSymbolConfiguration>
@@ -224,8 +226,8 @@
         <image name="message.fill" catalog="system" width="128" height="113"/>
         <image name="mic.fill" catalog="system" width="108" height="128"/>
         <image name="mic.slash.fill" catalog="system" width="108" height="128"/>
-        <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="phone.down.fill" catalog="system" width="128" height="52"/>
+        <image name="settings" width="85.333335876464844" height="85.333335876464844"/>
         <image name="speaker.wave.3" catalog="system" width="128" height="86"/>
         <image name="video.fill" catalog="system" width="128" height="82"/>
         <image name="video.slash.fill" catalog="system" width="128" height="106"/>

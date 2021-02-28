@@ -14,9 +14,9 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
 
     }
-    
+
     // MARK: - Action Handlers
-    
+
     @IBAction func closeTapped(_ sender: UIButton) {
         self.dismiss(animated: true)
     }

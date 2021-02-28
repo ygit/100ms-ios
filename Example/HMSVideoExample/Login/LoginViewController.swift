@@ -22,12 +22,15 @@ final class LoginViewController: UIViewController {
     @IBOutlet private weak var nameField: UITextField! {
         didSet {
             Utilities.applyBorder(on: nameField)
+            nameField.text = UserDefaults.standard.string(forKey: "name") ?? "iOS User"
         }
     }
 
     @IBOutlet private weak var meetingIDField: UITextField! {
         didSet {
             Utilities.drawCorner(on: meetingIDField)
+            meetingIDField.text = UserDefaults.standard.string(forKey: "room") ?? "Enter Meeting Name"
+//            meetingIDField.text = "6033b4cb89a96e73b23d13dc"
         }
     }
 
@@ -46,6 +49,7 @@ final class LoginViewController: UIViewController {
     @IBOutlet private weak var meetingNameField: UITextField! {
         didSet {
             Utilities.drawCorner(on: meetingNameField)
+            meetingNameField.text = UserDefaults.standard.string(forKey: "meeting") ?? "Enter Meeting ID"
         }
     }
 
@@ -110,6 +114,8 @@ final class LoginViewController: UIViewController {
         viewController.user = user
         viewController.roomName = roomName
         viewController.flow = .join
+        
+        save(user, roomName)
 
         navigationController?.pushViewController(viewController, animated: true)
     }
@@ -126,5 +132,26 @@ final class LoginViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "OK", style: .default))
 
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func save(_ name: String, _ room: String, _ meeting: String? = nil) {
+        let userDefaults = UserDefaults.standard
+        
+        userDefaults.set(name, forKey: "name")
+        userDefaults.set(room, forKey: "room")
+        
+        if let meeting = meeting {
+            userDefaults.set(meeting, forKey: "meeting")
+        }
+    }
+    
+    @IBAction func settingsTapped(_ sender: UIButton) {
+        guard let viewController = UIStoryboard(name: Constants.settings, bundle: nil)
+                .instantiateInitialViewController() as? SettingsViewController
+        else {
+            return
+        }
+
+        present(viewController, animated: true)
     }
 }

@@ -24,7 +24,7 @@
                                     <constraint firstAttribute="height" constant="48" id="taM-h2-zde"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <state key="normal" title="❌"/>
+                                <state key="normal" title="X"/>
                                 <connections>
                                     <action selector="closeTapped:" destination="Kb7-BY-B6F" eventType="touchUpInside" id="Jac-MO-jot"/>
                                 </connections>

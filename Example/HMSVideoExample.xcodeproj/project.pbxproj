@@ -22,8 +22,8 @@
 		EC462CB225E9616400BFF07C /* HMSInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC462CB125E9616400BFF07C /* HMSInterface.swift */; };
 		EC462CB825E9629700BFF07C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC462CB725E9629700BFF07C /* Constants.swift */; };
 		EC8C4ADA25EA4CDF00E90469 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8C4ADC25EA4CDF00E90469 /* LaunchScreen.storyboard */; };
-		ECE7C9C725EABD8D0081FD36 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE7C9C625EABD8D0081FD36 /* SettingsViewController.swift */; };
-		ECE7C9CE25EABDB00081FD36 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECE7C9D025EABDB00081FD36 /* Settings.storyboard */; };
+		ECA9BECB25EB6E3B0095C4FD /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA9BEC725EB6E3B0095C4FD /* Settings.storyboard */; };
+		ECA9BECC25EB6E3B0095C4FD /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA9BEC925EB6E3B0095C4FD /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,10 +66,10 @@
 		EC462CB725E9629700BFF07C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = "Supporting Files/Constants.swift"; sourceTree = "<group>"; };
 		EC8C4ADB25EA4CDF00E90469 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EC8C4AE025EA4CE100E90469 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		ECA9BEC825EB6E3B0095C4FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
+		ECA9BEC925EB6E3B0095C4FD /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		ECA9BED125EB6E710095C4FD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		ECDEE42B25E7A6AE00DB468F /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		ECE7C9C625EABD8D0081FD36 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		ECE7C9CF25EABDB00081FD36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
-		ECE7C9D425EABDB70081FD36 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Settings.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +127,7 @@
 			children = (
 				ECDEE43325E7A76700DB468F /* Login */,
 				ECDEE42C25E7A6C500DB468F /* Meeting */,
+				ECA9BEC425EB6E3B0095C4FD /* Settings */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 			);
 			name = "Example for HMSVideo";
@@ -185,6 +186,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		ECA9BEC425EB6E3B0095C4FD /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				ECA9BEC725EB6E3B0095C4FD /* Settings.storyboard */,
+				ECA9BEC925EB6E3B0095C4FD /* SettingsViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		ECDEE42C25E7A6C500DB468F /* Meeting */ = {
 			isa = PBXGroup;
 			children = (
@@ -193,7 +203,6 @@
 				EC462CB125E9616400BFF07C /* HMSInterface.swift */,
 				EC462C9425E95A3200BFF07C /* VideoCollectionViewCell.swift */,
 				EC462C8725E95A0B00BFF07C /* Meeting.storyboard */,
-				ECE7C9C525EABD650081FD36 /* Settings */,
 			);
 			name = Meeting;
 			sourceTree = "<group>";
@@ -205,16 +214,6 @@
 				607FACD91AFB9204008FA782 /* Login.storyboard */,
 			);
 			name = Login;
-			sourceTree = "<group>";
-		};
-		ECE7C9C525EABD650081FD36 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				ECE7C9C625EABD8D0081FD36 /* SettingsViewController.swift */,
-				ECE7C9D025EABDB00081FD36 /* Settings.storyboard */,
-			);
-			name = Settings;
-			path = Meeting/Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,8 +308,8 @@
 				607FACDB1AFB9204008FA782 /* Login.storyboard in Resources */,
 				EC462CA125E95A4100BFF07C /* Images.xcassets in Resources */,
 				EC8C4ADA25EA4CDF00E90469 /* LaunchScreen.storyboard in Resources */,
+				ECA9BECB25EB6E3B0095C4FD /* Settings.storyboard in Resources */,
 				EC462C8525E95A0B00BFF07C /* Meeting.storyboard in Resources */,
-				ECE7C9CE25EABDB00081FD36 /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,7 +419,7 @@
 				EC462CA025E95A4100BFF07C /* Utilities.swift in Sources */,
 				EC462C9725E95A3200BFF07C /* MeetingViewController.swift in Sources */,
 				EC462CB825E9629700BFF07C /* Constants.swift in Sources */,
-				ECE7C9C725EABD8D0081FD36 /* SettingsViewController.swift in Sources */,
+				ECA9BECC25EB6E3B0095C4FD /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,11 +470,11 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		ECE7C9D025EABDB00081FD36 /* Settings.storyboard */ = {
+		ECA9BEC725EB6E3B0095C4FD /* Settings.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				ECE7C9CF25EABDB00081FD36 /* Base */,
-				ECE7C9D425EABDB70081FD36 /* en */,
+				ECA9BEC825EB6E3B0095C4FD /* Base */,
+				ECA9BED125EB6E710095C4FD /* en */,
 			);
 			name = Settings.storyboard;
 			sourceTree = "<group>";

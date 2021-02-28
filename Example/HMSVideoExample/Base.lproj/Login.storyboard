@@ -52,7 +52,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="iOS User" borderStyle="roundedRect" placeholder="Enter Name" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="7HE-IK-4mD">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Name" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="7HE-IK-4mD">
                                                         <rect key="frame" x="119" y="8" width="208" height="32"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="namePhonePad" enablesReturnKeyAutomatically="YES" textContentType="name"/>
@@ -63,7 +63,7 @@
                                                 </constraints>
                                                 <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                             </stackView>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Meeting ID" borderStyle="roundedRect" placeholder="Enter Meeting ID" textAlignment="center" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="oHK-xx-jcU">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Meeting ID" textAlignment="center" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="oHK-xx-jcU">
                                                 <rect key="frame" x="0.0" y="112" width="335" height="48"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" priority="750" constant="48" id="GrJ-Jj-GeB"/>
@@ -103,7 +103,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Meeting Name" borderStyle="roundedRect" placeholder="Enter Meeting Name" textAlignment="center" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="FHx-L6-4DO">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Meeting Name" textAlignment="center" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="FHx-L6-4DO">
                                                 <rect key="frame" x="0.0" y="56" width="335" height="48"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="CG2-jx-KKr"/>
@@ -159,9 +159,22 @@
                                     <constraint firstAttribute="trailing" secondItem="UDb-3o-ia5" secondAttribute="trailing" constant="20" symbolic="YES" id="ynT-BE-CY0"/>
                                 </constraints>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bcw-CH-SJE">
+                                <rect key="frame" x="315" y="54" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="FJP-AP-4Am"/>
+                                    <constraint firstAttribute="width" constant="44" id="p6q-Md-1Sb"/>
+                                </constraints>
+                                <inset key="contentEdgeInsets" minX="8" minY="5" maxX="8" maxY="5"/>
+                                <state key="normal" image="settings"/>
+                                <connections>
+                                    <action selector="settingsTapped:" destination="SMR-Mj-Sg7" eventType="touchUpInside" id="12j-ki-Uzh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Bcw-CH-SJE" secondAttribute="trailing" constant="16" id="5Kt-ln-qG7"/>
                             <constraint firstItem="OCL-uA-gn7" firstAttribute="top" secondItem="Zky-Jr-DW7" secondAttribute="bottom" constant="8" symbolic="YES" id="I1M-Iz-fT6"/>
                             <constraint firstItem="pry-yg-EPI" firstAttribute="leading" secondItem="jQ1-tl-f6e" secondAttribute="leading" constant="20" symbolic="YES" id="Igg-fB-civ"/>
                             <constraint firstAttribute="trailing" secondItem="OCL-uA-gn7" secondAttribute="trailing" constant="20" symbolic="YES" id="KFP-YI-iDu"/>
@@ -171,6 +184,7 @@
                             <constraint firstAttribute="trailing" secondItem="pry-yg-EPI" secondAttribute="trailing" id="SyP-6y-rsV"/>
                             <constraint firstItem="C2U-dF-Uy4" firstAttribute="top" secondItem="Zky-Jr-DW7" secondAttribute="bottom" id="USt-HX-x7x"/>
                             <constraint firstItem="au1-nU-61f" firstAttribute="top" secondItem="pry-yg-EPI" secondAttribute="bottom" id="UrM-sU-rhI"/>
+                            <constraint firstItem="Bcw-CH-SJE" firstAttribute="centerY" secondItem="C2U-dF-Uy4" secondAttribute="centerY" id="gu5-Gy-9Nq"/>
                             <constraint firstItem="C2U-dF-Uy4" firstAttribute="leading" secondItem="jQ1-tl-f6e" secondAttribute="leading" constant="20" symbolic="YES" id="jjf-8D-Wvx"/>
                             <constraint firstItem="OCL-uA-gn7" firstAttribute="trailing" secondItem="pry-yg-EPI" secondAttribute="trailing" id="mI8-TJ-iVQ"/>
                             <constraint firstItem="OCL-uA-gn7" firstAttribute="leading" secondItem="jQ1-tl-f6e" secondAttribute="leading" constant="20" symbolic="YES" id="mQp-vx-b4t"/>
@@ -187,6 +201,7 @@
                         <variation key="heightClass=compact-widthClass=compact">
                             <mask key="subviews">
                                 <exclude reference="C2U-dF-Uy4"/>
+                                <exclude reference="Bcw-CH-SJE"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="I1M-Iz-fT6"/>
@@ -236,6 +251,7 @@
         <image name="100ms-icon" width="1598" height="1598"/>
         <image name="100ms-logo" width="5289" height="1598"/>
         <image name="arrow.up.right.video" catalog="system" width="128" height="83"/>
+        <image name="settings" width="85.333335876464844" height="85.333335876464844"/>
         <image name="video" catalog="system" width="128" height="83"/>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
