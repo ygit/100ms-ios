@@ -30,7 +30,7 @@ struct Constants {
     static let meeting = "Meeting"
 
     static let settings = "Settings"
-    
+
     static let chat = "Chat"
 
     static let emptyFields = "Please fill in all fields!"

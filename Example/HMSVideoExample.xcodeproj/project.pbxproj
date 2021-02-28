@@ -203,9 +203,9 @@
 		ECDEE42C25E7A6C500DB468F /* Meeting */ = {
 			isa = PBXGroup;
 			children = (
-				EC462CB125E9616400BFF07C /* HMSInterface.swift */,
 				EC462C9525E95A3200BFF07C /* MeetingViewController.swift */,
 				EC462CAD25E9606100BFF07C /* MeetingViewModel.swift */,
+				EC462CB125E9616400BFF07C /* HMSInterface.swift */,
 				EC462C9425E95A3200BFF07C /* VideoCollectionViewCell.swift */,
 				EC462C8725E95A0B00BFF07C /* Meeting.storyboard */,
 				ECF26D9E25EBDB3200BFB3B9 /* Chat */,

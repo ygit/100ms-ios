@@ -8,6 +8,10 @@
 
 import UIKit
 
+enum Layout {
+    case grid, portrait
+}
+
 final class MeetingViewModel: NSObject,
                               UICollectionViewDataSource,
                               UICollectionViewDelegate,
@@ -18,6 +22,12 @@ final class MeetingViewModel: NSObject,
     private weak var collectionView: UICollectionView!
 
     private let sectionInsets = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
+
+    var layout = Layout.grid {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
 
     // MARK: - Initializers
 
@@ -45,7 +55,7 @@ final class MeetingViewModel: NSObject,
     // MARK: - View Modifiers
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return hms.videoTracks.count
+        hms.videoTracks.count
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -53,7 +63,7 @@ final class MeetingViewModel: NSObject,
 
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.resuseIdentifier,
                                                             for: indexPath) as? VideoCollectionViewCell,
-              indexPath.item < hms.videoTracks.count
+               indexPath.item < hms.videoTracks.count
         else {
             return UICollectionViewCell()
         }
@@ -74,26 +84,39 @@ final class MeetingViewModel: NSObject,
         let widthInsets = sectionInsets.left + sectionInsets.right
         let heightInsets = sectionInsets.top + sectionInsets.bottom
 
-        if hms.videoTracks.count < 5 {
-            return CGSize(width: collectionView.frame.size.width - widthInsets,
-                          height: (collectionView.frame.size.height / CGFloat(hms.videoTracks.count)) - heightInsets)
-        } else {
-            let rows = UserDefaults.standard.object(forKey: Constants.maximumaRows) as? CGFloat ?? 3.0
-            return CGSize(width: (collectionView.frame.size.width / 2) - widthInsets,
-                          height: (collectionView.frame.size.height / rows) - heightInsets)
+        switch layout {
+        case .grid:
+            if hms.videoTracks.count < 5 {
+                return CGSize(width: collectionView.frame.size.width - widthInsets,
+                              height: (collectionView.frame.size.height / CGFloat(hms.videoTracks.count)) - heightInsets)
+            } else {
+                let rows = UserDefaults.standard.object(forKey: Constants.maximumaRows) as? CGFloat ?? 3.0
+                return CGSize(width: (collectionView.frame.size.width / 2) - widthInsets,
+                              height: (collectionView.frame.size.height / rows) - heightInsets)
+            }
+
+        case .portrait:
+            switch indexPath.row {
+            case 0:
+                return CGSize(width: collectionView.frame.size.width - widthInsets,
+                              height: collectionView.frame.size.height - collectionView.frame.size.height / 4 - heightInsets)
+            default:
+                return CGSize(width: collectionView.frame.size.width / 4 - widthInsets,
+                              height: collectionView.frame.size.height / 4 - heightInsets)
+            }
         }
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        return sectionInsets
+        sectionInsets
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return sectionInsets.left
+        sectionInsets.left
     }
 
     // MARK: - Action Handlers
