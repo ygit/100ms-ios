@@ -78,8 +78,9 @@ final class MeetingViewModel: NSObject,
             return CGSize(width: collectionView.frame.size.width - widthInsets,
                           height: (collectionView.frame.size.height / CGFloat(hms.videoTracks.count)) - heightInsets)
         } else {
+            let rows = UserDefaults.standard.object(forKey: Constants.maximumaRows) as? CGFloat ?? 3.0
             return CGSize(width: (collectionView.frame.size.width / 2) - widthInsets,
-                          height: (collectionView.frame.size.height / 3) - heightInsets)
+                          height: (collectionView.frame.size.height / rows) - heightInsets)
         }
     }
 

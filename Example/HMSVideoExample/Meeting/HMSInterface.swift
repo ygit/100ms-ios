@@ -37,6 +37,36 @@ final class HMSInterface {
 
     private(set) var speaker: String?
 
+    private var codec: HMSVideoCodec {
+        let codecString = UserDefaults.standard.string(forKey: Constants.videoCodec) ?? "VP8"
+
+        switch codecString {
+        case "VP8":
+            return .VP8
+        case "VP9":
+            return .VP9
+        default:
+            return .H264
+        }
+    }
+
+    private var resolution: HMSVideoResolution {
+        let resolutionString = UserDefaults.standard.string(forKey: Constants.videoResolution) ?? "QHD"
+
+        switch resolutionString {
+        case "QVGA":
+            return .QVGA
+        case "VGA":
+            return .VGA
+        case "HD":
+            return .HD
+        case "Full HD":
+            return .fullHD
+        default:
+            return .QHD
+        }
+    }
+
     // MARK: - Setup Stream
 
     init(user: String, roomName: String, callback: @escaping () -> Void) {
@@ -201,13 +231,15 @@ final class HMSInterface {
 
     func publish() {
 
+        let userDefaults = UserDefaults.standard
+
         let constraints = HMSMediaStreamConstraints()
-        constraints.shouldPublishAudio = true
-        constraints.shouldPublishVideo = true
-        constraints.codec = .VP8
-        constraints.bitrate = 256
-        constraints.frameRate = 25
-        constraints.resolution = .fullHD
+        constraints.shouldPublishAudio = userDefaults.object(forKey: Constants.publishAudio) as? Bool ?? true
+        constraints.shouldPublishVideo = userDefaults.object(forKey: Constants.publishVideo) as? Bool ?? true
+        constraints.codec = codec
+        constraints.bitrate = userDefaults.object(forKey: Constants.videoBitRate) as? Int ?? 256
+        constraints.frameRate = userDefaults.object(forKey: Constants.videoFrameRate) as? Int ?? 25
+        constraints.resolution = resolution
 
         guard let localStream = try? client.getLocalStream(constraints) else {
             return
@@ -215,7 +247,8 @@ final class HMSInterface {
 
         peers[localStream.streamId] = localPeer
 
-        client.startAudioLevelMonitor(0.5)
+        let audioPollDelay = userDefaults.object(forKey: Constants.audioPollDelay) as? Double ?? 0.5
+        client.startAudioLevelMonitor(audioPollDelay)
 
         client.publish(localStream, room: room) { stream, _ in
             guard let stream = stream else { return }
@@ -229,6 +262,12 @@ final class HMSInterface {
         videoCapturer = stream.videoCapturer
         localAudioTrack = stream.audioTracks?.first
         localVideoTrack = stream.videoTracks?.first
+
+        if let source = UserDefaults.standard.string(forKey: Constants.defaultVideoSource) {
+            if source == "Rear Facing" {
+                videoCapturer?.switchCamera()
+            }
+        }
 
         videoCapturer?.startCapture()
 
