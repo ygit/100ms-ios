@@ -29,7 +29,7 @@ final class LoginViewController: UIViewController {
     @IBOutlet private weak var meetingIDField: UITextField! {
         didSet {
             Utilities.drawCorner(on: meetingIDField)
-            meetingIDField.text = UserDefaults.standard.string(forKey: "room") ?? "Enter Meeting Name"
+            meetingIDField.text = UserDefaults.standard.string(forKey: "room") ?? "Enter Meeting ID"
 //            meetingIDField.text = "6033b4cb89a96e73b23d13dc"
         }
     }
@@ -49,7 +49,7 @@ final class LoginViewController: UIViewController {
     @IBOutlet private weak var meetingNameField: UITextField! {
         didSet {
             Utilities.drawCorner(on: meetingNameField)
-            meetingNameField.text = UserDefaults.standard.string(forKey: "meeting") ?? "Enter Meeting ID"
+            meetingNameField.text = UserDefaults.standard.string(forKey: "meeting") ?? "Enter Meeting Name"
         }
     }
 
@@ -121,7 +121,26 @@ final class LoginViewController: UIViewController {
     }
 
     @IBAction private  func startMeetingTapped(_ sender: UIButton) {
-        // viewController.flow = .start
+
+        guard let roomName = meetingNameField.text else {
+            showAlert(with: Constants.emptyFields)
+            return
+        }
+
+        let user = UserDefaults.standard.string(forKey: Constants.defaultName) ?? "iOS User"
+
+        guard let viewController = UIStoryboard(name: Constants.meeting, bundle: nil)
+                .instantiateInitialViewController() as? MeetingViewController else {
+            return
+        }
+
+        viewController.user = user
+        viewController.roomName = roomName
+        viewController.flow = .start
+
+        save(user, roomName)
+
+        navigationController?.pushViewController(viewController, animated: true)
     }
 
     func showAlert(with message: String) {
