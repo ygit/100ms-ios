@@ -12,6 +12,7 @@
 		607FACDB1AFB9204008FA782 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Login.storyboard */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		EC02581325EB7479001293C2 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC02581525EB7479001293C2 /* Settings.storyboard */; };
+		EC077CF325EC96090003D320 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EC077CF225EC96090003D320 /* GoogleService-Info.plist */; };
 		EC462C8525E95A0B00BFF07C /* Meeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC462C8725E95A0B00BFF07C /* Meeting.storyboard */; };
 		EC462C9125E95A2800BFF07C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC462C9025E95A2800BFF07C /* LoginViewController.swift */; };
 		EC462C9625E95A3200BFF07C /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC462C9425E95A3200BFF07C /* VideoCollectionViewCell.swift */; };
@@ -57,6 +58,7 @@
 		BADB1198BD96E24E9BFFB40B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		EC02581425EB7479001293C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		EC02581925EB747D001293C2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Settings.strings; sourceTree = "<group>"; };
+		EC077CF225EC96090003D320 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EC462C8425E95A0600BFF07C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Login.strings; sourceTree = "<group>"; };
 		EC462C8625E95A0B00BFF07C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Meeting.storyboard; sourceTree = "<group>"; };
 		EC462C8B25E95A0F00BFF07C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Meeting.strings; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				ECDEE42C25E7A6C500DB468F /* Meeting */,
 				ECA9BEC425EB6E3B0095C4FD /* Settings */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
+				EC077CF225EC96090003D320 /* GoogleService-Info.plist */,
 			);
 			name = "Example for HMSVideo";
 			path = HMSVideoExample;
@@ -261,6 +264,7 @@
 				607FACCE1AFB9204008FA782 /* Resources */,
 				A083901B2A3103E58EAE7EEF /* [CP] Embed Pods Frameworks */,
 				ECC8B03E25E948D200792944 /* ShellScript */,
+				EC6E6CF625EC9AD60011DC67 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -338,6 +342,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC8E97E325EBFF16003A3FCD /* Participants.storyboard in Resources */,
+				EC077CF325EC96090003D320 /* GoogleService-Info.plist in Resources */,
 				ECF26DA925EBDBC300BFB3B9 /* Chat.storyboard in Resources */,
 				607FACDB1AFB9204008FA782 /* Login.storyboard in Resources */,
 				EC462CA125E95A4100BFF07C /* Images.xcassets in Resources */,
@@ -417,6 +422,25 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HMSVideo_Example/Pods-HMSVideo_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		EC6E6CF625EC9AD60011DC67 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n\n";
 		};
 		ECC8B03E25E948D200792944 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
