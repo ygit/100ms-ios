@@ -35,9 +35,11 @@ final class MeetingViewController: UIViewController {
 
         switch flow {
         case .join:
-            viewModel = MeetingViewModel(Constants.endpoint, Constants.token, self.user, self.roomName, collectionView)
+            viewModel = MeetingViewModel(Constants.endpoint, Constants.token,
+                                         self.user, self.roomName, collectionView)
         case .start:
-            viewModel = MeetingViewModel(Constants.endpoint, Constants.serverToken, self.user, self.roomName, collectionView)
+            viewModel = MeetingViewModel(Constants.endpoint, Constants.serverToken,
+                                         self.user, self.roomName, collectionView)
         case .none:
             fatalError()
         }
@@ -138,6 +140,8 @@ final class MeetingViewController: UIViewController {
                 .instantiateInitialViewController() as? ChatViewController else {
             return
         }
+
+        viewController.hms = viewModel.hms
 
         present(viewController, animated: true)
     }

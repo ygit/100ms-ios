@@ -29,6 +29,8 @@ struct Constants {
 
     static let settingsUpdated = NSNotification.Name("SETTINGS_UPDATED")
 
+    static let broadcastReceived = NSNotification.Name("BROADCAST_RECEIVED")
+
     // MARK: - View Constants
 
     static let meeting = "Meeting"
@@ -44,6 +46,10 @@ struct Constants {
     static let meetingError = "Could not make Meeting View Controller!"
 
     static let resuseIdentifier = "Cell"
+
+    static let chatSenderName = "senderName"
+
+    static let chatMessage = "msg"
 
     // MARK: - Settings
 

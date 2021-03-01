@@ -75,6 +75,8 @@ final class HMSInterface {
         }
     }
 
+    private(set) var broadcasts = [[AnyHashable: Any]]()
+
     // MARK: - Setup Stream
 
     init(_ endpoint: String,
@@ -200,8 +202,10 @@ final class HMSInterface {
             self?.videoTracks.removeAll { $0.streamId == info.streamId }
         }
 
-        client.onBroadcast = { room, peer, data in
+        client.onBroadcast = { [weak self] room, peer, data in
             print("onBroadcast: ", room.roomId, peer.peerId, data)
+            self?.broadcasts.append(data)
+            NotificationCenter.default.post(name: Constants.broadcastReceived, object: nil)
         }
 
         client.onConnect = { [weak self] in
@@ -294,6 +298,12 @@ final class HMSInterface {
             videoTracks.append(track)
         }
     }
+
+}
+
+// MARK: - Action Handlers
+
+extension HMSInterface {
 
     func updateAudio(with levels: [HMSAudioLevelInfo]) {
 
