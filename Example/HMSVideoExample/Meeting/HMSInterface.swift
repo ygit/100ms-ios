@@ -66,6 +66,15 @@ final class HMSInterface {
             return .QHD
         }
     }
+    
+    var cameraSource = "Front Facing" {
+        willSet {
+            if newValue != cameraSource {
+                videoCapturer?.switchCamera()
+            }
+        }
+    }
+    
 
     // MARK: - Setup Stream
 
@@ -268,6 +277,9 @@ final class HMSInterface {
         if let source = UserDefaults.standard.string(forKey: Constants.defaultVideoSource) {
             if source == "Rear Facing" {
                 videoCapturer?.switchCamera()
+                cameraSource = "Rear Facing"
+            } else {
+                cameraSource = "Front Facing"
             }
         }
 
@@ -327,6 +339,10 @@ final class HMSInterface {
                 }
             } catch {
                 NotificationCenter.default.post(name: Constants.hmsError, object: nil, userInfo: ["Error": error])
+            }
+            
+            if let source = UserDefaults.standard.string(forKey: Constants.defaultVideoSource) {
+                self?.cameraSource = source
             }
         }
     }
