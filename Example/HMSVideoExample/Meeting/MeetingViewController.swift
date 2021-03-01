@@ -27,9 +27,8 @@ final class MeetingViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
 
     @IBOutlet weak var badgeButton: BadgeButton!
-    
+
     var chatBadgeCount = 0
-    
 
     // MARK: - View Lifecycle
 
@@ -75,14 +74,25 @@ final class MeetingViewController: UIViewController {
 
             print("Error: ", message)
 
-            let alertController = UIAlertController(title: "Error",
-                                                    message: message,
-                                                    preferredStyle: .alert)
+            if let presentedVC = self?.presentedViewController {
+                presentedVC.dismiss(animated: true) {
+                    self?.presentAlert(message)
+                }
+                return
+            }
 
-            alertController.addAction(UIAlertAction(title: "OK", style: .default))
-
-            self?.present(alertController, animated: true, completion: nil)
+            self?.presentAlert(message)
         }
+    }
+
+    func presentAlert(_ message: String) {
+        let alertController = UIAlertController(title: "Error",
+                                                message: message,
+                                                preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(title: "OK", style: .default))
+
+        present(alertController, animated: true, completion: nil)
     }
 
     func observeBroadcast() {
@@ -159,9 +169,9 @@ final class MeetingViewController: UIViewController {
         }
 
         viewController.hms = viewModel.hms
-        
+
         chatBadgeCount = 0
-        
+
         badgeButton.badge = nil
 
         present(viewController, animated: true)

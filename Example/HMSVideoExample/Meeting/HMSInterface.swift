@@ -75,7 +75,7 @@ final class HMSInterface {
         }
     }
 
-    private(set) var broadcasts = [[AnyHashable: Any]]()
+    var broadcasts = [[AnyHashable: Any]]()
 
     // MARK: - Setup Stream
 
@@ -364,6 +364,17 @@ extension HMSInterface {
             }
 
             self?.updateUI()
+        }
+    }
+
+    func send(_ broadcast: [AnyHashable: Any], completion: @escaping () -> Void) {
+
+        client.broadcast(broadcast, room: room) { _, error in
+
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            completion()
         }
     }
 
