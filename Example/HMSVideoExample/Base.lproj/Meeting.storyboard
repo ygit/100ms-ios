@@ -147,7 +147,7 @@
                                             <action selector="micTapped:" destination="mjG-Ba-if7" eventType="touchUpInside" id="bth-WE-Rka"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cxf-bq-abg">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cxf-bq-abg" customClass="BadgeButton" customModule="HMSVideo_Example" customModuleProvider="target">
                                         <rect key="frame" x="199" y="0.0" width="87.666666666666686" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="RA3-dL-P1E"/>
@@ -271,6 +271,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="badgeButton" destination="Cxf-bq-abg" id="1mm-tg-yyk"/>
                         <outlet property="collectionView" destination="DyH-bp-NTF" id="pNW-T6-NPM"/>
                         <outlet property="roomNameButton" destination="gdt-Kd-OJO" id="Qlv-ck-6Nf"/>
                     </connections>

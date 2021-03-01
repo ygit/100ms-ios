@@ -27,6 +27,7 @@
 		EC8E97DA25EBFEC6003A3FCD /* ParticipantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8E97D925EBFEC6003A3FCD /* ParticipantsViewController.swift */; };
 		EC8E97E325EBFF16003A3FCD /* Participants.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8E97E525EBFF16003A3FCD /* Participants.storyboard */; };
 		ECA9BECC25EB6E3B0095C4FD /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA9BEC925EB6E3B0095C4FD /* SettingsViewController.swift */; };
+		ECE5D2C725ED592200B8D7E4 /* BadgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE5D2C625ED592200B8D7E4 /* BadgeButton.swift */; };
 		ECF26DA025EBDB5700BFB3B9 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF26D9F25EBDB5700BFB3B9 /* ChatViewController.swift */; };
 		ECF26DA925EBDBC300BFB3B9 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECF26DAB25EBDBC300BFB3B9 /* Chat.storyboard */; };
 /* End PBXBuildFile section */
@@ -79,6 +80,7 @@
 		EC8E97E925EBFF18003A3FCD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Participants.strings; sourceTree = "<group>"; };
 		ECA9BEC925EB6E3B0095C4FD /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		ECDEE42B25E7A6AE00DB468F /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		ECE5D2C625ED592200B8D7E4 /* BadgeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeButton.swift; sourceTree = "<group>"; };
 		ECF26D9F25EBDB5700BFB3B9 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		ECF26DAA25EBDBC300BFB3B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Chat.storyboard; sourceTree = "<group>"; };
 		ECF26DAF25EBDBC500BFB3B9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Chat.strings; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 			children = (
 				ECF26D9F25EBDB5700BFB3B9 /* ChatViewController.swift */,
 				ECF26DAB25EBDBC300BFB3B9 /* Chat.storyboard */,
+				ECE5D2C625ED592200B8D7E4 /* BadgeButton.swift */,
 			);
 			name = Chat;
 			path = Meeting/Chat;
@@ -473,6 +476,7 @@
 				EC462C9625E95A3200BFF07C /* VideoCollectionViewCell.swift in Sources */,
 				EC462CA025E95A4100BFF07C /* Utilities.swift in Sources */,
 				EC8E97DA25EBFEC6003A3FCD /* ParticipantsViewController.swift in Sources */,
+				ECE5D2C725ED592200B8D7E4 /* BadgeButton.swift in Sources */,
 				EC462C9725E95A3200BFF07C /* MeetingViewController.swift in Sources */,
 				EC462CB825E9629700BFF07C /* Constants.swift in Sources */,
 				ECF26DA025EBDB5700BFB3B9 /* ChatViewController.swift in Sources */,

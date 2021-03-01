@@ -26,6 +26,8 @@ final class MeetingViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
 
+    @IBOutlet weak var badgeButton: BadgeButton!
+
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
@@ -45,6 +47,7 @@ final class MeetingViewController: UIViewController {
         }
 
         handleError()
+        observeBroadcast()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -76,6 +79,14 @@ final class MeetingViewController: UIViewController {
             alertController.addAction(UIAlertAction(title: "OK", style: .default))
 
             self?.present(alertController, animated: true, completion: nil)
+        }
+    }
+
+    func observeBroadcast() {
+        _ = NotificationCenter.default.addObserver(forName: Constants.broadcastReceived,
+                                                   object: nil,
+                                                   queue: .main) { [weak self] _ in
+            self?.badgeButton.badge = String(describing: self?.viewModel.hms.broadcasts.count)
         }
     }
 

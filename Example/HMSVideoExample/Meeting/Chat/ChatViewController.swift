@@ -20,6 +20,12 @@ class ChatViewController: UIViewController {
 
         observeBroadcast()
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    // MARK: - Action Handlers
 
     func observeBroadcast() {
         _ = NotificationCenter.default.addObserver(forName: Constants.broadcastReceived,
