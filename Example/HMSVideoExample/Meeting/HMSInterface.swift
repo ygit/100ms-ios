@@ -66,7 +66,7 @@ final class HMSInterface {
             return .QHD
         }
     }
-    
+
     var cameraSource = "Front Facing" {
         willSet {
             if newValue != cameraSource {
@@ -74,7 +74,6 @@ final class HMSInterface {
             }
         }
     }
-    
 
     // MARK: - Setup Stream
 
@@ -340,7 +339,7 @@ final class HMSInterface {
             } catch {
                 NotificationCenter.default.post(name: Constants.hmsError, object: nil, userInfo: ["Error": error])
             }
-            
+
             if let source = UserDefaults.standard.string(forKey: Constants.defaultVideoSource) {
                 self?.cameraSource = source
             }

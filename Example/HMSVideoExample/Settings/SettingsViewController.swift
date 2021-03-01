@@ -123,16 +123,16 @@ class SettingsViewController: UIViewController {
         let sourceIndex = defaultVideoSource.firstIndex(of: source) ?? 0
         videoSourcePicker.selectRow(sourceIndex, inComponent: 0, animated: false)
 
-        let codec = userDefaults.string(forKey: Constants.videoCodec) ?? "VP8"
-        let codecIndex = videoCodecs.firstIndex(of: codec) ?? 1
+        let codec = userDefaults.string(forKey: Constants.videoCodec) ?? "H264"
+        let codecIndex = videoCodecs.firstIndex(of: codec) ?? 0
         videoCodecPicker.selectRow(codecIndex, inComponent: 0, animated: false)
 
         let resolution = userDefaults.string(forKey: Constants.videoResolution) ?? "QHD"
         let resolutionIndex = videoResolution.firstIndex(of: resolution) ?? 2
         videoResolutionPicker.selectRow(resolutionIndex, inComponent: 0, animated: false)
 
-        let bitrate = userDefaults.string(forKey: Constants.videoBitRate) ?? "Medium (512 kbps)"
-        let bitrateIndex = videoBitRate.firstIndex(of: bitrate) ?? 2
+        let bitrate = userDefaults.string(forKey: Constants.videoBitRate) ?? "High (1 mbps)"
+        let bitrateIndex = videoBitRate.firstIndex(of: bitrate) ?? 3
         videoBitRatePicker.selectRow(bitrateIndex, inComponent: 0, animated: false)
     }
 
