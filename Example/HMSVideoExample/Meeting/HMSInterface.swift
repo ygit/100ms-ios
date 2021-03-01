@@ -77,13 +77,17 @@ final class HMSInterface {
 
     // MARK: - Setup Stream
 
-    init(user: String, roomName: String, callback: @escaping () -> Void) {
+    init(_ endpoint: String,
+         _ token: String,
+         _ user: String,
+         _ roomName: String,
+         _ callback: @escaping () -> Void) {
 
         self.user = user
         self.roomName = roomName
         self.updateUI = callback
 
-        fetchToken { [weak self] token, error in
+        fetchToken(endpoint, token) { [weak self] token, error in
 
             guard error == nil, let token = token
             else {
@@ -98,10 +102,12 @@ final class HMSInterface {
         observeSettingsUpdated()
     }
 
-    func fetchToken(completion: @escaping (String?, Error?) -> Void) {
+    func fetchToken(_ endpoint: String,
+                    _ token: String,
+                    completion: @escaping (String?, Error?) -> Void) {
 
-        guard let endpointURL = URL(string: Constants.endpoint),
-              let tokenURL = URL(string: Constants.token),
+        guard let endpointURL = URL(string: endpoint),
+              let tokenURL = URL(string: token),
               let subDomain = endpointURL.host?.components(separatedBy: ".").first
         else {
             completion(nil, CustomError(title: Constants.urlEmpty))
@@ -304,18 +310,21 @@ final class HMSInterface {
     func switchCamera() {
         if let capturer = localStream?.videoCapturer {
             capturer.switchCamera()
+            updateUI()
         }
     }
 
     func switchAudio(_ isOn: Bool) {
         if let audioTrack = localStream?.audioTracks?.first {
             audioTrack.enabled = isOn
+            updateUI()
         }
     }
 
     func switchVideo(_ isOn: Bool) {
         if let videoTrack = localStream?.videoTracks?.first {
             videoTrack.enabled = isOn
+            updateUI()
         }
     }
 
@@ -343,6 +352,8 @@ final class HMSInterface {
             if let source = UserDefaults.standard.string(forKey: Constants.defaultVideoSource) {
                 self?.cameraSource = source
             }
+
+            self?.updateUI()
         }
     }
 

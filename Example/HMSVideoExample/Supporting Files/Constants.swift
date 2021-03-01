@@ -19,6 +19,8 @@ struct Constants {
         ".100ms.live/ws"
 //    static let endpoint = "wss://qa-in.100ms.live/ws"
 
+    static let serverToken = "https://ms-services-ob8qiw3sjedt.runkit.sh/?api=token"
+
     static let urlEmpty = "Token & Endpoint URLs cannot be nil!"
 
     static let jsonError = "JSON Data parsing error!"

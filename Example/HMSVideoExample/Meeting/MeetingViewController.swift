@@ -33,7 +33,14 @@ final class MeetingViewController: UIViewController {
 
         UIApplication.shared.isIdleTimerDisabled = true
 
-        viewModel = MeetingViewModel(self.user, self.roomName, collectionView)
+        switch flow {
+        case .join:
+            viewModel = MeetingViewModel(Constants.endpoint, Constants.token, self.user, self.roomName, collectionView)
+        case .start:
+            viewModel = MeetingViewModel(Constants.endpoint, Constants.serverToken, self.user, self.roomName, collectionView)
+        case .none:
+            fatalError()
+        }
 
         handleError()
     }

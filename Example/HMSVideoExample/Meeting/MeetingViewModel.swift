@@ -31,11 +31,15 @@ final class MeetingViewModel: NSObject,
 
     // MARK: - Initializers
 
-    init(_ user: String, _ room: String, _ collectionView: UICollectionView) {
+    init(_ endpoint: String,
+         _ token: String,
+         _ user: String,
+         _ room: String,
+         _ collectionView: UICollectionView) {
 
         super.init()
 
-        hms = HMSInterface(user: user, roomName: room) {
+        hms = HMSInterface(endpoint, token, user, room) {
             collectionView.reloadData()
         }
 
@@ -55,7 +59,7 @@ final class MeetingViewModel: NSObject,
     // MARK: - View Modifiers
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        layout == .grid ? 1 : 2
+        hms.videoTracks.count > 0 ? (layout == .grid ? 1 : 2) : 0
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -154,17 +158,21 @@ final class MeetingViewModel: NSObject,
                 return sectionInsets
             default:
 
-                let width = collectionView.frame.size.width
-                let widthInsets = sectionInsets.left + sectionInsets.right
+                if hms.videoTracks.count < 5 {
+                    let width = collectionView.frame.size.width
+                    let widthInsets = sectionInsets.left + sectionInsets.right
 
-                let columns = CGFloat(min(hms.videoTracks.count - 1, 4))
-                let cellWidth = (width / columns)
+                    let columns = CGFloat(min(hms.videoTracks.count - 1, 4))
+                    let cellWidth = (width / columns)
 
-                let cellInsets = 2*widthInsets*columns
+                    let cellInsets = 2*widthInsets*columns
 
-                let inset = (width - cellWidth - cellInsets) / columns
+                    let inset = (width - cellWidth - cellInsets) / columns
 
-                return UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
+                    return UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
+                }
+
+                return UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
             }
         }
     }
