@@ -133,12 +133,16 @@ extension ChatViewController: UITableViewDataSource {
         return cell
     }
 
-    func tableView(_ tableView: UITableView,
+    private func tableView(_ tableView: UITableView,
                    heightForFooterInSection section: Int) -> CGFloat {
         50
     }
 }
 
-extension ChatViewController: UITableViewDelegate {
+extension ChatViewController: UITextFieldDelegate {
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        sendTapped(sendButton)
+        return true
+    }
 }
