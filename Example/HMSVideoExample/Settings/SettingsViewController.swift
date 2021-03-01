@@ -51,7 +51,7 @@ class SettingsViewController: UIViewController {
 
     @IBOutlet weak var maximumRowsField: UITextField! {
         didSet {
-            if let rows = UserDefaults.standard.string(forKey: Constants.maximumaRows) {
+            if let rows = UserDefaults.standard.string(forKey: Constants.maximumRows) {
                 maximumRowsField.text = rows
             }
         }
@@ -152,7 +152,7 @@ class SettingsViewController: UIViewController {
         userDefaults.set(publishVideoSwitch.isOn, forKey: Constants.publishVideo)
         userDefaults.set(publishAudioSwitch.isOn, forKey: Constants.publishAudio)
         userDefaults.set(!maximumRowsField.text!.isEmpty ? maximumRowsField.text : "2",
-                         forKey: Constants.maximumaRows)
+                         forKey: Constants.maximumRows)
         userDefaults.set(!audioPollDelayField.text!.isEmpty ? audioPollDelayField.text : "2",
                          forKey: Constants.audioPollDelay)
         userDefaults.set(!silenceThresholdField.text!.isEmpty ? silenceThresholdField.text : "0.01",

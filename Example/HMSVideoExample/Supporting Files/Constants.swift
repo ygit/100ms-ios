@@ -53,7 +53,7 @@ struct Constants {
 
     static let publishAudio = "publishAudio"
 
-    static let maximumaRows = "maximumaRows"
+    static let maximumRows = "maximumRows"
 
     static let audioPollDelay = "audioPollDelay"
 

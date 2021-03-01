@@ -54,8 +54,20 @@ final class MeetingViewModel: NSObject,
 
     // MARK: - View Modifiers
 
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        layout == .grid ? 1 : 2
+    }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        hms.videoTracks.count
+        switch layout {
+        case .grid:
+            return hms.videoTracks.count
+        case .portrait:
+            if hms.videoTracks.count == 0 {
+                return 0
+            }
+            return section == 0 ? 1 : (hms.videoTracks.count - 1)
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -68,13 +80,29 @@ final class MeetingViewModel: NSObject,
             return UICollectionViewCell()
         }
 
-        let track = hms.videoTracks[indexPath.item]
-
-        cell.videoView.setVideoTrack(track)
+        switch layout {
+        case .grid:
+            let track = hms.videoTracks[indexPath.item]
+            cell.videoView.setVideoTrack(track)
+        case .portrait:
+            if indexPath.section == 0 {
+                let track = hms.videoTracks[indexPath.row]
+                cell.videoView.setVideoTrack(track)
+            } else {
+                let track = hms.videoTracks[indexPath.row+1]
+                cell.videoView.setVideoTrack(track)
+            }
+        }
 
         Utilities.applyBorder(on: cell)
 
         return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        8
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -91,21 +119,22 @@ final class MeetingViewModel: NSObject,
                 return CGSize(width: collectionView.frame.size.width - widthInsets,
                               height: (collectionView.frame.size.height / count) - heightInsets)
             } else {
-                let rows = UserDefaults.standard.object(forKey: Constants.maximumaRows) as? CGFloat ?? 3.0
+                let rows = UserDefaults.standard.object(forKey: Constants.maximumRows) as? CGFloat ?? 3.0
                 return CGSize(width: (collectionView.frame.size.width / 2) - widthInsets,
                               height: (collectionView.frame.size.height / rows) - heightInsets)
             }
 
         case .portrait:
-            switch indexPath.row {
+            let rows = CGFloat(min(hms.videoTracks.count, 4))
+            let commonWidth = collectionView.frame.size.width / rows - widthInsets
+            let commonHeight = commonWidth * 3.0 / 4.0
+
+            switch indexPath.section {
             case 0:
-                let height = collectionView.frame.size.height
                 return CGSize(width: collectionView.frame.size.width - widthInsets,
-                              height: height - height / 4 - heightInsets)
+                              height: collectionView.frame.size.height - commonHeight - heightInsets)
             default:
-                let rows = CGFloat(min(hms.videoTracks.count, 4))
-                return CGSize(width: collectionView.frame.size.width / rows - widthInsets,
-                              height: collectionView.frame.size.height / rows - heightInsets)
+                return CGSize(width: commonWidth, height: commonHeight)
             }
         }
     }
@@ -113,7 +142,31 @@ final class MeetingViewModel: NSObject,
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        sectionInsets
+
+        switch layout {
+        case .grid:
+            return sectionInsets
+
+        case .portrait:
+
+            switch section {
+            case 0:
+                return sectionInsets
+            default:
+
+                let width = collectionView.frame.size.width
+                let widthInsets = sectionInsets.left + sectionInsets.right
+
+                let columns = CGFloat(min(hms.videoTracks.count - 1, 4))
+                let cellWidth = (width / columns)
+
+                let cellInsets = 2*widthInsets*columns
+
+                let inset = (width - cellWidth - cellInsets) / columns
+
+                return UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
+            }
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView,
