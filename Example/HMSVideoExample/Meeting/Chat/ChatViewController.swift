@@ -18,6 +18,10 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        table.tableFooterView = UIView()
+        table.estimatedRowHeight = 64
+        table.rowHeight = UITableView.automaticDimension
+        
         observeBroadcast()
     }
     
@@ -61,7 +65,11 @@ extension ChatViewController: UITableViewDataSource {
         cell.textLabel?.font = .preferredFont(forTextStyle: .headline)
         cell.textLabel?.text = sender
 
+        cell.detailTextLabel?.numberOfLines = 0
+        cell.detailTextLabel?.lineBreakMode = .byWordWrapping
+        
         cell.detailTextLabel?.font = .preferredFont(forTextStyle: .body)
+        
         cell.detailTextLabel?.text = message
 
         return cell

@@ -27,6 +27,9 @@ final class MeetingViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
 
     @IBOutlet weak var badgeButton: BadgeButton!
+    
+    var chatBadgeCount = 0
+    
 
     // MARK: - View Lifecycle
 
@@ -86,7 +89,10 @@ final class MeetingViewController: UIViewController {
         _ = NotificationCenter.default.addObserver(forName: Constants.broadcastReceived,
                                                    object: nil,
                                                    queue: .main) { [weak self] _ in
-            self?.badgeButton.badge = String(describing: self?.viewModel.hms.broadcasts.count)
+            if let strongSelf = self {
+                strongSelf.chatBadgeCount += 1
+                strongSelf.badgeButton.badge = "\(strongSelf.chatBadgeCount)"
+            }
         }
     }
 
@@ -153,6 +159,10 @@ final class MeetingViewController: UIViewController {
         }
 
         viewController.hms = viewModel.hms
+        
+        chatBadgeCount = 0
+        
+        badgeButton.badge = nil
 
         present(viewController, animated: true)
     }
