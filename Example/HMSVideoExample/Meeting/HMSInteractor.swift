@@ -14,7 +14,6 @@ final class HMSInteractor {
     // MARK: - Instance Properties
 
     private let user: String
-    private let roomName: String
 
     private var updateUI: () -> Void
 
@@ -81,41 +80,49 @@ final class HMSInteractor {
 
     // MARK: - Setup Stream
 
-    init(for user: String, in roomName: String, _ flow: MeetingFlow, _ callback: @escaping () -> Void) {
+    init(for user: String, in room: String, _ flow: MeetingFlow, _ callback: @escaping () -> Void) {
 
         self.user = user
-        self.roomName = roomName
         self.flow = flow
         self.updateUI = callback
 
-        setup()
+        setup(room)
 
         observeSettingsUpdated()
     }
 
-    func setup() {
+    func setup(_ room: String) {
 
-        fetchToken(Constants.endpoint, Constants.getToken) { [weak self] token, error in
+        switch flow {
+        case .join:
+            fetchToken(Constants.endpoint, Constants.getToken, room) { [weak self] token, error in
 
-            guard error == nil, let token = token, let strongSelf = self
-            else {
-                let error = error ?? CustomError(title: "Fetch Token Error")
-                NotificationCenter.default.post(name: Constants.hmsError,
-                                                object: nil,
-                                                userInfo: ["Error": error])
-                return
+                guard error == nil, let token = token, let strongSelf = self
+                else {
+                    let error = error ?? CustomError(title: "Fetch Token Error")
+                    NotificationCenter.default.post(name: Constants.hmsError,
+                                                    object: nil,
+                                                    userInfo: ["Error": error])
+                    return
+                }
+                strongSelf.connect(with: token, room)
             }
+        case .start:
+            createRoom(name: room) { [weak self] _, roomID, error in
 
-            switch strongSelf.flow {
-            case .join:
-                strongSelf.connect(with: token, strongSelf.roomName)
+                guard error == nil, let roomID = roomID, let strongSelf = self
+                else {
+                    let error = error ?? CustomError(title: "Create Room Error")
+                    NotificationCenter.default.post(name: Constants.hmsError,
+                                                    object: nil,
+                                                    userInfo: ["Error": error])
+                    return
+                }
 
-            case .start:
-                strongSelf.createRoom(name: strongSelf.roomName) { _, roomID, error in
-
-                    guard error == nil, let roomID = roomID, let strongSelf = self
+                strongSelf.fetchToken(Constants.endpoint, Constants.getToken, roomID) { [weak self] token, error in
+                    guard error == nil, let token = token, let strongSelf = self
                     else {
-                        let error = error ?? CustomError(title: "Create Room Error")
+                        let error = error ?? CustomError(title: "Fetch Token Error")
                         NotificationCenter.default.post(name: Constants.hmsError,
                                                         object: nil,
                                                         userInfo: ["Error": error])
@@ -130,6 +137,7 @@ final class HMSInteractor {
 
     func fetchToken(_ endpoint: String,
                     _ token: String,
+                    _ roomID: String,
                     completion: @escaping (String?, Error?) -> Void) {
 
         guard let endpointURL = URL(string: endpoint),
@@ -140,7 +148,7 @@ final class HMSInteractor {
             return
         }
 
-        let body = [  "room_id": roomName,
+        let body = [  "room_id": roomID,
                       "user_name": user,
                       "role": "guest",
                       "env": subDomain    ]
@@ -202,7 +210,7 @@ final class HMSInteractor {
         }
 
         let cleanedName = name.replacingOccurrences(of: " ", with: "")
-        
+
         let body = [ "room_name": cleanedName ]
 
         var request = URLRequest(url: createRoomURL)
