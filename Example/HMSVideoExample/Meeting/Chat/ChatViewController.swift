@@ -10,7 +10,7 @@ import UIKit
 
 class ChatViewController: UIViewController {
 
-    var hms: HMSInterface!
+    var hms: HMSInterface?
 
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var stackView: UIStackView!
@@ -83,7 +83,7 @@ class ChatViewController: UIViewController {
 
     @IBAction func sendTapped(_ sender: UIButton) {
 
-        if let message = textField.text, !message.isEmpty {
+        if let message = textField.text, !message.isEmpty, let hms = hms {
 
             sender.isEnabled = false
 
@@ -93,9 +93,9 @@ class ChatViewController: UIViewController {
 
                 sender.isEnabled = true
                 self.textField.text = nil
-                self.hms.broadcasts.append(broadcast)
+                hms.broadcasts.append(broadcast)
                 self.table.reloadData()
-                let index = IndexPath(row: self.hms.broadcasts.count - 1, section: 0)
+                let index = IndexPath(row: hms.broadcasts.count - 1, section: 0)
                 self.table.scrollToRow(at: index, at: .top, animated: true)
             }
         }
@@ -105,16 +105,15 @@ class ChatViewController: UIViewController {
 extension ChatViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        hms.broadcasts.count
+        hms?.broadcasts.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.resuseIdentifier, for: indexPath)
 
-        let chat = hms.broadcasts[indexPath.row]
-
-        guard let sender = chat[Constants.chatSenderName] as? String,
+        guard let chat = hms?.broadcasts[indexPath.row],
+              let sender = chat[Constants.chatSenderName] as? String,
               let message = chat[Constants.chatMessage] as? String
         else {
             return UITableViewCell()
@@ -133,8 +132,7 @@ extension ChatViewController: UITableViewDataSource {
         return cell
     }
 
-    private func tableView(_ tableView: UITableView,
-                   heightForFooterInSection section: Int) -> CGFloat {
+    private func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         50
     }
 }

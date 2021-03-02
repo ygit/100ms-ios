@@ -735,6 +735,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2521E98CB2584195FC9F8014 /* Pods-HMSVideo_Tests.debug.xcconfig */;
 			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -754,6 +755,7 @@
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HMSVideo_Example.app/HMSVideo_Example";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -761,6 +763,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 14CAFAB81EB7F870B9E6C3BC /* Pods-HMSVideo_Tests.release.xcconfig */;
 			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -776,6 +779,7 @@
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HMSVideo_Example.app/HMSVideo_Example";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
