@@ -309,9 +309,7 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 5N85PP82A9;
 						LastSwiftMigration = 1160;
-						ProvisioningStyle = Automatic;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -681,7 +679,8 @@
 				CODE_SIGN_ENTITLEMENTS = "HMSVideoExample/Supporting Files/HMSVideo_Example.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5N85PP82A9;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = HMSVideoExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -689,6 +688,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yourorg.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -697,6 +697,7 @@
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -708,7 +709,8 @@
 				CODE_SIGN_ENTITLEMENTS = "HMSVideoExample/Supporting Files/HMSVideo_Example.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5N85PP82A9;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = HMSVideoExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -716,6 +718,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yourorg.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -724,6 +727,7 @@
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};

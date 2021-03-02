@@ -16,11 +16,11 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## iOS
-### ios custom_lane
+### ios beta
 ```
-fastlane ios custom_lane
+fastlane ios beta
 ```
-Description of what the lane does
+Distributes the HMSVideoExample app on Firebase
 
 ----
 
