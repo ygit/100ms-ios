@@ -240,6 +240,7 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="Ny9-re-MbV"/>
+                                <exclude reference="nva-4l-9tN"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact-widthClass=compact">
@@ -250,6 +251,11 @@
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <exclude reference="nva-4l-9tN"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
                             <mask key="constraints">
                                 <exclude reference="nva-4l-9tN"/>
                             </mask>

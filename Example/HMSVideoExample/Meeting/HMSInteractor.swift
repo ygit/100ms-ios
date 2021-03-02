@@ -243,9 +243,10 @@ final class HMSInteractor {
         client.onAudioLevelInfo = { levels in
             self.updateAudio(with: levels)
         }
+        
+        self.setAudioDelay()
 
         client.connect()
-        client.startAudioLevelMonitor(0.5)
     }
 
     func subscribe(to room: HMSRoom, _ peer: HMSPeer, with info: HMSStreamInfo) {
@@ -380,7 +381,14 @@ extension HMSInteractor {
             }
 
             self?.updateUI()
+            
+            self?.setAudioDelay()
         }
+    }
+    
+    func setAudioDelay() {
+        let audioPollDelay = UserDefaults.standard.object(forKey: Constants.audioPollDelay) as? Double ?? 2.0
+        client.startAudioLevelMonitor(audioPollDelay)
     }
 
     func send(_ broadcast: [AnyHashable: Any], completion: @escaping () -> Void) {

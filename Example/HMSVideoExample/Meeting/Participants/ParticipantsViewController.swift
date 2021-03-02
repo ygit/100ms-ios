@@ -63,7 +63,7 @@ extension ParticipantsViewController: UITableViewDataSource {
 
         let peer = peers[indexPath.row]
 
-        cell.textLabel?.text = peer.name.capitalized
+        cell.textLabel?.text = peer.name
         cell.detailTextLabel?.text = peer.role?.capitalized ?? "Guest"
 
         return cell
