@@ -12,11 +12,13 @@ struct Constants {
 
     // MARK: - HMS Interactor
 
-    static let token = "https://ms-services-r9oucbp9pjl9.runkit.sh/?api=token"
+    static let server = "https://ms-services-r9oucbp9pjl9.runkit.sh/"
 
     static let endpoint = "wss://"+(UserDefaults.standard.string(forKey: "environment") ?? "prod-in")+".100ms.live/ws"
 
-    static let createRoom = token + "?api=room"
+    static let getToken = server + "?api=token"
+
+    static let createRoom = server + "?api=room"
 
     static let urlEmpty = "Token & Endpoint URLs cannot be nil!"
 

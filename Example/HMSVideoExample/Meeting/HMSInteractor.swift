@@ -94,22 +94,37 @@ final class HMSInteractor {
     }
 
     func setup() {
-        switch flow {
-        case .join:
-            fetchToken(Constants.endpoint, Constants.token) { [weak self] token, error in
 
-                guard error == nil, let token = token
-                else {
-                    let error = error ?? CustomError(title: "Fetch Token Error")
-                    NotificationCenter.default.post(name: Constants.hmsError, object: nil, userInfo: ["Error": error])
-                    return
-                }
+        fetchToken(Constants.endpoint, Constants.getToken) { [weak self] token, error in
 
-                self?.connect(with: token)
+            guard error == nil, let token = token, let strongSelf = self
+            else {
+                let error = error ?? CustomError(title: "Fetch Token Error")
+                NotificationCenter.default.post(name: Constants.hmsError,
+                                                object: nil,
+                                                userInfo: ["Error": error])
+                return
             }
 
-        case .start:
-            print("Start Meeting")
+            switch strongSelf.flow {
+            case .join:
+                strongSelf.connect(with: token, strongSelf.roomName)
+
+            case .start:
+                strongSelf.createRoom(name: strongSelf.roomName) { _, roomID, error in
+
+                    guard error == nil, let roomID = roomID, let strongSelf = self
+                    else {
+                        let error = error ?? CustomError(title: "Create Room Error")
+                        NotificationCenter.default.post(name: Constants.hmsError,
+                                                        object: nil,
+                                                        userInfo: ["Error": error])
+                        return
+                    }
+
+                    strongSelf.connect(with: token, roomID)
+                }
+            }
         }
     }
 
@@ -125,16 +140,16 @@ final class HMSInteractor {
             return
         }
 
-        let parameters = [  "room_id": roomName,
-                            "user_name": user,
-                            "role": "guest",
-                            "env": subDomain    ]
+        let body = [  "room_id": roomName,
+                      "user_name": user,
+                      "role": "guest",
+                      "env": subDomain    ]
 
         var request = URLRequest(url: tokenURL)
         request.httpMethod = "POST"
 
         do {
-            request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            request.httpBody = try JSONSerialization.data(withJSONObject: body, options: .prettyPrinted)
         } catch {
             print(error.localizedDescription)
             completion(nil, CustomError(title: error.localizedDescription))
@@ -144,15 +159,14 @@ final class HMSInteractor {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
 
-        URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { [weak self] data, _, error in
+        URLSession.shared.dataTask(with: request) { [weak self] data, _, error in
 
             self?.parseToken(from: data, error: error) { token, error in
                 DispatchQueue.main.async {
                     completion(token, error)
                 }
             }
-
-        }).resume()
+        }.resume()
     }
 
     func parseToken(from data: Data?, error: Error?, completion: @escaping (String?, Error?) -> Void) {
@@ -179,14 +193,66 @@ final class HMSInteractor {
         }
     }
 
-    func createRoom(name: String, completion: (Bool, Error?) -> Void) {
+    func createRoom(name: String, completion: @escaping (Bool, String?, Error?) -> Void) {
 
-        completion(true, nil)
+        guard let createRoomURL = URL(string: Constants.createRoom)
+        else {
+            completion(false, nil, CustomError(title: "Create Room URL Error"))
+            return
+        }
+
+        let cleanedName = name.replacingOccurrences(of: " ", with: "")
+        
+        let body = [ "room_name": cleanedName ]
+
+        var request = URLRequest(url: createRoomURL)
+        request.httpMethod = "POST"
+
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: body, options: .prettyPrinted)
+        } catch {
+            print(error.localizedDescription)
+            completion(false, nil, CustomError(title: error.localizedDescription))
+            return
+        }
+
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+
+        URLSession.shared.dataTask(with: request) { [weak self] data, _, error in
+
+            self?.parseRooms(data, error) { isSucces, roomID, error in
+                completion(isSucces, roomID, error)
+            }
+        }.resume()
+    }
+
+    func parseRooms(_ data: Data?, _ error: Error?, completion: (Bool, String?, Error?) -> Void) {
+        guard error == nil, let data = data else {
+            let message = error?.localizedDescription ?? "Parse Create Room Response Error"
+            completion(false, nil, CustomError(title: message))
+            return
+        }
+
+        do {
+            if let json = try JSONSerialization.jsonObject(with: data,
+                                                           options: .mutableContainers) as? [String: Any] {
+                if let roomID = json["id"] as? String {
+                    completion(true, roomID, nil)
+                } else {
+                    print(Constants.jsonError)
+                    completion(false, nil, CustomError(title: Constants.jsonError))
+                }
+            }
+        } catch {
+            print(error.localizedDescription)
+            completion(false, nil, CustomError(title: error.localizedDescription))
+        }
     }
 
     // MARK: - Stream Handlers
 
-    func connect(with token: String) {
+    func connect(with token: String, _ roomID: String) {
 
         localPeer = HMSPeer(name: user, authToken: token)
 
@@ -196,7 +262,7 @@ final class HMSInteractor {
         client = HMSClient(peer: localPeer, config: config)
         client.logLevel = .verbose
 
-        room = HMSRoom(roomId: roomName)
+        room = HMSRoom(roomId: roomID)
 
         client.onPeerJoin = { room, peer in
             print("onPeerJoin: ", room.roomId, peer.name)
@@ -243,7 +309,7 @@ final class HMSInteractor {
         client.onAudioLevelInfo = { levels in
             self.updateAudio(with: levels)
         }
-        
+
         self.setAudioDelay()
 
         client.connect()
@@ -381,11 +447,11 @@ extension HMSInteractor {
             }
 
             self?.updateUI()
-            
+
             self?.setAudioDelay()
         }
     }
-    
+
     func setAudioDelay() {
         let audioPollDelay = UserDefaults.standard.object(forKey: Constants.audioPollDelay) as? Double ?? 2.0
         client.startAudioLevelMonitor(audioPollDelay)
