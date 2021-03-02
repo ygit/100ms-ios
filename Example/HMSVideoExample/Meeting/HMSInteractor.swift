@@ -1,5 +1,5 @@
 //
-//  HMSWrapper.swift
+//  HMSInteractor.swift
 //  HMSVideo_Example
 //
 //  Created by Yogesh Singh on 26/02/21.
@@ -9,7 +9,7 @@
 import Foundation
 import HMSVideo
 
-final class HMSInterface {
+final class HMSInteractor {
 
     // MARK: - Instance Properties
 
@@ -67,7 +67,7 @@ final class HMSInterface {
         }
     }
 
-    var cameraSource = "Front Facing" {
+    private var cameraSource = "Front Facing" {
         willSet {
             if newValue != cameraSource {
                 videoCapturer?.switchCamera()
@@ -75,33 +75,42 @@ final class HMSInterface {
         }
     }
 
-    var broadcasts = [[AnyHashable: Any]]()
+    internal var broadcasts = [[AnyHashable: Any]]()
+
+    private var flow: MeetingFlow
 
     // MARK: - Setup Stream
 
-    init(_ endpoint: String,
-         _ token: String,
-         _ user: String,
-         _ roomName: String,
-         _ callback: @escaping () -> Void) {
+    init(for user: String, in roomName: String, _ flow: MeetingFlow, _ callback: @escaping () -> Void) {
 
         self.user = user
         self.roomName = roomName
+        self.flow = flow
         self.updateUI = callback
 
-        fetchToken(endpoint, token) { [weak self] token, error in
-
-            guard error == nil, let token = token
-            else {
-                let error = error ?? CustomError(title: "Fetch Token Error")
-                NotificationCenter.default.post(name: Constants.hmsError, object: nil, userInfo: ["Error": error])
-                return
-            }
-
-            self?.connect(with: token)
-        }
+        setup()
 
         observeSettingsUpdated()
+    }
+
+    func setup() {
+        switch flow {
+        case .join:
+            fetchToken(Constants.endpoint, Constants.token) { [weak self] token, error in
+
+                guard error == nil, let token = token
+                else {
+                    let error = error ?? CustomError(title: "Fetch Token Error")
+                    NotificationCenter.default.post(name: Constants.hmsError, object: nil, userInfo: ["Error": error])
+                    return
+                }
+
+                self?.connect(with: token)
+            }
+
+        case .start:
+            print("Start Meeting")
+        }
     }
 
     func fetchToken(_ endpoint: String,
@@ -170,6 +179,11 @@ final class HMSInterface {
         }
     }
 
+    func createRoom(name: String, completion: (Bool, Error?) -> Void) {
+
+        completion(true, nil)
+    }
+
     // MARK: - Stream Handlers
 
     func connect(with token: String) {
@@ -186,10 +200,12 @@ final class HMSInterface {
 
         client.onPeerJoin = { room, peer in
             print("onPeerJoin: ", room.roomId, peer.name)
+            NotificationCenter.default.post(name: Constants.peersUpdated, object: nil)
         }
 
         client.onPeerLeave = { room, peer in
             print("onPeerLeave: ", room.roomId, peer.name)
+            NotificationCenter.default.post(name: Constants.peersUpdated, object: nil)
         }
 
         client.onStreamAdd = { room, peer, info in
@@ -303,7 +319,7 @@ final class HMSInterface {
 
 // MARK: - Action Handlers
 
-extension HMSInterface {
+extension HMSInteractor {
 
     func updateAudio(with levels: [HMSAudioLevelInfo]) {
 

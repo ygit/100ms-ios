@@ -8,22 +8,18 @@
 
 import UIKit
 
-enum Layout {
-    case grid, portrait
-}
-
 final class MeetingViewModel: NSObject,
                               UICollectionViewDataSource,
                               UICollectionViewDelegate,
                               UICollectionViewDelegateFlowLayout {
 
-    private(set) var hms: HMSInterface!
+    private(set) var hms: HMSInteractor!
 
     private weak var collectionView: UICollectionView!
 
     private let sectionInsets = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
 
-    var layout = Layout.grid {
+    internal var layout = Layout.grid {
         didSet {
             collectionView.reloadData()
         }
@@ -31,15 +27,11 @@ final class MeetingViewModel: NSObject,
 
     // MARK: - Initializers
 
-    init(_ endpoint: String,
-         _ token: String,
-         _ user: String,
-         _ room: String,
-         _ collectionView: UICollectionView) {
+    init(_ user: String, _ room: String, _ flow: MeetingFlow, _ collectionView: UICollectionView) {
 
         super.init()
 
-        hms = HMSInterface(endpoint, token, user, room) {
+        hms = HMSInteractor(for: user, in: room, flow) {
             collectionView.reloadData()
         }
 

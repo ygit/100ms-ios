@@ -12,9 +12,9 @@ final class MeetingViewController: UIViewController {
 
     // MARK: - View Properties
 
-    var user: String!
-    var roomName: String!
-    var flow: MeetingFlow!
+    internal var user: String!
+    internal var roomName: String!
+    internal var flow: MeetingFlow!
 
     private var viewModel: MeetingViewModel!
 
@@ -24,11 +24,11 @@ final class MeetingViewController: UIViewController {
         }
     }
 
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet private(set) weak var collectionView: UICollectionView!
 
-    @IBOutlet weak var badgeButton: BadgeButton!
+    @IBOutlet private weak var badgeButton: BadgeButton!
 
-    var chatBadgeCount = 0
+    private var chatBadgeCount = 0
 
     // MARK: - View Lifecycle
 
@@ -37,16 +37,7 @@ final class MeetingViewController: UIViewController {
 
         UIApplication.shared.isIdleTimerDisabled = true
 
-        switch flow {
-        case .join:
-            viewModel = MeetingViewModel(Constants.endpoint, Constants.token,
-                                         self.user, self.roomName, collectionView)
-        case .start:
-            viewModel = MeetingViewModel(Constants.endpoint, Constants.serverToken,
-                                         self.user, self.roomName, collectionView)
-        case .none:
-            fatalError()
-        }
+        viewModel = MeetingViewModel(self.user, self.roomName, flow, collectionView)
 
         handleError()
         observeBroadcast()

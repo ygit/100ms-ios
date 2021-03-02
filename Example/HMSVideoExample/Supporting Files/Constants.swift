@@ -10,16 +10,13 @@ import Foundation
 
 struct Constants {
 
-    // MARK: - HMS Interface
+    // MARK: - HMS Interactor
 
     static let token = "https://ms-services-r9oucbp9pjl9.runkit.sh/?api=token"
 
-    static let endpoint = "wss://" +
-        (UserDefaults.standard.string(forKey: "environment") ?? "prod-in") +
-        ".100ms.live/ws"
-//    static let endpoint = "wss://qa-in.100ms.live/ws"
+    static let endpoint = "wss://"+(UserDefaults.standard.string(forKey: "environment") ?? "prod-in")+".100ms.live/ws"
 
-    static let serverToken = "https://ms-services-ob8qiw3sjedt.runkit.sh/?api=token"
+    static let createRoom = token + "?api=room"
 
     static let urlEmpty = "Token & Endpoint URLs cannot be nil!"
 
@@ -30,6 +27,8 @@ struct Constants {
     static let settingsUpdated = NSNotification.Name("SETTINGS_UPDATED")
 
     static let broadcastReceived = NSNotification.Name("BROADCAST_RECEIVED")
+
+    static let peersUpdated = NSNotification.Name("PEERS_UPDATED")
 
     // MARK: - View Constants
 

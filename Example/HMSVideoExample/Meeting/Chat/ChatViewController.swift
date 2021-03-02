@@ -10,7 +10,7 @@ import UIKit
 
 class ChatViewController: UIViewController {
 
-    var hms: HMSInterface?
+    var hms: HMSInteractor?
 
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var stackView: UIStackView!

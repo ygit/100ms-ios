@@ -13,7 +13,7 @@ class ParticipantsViewController: UIViewController {
 
     @IBOutlet weak var table: UITableView!
 
-    var hms: HMSInterface?
+    var hms: HMSInteractor?
 
     var peers: [HMSPeer] {
         var peers = hms?.peers.map { $0.1 } ?? [HMSPeer]()
@@ -30,9 +30,22 @@ class ParticipantsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        observeParticipants()
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: - Action Handlers
+
+    func observeParticipants() {
+        _ = NotificationCenter.default.addObserver(forName: Constants.peersUpdated,
+                                                   object: nil,
+                                                   queue: .main) { [weak self] _ in
+            self?.table.reloadData()
+        }
+    }
 
     @IBAction func closeTapped(_ sender: UIButton) {
         dismiss(animated: true)
@@ -50,8 +63,8 @@ extension ParticipantsViewController: UITableViewDataSource {
 
         let peer = peers[indexPath.row]
 
-        cell.textLabel?.text = peer.name
-        cell.detailTextLabel?.text = peer.role ?? "Guest"
+        cell.textLabel?.text = peer.name.capitalized
+        cell.detailTextLabel?.text = peer.role?.capitalized ?? "Guest"
 
         return cell
     }

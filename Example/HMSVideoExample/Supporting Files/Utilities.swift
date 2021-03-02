@@ -47,3 +47,7 @@ struct CustomError: ErrorProtocol {
 enum MeetingFlow {
     case join, start
 }
+
+enum Layout {
+    case grid, portrait
+}
