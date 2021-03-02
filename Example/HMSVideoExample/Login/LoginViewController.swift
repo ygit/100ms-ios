@@ -40,10 +40,14 @@ final class LoginViewController: UIViewController {
 
     @IBAction func cameraTapped(_ sender: UIButton) {
         AVCaptureDevice.requestAccess(for: .video) { _ in }
+        sender.isSelected = !sender.isSelected
+        UserDefaults.standard.set(sender.isEnabled, forKey: Constants.publishVideo)
     }
 
     @IBAction func micTapped(_ sender: UIButton) {
         AVAudioSession.sharedInstance().requestRecordPermission { _ in }
+        sender.isSelected = !sender.isSelected
+        UserDefaults.standard.set(sender.isEnabled, forKey: Constants.publishAudio)
     }
 
     @IBAction private  func startMeetingTapped(_ sender: UIButton) {
@@ -77,6 +81,7 @@ final class LoginViewController: UIViewController {
             if flow == .join {
                 textField.text = UserDefaults.standard.string(forKey: Constants.roomName)
             }
+            textField.text = "6033b4cb89a96e73b23d13dc"
         }
 
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))

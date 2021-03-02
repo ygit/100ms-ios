@@ -122,11 +122,12 @@
                                             <constraint firstAttribute="height" constant="64" id="io6-xb-Q0l"/>
                                             <constraint firstAttribute="width" constant="64" id="tE8-mK-E0m"/>
                                         </constraints>
-                                        <state key="normal" image="camera.circle.fill" catalog="system">
+                                        <state key="normal" image="video.fill" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                             </preferredSymbolConfiguration>
                                         </state>
+                                        <state key="selected" image="video.slash.fill" catalog="system"/>
                                         <connections>
                                             <action selector="cameraTapped:" destination="SMR-Mj-Sg7" eventType="touchUpInside" id="cD3-MV-TT8"/>
                                         </connections>
@@ -142,6 +143,7 @@
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                             </preferredSymbolConfiguration>
                                         </state>
+                                        <state key="selected" image="mic.slash.fill" catalog="system"/>
                                         <connections>
                                             <action selector="micTapped:" destination="SMR-Mj-Sg7" eventType="touchUpInside" id="Mfz-zz-nUE"/>
                                         </connections>
@@ -210,10 +212,12 @@
         <image name="100ms-icon" width="1598" height="1598"/>
         <image name="100ms-logo" width="5289" height="1598"/>
         <image name="arrow.up.right.video" catalog="system" width="128" height="83"/>
-        <image name="camera.circle.fill" catalog="system" width="128" height="121"/>
         <image name="mic.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="mic.slash.fill" catalog="system" width="108" height="128"/>
         <image name="settings" width="85.333335876464844" height="85.333335876464844"/>
         <image name="video.badge.plus" catalog="system" width="128" height="90"/>
+        <image name="video.fill" catalog="system" width="128" height="82"/>
+        <image name="video.slash.fill" catalog="system" width="128" height="106"/>
         <namedColor name="systemBackgroundInverse">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
