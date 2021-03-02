@@ -113,12 +113,48 @@
                                 </constraints>
                                 <edgeInsets key="layoutMargins" top="8" left="15" bottom="8" right="15"/>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="OEq-rU-lzb">
+                                <rect key="frame" x="99.666666666666686" y="434" width="176" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W2u-ed-mZu">
+                                        <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="64" id="io6-xb-Q0l"/>
+                                            <constraint firstAttribute="width" constant="64" id="tE8-mK-E0m"/>
+                                        </constraints>
+                                        <state key="normal" image="camera.circle.fill" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                            </preferredSymbolConfiguration>
+                                        </state>
+                                        <connections>
+                                            <action selector="cameraTapped:" destination="SMR-Mj-Sg7" eventType="touchUpInside" id="cD3-MV-TT8"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pCM-uq-NA0">
+                                        <rect key="frame" x="112" y="0.0" width="64" height="64"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="64" id="1E5-IN-XPG"/>
+                                            <constraint firstAttribute="width" constant="64" id="YcR-mA-orD"/>
+                                        </constraints>
+                                        <state key="normal" image="mic.circle.fill" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                            </preferredSymbolConfiguration>
+                                        </state>
+                                        <connections>
+                                            <action selector="micTapped:" destination="SMR-Mj-Sg7" eventType="touchUpInside" id="Mfz-zz-nUE"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Bcw-CH-SJE" secondAttribute="trailing" constant="16" id="5Kt-ln-qG7"/>
                             <constraint firstItem="Hgt-OM-PBn" firstAttribute="trailing" secondItem="ZCn-6R-e9s" secondAttribute="trailing" id="AoG-NC-0PT"/>
                             <constraint firstItem="ZCn-6R-e9s" firstAttribute="leading" secondItem="jQ1-tl-f6e" secondAttribute="leading" constant="15" id="BYz-5u-WZC"/>
+                            <constraint firstItem="OEq-rU-lzb" firstAttribute="centerX" secondItem="jQ1-tl-f6e" secondAttribute="centerX" id="Clp-jn-YfA"/>
                             <constraint firstAttribute="trailing" secondItem="ZCn-6R-e9s" secondAttribute="trailing" constant="15" id="DJg-Nm-PvX"/>
                             <constraint firstItem="pry-yg-EPI" firstAttribute="leading" secondItem="jQ1-tl-f6e" secondAttribute="leading" id="Igg-fB-civ"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="C2U-dF-Uy4" secondAttribute="trailing" constant="160" id="P2f-qc-78M"/>
@@ -127,6 +163,7 @@
                             <constraint firstItem="C2U-dF-Uy4" firstAttribute="top" secondItem="Zky-Jr-DW7" secondAttribute="bottom" id="USt-HX-x7x"/>
                             <constraint firstItem="au1-nU-61f" firstAttribute="top" secondItem="pry-yg-EPI" secondAttribute="bottom" id="UrM-sU-rhI"/>
                             <constraint firstItem="Hgt-OM-PBn" firstAttribute="leading" secondItem="ZCn-6R-e9s" secondAttribute="leading" id="ZQw-c6-kkh"/>
+                            <constraint firstItem="Hgt-OM-PBn" firstAttribute="top" secondItem="OEq-rU-lzb" secondAttribute="bottom" constant="8" symbolic="YES" id="aq3-DL-VXv"/>
                             <constraint firstItem="Bcw-CH-SJE" firstAttribute="centerY" secondItem="C2U-dF-Uy4" secondAttribute="centerY" id="gu5-Gy-9Nq"/>
                             <constraint firstItem="au1-nU-61f" firstAttribute="top" secondItem="ZCn-6R-e9s" secondAttribute="bottom" constant="8" symbolic="YES" id="heS-IC-Ler"/>
                             <constraint firstItem="C2U-dF-Uy4" firstAttribute="leading" secondItem="jQ1-tl-f6e" secondAttribute="leading" constant="20" symbolic="YES" id="jjf-8D-Wvx"/>
@@ -173,6 +210,8 @@
         <image name="100ms-icon" width="1598" height="1598"/>
         <image name="100ms-logo" width="5289" height="1598"/>
         <image name="arrow.up.right.video" catalog="system" width="128" height="83"/>
+        <image name="camera.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="mic.circle.fill" catalog="system" width="128" height="121"/>
         <image name="settings" width="85.333335876464844" height="85.333335876464844"/>
         <image name="video.badge.plus" catalog="system" width="128" height="90"/>
         <namedColor name="systemBackgroundInverse">

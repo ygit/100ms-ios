@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVKit
 
 final class LoginViewController: UIViewController {
 
@@ -37,8 +38,15 @@ final class LoginViewController: UIViewController {
 
     // MARK: - Action Handlers
 
-    @IBAction private  func startMeetingTapped(_ sender: UIButton) {
+    @IBAction func cameraTapped(_ sender: UIButton) {
+        AVCaptureDevice.requestAccess(for: .video) { _ in }
+    }
 
+    @IBAction func micTapped(_ sender: UIButton) {
+        AVAudioSession.sharedInstance().requestRecordPermission { _ in }
+    }
+
+    @IBAction private  func startMeetingTapped(_ sender: UIButton) {
         showInputAlert(flow: sender.tag == 0 ? .join : .start)
     }
 
