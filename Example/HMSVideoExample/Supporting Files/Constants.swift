@@ -12,9 +12,10 @@ struct Constants {
 
     // MARK: - HMS Interactor
 
-    static let server = "https://ms-services-r9oucbp9pjl9.runkit.sh/"
+    static let server = UserDefaults.standard.string(forKey: Constants.serverURLKey) ?? "https://ms-services-server-token-17sgcgfb18ow.runkit.sh/"
 
-    static let endpoint = "wss://"+(UserDefaults.standard.string(forKey: "environment") ?? "prod-in")+".100ms.live/ws"
+    static let endpoint = UserDefaults.standard.string(forKey: Constants.socketEndpointKey) ??
+        "wss://prod-in.100ms.live/ws"
 
     static let getToken = server + "?api=token"
 
@@ -55,6 +56,10 @@ struct Constants {
     // MARK: - Settings
 
     static let defaultName = "defaultName"
+    
+    static let serverURLKey = "serverURL"
+    
+    static let socketEndpointKey = "socketEndpoint"
 
     static let roomName = "roomName"
 
@@ -73,8 +78,6 @@ struct Constants {
     static let showVideoPreview = "showVideoPreview"
 
     static let videoFrameRate = "videoFrameRate"
-
-    static let environment = "environment"
 
     static let defaultVideoSource = "defaultVideoSource"
 

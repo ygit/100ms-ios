@@ -32,7 +32,20 @@ class SettingsViewController: UIViewController {
             }
         }
     }
-
+    
+    @IBOutlet weak var serverURLField: UITextField! {
+        didSet {
+            serverURLField.text = UserDefaults.standard.string(forKey: Constants.serverURLKey) ?? Constants.server
+        }
+    }
+    
+    @IBOutlet weak var socketEndpointField: UITextField! {
+        didSet {
+            socketEndpointField.text = UserDefaults.standard.string(forKey: Constants.socketEndpointKey) ?? Constants.endpoint
+        }
+    }
+    
+    
     @IBOutlet weak var publishVideoSwitch: UISwitch! {
         didSet {
             if let isOn = UserDefaults.standard.object(forKey: Constants.publishVideo) as? Bool {
@@ -97,13 +110,6 @@ class SettingsViewController: UIViewController {
         }
     }
 
-    @IBOutlet weak var environmentField: UITextField! {
-        didSet {
-            if let environment = UserDefaults.standard.string(forKey: Constants.environment) {
-                environmentField.text = environment
-            }
-        }
-    }
 
     // MARK: - View Lifecycle
 
@@ -149,6 +155,10 @@ class SettingsViewController: UIViewController {
 
         userDefaults.set(!defaultNameField.text!.isEmpty ? defaultNameField.text : "iOS User",
                          forKey: Constants.defaultName)
+        userDefaults.set(!serverURLField.text!.isEmpty ? serverURLField.text : Constants.server,
+                         forKey: Constants.serverURLKey)
+        userDefaults.set(!socketEndpointField.text!.isEmpty ? socketEndpointField.text : Constants.endpoint,
+                         forKey: Constants.socketEndpointKey)
         userDefaults.set(publishVideoSwitch.isOn, forKey: Constants.publishVideo)
         userDefaults.set(publishAudioSwitch.isOn, forKey: Constants.publishAudio)
         userDefaults.set(!maximumRowsField.text!.isEmpty ? maximumRowsField.text : "2",
@@ -161,8 +171,6 @@ class SettingsViewController: UIViewController {
         userDefaults.set(showVideoPreviewSwitch.isOn, forKey: Constants.showVideoPreview)
         userDefaults.set(!videoFrameRateField.text!.isEmpty ? videoFrameRateField.text : "25",
                          forKey: Constants.videoFrameRate)
-        userDefaults.set(!environmentField.text!.isEmpty ? environmentField.text : "prod-in",
-                         forKey: Constants.environment)
 
         let source = defaultVideoSource[videoSourcePicker.selectedRow(inComponent: 0)]
         userDefaults.set(source, forKey: Constants.defaultVideoSource)

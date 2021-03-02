@@ -19,7 +19,12 @@ final class HMSInteractor {
 
     private(set) var localPeer: HMSPeer!
     private(set) var client: HMSClient!
-    private(set) var room: HMSRoom!
+    private(set) var room: HMSRoom! {
+        didSet {
+            let pasteboard = UIPasteboard.general
+            pasteboard.string = room.roomId
+        }
+    }
 
     private(set) var peers = [String: HMSPeer]()
     private(set) var remoteStreams = [HMSStream]()
