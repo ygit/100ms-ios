@@ -79,9 +79,10 @@ final class LoginViewController: UIViewController {
         alertController.addTextField { textField in
             textField.placeholder = roomPlaceholder
             if flow == .join {
-                textField.text = UserDefaults.standard.string(forKey: Constants.roomName)
+                textField.text = UserDefaults.standard.string(forKey: Constants.roomName) ?? "6033b4cb89a96e73b23d13dc"
+            } else {
+                textField.text = "My Meeting"
             }
-            textField.text = "6033b4cb89a96e73b23d13dc"
         }
 
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))

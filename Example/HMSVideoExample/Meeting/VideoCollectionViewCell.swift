@@ -1,16 +1,18 @@
 //
 //  VideoCollectionViewCell.swift
-//  HMSVideo
+//  HMSVideo_Example
 //
-//  Copyright (c) 2020 100ms. All rights reserved.
+//  Created by Yogesh Singh on 03/03/21.
+//  Copyright © 2021 100ms. All rights reserved.
 //
 
 import UIKit
 import HMSVideo
 
 class VideoCollectionViewCell: UICollectionViewCell {
-    lazy var videoView: HMSVideoView = {
-        return HMSVideoView()
+
+    private(set) lazy var videoView: HMSVideoView = {
+        HMSVideoView()
     }()
 
     override func layoutSubviews() {

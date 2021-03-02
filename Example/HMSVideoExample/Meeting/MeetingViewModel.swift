@@ -90,6 +90,24 @@ final class MeetingViewModel: NSObject,
             }
         }
 
+        let track = hms.videoTracks[indexPath.item]
+        let streamID = track.streamId
+        let peer = hms.peers[streamID]
+        let peerName = peer?.name
+
+        let title = UILabel(frame: CGRect(x: 0, y: 0, width: cell.bounds.size.width, height: 50))
+        title.text = peerName
+        title.font = .preferredFont(forTextStyle: .headline)
+        title.textAlignment = .center
+        title.tag = 1
+        cell.contentView.subviews.forEach {
+            if $0.tag == 1 {
+                $0.removeFromSuperview()
+            }
+        }
+        cell.contentView.addSubview(title)
+        
+
         Utilities.applyBorder(on: cell)
 
         return cell
@@ -182,18 +200,20 @@ final class MeetingViewModel: NSObject,
     }
 
     func switchCamera() {
-        hms.switchCamera()
+        if let capturer = hms.localStream?.videoCapturer {
+            capturer.switchCamera()
+        }
     }
 
     func switchAudio(isOn: Bool) {
-        hms.switchAudio(isOn)
+        if let audioTrack = hms.localStream?.audioTracks?.first {
+            audioTrack.enabled = isOn
+        }
     }
 
     func switchVideo(isOn: Bool) {
-        hms.switchVideo(isOn)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        if let videoTrack = hms.localStream?.videoTracks?.first {
+            videoTrack.enabled = isOn
+        }
     }
 }

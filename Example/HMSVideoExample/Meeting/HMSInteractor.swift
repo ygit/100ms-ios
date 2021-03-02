@@ -277,6 +277,14 @@ final class HMSInteractor {
 
         room = HMSRoom(roomId: roomID)
 
+        setupCallbacks()
+
+        setAudioDelay()
+
+        client.connect()
+    }
+
+    func setupCallbacks() {
         client.onPeerJoin = { room, peer in
             print("onPeerJoin: ", room.roomId, peer.name)
             NotificationCenter.default.post(name: Constants.peersUpdated, object: nil)
@@ -287,9 +295,9 @@ final class HMSInteractor {
             NotificationCenter.default.post(name: Constants.peersUpdated, object: nil)
         }
 
-        client.onStreamAdd = { room, peer, info in
+        client.onStreamAdd = { [weak self] room, peer, info in
             print("onStreamAdd: ", room.roomId, peer.name, info.streamId)
-            self.subscribe(to: room, peer, with: info)
+            self?.subscribe(to: room, peer, with: info)
         }
 
         client.onStreamRemove = { [weak self] room, peer, info in
@@ -319,20 +327,16 @@ final class HMSInteractor {
                                             userInfo: ["error": message])
         }
 
-        client.onAudioLevelInfo = { levels in
-            self.updateAudio(with: levels)
+        client.onAudioLevelInfo = { [weak self] levels in
+            self?.updateAudio(with: levels)
         }
-
-        self.setAudioDelay()
-
-        client.connect()
     }
 
     func subscribe(to room: HMSRoom, _ peer: HMSPeer, with info: HMSStreamInfo) {
 
         peers[info.streamId] = peer
 
-        client.subscribe(info, room: room) { (stream, _) in
+        client.subscribe(info, room: room) { [weak self] (stream, _) in
 
             guard let stream = stream,
                   let videoTrack = stream.videoTracks?.first
@@ -340,8 +344,8 @@ final class HMSInteractor {
                 return
             }
 
-            self.remoteStreams.append(stream)
-            self.videoTracks.append(videoTrack)
+            self?.remoteStreams.append(stream)
+            self?.videoTracks.append(videoTrack)
         }
     }
 
@@ -411,27 +415,6 @@ extension HMSInteractor {
 
         speaker = peer.name
         print("Speaker: ", peer.name)
-    }
-
-    func switchCamera() {
-        if let capturer = localStream?.videoCapturer {
-            capturer.switchCamera()
-            updateUI()
-        }
-    }
-
-    func switchAudio(_ isOn: Bool) {
-        if let audioTrack = localStream?.audioTracks?.first {
-            audioTrack.enabled = isOn
-            updateUI()
-        }
-    }
-
-    func switchVideo(_ isOn: Bool) {
-        if let videoTrack = localStream?.videoTracks?.first {
-            videoTrack.enabled = isOn
-            updateUI()
-        }
     }
 
     func observeSettingsUpdated() {
