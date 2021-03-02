@@ -16,7 +16,13 @@ class ParticipantsViewController: UIViewController {
     var hms: HMSInterface?
 
     var peers: [HMSPeer] {
-        hms?.peers.map { $0.1 } ?? [HMSPeer]()
+        var peers = hms?.peers.map { $0.1 } ?? [HMSPeer]()
+        let host = peers.filter { $0.role?.lowercased() == "host" }
+        if peers.count > 0, host.count > 0 {
+            peers.removeAll { $0.role?.lowercased() == "host" }
+            host.forEach { peers.insert($0, at: 0) }
+        }
+        return peers
     }
 
     // MARK: - View Lifecycle
@@ -45,10 +51,7 @@ extension ParticipantsViewController: UITableViewDataSource {
         let peer = peers[indexPath.row]
 
         cell.textLabel?.text = peer.name
-
-        if peer.role == "Host" {
-            cell.detailTextLabel?.text = peer.role
-        }
+        cell.detailTextLabel?.text = peer.role ?? "Guest"
 
         return cell
     }
