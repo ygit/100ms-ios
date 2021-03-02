@@ -11,49 +11,23 @@ final class LoginViewController: UIViewController {
 
     // MARK: - View Properties
 
-    @IBOutlet private weak var scrollView: UIScrollView!
-
-    @IBOutlet private weak var joinNowStackView: UIStackView! {
+    @IBOutlet weak var joinMeetingStackView: UIStackView! {
         didSet {
-            Utilities.applyBorder(on: joinNowStackView)
+            Utilities.drawCorner(on: joinMeetingStackView)
         }
     }
 
-    @IBOutlet private weak var nameField: UITextField! {
+    @IBOutlet weak var startMeetingStackView: UIStackView! {
         didSet {
-            Utilities.applyBorder(on: nameField)
-            nameField.text = UserDefaults.standard.string(forKey: Constants.defaultName) ?? "iOS User"
+            Utilities.drawCorner(on: startMeetingStackView)
         }
     }
 
-    @IBOutlet private weak var meetingIDField: UITextField! {
+    @IBOutlet weak var joinMeetingButton: UIButton! {
         didSet {
-            Utilities.drawCorner(on: meetingIDField)
-            meetingIDField.text = UserDefaults.standard.string(forKey: Constants.roomName) ?? "Enter Meeting ID"
-            meetingIDField.text = "6033b4cb89a96e73b23d13dc"
+            Utilities.drawCorner(on: joinMeetingButton)
         }
     }
-
-    @IBOutlet private weak var joinNowButton: UIButton! {
-        didSet {
-            Utilities.drawCorner(on: joinNowButton)
-        }
-    }
-
-    @IBOutlet private weak var startMeetingStackView: UIStackView! {
-        didSet {
-            Utilities.applyBorder(on: startMeetingStackView)
-        }
-    }
-
-    @IBOutlet private weak var meetingNameField: UITextField! {
-        didSet {
-            Utilities.drawCorner(on: meetingNameField)
-            meetingNameField.text = UserDefaults.standard.string(forKey: "meeting") ?? "Enter Meeting Name"
-        }
-    }
-
-    @IBOutlet private weak var recordSwitch: UISwitch!
 
     @IBOutlet private weak var startMeetingButton: UIButton! {
         didSet {
@@ -61,96 +35,76 @@ final class LoginViewController: UIViewController {
         }
     }
 
-    // MARK: - View Lifecycle
-
-    override func viewDidLoad() {
-        handleKeyboard()
-    }
-
-    // MARK: - View Modifiers
-
-    private func handleKeyboard() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow),
-                                               name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide),
-                                               name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-
-    @objc private func keyboardWillShow(notification: NSNotification) {
-
-        guard let userInfo = notification.userInfo,
-              var keyboardFrame = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
-        else { return }
-
-        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
-
-        var contentInset = self.scrollView.contentInset
-        contentInset.bottom = keyboardFrame.size.height
-        scrollView.contentInset = contentInset
-    }
-
-    @objc private func keyboardWillHide(notification: NSNotification) {
-
-        let contentInset = UIEdgeInsets.zero
-        scrollView.contentInset = contentInset
-    }
-
     // MARK: - Action Handlers
-
-    @IBAction private func joinNowTapped(_ sender: UIButton) {
-        guard let roomName = meetingIDField.text,
-              let user = nameField.text,
-              !user.isEmpty, !roomName.isEmpty
-        else {
-            showAlert(with: Constants.emptyFields)
-            return
-        }
-
-        guard let viewController = UIStoryboard(name: Constants.meeting, bundle: nil)
-                .instantiateInitialViewController() as? MeetingViewController else {
-            return
-        }
-
-        viewController.user = user
-        viewController.roomName = roomName
-        viewController.flow = .join
-
-        save(user, roomName)
-
-        navigationController?.pushViewController(viewController, animated: true)
-    }
 
     @IBAction private  func startMeetingTapped(_ sender: UIButton) {
 
-        guard let roomName = meetingNameField.text else {
-            showAlert(with: Constants.emptyFields)
-            return
-        }
-
-        let user = UserDefaults.standard.string(forKey: Constants.defaultName) ?? "iOS User"
-
-        guard let viewController = UIStoryboard(name: Constants.meeting, bundle: nil)
-                .instantiateInitialViewController() as? MeetingViewController else {
-            return
-        }
-
-        viewController.user = user
-        viewController.roomName = roomName
-        viewController.flow = .start
-
-        save(user, roomName)
-
-        navigationController?.pushViewController(viewController, animated: true)
+        showInputAlert(flow: sender.tag == 0 ? .join : .start)
     }
 
-    func showAlert(with message: String) {
+    func showInputAlert(flow: MeetingFlow) {
+
+        let title: String
+        let roomPlaceholder: String
+
+        if flow == .join {
+            title = "Join a Meeting"
+            roomPlaceholder = "Enter Room ID"
+        } else {
+            title = "Start a Meeting"
+            roomPlaceholder = "Enter Room Name"
+        }
+
+        let alertController = UIAlertController(title: title,
+                                                message: nil,
+                                                preferredStyle: .alert)
+
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Enter your Name"
+            textField.text = UserDefaults.standard.string(forKey: Constants.defaultName) ?? "iOS User"
+        }
+
+        alertController.addTextField { textField in
+            textField.placeholder = roomPlaceholder
+            if flow == .join {
+                textField.text = UserDefaults.standard.string(forKey: Constants.roomName)
+            }
+        }
+
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alertController.addAction(UIAlertAction(title: "Submit", style: .default) { [weak self] _ in
+
+            guard let name = alertController.textFields?[0].text, !name.isEmpty,
+                  let room = alertController.textFields?[1].text, !room.isEmpty,
+                  let viewController = UIStoryboard(name: Constants.meeting, bundle: nil)
+                            .instantiateInitialViewController() as? MeetingViewController
+            else {
+                self?.dismiss(animated: true)
+                let message = flow == .join ? "Could not join meeting" : "Could not start meeting"
+                self?.showErrorAlert(with: message)
+                return
+            }
+
+            viewController.user = name
+            viewController.roomName = room
+            viewController.flow = flow
+
+            self?.save(name, room)
+
+            self?.navigationController?.pushViewController(viewController, animated: true)
+        })
+
+        present(alertController, animated: true, completion: nil)
+    }
+
+    func showErrorAlert(with message: String) {
         let alertController = UIAlertController(title: "Alert",
                                                 message: message,
                                                 preferredStyle: .alert)
 
         alertController.addAction(UIAlertAction(title: "OK", style: .default))
 
-        self.present(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
 
     func save(_ name: String, _ room: String, _ meeting: String? = nil) {

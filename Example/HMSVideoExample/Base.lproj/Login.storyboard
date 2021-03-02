@@ -4,7 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,8 +22,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="100ms-icon" translatesAutoresizingMaskIntoConstraints="NO" id="pry-yg-EPI">
-                                <rect key="frame" x="20" y="44" width="355" height="734"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="100ms-icon" translatesAutoresizingMaskIntoConstraints="NO" id="pry-yg-EPI">
+                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="100ms-logo" translatesAutoresizingMaskIntoConstraints="NO" id="C2U-dF-Uy4">
                                 <rect key="frame" x="20" y="44" width="195" height="64"/>
@@ -31,134 +31,6 @@
                                     <constraint firstAttribute="height" constant="64" id="WfE-uQ-tMe"/>
                                 </constraints>
                             </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="OCL-uA-gn7">
-                                <rect key="frame" x="0.0" y="132" width="375" height="638"/>
-                                <subviews>
-                                    <stackView opaque="NO" alpha="0.75" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="UDb-3o-ia5">
-                                        <rect key="frame" x="20" y="20" width="335" height="216"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join Meeting" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyV-uo-euy">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="48"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7Uc-L5-TRx">
-                                                <rect key="frame" x="0.0" y="56" width="335" height="48"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3IR-ix-Tf0">
-                                                        <rect key="frame" x="8" y="12" width="103" height="24"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Name" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="7HE-IK-4mD">
-                                                        <rect key="frame" x="119" y="8" width="208" height="32"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="namePhonePad" enablesReturnKeyAutomatically="YES" textContentType="name"/>
-                                                    </textField>
-                                                </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="48" id="sEK-hS-VVP"/>
-                                                </constraints>
-                                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
-                                            </stackView>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Meeting ID" textAlignment="center" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="oHK-xx-jcU">
-                                                <rect key="frame" x="0.0" y="112" width="335" height="48"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" priority="750" constant="48" id="GrJ-Jj-GeB"/>
-                                                </constraints>
-                                                <edgeInsets key="layoutMargins" top="8" left="15" bottom="8" right="15"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
-                                            </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sLi-29-TEO">
-                                                <rect key="frame" x="0.0" y="168" width="335" height="48"/>
-                                                <color key="backgroundColor" systemColor="linkColor"/>
-                                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title=" Join Now">
-                                                    <imageReference key="image" image="arrow.up.right.video" catalog="system" symbolScale="medium"/>
-                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large" weight="black">
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                                    </preferredSymbolConfiguration>
-                                                </state>
-                                                <connections>
-                                                    <action selector="joinNowTapped:" destination="SMR-Mj-Sg7" eventType="touchUpInside" id="MCT-x7-uEu"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstItem="fyV-uo-euy" firstAttribute="centerX" secondItem="UDb-3o-ia5" secondAttribute="centerX" id="heo-4F-rPL"/>
-                                        </constraints>
-                                    </stackView>
-                                    <stackView opaque="NO" alpha="0.75" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qLT-dI-y1U">
-                                        <rect key="frame" x="20" y="300" width="335" height="216"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get Started" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOf-2q-sK6">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="48"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Meeting Name" textAlignment="center" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="FHx-L6-4DO">
-                                                <rect key="frame" x="0.0" y="56" width="335" height="48"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="48" id="CG2-jx-KKr"/>
-                                                </constraints>
-                                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="namePhonePad" enablesReturnKeyAutomatically="YES" textContentType="name"/>
-                                            </textField>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="cc2-XY-bW8">
-                                                <rect key="frame" x="0.0" y="112" width="335" height="48"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Record Meeting" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iqm-l3-nQu">
-                                                        <rect key="frame" x="7.9999999999999858" y="12" width="247.66666666666663" height="24"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KsG-jx-8PJ">
-                                                        <rect key="frame" x="263.66666666666669" y="8.6666666666666288" width="65.333333333333314" height="31"/>
-                                                        <color key="onTintColor" systemColor="linkColor"/>
-                                                    </switch>
-                                                </subviews>
-                                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
-                                            </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M9x-jp-1dT">
-                                                <rect key="frame" x="0.0" y="168" width="335" height="48"/>
-                                                <color key="backgroundColor" systemColor="linkColor"/>
-                                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title=" Start a Meeting" image="video" catalog="system">
-                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large" weight="black">
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                                    </preferredSymbolConfiguration>
-                                                </state>
-                                                <connections>
-                                                    <action selector="startMeetingTapped:" destination="SMR-Mj-Sg7" eventType="touchUpInside" id="hqc-9U-XK4"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    </stackView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="UDb-3o-ia5" firstAttribute="top" secondItem="OCL-uA-gn7" secondAttribute="top" constant="20" symbolic="YES" id="0KL-6Q-3X3"/>
-                                    <constraint firstItem="qLT-dI-y1U" firstAttribute="centerX" secondItem="OCL-uA-gn7" secondAttribute="centerX" id="9GG-C2-EAw"/>
-                                    <constraint firstItem="UDb-3o-ia5" firstAttribute="leading" secondItem="OCL-uA-gn7" secondAttribute="leading" constant="20" symbolic="YES" id="A96-y6-wTj"/>
-                                    <constraint firstItem="qLT-dI-y1U" firstAttribute="leading" secondItem="OCL-uA-gn7" secondAttribute="leading" constant="20" symbolic="YES" id="Prn-tq-kQi"/>
-                                    <constraint firstItem="UDb-3o-ia5" firstAttribute="centerX" secondItem="OCL-uA-gn7" secondAttribute="centerX" id="edn-xX-0An"/>
-                                    <constraint firstAttribute="trailing" secondItem="qLT-dI-y1U" secondAttribute="trailing" constant="20" symbolic="YES" id="oGA-1r-Hvd"/>
-                                    <constraint firstItem="qLT-dI-y1U" firstAttribute="top" secondItem="UDb-3o-ia5" secondAttribute="bottom" priority="750" constant="64" id="pna-qT-HZL"/>
-                                    <constraint firstAttribute="bottom" secondItem="qLT-dI-y1U" secondAttribute="bottom" constant="32" id="tKu-bc-QEj"/>
-                                    <constraint firstAttribute="trailing" secondItem="UDb-3o-ia5" secondAttribute="trailing" constant="20" symbolic="YES" id="ynT-BE-CY0"/>
-                                </constraints>
-                            </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bcw-CH-SJE">
                                 <rect key="frame" x="315" y="54" width="44" height="44"/>
                                 <constraints>
@@ -171,58 +43,108 @@
                                     <action selector="settingsTapped:" destination="SMR-Mj-Sg7" eventType="touchUpInside" id="12j-ki-Uzh"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ZCn-6R-e9s">
+                                <rect key="frame" x="15" y="662" width="345" height="108"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get Started" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9kE-Sy-63S">
+                                        <rect key="frame" x="15" y="8" width="315" height="32"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <color key="textColor" systemColor="systemBackgroundColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4EC-KI-Amz">
+                                        <rect key="frame" x="15" y="48" width="315" height="52"/>
+                                        <color key="backgroundColor" systemColor="linkColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="52" id="y2A-3I-tyL"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="contentEdgeInsets" minX="0.0" minY="2" maxX="0.0" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="-8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="Start a Meeting" image="video.badge.plus" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                            </preferredSymbolConfiguration>
+                                        </state>
+                                        <connections>
+                                            <action selector="startMeetingTapped:" destination="SMR-Mj-Sg7" eventType="touchUpInside" id="loq-nQ-toP"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" name="systemBackgroundInverse"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="108" id="IQw-Hp-Ryn"/>
+                                </constraints>
+                                <edgeInsets key="layoutMargins" top="8" left="15" bottom="8" right="15"/>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Hgt-OM-PBn">
+                                <rect key="frame" x="15" y="506" width="345" height="108"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join Meeting" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ycw-3w-dwc">
+                                        <rect key="frame" x="15" y="8" width="315" height="32"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <color key="textColor" systemColor="systemBackgroundColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ta-CK-XYA">
+                                        <rect key="frame" x="15" y="48" width="315" height="52"/>
+                                        <color key="backgroundColor" systemColor="linkColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="52" id="HzS-Mx-OL9"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="contentEdgeInsets" minX="0.0" minY="2" maxX="0.0" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="-8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="Enter Meeting ID" image="arrow.up.right.video" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                            </preferredSymbolConfiguration>
+                                        </state>
+                                        <connections>
+                                            <action selector="startMeetingTapped:" destination="SMR-Mj-Sg7" eventType="touchUpInside" id="PLB-h2-qTf"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" name="systemBackgroundInverse"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="108" id="RJb-Qv-yK4"/>
+                                </constraints>
+                                <edgeInsets key="layoutMargins" top="8" left="15" bottom="8" right="15"/>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Bcw-CH-SJE" secondAttribute="trailing" constant="16" id="5Kt-ln-qG7"/>
-                            <constraint firstItem="OCL-uA-gn7" firstAttribute="top" secondItem="Zky-Jr-DW7" secondAttribute="bottom" constant="8" symbolic="YES" id="I1M-Iz-fT6"/>
-                            <constraint firstItem="pry-yg-EPI" firstAttribute="leading" secondItem="jQ1-tl-f6e" secondAttribute="leading" constant="20" symbolic="YES" id="Igg-fB-civ"/>
-                            <constraint firstAttribute="trailing" secondItem="OCL-uA-gn7" secondAttribute="trailing" constant="20" symbolic="YES" id="KFP-YI-iDu"/>
+                            <constraint firstItem="Hgt-OM-PBn" firstAttribute="trailing" secondItem="ZCn-6R-e9s" secondAttribute="trailing" id="AoG-NC-0PT"/>
+                            <constraint firstItem="ZCn-6R-e9s" firstAttribute="leading" secondItem="jQ1-tl-f6e" secondAttribute="leading" constant="15" id="BYz-5u-WZC"/>
+                            <constraint firstAttribute="trailing" secondItem="ZCn-6R-e9s" secondAttribute="trailing" constant="15" id="DJg-Nm-PvX"/>
+                            <constraint firstItem="pry-yg-EPI" firstAttribute="leading" secondItem="jQ1-tl-f6e" secondAttribute="leading" id="Igg-fB-civ"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="C2U-dF-Uy4" secondAttribute="trailing" constant="160" id="P2f-qc-78M"/>
-                            <constraint firstItem="au1-nU-61f" firstAttribute="top" secondItem="OCL-uA-gn7" secondAttribute="bottom" constant="8" symbolic="YES" id="P6w-KY-pUn"/>
                             <constraint firstItem="pry-yg-EPI" firstAttribute="top" secondItem="Zky-Jr-DW7" secondAttribute="bottom" id="QJr-bQ-9uu"/>
                             <constraint firstAttribute="trailing" secondItem="pry-yg-EPI" secondAttribute="trailing" id="SyP-6y-rsV"/>
                             <constraint firstItem="C2U-dF-Uy4" firstAttribute="top" secondItem="Zky-Jr-DW7" secondAttribute="bottom" id="USt-HX-x7x"/>
                             <constraint firstItem="au1-nU-61f" firstAttribute="top" secondItem="pry-yg-EPI" secondAttribute="bottom" id="UrM-sU-rhI"/>
+                            <constraint firstItem="Hgt-OM-PBn" firstAttribute="leading" secondItem="ZCn-6R-e9s" secondAttribute="leading" id="ZQw-c6-kkh"/>
                             <constraint firstItem="Bcw-CH-SJE" firstAttribute="centerY" secondItem="C2U-dF-Uy4" secondAttribute="centerY" id="gu5-Gy-9Nq"/>
+                            <constraint firstItem="au1-nU-61f" firstAttribute="top" secondItem="ZCn-6R-e9s" secondAttribute="bottom" constant="8" symbolic="YES" id="heS-IC-Ler"/>
                             <constraint firstItem="C2U-dF-Uy4" firstAttribute="leading" secondItem="jQ1-tl-f6e" secondAttribute="leading" constant="20" symbolic="YES" id="jjf-8D-Wvx"/>
-                            <constraint firstItem="OCL-uA-gn7" firstAttribute="trailing" secondItem="pry-yg-EPI" secondAttribute="trailing" id="mI8-TJ-iVQ"/>
-                            <constraint firstItem="OCL-uA-gn7" firstAttribute="leading" secondItem="jQ1-tl-f6e" secondAttribute="leading" constant="20" symbolic="YES" id="mQp-vx-b4t"/>
-                            <constraint firstItem="OCL-uA-gn7" firstAttribute="top" secondItem="C2U-dF-Uy4" secondAttribute="bottom" constant="24" id="mdA-ak-79V"/>
-                            <constraint firstItem="OCL-uA-gn7" firstAttribute="centerX" secondItem="jQ1-tl-f6e" secondAttribute="centerX" id="sJd-Fa-UMB"/>
+                            <constraint firstItem="ZCn-6R-e9s" firstAttribute="top" secondItem="Hgt-OM-PBn" secondAttribute="bottom" constant="48" id="sXg-Lj-I5E"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="I1M-Iz-fT6"/>
-                                <exclude reference="KFP-YI-iDu"/>
-                                <exclude reference="mQp-vx-b4t"/>
-                            </mask>
-                        </variation>
                         <variation key="heightClass=compact-widthClass=compact">
                             <mask key="subviews">
                                 <exclude reference="C2U-dF-Uy4"/>
                                 <exclude reference="Bcw-CH-SJE"/>
                             </mask>
-                            <mask key="constraints">
-                                <include reference="I1M-Iz-fT6"/>
-                                <include reference="KFP-YI-iDu"/>
-                                <exclude reference="mI8-TJ-iVQ"/>
-                                <include reference="mQp-vx-b4t"/>
-                                <exclude reference="sJd-Fa-UMB"/>
-                            </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="WAo-RG-heA"/>
                     <connections>
-                        <outlet property="joinNowButton" destination="sLi-29-TEO" id="rZ8-Lo-ojT"/>
-                        <outlet property="joinNowStackView" destination="UDb-3o-ia5" id="SrA-nZ-q2e"/>
-                        <outlet property="meetingIDField" destination="oHK-xx-jcU" id="Nu3-8X-MKu"/>
-                        <outlet property="meetingNameField" destination="FHx-L6-4DO" id="wyC-9c-H1Y"/>
-                        <outlet property="nameField" destination="7HE-IK-4mD" id="CeL-Kk-7jP"/>
-                        <outlet property="recordSwitch" destination="KsG-jx-8PJ" id="TM7-sB-Ck9"/>
-                        <outlet property="scrollView" destination="OCL-uA-gn7" id="l8l-i3-S5c"/>
-                        <outlet property="startMeetingButton" destination="M9x-jp-1dT" id="Zd5-fT-eFU"/>
-                        <outlet property="startMeetingStackView" destination="qLT-dI-y1U" id="Ilo-lF-oNt"/>
+                        <outlet property="joinMeetingButton" destination="9ta-CK-XYA" id="gIo-4o-E4d"/>
+                        <outlet property="joinMeetingStackView" destination="Hgt-OM-PBn" id="PTj-r0-034"/>
+                        <outlet property="startMeetingButton" destination="4EC-KI-Amz" id="H8r-p7-Rdh"/>
+                        <outlet property="startMeetingStackView" destination="ZCn-6R-e9s" id="gHJ-Pu-Jev"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p3x-pC-Zih" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -252,7 +174,10 @@
         <image name="100ms-logo" width="5289" height="1598"/>
         <image name="arrow.up.right.video" catalog="system" width="128" height="83"/>
         <image name="settings" width="85.333335876464844" height="85.333335876464844"/>
-        <image name="video" catalog="system" width="128" height="83"/>
+        <image name="video.badge.plus" catalog="system" width="128" height="90"/>
+        <namedColor name="systemBackgroundInverse">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

@@ -19,12 +19,12 @@ class Utilities {
         }
 
         view.layer.borderWidth = 1
-        view.layer.cornerRadius = 8
+        view.layer.cornerRadius = 16
         view.layer.masksToBounds = true
     }
 
     static func drawCorner(on view: UIView) {
-        view.layer.cornerRadius = 8
+        view.layer.cornerRadius = 16
         view.layer.masksToBounds = true
     }
 }

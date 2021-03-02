@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B1674E943863D23D68483DF /* Pods_HMSVideo_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71C1B9C4B1C0291D024D29D7 /* Pods_HMSVideo_Tests.framework */; };
-		1EA4F17E1C9A28E1631291A2 /* Pods_HMSVideo_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 573765C134F99AC8C2132D64 /* Pods_HMSVideo_Example.framework */; };
+		436C830EA85BA3437F01F9DA /* libPods-HMSVideo_Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 461E2E39FF6A82057145B78F /* libPods-HMSVideo_Example.a */; };
 		607FACDB1AFB9204008FA782 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Login.storyboard */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		A9D62D7F0811D44CEA768C16 /* libPods-HMSVideo_Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB9722B556F1E4A407C60A5 /* libPods-HMSVideo_Tests.a */; };
 		EC02581325EB7479001293C2 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC02581525EB7479001293C2 /* Settings.storyboard */; };
 		EC077CF325EC96090003D320 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EC077CF225EC96090003D320 /* GoogleService-Info.plist */; };
 		EC462C8525E95A0B00BFF07C /* Meeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC462C8725E95A0B00BFF07C /* Meeting.storyboard */; };
@@ -47,14 +47,14 @@
 		14CAFAB81EB7F870B9E6C3BC /* Pods-HMSVideo_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSVideo_Tests.release.xcconfig"; path = "Target Support Files/Pods-HMSVideo_Tests/Pods-HMSVideo_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		2521E98CB2584195FC9F8014 /* Pods-HMSVideo_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSVideo_Tests.debug.xcconfig"; path = "Target Support Files/Pods-HMSVideo_Tests/Pods-HMSVideo_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		368FE729C29E66B75B83DFE0 /* Pods-HMSVideo_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSVideo_Example.debug.xcconfig"; path = "Target Support Files/Pods-HMSVideo_Example/Pods-HMSVideo_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		573765C134F99AC8C2132D64 /* Pods_HMSVideo_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HMSVideo_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		461E2E39FF6A82057145B78F /* libPods-HMSVideo_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HMSVideo_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5EB9722B556F1E4A407C60A5 /* libPods-HMSVideo_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HMSVideo_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* HMSVideo_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HMSVideo_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* HMSVideo_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HMSVideo_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		71C1B9C4B1C0291D024D29D7 /* Pods_HMSVideo_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HMSVideo_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9360531DA4B170754E7D94BF /* Pods-HMSVideo_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSVideo_Example.release.xcconfig"; path = "Target Support Files/Pods-HMSVideo_Example/Pods-HMSVideo_Example.release.xcconfig"; sourceTree = "<group>"; };
 		BADB1198BD96E24E9BFFB40B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		EC02581425EB7479001293C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
@@ -91,7 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1EA4F17E1C9A28E1631291A2 /* Pods_HMSVideo_Example.framework in Frameworks */,
+				436C830EA85BA3437F01F9DA /* libPods-HMSVideo_Example.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,7 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B1674E943863D23D68483DF /* Pods_HMSVideo_Tests.framework in Frameworks */,
+				A9D62D7F0811D44CEA768C16 /* libPods-HMSVideo_Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,8 +109,8 @@
 		1041C860E962BA7C1E0CA76C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				573765C134F99AC8C2132D64 /* Pods_HMSVideo_Example.framework */,
-				71C1B9C4B1C0291D024D29D7 /* Pods_HMSVideo_Tests.framework */,
+				461E2E39FF6A82057145B78F /* libPods-HMSVideo_Example.a */,
+				5EB9722B556F1E4A407C60A5 /* libPods-HMSVideo_Tests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -683,7 +683,7 @@
 				DEVELOPMENT_TEAM = 5N85PP82A9;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = HMSVideoExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -713,7 +713,7 @@
 				DEVELOPMENT_TEAM = 5N85PP82A9;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = HMSVideoExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

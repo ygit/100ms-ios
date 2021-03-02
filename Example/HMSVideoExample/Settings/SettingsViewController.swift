@@ -32,20 +32,19 @@ class SettingsViewController: UIViewController {
             }
         }
     }
-    
+
     @IBOutlet weak var serverURLField: UITextField! {
         didSet {
             serverURLField.text = UserDefaults.standard.string(forKey: Constants.serverURLKey) ?? Constants.server
         }
     }
-    
+
     @IBOutlet weak var socketEndpointField: UITextField! {
         didSet {
             socketEndpointField.text = UserDefaults.standard.string(forKey: Constants.socketEndpointKey) ?? Constants.endpoint
         }
     }
-    
-    
+
     @IBOutlet weak var publishVideoSwitch: UISwitch! {
         didSet {
             if let isOn = UserDefaults.standard.object(forKey: Constants.publishVideo) as? Bool {
@@ -109,7 +108,6 @@ class SettingsViewController: UIViewController {
             }
         }
     }
-
 
     // MARK: - View Lifecycle
 

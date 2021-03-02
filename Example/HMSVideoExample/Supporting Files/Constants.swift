@@ -12,7 +12,8 @@ struct Constants {
 
     // MARK: - HMS Interactor
 
-    static let server = UserDefaults.standard.string(forKey: Constants.serverURLKey) ?? "https://ms-services-server-token-17sgcgfb18ow.runkit.sh/"
+    static let server = UserDefaults.standard.string(forKey: Constants.serverURLKey) ??
+        "https://ms-services-server-token-17sgcgfb18ow.runkit.sh/"
 
     static let endpoint = UserDefaults.standard.string(forKey: Constants.socketEndpointKey) ??
         "wss://prod-in.100ms.live/ws"
@@ -56,9 +57,9 @@ struct Constants {
     // MARK: - Settings
 
     static let defaultName = "defaultName"
-    
+
     static let serverURLKey = "serverURL"
-    
+
     static let socketEndpointKey = "socketEndpoint"
 
     static let roomName = "roomName"
