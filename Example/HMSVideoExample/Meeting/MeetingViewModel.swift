@@ -47,6 +47,23 @@ final class MeetingViewModel: NSObject,
 
         self.collectionView = collectionView
     }
+    
+//    func observeSpeaker() {
+//        _ = NotificationCenter.default.addObserver(forName: Constants.speakerUpdated,
+//                                                   object: nil,
+//                                                   queue: .main) { [weak self] (notification) in
+//
+//            self?.collectionView.reloadData()
+//            if let index = notification.userInfo?["index"] as? Int {
+//                if self?.layout == .grid {
+//                    self?.collectionView.reloadItems(at: [IndexPath(row: index, section: 0)])
+//                } else {
+//
+//                }
+//            }
+            
+//           }
+//    }
 
     // MARK: - View Modifiers
 
@@ -107,8 +124,11 @@ final class MeetingViewModel: NSObject,
         }
         cell.contentView.addSubview(title)
         
-
-        Utilities.applyBorder(on: cell)
+        if track.trackId == hms.speakerVideoTrack?.trackId {
+            Utilities.applySpeakerBorder(on: cell)
+        } else {
+            Utilities.applyBorder(on: cell)
+        }
 
         return cell
     }

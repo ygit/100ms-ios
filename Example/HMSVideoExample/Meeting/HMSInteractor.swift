@@ -39,7 +39,25 @@ final class HMSInteractor {
     private(set) var localVideoTrack: HMSVideoTrack?
     private(set) var videoCapturer: HMSVideoCapturer?
 
-    private(set) var speaker: String?
+    private(set) var speakerID: String? {
+        didSet {
+            let streamer = peers.filter { $0.value.peerId == speakerID }
+            if let streamID = streamer.keys.first {
+                if let track = videoTracks.filter { $0.streamId == streamID }.first {
+                    if let index = videoTracks.firstIndex(of: track) {
+                        speakerVideoTrack = track
+                        updateUI()
+//                        NotificationCenter.default.post(name: Constants.speakerUpdated,
+//                                                        object: nil,
+//                                                        userInfo: ["index": index])
+                        
+                    }
+                }
+            }
+        }
+    }
+    
+    private(set) var speakerVideoTrack: HMSVideoTrack?
 
     private var codec: HMSVideoCodec {
         let codecString = UserDefaults.standard.string(forKey: Constants.videoCodec) ?? "VP8"
@@ -413,7 +431,8 @@ extension HMSInteractor {
             return
         }
 
-        speaker = peer.name
+        speakerID = peer.peerId
+        
         print("Speaker: ", peer.name)
     }
 

@@ -27,6 +27,14 @@ class Utilities {
         view.layer.cornerRadius = 16
         view.layer.masksToBounds = true
     }
+    
+    static func applySpeakerBorder(on view: UIView) {
+        
+        view.layer.borderColor = UIColor.blue.cgColor
+        view.layer.borderWidth = 2
+        view.layer.cornerRadius = 16
+        view.layer.masksToBounds = true
+    }
 }
 
 protocol ErrorProtocol: LocalizedError {
