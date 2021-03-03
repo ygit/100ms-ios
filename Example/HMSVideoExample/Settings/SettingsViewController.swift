@@ -173,6 +173,10 @@ class SettingsViewController: UIViewController {
                          forKey: Constants.serverURLKey)
         userDefaults.set(!socketEndpointField.text!.isEmpty ? socketEndpointField.text : Constants.endpoint,
                          forKey: Constants.socketEndpointKey)
+        userDefaults.set(!tokenField.text!.isEmpty ? tokenField.text : Constants.getToken,
+                         forKey: Constants.getTokenKey)
+        userDefaults.set(!createRoomField.text!.isEmpty ? createRoomField.text : Constants.createRoom,
+                         forKey: Constants.createRoomKey)
         userDefaults.set(publishVideoSwitch.isOn, forKey: Constants.publishVideo)
         userDefaults.set(publishAudioSwitch.isOn, forKey: Constants.publishAudio)
         userDefaults.set(!maximumRowsField.text!.isEmpty ? maximumRowsField.text : "2",
