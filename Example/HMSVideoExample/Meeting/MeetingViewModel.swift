@@ -56,7 +56,7 @@ final class MeetingViewModel: NSObject,
 
         let oldIndex: IndexPath
         let newIndex: IndexPath
-        
+
         switch layout {
         case .grid:
             oldIndex = IndexPath(item: indexes.0, section: 0)
@@ -67,7 +67,7 @@ final class MeetingViewModel: NSObject,
             } else {
                 oldIndex = IndexPath(item: indexes.0 - 1, section: 1)
             }
-            
+
             if indexes.1 == 0 {
                 newIndex = IndexPath(item: 0, section: 0)
             } else {
