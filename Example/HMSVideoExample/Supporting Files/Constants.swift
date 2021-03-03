@@ -33,7 +33,7 @@ struct Constants {
     static let broadcastReceived = NSNotification.Name("BROADCAST_RECEIVED")
 
     static let peersUpdated = NSNotification.Name("PEERS_UPDATED")
-    
+
     static let speakerUpdated = NSNotification.Name("SPEAKER_UPDATED")
 
     // MARK: - View Constants

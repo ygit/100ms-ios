@@ -39,28 +39,27 @@ final class HMSInteractor {
     private(set) var localVideoTrack: HMSVideoTrack?
     private(set) var videoCapturer: HMSVideoCapturer?
 
-    private(set) var speakerID: String? {
+    private(set) var speakerPeerID: String? {
         didSet {
-            let streamer = peers.filter { $0.value.peerId == speakerID }
+            let streamer = peers.filter { $0.value.peerId == speakerPeerID }
             if let streamID = streamer.keys.first {
-                if let track = videoTracks.filter { $0.streamId == streamID }.first {
-                    if let index = videoTracks.firstIndex(of: track) {
-                        speakerVideoTrack = track
-                        updateUI()
-//                        NotificationCenter.default.post(name: Constants.speakerUpdated,
-//                                                        object: nil,
-//                                                        userInfo: ["index": index])
-                        
-                    }
+                if let track = videoTracks.filter({ $0.streamId == streamID }).first {
+                    speakerVideoTrack = track
                 }
             }
         }
     }
-    
-    private(set) var speakerVideoTrack: HMSVideoTrack?
+
+    private(set) var speakerVideoTrack: HMSVideoTrack? {
+        didSet {
+            if speakerVideoTrack?.streamId != oldValue?.streamId {
+                updateUI()
+            }
+        }
+    }
 
     private var codec: HMSVideoCodec {
-        let codecString = UserDefaults.standard.string(forKey: Constants.videoCodec) ?? "VP8"
+        let codecString = UserDefaults.standard.string(forKey: Constants.videoCodec) ?? "H264"
 
         switch codecString {
         case "VP8":
@@ -431,15 +430,15 @@ extension HMSInteractor {
             return
         }
 
-        speakerID = peer.peerId
-        
+        speakerPeerID = peer.peerId
+
         print("Speaker: ", peer.name)
     }
 
     func observeSettingsUpdated() {
         _ = NotificationCenter.default.addObserver(forName: Constants.settingsUpdated,
-                                               object: nil,
-                                               queue: .main) { [weak self] _ in
+                                                   object: nil,
+                                                   queue: .main) { [weak self] _ in
 
             let userDefaults = UserDefaults.standard
 
@@ -468,7 +467,7 @@ extension HMSInteractor {
     }
 
     func setAudioDelay() {
-        let audioPollDelay = UserDefaults.standard.object(forKey: Constants.audioPollDelay) as? Double ?? 2.0
+        let audioPollDelay = UserDefaults.standard.object(forKey: Constants.audioPollDelay) as? Double ?? 3.0
         client.startAudioLevelMonitor(audioPollDelay)
     }
 

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import HMSVideo
 import MediaPlayer
 
 final class MeetingViewController: UIViewController {

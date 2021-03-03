@@ -11,24 +11,21 @@ import HMSVideo
 
 class VideoCollectionViewCell: UICollectionViewCell {
 
-    private(set) lazy var videoView: HMSVideoView = {
-        HMSVideoView()
-    }()
+    @IBOutlet weak var nameLabel: UILabel! {
+        didSet {
+            contentView.bringSubviewToFront(nameLabel)
+        }
+    }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        contentView.clipsToBounds = true
-        contentView.contentMode = .scaleAspectFit
-
-        if videoView.superview == nil {
-            contentView.addSubview(videoView)
-            videoView.translatesAutoresizingMaskIntoConstraints = false
-
-            videoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-            videoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-            videoView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-            videoView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+    @IBOutlet weak var videoView: HMSVideoView!
+    
+    var isSpeaker = false {
+        didSet {
+            if isSpeaker {
+                Utilities.applySpeakerBorder(on: videoView)
+            } else {
+                Utilities.applyBorder(on: videoView)
+            }
         }
     }
 }

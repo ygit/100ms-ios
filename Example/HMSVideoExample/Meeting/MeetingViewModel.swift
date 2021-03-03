@@ -40,30 +40,11 @@ final class MeetingViewModel: NSObject,
 
     func setup(_ collectionView: UICollectionView) {
 
-        collectionView.register(VideoCollectionViewCell.self, forCellWithReuseIdentifier: Constants.resuseIdentifier)
-
         collectionView.dataSource = self
         collectionView.delegate = self
 
         self.collectionView = collectionView
     }
-    
-//    func observeSpeaker() {
-//        _ = NotificationCenter.default.addObserver(forName: Constants.speakerUpdated,
-//                                                   object: nil,
-//                                                   queue: .main) { [weak self] (notification) in
-//
-//            self?.collectionView.reloadData()
-//            if let index = notification.userInfo?["index"] as? Int {
-//                if self?.layout == .grid {
-//                    self?.collectionView.reloadItems(at: [IndexPath(row: index, section: 0)])
-//                } else {
-//
-//                }
-//            }
-            
-//           }
-//    }
 
     // MARK: - View Modifiers
 
@@ -110,25 +91,9 @@ final class MeetingViewModel: NSObject,
         let track = hms.videoTracks[indexPath.item]
         let streamID = track.streamId
         let peer = hms.peers[streamID]
-        let peerName = peer?.name
+        cell.nameLabel.text = peer?.name
 
-        let title = UILabel(frame: CGRect(x: 0, y: 0, width: cell.bounds.size.width, height: 50))
-        title.text = peerName
-        title.font = .preferredFont(forTextStyle: .headline)
-        title.textAlignment = .center
-        title.tag = 1
-        cell.contentView.subviews.forEach {
-            if $0.tag == 1 {
-                $0.removeFromSuperview()
-            }
-        }
-        cell.contentView.addSubview(title)
-        
-        if track.trackId == hms.speakerVideoTrack?.trackId {
-            Utilities.applySpeakerBorder(on: cell)
-        } else {
-            Utilities.applyBorder(on: cell)
-        }
+        cell.isSpeaker = track.trackId == hms.speakerVideoTrack?.trackId 
 
         return cell
     }
@@ -148,7 +113,7 @@ final class MeetingViewModel: NSObject,
 
         switch layout {
         case .grid:
-            if hms.videoTracks.count < 5 {
+            if hms.videoTracks.count < 4 {
                 let count = CGFloat(hms.videoTracks.count)
                 return CGSize(width: collectionView.frame.size.width - widthInsets,
                               height: (collectionView.frame.size.height / count) - heightInsets)
