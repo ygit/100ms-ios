@@ -49,6 +49,8 @@ class SettingsViewController: UIViewController {
         didSet {
             if let isOn = UserDefaults.standard.object(forKey: Constants.publishVideo) as? Bool {
                 publishVideoSwitch.setOn(isOn, animated: false)
+            } else {
+                publishVideoSwitch.isOn = true
             }
         }
     }
@@ -57,6 +59,8 @@ class SettingsViewController: UIViewController {
         didSet {
             if let isOn = UserDefaults.standard.object(forKey: Constants.publishAudio) as? Bool {
                 publishAudioSwitch.setOn(isOn, animated: false)
+            } else {
+                publishAudioSwitch.isOn = true
             }
         }
     }

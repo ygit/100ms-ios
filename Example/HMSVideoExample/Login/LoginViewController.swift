@@ -36,8 +36,28 @@ final class LoginViewController: UIViewController {
         }
     }
 
+    @IBOutlet weak var publishVideoButton: UIButton! {
+        didSet {
+            if let publishVideo = UserDefaults.standard.object(forKey: Constants.publishVideo) as? Bool {
+                publishVideoButton.isSelected = publishVideo
+            } else {
+                publishVideoButton.isSelected = false
+            }
+        }
+    }
+    
+    @IBOutlet weak var publishAudioButton: UIButton! {
+        didSet {
+            if let publishAudio = UserDefaults.standard.object(forKey: Constants.publishAudio) as? Bool {
+                publishAudioButton.isSelected = publishAudio
+            } else {
+                publishAudioButton.isSelected = false
+            }
+        }
+    }
+    
     @IBOutlet weak var cameraPreview: UIView!
-
+    
     var session: AVCaptureSession?
     var input: AVCaptureDeviceInput?
     var output: AVCaptureStillImageOutput?
@@ -47,7 +67,7 @@ final class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Initialize session an output variables this is necessary
         session = AVCaptureSession()
         output = AVCaptureStillImageOutput()
@@ -91,13 +111,13 @@ final class LoginViewController: UIViewController {
     // MARK: - Action Handlers
 
     @IBAction func cameraTapped(_ sender: UIButton) {
-        AVCaptureDevice.requestAccess(for: .video) { _ in }
-        sender.isSelected = !sender.isSelected
+//        AVCaptureDevice.requestAccess(for: .video) { _ in }
+        sender.isSelected = !sender.isSelected 
         UserDefaults.standard.set(sender.isEnabled, forKey: Constants.publishVideo)
     }
 
     @IBAction func micTapped(_ sender: UIButton) {
-        AVAudioSession.sharedInstance().requestRecordPermission { _ in }
+//        AVAudioSession.sharedInstance().requestRecordPermission { _ in }
         sender.isSelected = !sender.isSelected
         UserDefaults.standard.set(sender.isEnabled, forKey: Constants.publishAudio)
     }
@@ -131,7 +151,7 @@ final class LoginViewController: UIViewController {
         alertController.addTextField { textField in
             textField.placeholder = roomPlaceholder
             if flow == .join {
-                textField.text = UserDefaults.standard.string(forKey: Constants.roomName) ?? "6033b4cb89a96e73b23d13dc"
+                textField.text = UserDefaults.standard.string(forKey: Constants.roomName) ?? "603f6d1f89a96e73b23d1958"
             } else {
                 textField.text = "My Meeting"
             }

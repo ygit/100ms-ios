@@ -240,7 +240,13 @@ final class HMSInteractor {
 
         let cleanedName = name.replacingOccurrences(of: " ", with: "")
 
-        let body = [ "room_name": cleanedName ]
+        let body = [
+                "room_id": cleanedName,
+                "user_name": user,
+                "role": "host",
+                "env": "prod-in"
+                ]
+
 
         var request = URLRequest(url: createRoomURL)
         request.httpMethod = "POST"

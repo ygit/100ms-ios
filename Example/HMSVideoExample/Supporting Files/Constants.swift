@@ -13,14 +13,18 @@ struct Constants {
     // MARK: - HMS Interactor
 
     static let server = UserDefaults.standard.string(forKey: Constants.serverURLKey) ??
-        "https://ms-services-server-token-17sgcgfb18ow.runkit.sh/"
-
+        "https://100ms-services.vercel.app/"
+//        "https://ms-services-server-token-17sgcgfb18ow.runkit.sh/"
+//    https://100ms-services.vercel.app/api/room_token
+    
     static let endpoint = UserDefaults.standard.string(forKey: Constants.socketEndpointKey) ??
         "wss://prod-in.100ms.live/ws"
 
-    static let getToken = server + "?api=token"
+//    static let getToken = server + "?api=token"
+    static let getToken = server + "api/token"
 
-    static let createRoom = server + "?api=room"
+//    static let createRoom = server + "?api=room"
+    static let createRoom = server + "api/room_token"
 
     static let urlEmpty = "Token & Endpoint URLs cannot be nil!"
 

@@ -28,7 +28,27 @@ final class MeetingViewController: UIViewController {
     @IBOutlet private(set) weak var collectionView: UICollectionView!
 
     @IBOutlet private weak var badgeButton: BadgeButton!
-
+    
+    @IBOutlet weak var publishVideoButton: UIButton! {
+        didSet {
+            if let publishVideo = UserDefaults.standard.object(forKey: Constants.publishVideo) as? Bool {
+                publishVideoButton.isSelected = publishVideo
+            } else {
+                publishVideoButton.isSelected = false
+            }
+        }
+    }
+    
+    @IBOutlet weak var publishAudioButton: UIButton! {
+        didSet {
+            if let publishAudio = UserDefaults.standard.object(forKey: Constants.publishAudio) as? Bool {
+                publishAudioButton.isSelected = publishAudio
+            } else {
+                publishAudioButton.isSelected = false
+            }
+        }
+    }
+    
     private var chatBadgeCount = 0
 
     // MARK: - View Lifecycle
@@ -147,11 +167,13 @@ final class MeetingViewController: UIViewController {
     @IBAction func videoTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         viewModel.switchVideo(isOn: sender.isSelected)
+        UserDefaults.standard.set(sender.isSelected, forKey: Constants.publishVideo)
     }
 
     @IBAction func micTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         viewModel.switchAudio(isOn: sender.isSelected)
+        UserDefaults.standard.set(sender.isSelected, forKey: Constants.publishAudio)
     }
 
     @IBAction func chatTapped(_ sender: UIButton) {

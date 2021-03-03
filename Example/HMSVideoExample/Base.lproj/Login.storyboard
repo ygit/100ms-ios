@@ -183,6 +183,8 @@
                         <outlet property="cameraPreview" destination="N7m-VC-yE1" id="CYM-MB-Jig"/>
                         <outlet property="joinMeetingButton" destination="9ta-CK-XYA" id="gIo-4o-E4d"/>
                         <outlet property="joinMeetingStackView" destination="Hgt-OM-PBn" id="PTj-r0-034"/>
+                        <outlet property="publishAudioButton" destination="pCM-uq-NA0" id="zg7-e6-DAQ"/>
+                        <outlet property="publishVideoButton" destination="W2u-ed-mZu" id="e0D-hD-WTt"/>
                         <outlet property="startMeetingButton" destination="4EC-KI-Amz" id="H8r-p7-Rdh"/>
                         <outlet property="startMeetingStackView" destination="ZCn-6R-e9s" id="gHJ-Pu-Jev"/>
                     </connections>
@@ -210,11 +212,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="100ms-logo" width="5289" height="1598"/>
+        <image name="100ms-logo" width="7052" height="2130"/>
         <image name="arrow.up.right.video" catalog="system" width="128" height="83"/>
         <image name="mic.circle.fill" catalog="system" width="128" height="121"/>
         <image name="mic.slash.fill" catalog="system" width="108" height="128"/>
-        <image name="settings" width="60.333332061767578" height="61"/>
+        <image name="settings" width="256" height="256"/>
         <image name="video.badge.plus" catalog="system" width="128" height="90"/>
         <image name="video.fill" catalog="system" width="128" height="82"/>
         <image name="video.slash.fill" catalog="system" width="128" height="106"/>
