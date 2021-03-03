@@ -31,8 +31,8 @@ final class MeetingViewModel: NSObject,
 
         super.init()
 
-        hms = HMSInteractor(for: user, in: room, flow) {
-            collectionView.reloadData()
+        hms = HMSInteractor(for: user, in: room, flow) { [weak self] (indexes) in
+            self?.updateUI(indexes)
         }
 
         setup(collectionView)
@@ -47,6 +47,40 @@ final class MeetingViewModel: NSObject,
     }
 
     // MARK: - View Modifiers
+
+    func updateUI(_ indexes: (Int, Int)?) {
+        guard let indexes = indexes else {
+            collectionView.reloadData()
+            return
+        }
+
+        let oldIndex: IndexPath
+        let newIndex: IndexPath
+        
+        switch layout {
+        case .grid:
+            oldIndex = IndexPath(item: indexes.0, section: 0)
+            newIndex = IndexPath(item: indexes.1, section: 0)
+        case .portrait:
+            if indexes.0 == 0 {
+                oldIndex = IndexPath(item: 0, section: 0)
+            } else {
+                oldIndex = IndexPath(item: indexes.0 - 1, section: 1)
+            }
+            
+            if indexes.1 == 0 {
+                newIndex = IndexPath(item: 0, section: 0)
+            } else {
+                newIndex = IndexPath(item: indexes.1 - 1, section: 1)
+            }
+        }
+
+        if let oldCell = collectionView.cellForItem(at: oldIndex) as? VideoCollectionViewCell,
+           let newCell = collectionView.cellForItem(at: newIndex) as? VideoCollectionViewCell {
+            oldCell.isSpeaker = false
+            newCell.isSpeaker = true
+        }
+    }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         hms.videoTracks.count > 0 ? (layout == .grid ? 1 : 2) : 0
@@ -74,13 +108,20 @@ final class MeetingViewModel: NSObject,
             return UICollectionViewCell()
         }
 
+        updateView(at: indexPath, for: cell)
+
+        return cell
+    }
+
+    func updateView(at indexPath: IndexPath, for cell: VideoCollectionViewCell) {
+
+        let track = hms.videoTracks[indexPath.row]
+
         switch layout {
         case .grid:
-            let track = hms.videoTracks[indexPath.item]
             cell.videoView.setVideoTrack(track)
         case .portrait:
             if indexPath.section == 0 {
-                let track = hms.videoTracks[indexPath.row]
                 cell.videoView.setVideoTrack(track)
             } else {
                 let track = hms.videoTracks[indexPath.row+1]
@@ -88,14 +129,12 @@ final class MeetingViewModel: NSObject,
             }
         }
 
-        let track = hms.videoTracks[indexPath.item]
         let streamID = track.streamId
         let peer = hms.peers[streamID]
         cell.nameLabel.text = peer?.name
 
-        cell.isSpeaker = track.trackId == hms.speakerVideoTrack?.trackId 
-
-        return cell
+        cell.isSpeaker = track.trackId == hms.speakerVideoTrack?.trackId
+//        cell.isSpeaker = false
     }
 
     func collectionView(_ collectionView: UICollectionView,

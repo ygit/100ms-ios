@@ -18,7 +18,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
     }
 
     @IBOutlet weak var videoView: HMSVideoView!
-    
+
     var isSpeaker = false {
         didSet {
             if isSpeaker {

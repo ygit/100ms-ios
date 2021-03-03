@@ -15,7 +15,7 @@ final class HMSInteractor {
 
     private let user: String
 
-    private var updateUI: () -> Void
+    private var updateUI: ((Int, Int)?) -> Void
 
     private(set) var localPeer: HMSPeer!
     private(set) var client: HMSClient!
@@ -30,7 +30,7 @@ final class HMSInteractor {
     private(set) var remoteStreams = [HMSStream]()
     private(set) var videoTracks = [HMSVideoTrack]() {
         didSet {
-            updateUI()
+            updateUI(nil)
         }
     }
 
@@ -53,7 +53,14 @@ final class HMSInteractor {
     private(set) var speakerVideoTrack: HMSVideoTrack? {
         didSet {
             if speakerVideoTrack?.streamId != oldValue?.streamId {
-                updateUI()
+                if let oldValue = oldValue, let speakerVideoTrack = speakerVideoTrack {
+                    if let oldIndex = videoTracks.firstIndex(of: oldValue),
+                       let newIndex = videoTracks.firstIndex(of: speakerVideoTrack) {
+                        updateUI((oldIndex, newIndex))
+                        return
+                    }
+                }
+                updateUI(nil)
             }
         }
     }
@@ -102,7 +109,7 @@ final class HMSInteractor {
 
     // MARK: - Setup Stream
 
-    init(for user: String, in room: String, _ flow: MeetingFlow, _ callback: @escaping () -> Void) {
+    init(for user: String, in room: String, _ flow: MeetingFlow, _ callback: @escaping ((Int, Int)?) -> Void) {
 
         self.user = user
         self.flow = flow
@@ -460,7 +467,7 @@ extension HMSInteractor {
                 self?.cameraSource = source
             }
 
-            self?.updateUI()
+            self?.updateUI(nil)
 
             self?.setAudioDelay()
         }
