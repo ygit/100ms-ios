@@ -12,19 +12,17 @@ struct Constants {
 
     // MARK: - HMS Interactor
 
-    static let server = UserDefaults.standard.string(forKey: Constants.serverURLKey) ??
-        "https://100ms-services.vercel.app/"
-//        "https://ms-services-server-token-17sgcgfb18ow.runkit.sh/"
+    static let server = UserDefaults.standard.string(forKey: serverURLKey) ?? "https://100ms-services.vercel.app/"
+//    "https://ms-services-server-token-17sgcgfb18ow.runkit.sh/"
 //    https://100ms-services.vercel.app/api/room_token
-    
-    static let endpoint = UserDefaults.standard.string(forKey: Constants.socketEndpointKey) ??
-        "wss://prod-in.100ms.live/ws"
 
-//    static let getToken = server + "?api=token"
-    static let getToken = server + "api/token"
+    static let endpoint = UserDefaults.standard.string(forKey: socketEndpointKey) ?? "wss://prod-in.100ms.live/ws"
 
-//    static let createRoom = server + "?api=room"
-    static let createRoom = server + "api/room_token"
+    static let getToken = UserDefaults.standard.string(forKey: getTokenKey) ?? server + "api/token"
+    //    static let getToken = server + "?api=token"
+
+    static let createRoom = UserDefaults.standard.string(forKey: createRoomKey) ?? server + "api/room_token"
+    //    static let createRoom = server + "?api=room"
 
     static let urlEmpty = "Token & Endpoint URLs cannot be nil!"
 
@@ -67,6 +65,10 @@ struct Constants {
     static let serverURLKey = "serverURL"
 
     static let socketEndpointKey = "socketEndpoint"
+    
+    static let getTokenKey = "getToken"
+    
+    static let createRoomKey = "createRoom"
 
     static let roomName = "roomName"
 

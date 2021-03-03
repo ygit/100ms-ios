@@ -247,7 +247,6 @@ final class HMSInteractor {
                 "env": "prod-in"
                 ]
 
-
         var request = URLRequest(url: createRoomURL)
         request.httpMethod = "POST"
 
@@ -400,8 +399,11 @@ final class HMSInteractor {
         let audioPollDelay = userDefaults.object(forKey: Constants.audioPollDelay) as? Double ?? 0.5
         client.startAudioLevelMonitor(audioPollDelay)
 
-        client.publish(localStream, room: room) { stream, _ in
-            guard let stream = stream else { return }
+        client.publish(localStream, room: room) { stream, error in
+            guard let stream = stream else {
+                print(error?.localizedDescription ?? "Local Stream publish failed")
+                return
+            }
 
             self.setupLocal(stream)
         }

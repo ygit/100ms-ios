@@ -38,39 +38,37 @@ final class LoginViewController: UIViewController {
 
     @IBOutlet weak var publishVideoButton: UIButton! {
         didSet {
-            if let publishVideo = UserDefaults.standard.object(forKey: Constants.publishVideo) as? Bool {
-                publishVideoButton.isSelected = publishVideo
-            } else {
-                publishVideoButton.isSelected = false
-            }
+            UserDefaults.standard.set(false, forKey: Constants.publishVideo)
         }
     }
-    
+
     @IBOutlet weak var publishAudioButton: UIButton! {
         didSet {
-            if let publishAudio = UserDefaults.standard.object(forKey: Constants.publishAudio) as? Bool {
-                publishAudioButton.isSelected = publishAudio
-            } else {
-                publishAudioButton.isSelected = false
-            }
+            UserDefaults.standard.set(false, forKey: Constants.publishAudio)
         }
     }
-    
+
     @IBOutlet weak var cameraPreview: UIView!
-    
+
     var session: AVCaptureSession?
     var input: AVCaptureDeviceInput?
-    var output: AVCaptureStillImageOutput?
+    var output: AVCapturePhotoOutput?
     var previewLayer: AVCaptureVideoPreviewLayer?
 
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Initialize session an output variables this is necessary
+
+        setupCameraPreview()
+    }
+
+    // MARK: - View Modifiers
+
+    func setupCameraPreview() {
+
         session = AVCaptureSession()
-        output = AVCaptureStillImageOutput()
+        output = AVCapturePhotoOutput()
         if let camera = getDevice(position: .front) {
             do {
                 input = try AVCaptureDeviceInput(device: camera)
@@ -81,22 +79,26 @@ final class LoginViewController: UIViewController {
 
             guard let input = input, let output = output, let session = session else { return }
 
-            if session.canAddInput(input) == true {
+            if session.canAddInput(input) {
                 session.addInput(input)
-                output.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
-                if session.canAddOutput(output) == true {
+
+                if session.canAddOutput(output) {
                     session.addOutput(output)
-                    previewLayer = AVCaptureVideoPreviewLayer(session: session)
-                    previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-                    previewLayer?.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
-                    previewLayer?.frame = cameraPreview.bounds
-                    cameraPreview.layer.addSublayer(previewLayer!)
-                    session.startRunning()
                 }
+
+                let settings = AVCapturePhotoSettings()
+                let previewPixelType = settings.availablePreviewPhotoPixelFormatTypes.first!
+
+                let previewFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPixelType,
+                                     kCVPixelBufferWidthKey as String: self.view.frame.size.width,
+                                     kCVPixelBufferHeightKey as String: self.view.frame.size.height] as [String: Any]
+                settings.previewPhotoFormat = previewFormat
+
+                output.capturePhoto(with: settings, delegate: self)
             }
         }
     }
-    // Get the device (Front or Back)
+
     func getDevice(position: AVCaptureDevice.Position) -> AVCaptureDevice? {
         let devices = AVCaptureDevice.devices()
         for de in devices {
@@ -111,13 +113,27 @@ final class LoginViewController: UIViewController {
     // MARK: - Action Handlers
 
     @IBAction func cameraTapped(_ sender: UIButton) {
-//        AVCaptureDevice.requestAccess(for: .video) { _ in }
-        sender.isSelected = !sender.isSelected 
+
+        sender.isSelected = !sender.isSelected
         UserDefaults.standard.set(sender.isEnabled, forKey: Constants.publishVideo)
+
+        if let session = session {
+            if sender.isSelected {
+                if session.isRunning {
+                    session.stopRunning()
+                    previewLayer?.removeFromSuperlayer()
+                }
+            } else {
+                if !session.isRunning {
+                    session.startRunning()
+                    cameraPreview.layer.addSublayer(previewLayer!)
+                }
+            }
+        }
     }
 
     @IBAction func micTapped(_ sender: UIButton) {
-//        AVAudioSession.sharedInstance().requestRecordPermission { _ in }
+        AVAudioSession.sharedInstance().requestRecordPermission { _ in }
         sender.isSelected = !sender.isSelected
         UserDefaults.standard.set(sender.isEnabled, forKey: Constants.publishAudio)
     }
@@ -163,7 +179,7 @@ final class LoginViewController: UIViewController {
             guard let name = alertController.textFields?[0].text, !name.isEmpty,
                   let room = alertController.textFields?[1].text, !room.isEmpty,
                   let viewController = UIStoryboard(name: Constants.meeting, bundle: nil)
-                            .instantiateInitialViewController() as? MeetingViewController
+                    .instantiateInitialViewController() as? MeetingViewController
             else {
                 self?.dismiss(animated: true)
                 let message = flow == .join ? "Could not join meeting" : "Could not start meeting"
@@ -212,5 +228,38 @@ final class LoginViewController: UIViewController {
         }
 
         present(viewController, animated: true)
+    }
+
+    override func willTransition(to newCollection: UITraitCollection,
+                                 with coordinator: UIViewControllerTransitionCoordinator) {
+
+        super.willTransition(to: newCollection, with: coordinator)
+
+        coordinator.animate { _ in
+            self.updateCameraView()
+        }
+    }
+
+    func updateCameraView() {
+        let orientation = UIApplication.shared.statusBarOrientation
+        previewLayer?.connection?.videoOrientation = AVCaptureVideoOrientation(rawValue: orientation.rawValue) ?? .portrait
+        previewLayer?.frame = cameraPreview.bounds
+    }
+}
+
+@available(iOS 11.0, *)
+extension LoginViewController: AVCapturePhotoCaptureDelegate {
+
+    func photoOutput(_ output: AVCapturePhotoOutput,
+                     didFinishProcessingPhoto photo: AVCapturePhoto,
+                     error: Error?) {
+
+        if let session = session {
+            previewLayer = AVCaptureVideoPreviewLayer(session: session)
+            previewLayer?.videoGravity = .resizeAspectFill
+            updateCameraView()
+            cameraPreview.layer.addSublayer(previewLayer!)
+            session.startRunning()
+        }
     }
 }

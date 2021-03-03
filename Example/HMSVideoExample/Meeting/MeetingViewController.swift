@@ -28,7 +28,7 @@ final class MeetingViewController: UIViewController {
     @IBOutlet private(set) weak var collectionView: UICollectionView!
 
     @IBOutlet private weak var badgeButton: BadgeButton!
-    
+
     @IBOutlet weak var publishVideoButton: UIButton! {
         didSet {
             if let publishVideo = UserDefaults.standard.object(forKey: Constants.publishVideo) as? Bool {
@@ -38,7 +38,7 @@ final class MeetingViewController: UIViewController {
             }
         }
     }
-    
+
     @IBOutlet weak var publishAudioButton: UIButton! {
         didSet {
             if let publishAudio = UserDefaults.standard.object(forKey: Constants.publishAudio) as? Bool {
@@ -48,7 +48,7 @@ final class MeetingViewController: UIViewController {
             }
         }
     }
-    
+
     private var chatBadgeCount = 0
 
     // MARK: - View Lifecycle

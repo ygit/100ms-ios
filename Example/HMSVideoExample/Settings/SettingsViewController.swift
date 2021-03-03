@@ -35,16 +35,28 @@ class SettingsViewController: UIViewController {
 
     @IBOutlet weak var serverURLField: UITextField! {
         didSet {
-            serverURLField.text = UserDefaults.standard.string(forKey: Constants.serverURLKey) ?? Constants.server
+            serverURLField.text = Constants.server
         }
     }
 
     @IBOutlet weak var socketEndpointField: UITextField! {
         didSet {
-            socketEndpointField.text = UserDefaults.standard.string(forKey: Constants.socketEndpointKey) ?? Constants.endpoint
+            socketEndpointField.text = Constants.endpoint
         }
     }
-
+    
+    @IBOutlet weak var tokenField: UITextField! {
+        didSet {
+            tokenField.text = Constants.getToken
+        }
+    }
+    
+    @IBOutlet weak var createRoomField: UITextField! {
+        didSet {
+            createRoomField.text = Constants.createRoom
+        }
+    }
+    
     @IBOutlet weak var publishVideoSwitch: UISwitch! {
         didSet {
             if let isOn = UserDefaults.standard.object(forKey: Constants.publishVideo) as? Bool {
