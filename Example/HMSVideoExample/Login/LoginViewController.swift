@@ -35,7 +35,61 @@ final class LoginViewController: UIViewController {
             Utilities.drawCorner(on: startMeetingButton)
         }
     }
+    
+    @IBOutlet weak var cameraPreview: UIView!
+    
+    var session: AVCaptureSession?
+    var input: AVCaptureDeviceInput?
+    var output: AVCaptureStillImageOutput?
+    var previewLayer: AVCaptureVideoPreviewLayer?
 
+    
+    // MARK: - View Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //Initialize session an output variables this is necessary
+        session = AVCaptureSession()
+        output = AVCaptureStillImageOutput()
+        if let camera = getDevice(position: .front) {
+            do {
+                input = try AVCaptureDeviceInput(device: camera)
+            } catch let error as NSError {
+                print(error)
+                input = nil
+            }
+            
+            guard let input = input, let output = output, let session = session else { return }
+            
+            if(session.canAddInput(input) == true){
+                session.addInput(input)
+                output.outputSettings = [AVVideoCodecKey : AVVideoCodecJPEG]
+                if(session.canAddOutput(output) == true){
+                    session.addOutput(output)
+                    previewLayer = AVCaptureVideoPreviewLayer(session: session)
+                    previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+                    previewLayer?.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
+                    previewLayer?.frame = cameraPreview.bounds
+                    cameraPreview.layer.addSublayer(previewLayer!)
+                    session.startRunning()
+                }
+            }
+        }
+    }
+    //Get the device (Front or Back)
+    func getDevice(position: AVCaptureDevice.Position) -> AVCaptureDevice? {
+        let devices = AVCaptureDevice.devices();
+        for de in devices {
+            let deviceConverted = de
+            if(deviceConverted.position == position){
+                return deviceConverted
+            }
+        }
+        return nil
+    }
+    
+    
     // MARK: - Action Handlers
 
     @IBAction func cameraTapped(_ sender: UIButton) {

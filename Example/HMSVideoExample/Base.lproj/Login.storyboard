@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="JHd-X7-1X6">
-    <device id="retina5_9" orientation="portrait" appearance="dark"/>
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -18,20 +18,21 @@
                         <viewControllerLayoutGuide type="bottom" id="au1-nU-61f"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="jQ1-tl-f6e">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="100ms-icon" translatesAutoresizingMaskIntoConstraints="NO" id="pry-yg-EPI">
-                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
-                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N7m-VC-yE1">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="854"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="100ms-logo" translatesAutoresizingMaskIntoConstraints="NO" id="C2U-dF-Uy4">
-                                <rect key="frame" x="20" y="44" width="195" height="64"/>
+                                <rect key="frame" x="20" y="44" width="210" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="WfE-uQ-tMe"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bcw-CH-SJE">
-                                <rect key="frame" x="315" y="54" width="44" height="44"/>
+                                <rect key="frame" x="330" y="54" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="FJP-AP-4Am"/>
                                     <constraint firstAttribute="width" constant="44" id="p6q-Md-1Sb"/>
@@ -43,16 +44,16 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ZCn-6R-e9s">
-                                <rect key="frame" x="15" y="662" width="345" height="108"/>
+                                <rect key="frame" x="15" y="694" width="360" height="108"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get Started" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9kE-Sy-63S">
-                                        <rect key="frame" x="15" y="8" width="315" height="32"/>
+                                        <rect key="frame" x="15" y="8" width="330" height="32"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                         <color key="textColor" systemColor="secondaryLabelColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4EC-KI-Amz">
-                                        <rect key="frame" x="15" y="48" width="315" height="52"/>
+                                        <rect key="frame" x="15" y="48" width="330" height="52"/>
                                         <color key="backgroundColor" systemColor="linkColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="52" id="y2A-3I-tyL"/>
@@ -78,16 +79,16 @@
                                 <edgeInsets key="layoutMargins" top="8" left="15" bottom="8" right="15"/>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Hgt-OM-PBn">
-                                <rect key="frame" x="15" y="506" width="345" height="108"/>
+                                <rect key="frame" x="15" y="538" width="360" height="108"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join Meeting" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ycw-3w-dwc">
-                                        <rect key="frame" x="15" y="8" width="315" height="32"/>
+                                        <rect key="frame" x="15" y="8" width="330" height="32"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                         <color key="textColor" systemColor="secondaryLabelColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ta-CK-XYA">
-                                        <rect key="frame" x="15" y="48" width="315" height="52"/>
+                                        <rect key="frame" x="15" y="48" width="330" height="52"/>
                                         <color key="backgroundColor" systemColor="linkColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="52" id="HzS-Mx-OL9"/>
@@ -113,7 +114,7 @@
                                 <edgeInsets key="layoutMargins" top="8" left="15" bottom="8" right="15"/>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="OEq-rU-lzb">
-                                <rect key="frame" x="99.666666666666686" y="434" width="176" height="64"/>
+                                <rect key="frame" x="107" y="466" width="176" height="64"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W2u-ed-mZu">
                                         <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
@@ -157,18 +158,18 @@
                             <constraint firstItem="ZCn-6R-e9s" firstAttribute="leading" secondItem="jQ1-tl-f6e" secondAttribute="leading" constant="15" id="BYz-5u-WZC"/>
                             <constraint firstItem="OEq-rU-lzb" firstAttribute="centerX" secondItem="jQ1-tl-f6e" secondAttribute="centerX" id="Clp-jn-YfA"/>
                             <constraint firstAttribute="trailing" secondItem="ZCn-6R-e9s" secondAttribute="trailing" constant="15" id="DJg-Nm-PvX"/>
-                            <constraint firstItem="pry-yg-EPI" firstAttribute="leading" secondItem="jQ1-tl-f6e" secondAttribute="leading" id="Igg-fB-civ"/>
+                            <constraint firstItem="au1-nU-61f" firstAttribute="top" secondItem="N7m-VC-yE1" secondAttribute="bottom" constant="-44" id="LLW-ij-ZCe"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="C2U-dF-Uy4" secondAttribute="trailing" constant="160" id="P2f-qc-78M"/>
-                            <constraint firstItem="pry-yg-EPI" firstAttribute="top" secondItem="Zky-Jr-DW7" secondAttribute="bottom" id="QJr-bQ-9uu"/>
-                            <constraint firstAttribute="trailing" secondItem="pry-yg-EPI" secondAttribute="trailing" id="SyP-6y-rsV"/>
                             <constraint firstItem="C2U-dF-Uy4" firstAttribute="top" secondItem="Zky-Jr-DW7" secondAttribute="bottom" id="USt-HX-x7x"/>
-                            <constraint firstItem="au1-nU-61f" firstAttribute="top" secondItem="pry-yg-EPI" secondAttribute="bottom" id="UrM-sU-rhI"/>
                             <constraint firstItem="Hgt-OM-PBn" firstAttribute="leading" secondItem="ZCn-6R-e9s" secondAttribute="leading" id="ZQw-c6-kkh"/>
+                            <constraint firstItem="N7m-VC-yE1" firstAttribute="top" secondItem="Zky-Jr-DW7" secondAttribute="bottom" constant="-44" id="ZSL-lg-2ZQ"/>
                             <constraint firstItem="Hgt-OM-PBn" firstAttribute="top" secondItem="OEq-rU-lzb" secondAttribute="bottom" constant="8" symbolic="YES" id="aq3-DL-VXv"/>
                             <constraint firstItem="Bcw-CH-SJE" firstAttribute="centerY" secondItem="C2U-dF-Uy4" secondAttribute="centerY" id="gu5-Gy-9Nq"/>
                             <constraint firstItem="au1-nU-61f" firstAttribute="top" secondItem="ZCn-6R-e9s" secondAttribute="bottom" constant="8" symbolic="YES" id="heS-IC-Ler"/>
                             <constraint firstItem="C2U-dF-Uy4" firstAttribute="leading" secondItem="jQ1-tl-f6e" secondAttribute="leading" constant="20" symbolic="YES" id="jjf-8D-Wvx"/>
                             <constraint firstItem="ZCn-6R-e9s" firstAttribute="top" secondItem="Hgt-OM-PBn" secondAttribute="bottom" constant="48" id="sXg-Lj-I5E"/>
+                            <constraint firstAttribute="trailing" secondItem="N7m-VC-yE1" secondAttribute="trailing" id="uh9-JE-Lb2"/>
+                            <constraint firstItem="N7m-VC-yE1" firstAttribute="leading" secondItem="jQ1-tl-f6e" secondAttribute="leading" id="wBY-Jz-JUx"/>
                         </constraints>
                         <variation key="heightClass=compact-widthClass=compact">
                             <mask key="subviews">
@@ -179,6 +180,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="WAo-RG-heA"/>
                     <connections>
+                        <outlet property="cameraPreview" destination="N7m-VC-yE1" id="CYM-MB-Jig"/>
                         <outlet property="joinMeetingButton" destination="9ta-CK-XYA" id="gIo-4o-E4d"/>
                         <outlet property="joinMeetingStackView" destination="Hgt-OM-PBn" id="PTj-r0-034"/>
                         <outlet property="startMeetingButton" destination="4EC-KI-Amz" id="H8r-p7-Rdh"/>
@@ -208,12 +210,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="100ms-icon" width="1598" height="1598"/>
         <image name="100ms-logo" width="5289" height="1598"/>
         <image name="arrow.up.right.video" catalog="system" width="128" height="83"/>
         <image name="mic.circle.fill" catalog="system" width="128" height="121"/>
         <image name="mic.slash.fill" catalog="system" width="108" height="128"/>
-        <image name="settings" width="85.333335876464844" height="85.333335876464844"/>
+        <image name="settings" width="60.333332061767578" height="61"/>
         <image name="video.badge.plus" catalog="system" width="128" height="90"/>
         <image name="video.fill" catalog="system" width="128" height="82"/>
         <image name="video.slash.fill" catalog="system" width="128" height="106"/>
