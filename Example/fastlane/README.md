@@ -16,9 +16,9 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## iOS
-### ios beta
+### ios upload_on_firebase
 ```
-fastlane ios beta
+fastlane ios upload_on_firebase
 ```
 Distributes the HMSVideoExample app on Firebase
 

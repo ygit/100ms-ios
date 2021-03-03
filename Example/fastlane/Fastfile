@@ -18,16 +18,23 @@ default_platform(:ios)
 
 platform :ios do
   desc "Distributes the HMSVideoExample app on Firebase"
-  lane :beta do
+  lane :upload_on_firebase do
 
     increment_build_number 
     
     increment_version_number(
-      bump_type: "minor" 
+      bump_type: "patch" 
     )
-
-    build_app(scheme: "HMSVideo_Example",
-              workspace: "HMSVideoExample.xcworkspace")
+    
+    build_app(
+      scheme: "HMSVideo_Example",
+      export_options: {
+        method: "development",
+        provisioningProfiles: { 
+          "live.100ms.videoapp" => "match Development live.100ms.videoapp"
+        }
+      }
+    )
     
     firebase_app_distribution(
       app: "1:1018747429814:ios:97b0916de004d8ad76d717"
