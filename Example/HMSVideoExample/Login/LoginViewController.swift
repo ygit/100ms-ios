@@ -11,13 +11,13 @@ import AVKit
 final class LoginViewController: UIViewController {
 
     // MARK: - View Properties
-
+    
     @IBOutlet weak var joinMeetingIDField: UITextField! {
         didSet {
             Utilities.drawCorner(on: joinMeetingIDField)
         }
     }
-    
+
     @IBOutlet weak var joinMeetingStackView: UIStackView! {
         didSet {
             Utilities.drawCorner(on: joinMeetingStackView)
@@ -54,12 +54,19 @@ final class LoginViewController: UIViewController {
         }
     }
 
-    @IBOutlet weak var cameraPreview: UIView!
+    @IBOutlet weak var cameraPreview: UIView! {
+        didSet {
+            let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_:)))
+            cameraPreview.addGestureRecognizer(tap)
+        }
+    }
 
     var session: AVCaptureSession?
     var input: AVCaptureDeviceInput?
     var output: AVCapturePhotoOutput?
     var previewLayer: AVCaptureVideoPreviewLayer?
+
+    var keyboardHeight = CGFloat(0)
 
     // MARK: - View Lifecycle
 
@@ -67,11 +74,8 @@ final class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         setupCameraPreview()
-        
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
     }
-    
+
     override func willTransition(to newCollection: UITraitCollection,
                                  with coordinator: UIViewControllerTransitionCoordinator) {
 
@@ -79,6 +83,7 @@ final class LoginViewController: UIViewController {
 
         coordinator.animate { _ in
             self.updateCameraView()
+            self.joinMeetingIDField.resignFirstResponder()
         }
     }
 
@@ -116,9 +121,6 @@ final class LoginViewController: UIViewController {
                 output.capturePhoto(with: settings, delegate: self)
             }
         }
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_:)))
-        cameraPreview.addGestureRecognizer(tap)
     }
 
     func getDevice(position: AVCaptureDevice.Position) -> AVCaptureDevice? {
@@ -131,7 +133,7 @@ final class LoginViewController: UIViewController {
         }
         return nil
     }
-    
+
     func updateCameraView() {
         let orientation = UIApplication.shared.statusBarOrientation
         previewLayer?.connection?.videoOrientation = AVCaptureVideoOrientation(rawValue: orientation.rawValue) ?? .portrait
@@ -139,7 +141,7 @@ final class LoginViewController: UIViewController {
     }
 
     // MARK: - Action Handlers
-    
+
     @objc func dismissKeyboard(_ sender: Any) {
         joinMeetingIDField.resignFirstResponder()
     }
@@ -147,7 +149,7 @@ final class LoginViewController: UIViewController {
     @IBAction func cameraTapped(_ sender: UIButton) {
 
         sender.isSelected = !sender.isSelected
-        UserDefaults.standard.set(sender.isEnabled, forKey: Constants.publishVideo)
+        UserDefaults.standard.set(sender.isSelected, forKey: Constants.publishVideo)
 
         if let session = session {
             if sender.isSelected {
@@ -158,7 +160,7 @@ final class LoginViewController: UIViewController {
             } else {
                 if !session.isRunning {
                     session.startRunning()
-                    cameraPreview.layer.addSublayer(previewLayer!)
+                    cameraPreview.layer.addSublayer(previewLayer ?? CALayer())
                 }
             }
         }
@@ -167,7 +169,7 @@ final class LoginViewController: UIViewController {
     @IBAction func micTapped(_ sender: UIButton) {
         AVAudioSession.sharedInstance().requestRecordPermission { _ in }
         sender.isSelected = !sender.isSelected
-        UserDefaults.standard.set(sender.isEnabled, forKey: Constants.publishAudio)
+        UserDefaults.standard.set(sender.isSelected, forKey: Constants.publishAudio)
     }
 
     @IBAction private  func startMeetingTapped(_ sender: UIButton) {
@@ -178,12 +180,15 @@ final class LoginViewController: UIViewController {
 
         let title: String
         var message: String?
-        
+        let action: String
+
         if flow == .join {
             title = "Join a Meeting"
             message = "Enter your Name"
+            action = "Join"
         } else {
             title = "Start a Meeting"
+            action = "Start"
         }
 
         let alertController = UIAlertController(title: title,
@@ -205,46 +210,50 @@ final class LoginViewController: UIViewController {
         }
 
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alertController.addAction(UIAlertAction(title: "Submit", style: .default) { [weak self] _ in
-            
-            var room: String
-            
-            if flow == .join {
-                if !(self?.joinMeetingIDField.text!.isEmpty)! {
-                    room = (self?.joinMeetingIDField.text!)!
-                } else {
-                    self?.showErrorAlert(with: "Enter Meeting ID!")
-                    return
-                }
-            } else {
-                if !(alertController.textFields?[1].text!.isEmpty)! {
-                    room = (alertController.textFields?[1].text!)!
-                } else {
-                    self?.showErrorAlert(with: "Enter Meeting Name!")
-                    return
-                }
-            }
+        alertController.addAction(UIAlertAction(title: action, style: .default) { [weak self] _ in
 
-            guard let name = alertController.textFields?[0].text, !name.isEmpty,
-                  let viewController = UIStoryboard(name: Constants.meeting, bundle: nil)
-                    .instantiateInitialViewController() as? MeetingViewController
-            else {
-                self?.dismiss(animated: true)
-                let message = flow == .join ? "Could not join meeting" : "Could not start meeting"
-                self?.showErrorAlert(with: message)
-                return
-            }
-
-            viewController.user = name
-            viewController.flow = flow            
-            viewController.roomName = room
-
-            self?.save(name, room)
-
-            self?.navigationController?.pushViewController(viewController, animated: true)
+            self?.handleActions(for: alertController, in: flow)
         })
 
         present(alertController, animated: true, completion: nil)
+    }
+
+    func handleActions(for alertController: UIAlertController, in flow: MeetingFlow) {
+        var room: String
+
+        if flow == .join {
+            if !joinMeetingIDField.text!.isEmpty {
+                room = joinMeetingIDField.text!
+            } else {
+                showErrorAlert(with: "Enter Meeting ID!")
+                return
+            }
+        } else {
+            if !(alertController.textFields?[1].text!.isEmpty)! {
+                room = (alertController.textFields?[1].text!)!
+            } else {
+                showErrorAlert(with: "Enter Meeting Name!")
+                return
+            }
+        }
+
+        guard let name = alertController.textFields?[0].text, !name.isEmpty,
+              let viewController = UIStoryboard(name: Constants.meeting, bundle: nil)
+                .instantiateInitialViewController() as? MeetingViewController
+        else {
+            dismiss(animated: true)
+            let message = flow == .join ? "Could not join meeting" : "Could not start meeting"
+            showErrorAlert(with: message)
+            return
+        }
+
+        viewController.user = name
+        viewController.flow = flow
+        viewController.roomName = room
+
+        save(name, room)
+
+        navigationController?.pushViewController(viewController, animated: true)
     }
 
     func showErrorAlert(with message: String) {

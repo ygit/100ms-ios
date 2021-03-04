@@ -12,7 +12,6 @@
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		A9D62D7F0811D44CEA768C16 /* libPods-HMSVideo_Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB9722B556F1E4A407C60A5 /* libPods-HMSVideo_Tests.a */; };
 		EC02581325EB7479001293C2 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC02581525EB7479001293C2 /* Settings.storyboard */; };
-		EC077CF325EC96090003D320 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EC077CF225EC96090003D320 /* GoogleService-Info.plist */; };
 		EC462C8525E95A0B00BFF07C /* Meeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC462C8725E95A0B00BFF07C /* Meeting.storyboard */; };
 		EC462C9125E95A2800BFF07C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC462C9025E95A2800BFF07C /* LoginViewController.swift */; };
 		EC462C9625E95A3200BFF07C /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC462C9425E95A3200BFF07C /* VideoCollectionViewCell.swift */; };
@@ -28,6 +27,7 @@
 		EC8E97E325EBFF16003A3FCD /* Participants.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8E97E525EBFF16003A3FCD /* Participants.storyboard */; };
 		ECA9BECC25EB6E3B0095C4FD /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA9BEC925EB6E3B0095C4FD /* SettingsViewController.swift */; };
 		ECDFC34A25F069CA0036DAE7 /* FirebaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFC34925F069CA0036DAE7 /* FirebaseInteractor.swift */; };
+		ECDFC35025F07AC30036DAE7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ECDFC34F25F07AC30036DAE7 /* GoogleService-Info.plist */; };
 		ECE5D2C725ED592200B8D7E4 /* BadgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE5D2C625ED592200B8D7E4 /* BadgeButton.swift */; };
 		ECF26DA025EBDB5700BFB3B9 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF26D9F25EBDB5700BFB3B9 /* ChatViewController.swift */; };
 		ECF26DA925EBDBC300BFB3B9 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECF26DAB25EBDBC300BFB3B9 /* Chat.storyboard */; };
@@ -60,7 +60,6 @@
 		BADB1198BD96E24E9BFFB40B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		EC02581425EB7479001293C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		EC02581925EB747D001293C2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Settings.strings; sourceTree = "<group>"; };
-		EC077CF225EC96090003D320 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EC462C8425E95A0600BFF07C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Login.strings; sourceTree = "<group>"; };
 		EC462C8625E95A0B00BFF07C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Meeting.storyboard; sourceTree = "<group>"; };
 		EC462C8B25E95A0F00BFF07C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Meeting.strings; sourceTree = "<group>"; };
@@ -82,6 +81,7 @@
 		ECA9BEC925EB6E3B0095C4FD /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		ECDEE42B25E7A6AE00DB468F /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		ECDFC34925F069CA0036DAE7 /* FirebaseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FirebaseInteractor.swift; path = "Supporting Files/FirebaseInteractor.swift"; sourceTree = "<group>"; };
+		ECDFC34F25F07AC30036DAE7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ECE5D2C625ED592200B8D7E4 /* BadgeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeButton.swift; sourceTree = "<group>"; };
 		ECF26D9F25EBDB5700BFB3B9 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		ECF26DAA25EBDBC300BFB3B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Chat.storyboard; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 				ECDEE42C25E7A6C500DB468F /* Meeting */,
 				ECA9BEC425EB6E3B0095C4FD /* Settings */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
-				EC077CF225EC96090003D320 /* GoogleService-Info.plist */,
+				ECDFC34F25F07AC30036DAE7 /* GoogleService-Info.plist */,
 			);
 			name = "Example for HMSVideo";
 			path = HMSVideoExample;
@@ -346,7 +346,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC8E97E325EBFF16003A3FCD /* Participants.storyboard in Resources */,
-				EC077CF325EC96090003D320 /* GoogleService-Info.plist in Resources */,
+				ECDFC35025F07AC30036DAE7 /* GoogleService-Info.plist in Resources */,
 				ECF26DA925EBDBC300BFB3B9 /* Chat.storyboard in Resources */,
 				607FACDB1AFB9204008FA782 /* Login.storyboard in Resources */,
 				EC462CA125E95A4100BFF07C /* Images.xcassets in Resources */,
