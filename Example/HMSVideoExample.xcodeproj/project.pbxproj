@@ -27,6 +27,7 @@
 		EC8E97DA25EBFEC6003A3FCD /* ParticipantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8E97D925EBFEC6003A3FCD /* ParticipantsViewController.swift */; };
 		EC8E97E325EBFF16003A3FCD /* Participants.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8E97E525EBFF16003A3FCD /* Participants.storyboard */; };
 		ECA9BECC25EB6E3B0095C4FD /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA9BEC925EB6E3B0095C4FD /* SettingsViewController.swift */; };
+		ECDFC34A25F069CA0036DAE7 /* FirebaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFC34925F069CA0036DAE7 /* FirebaseInteractor.swift */; };
 		ECE5D2C725ED592200B8D7E4 /* BadgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE5D2C625ED592200B8D7E4 /* BadgeButton.swift */; };
 		ECF26DA025EBDB5700BFB3B9 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF26D9F25EBDB5700BFB3B9 /* ChatViewController.swift */; };
 		ECF26DA925EBDBC300BFB3B9 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECF26DAB25EBDBC300BFB3B9 /* Chat.storyboard */; };
@@ -80,6 +81,7 @@
 		EC8E97E925EBFF18003A3FCD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Participants.strings; sourceTree = "<group>"; };
 		ECA9BEC925EB6E3B0095C4FD /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		ECDEE42B25E7A6AE00DB468F /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		ECDFC34925F069CA0036DAE7 /* FirebaseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FirebaseInteractor.swift; path = "Supporting Files/FirebaseInteractor.swift"; sourceTree = "<group>"; };
 		ECE5D2C625ED592200B8D7E4 /* BadgeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeButton.swift; sourceTree = "<group>"; };
 		ECF26D9F25EBDB5700BFB3B9 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		ECF26DAA25EBDBC300BFB3B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Chat.storyboard; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				607FACD41AFB9204008FA782 /* Info.plist */,
 				EC462CA825E95BC100BFF07C /* HMSVideo_Example.entitlements */,
 				EC8C4ADC25EA4CDF00E90469 /* LaunchScreen.storyboard */,
+				ECDFC34925F069CA0036DAE7 /* FirebaseInteractor.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -478,6 +481,7 @@
 				EC462C9725E95A3200BFF07C /* MeetingViewController.swift in Sources */,
 				EC462CB825E9629700BFF07C /* Constants.swift in Sources */,
 				ECF26DA025EBDB5700BFB3B9 /* ChatViewController.swift in Sources */,
+				ECDFC34A25F069CA0036DAE7 /* FirebaseInteractor.swift in Sources */,
 				ECA9BECC25EB6E3B0095C4FD /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
