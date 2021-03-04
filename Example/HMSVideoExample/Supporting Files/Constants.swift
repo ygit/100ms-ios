@@ -16,7 +16,7 @@ struct Constants {
 //    "https://ms-services-server-token-17sgcgfb18ow.runkit.sh/"
 //    https://100ms-services.vercel.app/api/room_token
 
-    static let endpoint = UserDefaults.standard.string(forKey: socketEndpointKey) ?? "wss://prod-in.100ms.live/ws"
+    static let endpoint = UserDefaults.standard.string(forKey: socketEndpointKey) ?? "wss://qa-in.100ms.live/ws"
 
     static let tokenQuery = UserDefaults.standard.string(forKey: tokenQueryKey) ?? "api/token"
     //    static let getToken = server + "?api=token"
@@ -32,6 +32,8 @@ struct Constants {
 
     static let jsonError = "JSON Data parsing error!"
 
+    // MARK: - Notifications
+
     static let hmsError = NSNotification.Name("HMS_ERROR")
 
     static let settingsUpdated = NSNotification.Name("SETTINGS_UPDATED")
@@ -41,6 +43,10 @@ struct Constants {
     static let peersUpdated = NSNotification.Name("PEERS_UPDATED")
 
     static let speakerUpdated = NSNotification.Name("SPEAKER_UPDATED")
+
+    static let pinTapped = NSNotification.Name("PIN_TAPPED")
+
+    static let muteTapped = NSNotification.Name("MUTE_TAPPED")
 
     // MARK: - View Constants
 
@@ -61,6 +67,8 @@ struct Constants {
     static let chatSenderName = "senderName"
 
     static let chatMessage = "msg"
+
+    static let index = "index"
 
     // MARK: - Settings
 

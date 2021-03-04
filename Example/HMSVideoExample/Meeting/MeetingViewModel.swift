@@ -17,13 +17,7 @@ final class MeetingViewModel: NSObject,
 
     weak var collectionView: UICollectionView?
 
-    private let sectionInsets = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
-
-    internal var layout = Layout.grid {
-        didSet {
-            collectionView?.reloadData()
-        }
-    }
+    private let sectionInsets = UIEdgeInsets(top: 4.0, left: 4.0, bottom: 4.0, right: 4.0)
 
     // MARK: - Initializers
 
@@ -36,6 +30,8 @@ final class MeetingViewModel: NSObject,
         }
 
         setup(collectionView)
+
+        observeUserActions()
     }
 
     func setup(_ collectionView: UICollectionView) {
@@ -46,9 +42,35 @@ final class MeetingViewModel: NSObject,
         self.collectionView = collectionView
     }
 
+    func observeUserActions() {
+
+        _ = NotificationCenter.default.addObserver(forName: Constants.pinTapped,
+                                                   object: nil,
+                                                   queue: .main) { [weak self] notification in
+
+            if let index = notification.userInfo?[Constants.index] as? IndexPath {
+
+                var indexes = [IndexPath]()
+                for counter in 0..<index.item {
+                    indexes.append(IndexPath(item: counter, section: 0))
+                }
+                indexes.append(index)
+
+                self?.hms.model = (self?.hms.model.sorted { $0.isPinned && !$1.isPinned })!
+
+                self?.collectionView?.reloadItems(at: indexes)
+
+                self?.collectionView?.scrollToItem(at: IndexPath(item: 0, section: 0),
+                                                   at: .left, animated: true)
+            }
+        }
+    }
+
     // MARK: - View Modifiers
 
     func updateView(for state: VideoCellState) {
+        
+        print(#function, state)
 
         switch state {
 
@@ -79,7 +101,7 @@ final class MeetingViewModel: NSObject,
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        hms.videoTracks.count
+        hms.model.count
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -87,7 +109,7 @@ final class MeetingViewModel: NSObject,
 
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.resuseIdentifier,
                                                             for: indexPath) as? VideoCollectionViewCell,
-               indexPath.item < hms.videoTracks.count
+               indexPath.item < hms.model.count
         else {
             return UICollectionViewCell()
         }
@@ -99,31 +121,27 @@ final class MeetingViewModel: NSObject,
 
     func updateCell(at indexPath: IndexPath, for cell: VideoCollectionViewCell) {
 
-        let track = hms.videoTracks[indexPath.row]
+        let model = hms.model[indexPath.row]
 
-        switch layout {
-        case .grid:
-            cell.videoView.setVideoTrack(track)
-        case .portrait:
-            if indexPath.section == 0 {
-                cell.videoView.setVideoTrack(track)
-            } else {
-                let track = hms.videoTracks[indexPath.row+1]
-                cell.videoView.setVideoTrack(track)
-            }
-        }
+        model.indexPath = indexPath
 
-        let streamID = track.streamId
-        let peer = hms.peers[streamID]
-        cell.nameLabel.text = peer?.name
+        cell.model = model
 
-        cell.isSpeaker = track.trackId == hms.speakerVideoTrack?.trackId
+        cell.videoView.setVideoTrack(model.videoTrack)
+
+        cell.nameLabel.text = model.peer.name
+
+        cell.isSpeaker = model.isCurrentSpeaker
+
+        cell.pinButton.isSelected = model.isPinned
+
+        cell.muteButton.isSelected = model.isMuted
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        8
+        2
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -132,66 +150,31 @@ final class MeetingViewModel: NSObject,
 
         let widthInsets = sectionInsets.left + sectionInsets.right
         let heightInsets = sectionInsets.top + sectionInsets.bottom
+        
+        print(#function, indexPath.item)
 
-        switch layout {
-        case .grid:
-            if hms.videoTracks.count < 3 {
-                let count = CGFloat(hms.videoTracks.count)
-                return CGSize(width: collectionView.frame.size.width - widthInsets,
-                              height: (collectionView.frame.size.height / count) - heightInsets)
-            } else {
-                let rows = UserDefaults.standard.object(forKey: Constants.maximumRows) as? CGFloat ?? 2.0
-                return CGSize(width: (collectionView.frame.size.width / 2) - widthInsets,
-                              height: (collectionView.frame.size.height / rows) - heightInsets)
-            }
+        let model = hms.model[indexPath.row]
 
-        case .portrait:
-            let rows = CGFloat(min(hms.videoTracks.count, 4))
-            let commonWidth = collectionView.frame.size.width / rows - widthInsets
-            let commonHeight = commonWidth * 3.0 / 4.0
+        if model.isPinned {
+            return CGSize(width: collectionView.frame.size.width - widthInsets,
+                          height: collectionView.frame.size.height - heightInsets)
+        }
 
-            switch indexPath.section {
-            case 0:
-                return CGSize(width: collectionView.frame.size.width - widthInsets,
-                              height: collectionView.frame.size.height - commonHeight - heightInsets)
-            default:
-                return CGSize(width: commonWidth, height: commonHeight)
-            }
+        if hms.videoTracks.count < 4 {
+            let count = CGFloat(hms.videoTracks.count)
+            return CGSize(width: collectionView.frame.size.width - widthInsets,
+                          height: (collectionView.frame.size.height / count) - heightInsets)
+        } else {
+            let rows = UserDefaults.standard.object(forKey: Constants.maximumRows) as? CGFloat ?? 2.0
+            return CGSize(width: (collectionView.frame.size.width / 2) - widthInsets,
+                          height: (collectionView.frame.size.height / rows) - heightInsets)
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-
-        switch layout {
-        case .grid:
-            return sectionInsets
-
-        case .portrait:
-
-            switch section {
-            case 0:
-                return sectionInsets
-            default:
-
-                if hms.videoTracks.count < 5 {
-                    let width = collectionView.frame.size.width
-                    let widthInsets = sectionInsets.left + sectionInsets.right
-
-                    let columns = CGFloat(min(hms.videoTracks.count - 1, 4))
-                    let cellWidth = (width / columns)
-
-                    let cellInsets = 2*widthInsets*columns
-
-                    let inset = (width - cellWidth - cellInsets) / columns
-
-                    return UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
-                }
-
-                return UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
-            }
-        }
+        sectionInsets
     }
 
     func collectionView(_ collectionView: UICollectionView,

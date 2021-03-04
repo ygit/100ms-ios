@@ -1,0 +1,30 @@
+//
+//  VideoModel.swift
+//  HMSVideo_Example
+//
+//  Created by Yogesh Singh on 04/03/21.
+//  Copyright © 2021 100ms. All rights reserved.
+//
+
+import Foundation
+import HMSVideo
+
+class VideoModel {
+
+    let peer: HMSPeer
+
+    let videoTrack: HMSVideoTrack
+
+    var isCurrentSpeaker = false
+
+    var isPinned = false
+
+    var isMuted = false
+
+    var indexPath: IndexPath?
+
+    init(peer: HMSPeer, videoTrack: HMSVideoTrack) {
+        self.peer = peer
+        self.videoTrack = videoTrack
+    }
+}

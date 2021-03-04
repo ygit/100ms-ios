@@ -11,11 +11,20 @@ import HMSVideo
 
 class VideoCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var nameLabel: UILabel! {
+    weak var model: VideoModel?
+
+    @IBOutlet weak var stackView: UIStackView! {
         didSet {
-            contentView.bringSubviewToFront(nameLabel)
+            Utilities.applyBorder(on: stackView)
+            stackView.backgroundColor = stackView.backgroundColor?.withAlphaComponent(0.5)
         }
     }
+
+    @IBOutlet weak var nameLabel: UILabel!
+
+    @IBOutlet weak var pinButton: UIButton!
+
+    @IBOutlet weak var muteButton: UIButton!
 
     @IBOutlet weak var videoView: HMSVideoView!
 
@@ -27,5 +36,21 @@ class VideoCollectionViewCell: UICollectionViewCell {
                 Utilities.applyBorder(on: videoView)
             }
         }
+    }
+
+    @IBAction func pinTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        model?.isPinned = sender.isSelected
+        NotificationCenter.default.post(name: Constants.pinTapped,
+                                        object: nil,
+                                        userInfo: [Constants.index: model?.indexPath])
+    }
+
+    @IBAction func muteTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        model?.isMuted = sender.isSelected
+        NotificationCenter.default.post(name: Constants.muteTapped,
+                                        object: nil,
+                                        userInfo: [Constants.index: model?.indexPath])
     }
 }

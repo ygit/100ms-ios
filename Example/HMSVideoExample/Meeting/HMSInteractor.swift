@@ -30,6 +30,8 @@ final class HMSInteractor {
     private(set) var remoteStreams = [HMSStream]()
     private(set) var videoTracks = [HMSVideoTrack]()
 
+    var model = [VideoModel]()
+
     private(set) var localStream: HMSStream?
     private(set) var localAudioTrack: HMSAudioTrack?
     private(set) var localVideoTrack: HMSVideoTrack?
@@ -40,7 +42,9 @@ final class HMSInteractor {
             let streamer = peers.filter { $0.value.peerId == speakerPeerID }
             if let streamID = streamer.keys.first {
                 if let track = videoTracks.filter({ $0.streamId == streamID }).first {
-                    speakerVideoTrack = track
+                    if speakerVideoTrack?.trackId != track.trackId {
+                        speakerVideoTrack = track
+                    }
                 }
             }
         }
@@ -48,13 +52,14 @@ final class HMSInteractor {
 
     private(set) var speakerVideoTrack: HMSVideoTrack? {
         didSet {
-            if speakerVideoTrack?.streamId != oldValue?.streamId {
-                if let oldValue = oldValue, let speakerVideoTrack = speakerVideoTrack {
-                    if let oldIndex = videoTracks.firstIndex(of: oldValue),
-                       let newIndex = videoTracks.firstIndex(of: speakerVideoTrack) {
-                        if oldIndex != newIndex {
-                            updateView(.refresh(indexes: (oldIndex, newIndex)))
-                        }
+            if let oldValue = oldValue, let speakerVideoTrack = speakerVideoTrack {
+
+                if let oldIndex = model.firstIndex(where: { $0.videoTrack.trackId == oldValue.trackId }),
+                   let newIndex = model.firstIndex(where: { $0.videoTrack.trackId == speakerVideoTrack.trackId }) {
+                    if oldIndex != newIndex {
+                        model[oldIndex].isCurrentSpeaker = false
+                        model[newIndex].isCurrentSpeaker = true
+                        updateView(.refresh(indexes: (oldIndex, newIndex)))
                     }
                 }
             }
@@ -331,11 +336,16 @@ final class HMSInteractor {
 
             if let videoTracks = self?.videoTracks {
 
-                var indexes = [Int]()
-
                 for (index, track) in videoTracks.enumerated() where track.streamId == info.streamId {
-                    indexes.append(index)
                     self?.videoTracks.remove(at: index)
+                }
+
+                var indexes = [Int]()
+                if let model = self?.model {
+                    for (index, item) in model.enumerated() where item.videoTrack.streamId == info.streamId {
+                        self?.model.remove(at: index)
+                        indexes.append(index)
+                    }
                 }
 
                 indexes.forEach { self?.updateView(.delete(index: $0)) }
@@ -384,7 +394,10 @@ final class HMSInteractor {
 
             self?.remoteStreams.append(stream)
             self?.videoTracks.append(videoTrack)
-            self?.updateView(.insert(index: (self?.videoTracks.count ?? 1) - 1))
+
+            let item = VideoModel(peer: peer, videoTrack: videoTrack)
+            self?.model.append(item)
+            self?.updateView(.insert(index: (self?.model.count ?? 1) - 1))
         }
     }
 
@@ -439,7 +452,16 @@ final class HMSInteractor {
 
         if let track = localVideoTrack {
             videoTracks.append(track)
-            let lastIndex = videoTracks.count > 0 ? videoTracks.count : 1
+
+            guard let peer = peers[stream.streamId] else {
+                print("Error: Could not find local peer!")
+                return
+            }
+
+            let item = VideoModel(peer: peer, videoTrack: track)
+            model.append(item)
+
+            let lastIndex = model.count > 0 ? model.count : 1
             updateView(.insert(index: lastIndex - 1))
         }
     }
