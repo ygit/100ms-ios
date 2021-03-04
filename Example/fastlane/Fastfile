@@ -1,0 +1,43 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+ENV["FIREBASE_TOKEN"] = "1//0gXmd2UmtDh6PCgYIARAAGBASNwF-L9IrahfukyD1EiteVSYNH-zhSSjWFbPly6hA1nGh4pxPMKR0ptadvl5ZesFWEOGn63obux8"
+
+update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Distributes the HMSVideoExample app on Firebase"
+  lane :upload_on_firebase do
+
+    increment_build_number 
+    
+    increment_version_number(
+      bump_type: "patch" 
+    )
+    
+    build_app(
+      scheme: "HMSVideo_Example",
+      export_options: {
+        method: "development",
+        provisioningProfiles: { 
+          "live.100ms.videoapp" => "match Development live.100ms.videoapp"
+        }
+      }
+    )
+    
+    firebase_app_distribution(
+      app: "1:1018747429814:ios:1ea1d6ba732bf85976d717"
+    )
+  end
+end
