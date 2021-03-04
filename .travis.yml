@@ -1,6 +1,4 @@
 language: swift
 osx_image: xcode12.2
-install:
-  - bundle install
 script:
-  - cd Example ; fastlane upload_on_firebase
+  - cd Example ; bundle install ; fastlane upload_on_firebase
