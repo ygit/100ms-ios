@@ -56,7 +56,7 @@ final class MeetingViewModel: NSObject,
                 }
                 indexes.append(index)
 
-                self?.hms.model = (self?.hms.model.sorted { $0.isPinned && !$1.isPinned })!
+                self?.hms.model.sort { $0.isPinned && !$1.isPinned }
 
                 self?.collectionView?.reloadItems(at: indexes)
 
@@ -169,18 +169,6 @@ final class MeetingViewModel: NSObject,
             return CGSize(width: (collectionView.frame.size.width / 2) - widthInsets,
                           height: (collectionView.frame.size.height / rows) - heightInsets)
         }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        insetForSectionAt section: Int) -> UIEdgeInsets {
-        sectionInsets
-    }
-
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        sectionInsets.left
     }
 
     // MARK: - Action Handlers

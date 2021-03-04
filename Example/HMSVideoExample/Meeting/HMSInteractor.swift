@@ -197,8 +197,9 @@ final class HMSInteractor {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
 
-        URLSession.shared.dataTask(with: request) { [weak self] data, _, error in
+        URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
 
+            print(#function, response)
             self?.parseToken(from: data, error: error) { token, error in
                 DispatchQueue.main.async {
                     completion(token, error)

@@ -159,11 +159,11 @@
 				EC462C9C25E95A4100BFF07C /* AppDelegate.swift */,
 				EC462CB725E9629700BFF07C /* Constants.swift */,
 				EC462C9D25E95A4100BFF07C /* Utilities.swift */,
+				ECDFC34925F069CA0036DAE7 /* FirebaseInteractor.swift */,
 				EC462C9E25E95A4100BFF07C /* Images.xcassets */,
 				607FACD41AFB9204008FA782 /* Info.plist */,
 				EC462CA825E95BC100BFF07C /* HMSVideo_Example.entitlements */,
 				EC8C4ADC25EA4CDF00E90469 /* LaunchScreen.storyboard */,
-				ECDFC34925F069CA0036DAE7 /* FirebaseInteractor.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";

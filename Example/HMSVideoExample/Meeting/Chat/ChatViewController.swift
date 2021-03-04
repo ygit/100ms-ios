@@ -73,7 +73,10 @@ class ChatViewController: UIViewController {
         _ = NotificationCenter.default.addObserver(forName: Constants.broadcastReceived,
                                                    object: nil,
                                                    queue: .main) { [weak self] _ in
-            self?.table.reloadData()
+            
+            let index = IndexPath(row: (self?.hms?.broadcasts.count ?? 1) - 1, section: 0)
+            self?.table.insertRows(at: [index], with: .automatic)
+            self?.table.scrollToRow(at: index, at: .top, animated: true)
         }
     }
 
@@ -89,14 +92,14 @@ class ChatViewController: UIViewController {
 
             let broadcast = [Constants.chatSenderName: hms.localPeer.name, Constants.chatMessage: message]
 
-            hms.send(broadcast) {
+            hms.send(broadcast) { [weak self] in
 
                 sender.isEnabled = true
-                self.textField.text = nil
+                self?.textField.text = nil
                 hms.broadcasts.append(broadcast)
-                self.table.reloadData()
                 let index = IndexPath(row: hms.broadcasts.count - 1, section: 0)
-                self.table.scrollToRow(at: index, at: .top, animated: true)
+                self?.table.insertRows(at: [index], with: .automatic)
+                self?.table.scrollToRow(at: index, at: .top, animated: true)
             }
         }
     }
