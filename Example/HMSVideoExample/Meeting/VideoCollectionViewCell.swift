@@ -39,16 +39,17 @@ class VideoCollectionViewCell: UICollectionViewCell {
     }
 
     @IBAction func pinTapped(_ sender: UIButton) {
-        sender.isSelected = !sender.isSelected
         model?.isPinned = sender.isSelected
+        sender.isSelected = !sender.isSelected
         NotificationCenter.default.post(name: Constants.pinTapped,
                                         object: nil,
                                         userInfo: [Constants.index: model?.indexPath])
     }
 
     @IBAction func muteTapped(_ sender: UIButton) {
-        sender.isSelected = !sender.isSelected
         model?.isMuted = sender.isSelected
+        model?.stream.audioTracks?.first?.enabled = sender.isSelected
+        sender.isSelected = !sender.isSelected
         NotificationCenter.default.post(name: Constants.muteTapped,
                                         object: nil,
                                         userInfo: [Constants.index: model?.indexPath])

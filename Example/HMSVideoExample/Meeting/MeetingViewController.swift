@@ -132,13 +132,6 @@ final class MeetingViewController: UIViewController {
     @IBAction func switchLayoutTapped(_ sender: UIButton) {
 
         sender.isSelected = !sender.isSelected
-
-//        switch viewModel.layout {
-//        case .grid:
-//            viewModel.layout = .portrait
-//        case .portrait:
-//            viewModel.layout = .grid
-//        }
     }
 
     @IBAction func volumeTapped(_ sender: UIButton) {

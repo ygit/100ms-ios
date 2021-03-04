@@ -13,6 +13,8 @@ class VideoModel {
 
     let peer: HMSPeer
 
+    let stream: HMSStream
+    
     let videoTrack: HMSVideoTrack
 
     var isCurrentSpeaker = false
@@ -23,8 +25,9 @@ class VideoModel {
 
     var indexPath: IndexPath?
 
-    init(peer: HMSPeer, videoTrack: HMSVideoTrack) {
+    init(_ peer: HMSPeer, _ stream: HMSStream, _ videoTrack: HMSVideoTrack) {
         self.peer = peer
+        self.stream = stream
         self.videoTrack = videoTrack
     }
 }

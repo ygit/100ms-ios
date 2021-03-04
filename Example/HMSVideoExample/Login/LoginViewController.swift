@@ -156,8 +156,8 @@ final class LoginViewController: UIViewController {
 
     @IBAction func cameraTapped(_ sender: UIButton) {
 
-        sender.isSelected = !sender.isSelected
         UserDefaults.standard.set(sender.isSelected, forKey: Constants.publishVideo)
+        sender.isSelected = !sender.isSelected
 
         if let session = session {
             if sender.isSelected {
@@ -176,8 +176,8 @@ final class LoginViewController: UIViewController {
 
     @IBAction func micTapped(_ sender: UIButton) {
         AVAudioSession.sharedInstance().requestRecordPermission { _ in }
-        sender.isSelected = !sender.isSelected
         UserDefaults.standard.set(sender.isSelected, forKey: Constants.publishAudio)
+        sender.isSelected = !sender.isSelected
     }
 
     @IBAction private  func startMeetingTapped(_ sender: UIButton) {

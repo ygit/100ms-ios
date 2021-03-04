@@ -396,7 +396,7 @@ final class HMSInteractor {
             self?.remoteStreams.append(stream)
             self?.videoTracks.append(videoTrack)
 
-            let item = VideoModel(peer: peer, videoTrack: videoTrack)
+            let item = VideoModel(peer, stream, videoTrack)
             self?.model.append(item)
             self?.updateView(.insert(index: (self?.model.count ?? 1) - 1))
         }
@@ -459,7 +459,7 @@ final class HMSInteractor {
                 return
             }
 
-            let item = VideoModel(peer: peer, videoTrack: track)
+            let item = VideoModel(peer, stream, track)
             model.append(item)
 
             let lastIndex = model.count > 0 ? model.count : 1
@@ -510,6 +510,12 @@ extension HMSInteractor {
             if let source = UserDefaults.standard.string(forKey: Constants.defaultVideoSource) {
                 self?.cameraSource = source
             }
+            
+            let publishVideo = UserDefaults.standard.object(forKey: Constants.publishVideo) as? Bool ?? true
+            self?.localStream?.videoTracks?.first?.enabled = publishVideo
+            
+            let publishAudio = UserDefaults.standard.object(forKey: Constants.publishAudio) as? Bool ?? true
+            self?.localStream?.audioTracks?.first?.enabled = publishAudio
 
             self?.setAudioDelay()
         }
