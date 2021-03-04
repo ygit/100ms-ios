@@ -11,26 +11,33 @@ import AVKit
 final class LoginViewController: UIViewController {
 
     // MARK: - View Properties
-    
-    @IBOutlet weak var joinMeetingIDField: UITextField! {
+
+    @IBOutlet private weak var containerStackView: UIStackView! {
+        didSet {
+            let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_:)))
+            containerStackView.addGestureRecognizer(tap)
+        }
+    }
+
+    @IBOutlet private weak var joinMeetingIDField: UITextField! {
         didSet {
             Utilities.drawCorner(on: joinMeetingIDField)
         }
     }
 
-    @IBOutlet weak var joinMeetingStackView: UIStackView! {
+    @IBOutlet private weak var joinMeetingStackView: UIStackView! {
         didSet {
             Utilities.drawCorner(on: joinMeetingStackView)
         }
     }
 
-    @IBOutlet weak var startMeetingStackView: UIStackView! {
+    @IBOutlet private weak var startMeetingStackView: UIStackView! {
         didSet {
             Utilities.drawCorner(on: startMeetingStackView)
         }
     }
 
-    @IBOutlet weak var joinMeetingButton: UIButton! {
+    @IBOutlet private weak var joinMeetingButton: UIButton! {
         didSet {
             Utilities.drawCorner(on: joinMeetingButton)
         }
@@ -42,31 +49,24 @@ final class LoginViewController: UIViewController {
         }
     }
 
-    @IBOutlet weak var publishVideoButton: UIButton! {
+    @IBOutlet private weak var publishVideoButton: UIButton! {
         didSet {
             UserDefaults.standard.set(false, forKey: Constants.publishVideo)
         }
     }
 
-    @IBOutlet weak var publishAudioButton: UIButton! {
+    @IBOutlet private weak var publishAudioButton: UIButton! {
         didSet {
             UserDefaults.standard.set(false, forKey: Constants.publishAudio)
         }
     }
 
-    @IBOutlet weak var cameraPreview: UIView! {
-        didSet {
-            let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_:)))
-            cameraPreview.addGestureRecognizer(tap)
-        }
-    }
+    @IBOutlet weak var cameraPreview: UIView!
 
-    var session: AVCaptureSession?
-    var input: AVCaptureDeviceInput?
-    var output: AVCapturePhotoOutput?
-    var previewLayer: AVCaptureVideoPreviewLayer?
-
-    var keyboardHeight = CGFloat(0)
+    private var session: AVCaptureSession?
+    private var input: AVCaptureDeviceInput?
+    private var output: AVCapturePhotoOutput?
+    private var previewLayer: AVCaptureVideoPreviewLayer?
 
     // MARK: - View Lifecycle
 
