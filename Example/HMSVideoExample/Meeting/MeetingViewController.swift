@@ -165,15 +165,15 @@ final class MeetingViewController: UIViewController {
     }
 
     @IBAction func videoTapped(_ sender: UIButton) {
-        sender.isSelected = !sender.isSelected
         viewModel.switchVideo(isOn: sender.isSelected)
         UserDefaults.standard.set(sender.isSelected, forKey: Constants.publishVideo)
+        sender.isSelected = !sender.isSelected
     }
 
     @IBAction func micTapped(_ sender: UIButton) {
-        sender.isSelected = !sender.isSelected
         viewModel.switchAudio(isOn: sender.isSelected)
         UserDefaults.standard.set(sender.isSelected, forKey: Constants.publishAudio)
+        sender.isSelected = !sender.isSelected
     }
 
     @IBAction func chatTapped(_ sender: UIButton) {
