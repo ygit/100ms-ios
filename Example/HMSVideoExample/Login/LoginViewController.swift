@@ -12,6 +12,12 @@ final class LoginViewController: UIViewController {
 
     // MARK: - View Properties
 
+    @IBOutlet weak var joinMeetingIDField: UITextField! {
+        didSet {
+            Utilities.drawCorner(on: joinMeetingIDField)
+        }
+    }
+    
     @IBOutlet weak var joinMeetingStackView: UIStackView! {
         didSet {
             Utilities.drawCorner(on: joinMeetingStackView)
@@ -61,6 +67,19 @@ final class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         setupCameraPreview()
+        
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func willTransition(to newCollection: UITraitCollection,
+                                 with coordinator: UIViewControllerTransitionCoordinator) {
+
+        super.willTransition(to: newCollection, with: coordinator)
+
+        coordinator.animate { _ in
+            self.updateCameraView()
+        }
     }
 
     // MARK: - View Modifiers
@@ -97,6 +116,9 @@ final class LoginViewController: UIViewController {
                 output.capturePhoto(with: settings, delegate: self)
             }
         }
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_:)))
+        cameraPreview.addGestureRecognizer(tap)
     }
 
     func getDevice(position: AVCaptureDevice.Position) -> AVCaptureDevice? {
@@ -109,8 +131,18 @@ final class LoginViewController: UIViewController {
         }
         return nil
     }
+    
+    func updateCameraView() {
+        let orientation = UIApplication.shared.statusBarOrientation
+        previewLayer?.connection?.videoOrientation = AVCaptureVideoOrientation(rawValue: orientation.rawValue) ?? .portrait
+        previewLayer?.frame = cameraPreview.bounds
+    }
 
     // MARK: - Action Handlers
+    
+    @objc func dismissKeyboard(_ sender: Any) {
+        joinMeetingIDField.resignFirstResponder()
+    }
 
     @IBAction func cameraTapped(_ sender: UIButton) {
 
@@ -145,39 +177,55 @@ final class LoginViewController: UIViewController {
     func showInputAlert(flow: MeetingFlow) {
 
         let title: String
-        let roomPlaceholder: String
-
+        var message: String?
+        
         if flow == .join {
             title = "Join a Meeting"
-            roomPlaceholder = "Enter Room ID"
+            message = "Enter your Name"
         } else {
             title = "Start a Meeting"
-            roomPlaceholder = "Enter Room Name"
         }
 
         let alertController = UIAlertController(title: title,
-                                                message: nil,
+                                                message: message,
                                                 preferredStyle: .alert)
 
-        alertController.addTextField { (textField) in
+        alertController.addTextField { textField in
             textField.placeholder = "Enter your Name"
+            textField.clearButtonMode = .always
             textField.text = UserDefaults.standard.string(forKey: Constants.defaultName) ?? "iOS User"
         }
 
-        alertController.addTextField { textField in
-            textField.placeholder = roomPlaceholder
-            if flow == .join {
-                textField.text = UserDefaults.standard.string(forKey: Constants.roomName) ?? "603f6d1f89a96e73b23d1958"
-            } else {
+        if flow == .start {
+            alertController.addTextField { textField in
+                textField.placeholder = "Enter Room Name"
+                textField.clearButtonMode = .always
                 textField.text = "My Meeting"
             }
         }
 
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         alertController.addAction(UIAlertAction(title: "Submit", style: .default) { [weak self] _ in
+            
+            var room: String
+            
+            if flow == .join {
+                if !(self?.joinMeetingIDField.text!.isEmpty)! {
+                    room = (self?.joinMeetingIDField.text!)!
+                } else {
+                    self?.showErrorAlert(with: "Enter Meeting ID!")
+                    return
+                }
+            } else {
+                if !(alertController.textFields?[1].text!.isEmpty)! {
+                    room = (alertController.textFields?[1].text!)!
+                } else {
+                    self?.showErrorAlert(with: "Enter Meeting Name!")
+                    return
+                }
+            }
 
             guard let name = alertController.textFields?[0].text, !name.isEmpty,
-                  let room = alertController.textFields?[1].text, !room.isEmpty,
                   let viewController = UIStoryboard(name: Constants.meeting, bundle: nil)
                     .instantiateInitialViewController() as? MeetingViewController
             else {
@@ -188,8 +236,8 @@ final class LoginViewController: UIViewController {
             }
 
             viewController.user = name
+            viewController.flow = flow            
             viewController.roomName = room
-            viewController.flow = flow
 
             self?.save(name, room)
 
@@ -228,22 +276,6 @@ final class LoginViewController: UIViewController {
         }
 
         present(viewController, animated: true)
-    }
-
-    override func willTransition(to newCollection: UITraitCollection,
-                                 with coordinator: UIViewControllerTransitionCoordinator) {
-
-        super.willTransition(to: newCollection, with: coordinator)
-
-        coordinator.animate { _ in
-            self.updateCameraView()
-        }
-    }
-
-    func updateCameraView() {
-        let orientation = UIApplication.shared.statusBarOrientation
-        previewLayer?.connection?.videoOrientation = AVCaptureVideoOrientation(rawValue: orientation.rawValue) ?? .portrait
-        previewLayer?.frame = cameraPreview.bounds
     }
 }
 
