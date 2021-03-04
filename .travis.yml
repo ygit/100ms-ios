@@ -1,4 +1,4 @@
 language: swift
 osx_image: xcode12.2
 script:
-  - cd Example ; bundle install ; fastlane upload_on_firebase
+  - cd Example ; bundle install ; gem install cocoapods ; pod install --verbose ; fastlane upload_on_firebase
