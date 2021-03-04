@@ -75,6 +75,11 @@ final class LoginViewController: UIViewController {
 
         setupCameraPreview()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateCameraView()
+    }
 
     override func willTransition(to newCollection: UITraitCollection,
                                  with coordinator: UIViewControllerTransitionCoordinator) {
