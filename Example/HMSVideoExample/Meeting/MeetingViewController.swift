@@ -192,7 +192,7 @@ final class MeetingViewController: UIViewController {
     }
 
     @IBAction func disconnectTapped(_ sender: UIButton) {
-        let alertController = UIAlertController(title: "Exit Call",
+        let alertController = UIAlertController(title: "Leave Call",
                                                 message: nil,
                                                 preferredStyle: .alert)
 

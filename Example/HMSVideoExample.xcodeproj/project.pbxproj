@@ -30,6 +30,7 @@
 		ECDFC34A25F069CA0036DAE7 /* FirebaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFC34925F069CA0036DAE7 /* FirebaseInteractor.swift */; };
 		ECDFC35025F07AC30036DAE7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ECDFC34F25F07AC30036DAE7 /* GoogleService-Info.plist */; };
 		ECE5D2C725ED592200B8D7E4 /* BadgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE5D2C625ED592200B8D7E4 /* BadgeButton.swift */; };
+		ECF0C4AB25F138630021537A /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF0C4AA25F138630021537A /* ChatTableViewCell.swift */; };
 		ECF26DA025EBDB5700BFB3B9 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF26D9F25EBDB5700BFB3B9 /* ChatViewController.swift */; };
 		ECF26DA925EBDBC300BFB3B9 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECF26DAB25EBDBC300BFB3B9 /* Chat.storyboard */; };
 /* End PBXBuildFile section */
@@ -85,6 +86,7 @@
 		ECDFC34925F069CA0036DAE7 /* FirebaseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FirebaseInteractor.swift; path = "Supporting Files/FirebaseInteractor.swift"; sourceTree = "<group>"; };
 		ECDFC34F25F07AC30036DAE7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ECE5D2C625ED592200B8D7E4 /* BadgeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeButton.swift; sourceTree = "<group>"; };
+		ECF0C4AA25F138630021537A /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		ECF26D9F25EBDB5700BFB3B9 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		ECF26DAA25EBDBC300BFB3B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Chat.storyboard; sourceTree = "<group>"; };
 		ECF26DAF25EBDBC500BFB3B9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Chat.strings; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				ECF26D9F25EBDB5700BFB3B9 /* ChatViewController.swift */,
 				ECF26DAB25EBDBC300BFB3B9 /* Chat.storyboard */,
 				ECE5D2C625ED592200B8D7E4 /* BadgeButton.swift */,
+				ECF0C4AA25F138630021537A /* ChatTableViewCell.swift */,
 			);
 			name = Chat;
 			path = Meeting/Chat;
@@ -485,6 +488,7 @@
 				EC462C9725E95A3200BFF07C /* MeetingViewController.swift in Sources */,
 				EC462CB825E9629700BFF07C /* Constants.swift in Sources */,
 				ECF26DA025EBDB5700BFB3B9 /* ChatViewController.swift in Sources */,
+				ECF0C4AB25F138630021537A /* ChatTableViewCell.swift in Sources */,
 				ECDFC34A25F069CA0036DAE7 /* FirebaseInteractor.swift in Sources */,
 				ECA9BECC25EB6E3B0095C4FD /* SettingsViewController.swift in Sources */,
 			);

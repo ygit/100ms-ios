@@ -16,6 +16,7 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
+    
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
@@ -90,7 +91,8 @@ class ChatViewController: UIViewController {
 
             sender.isEnabled = false
 
-            let broadcast = [Constants.chatSenderName: hms.localPeer.name, Constants.chatMessage: message]
+            let broadcast = [ Constants.chatSenderName: hms.localPeer.name,
+                              Constants.chatMessage: message ]
 
             hms.send(broadcast) { [weak self] in
 
@@ -112,31 +114,28 @@ extension ChatViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.resuseIdentifier, for: indexPath)
-
+        
         guard let chat = hms?.broadcasts[indexPath.row],
               let sender = chat[Constants.chatSenderName] as? String,
-              let message = chat[Constants.chatMessage] as? String
+              let message = chat[Constants.chatMessage] as? String,
+              let cell = tableView.dequeueReusableCell(withIdentifier: Constants.resuseIdentifier,
+                                                       for: indexPath) as? ChatTableViewCell
         else {
             return UITableViewCell()
         }
+        
+        if sender.lowercased() == hms?.localPeer.name.lowercased() {
+            cell.nameLabel.textAlignment = .right
+            cell.messageLabel.textAlignment = .right
+        } else {
+            cell.nameLabel.textAlignment = .left
+            cell.messageLabel.textAlignment = .left
+        }
 
-        cell.textLabel?.font = .preferredFont(forTextStyle: .headline)
-        cell.textLabel?.text = sender
-
-        cell.detailTextLabel?.numberOfLines = 0
-        cell.detailTextLabel?.lineBreakMode = .byWordWrapping
-
-        cell.detailTextLabel?.font = .preferredFont(forTextStyle: .body)
-
-        cell.detailTextLabel?.text = message
+        cell.nameLabel.text = sender
+        cell.messageLabel.text = message
 
         return cell
-    }
-
-    private func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        50
     }
 }
 
