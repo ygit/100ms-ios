@@ -124,7 +124,7 @@ class SettingsViewController: UIViewController {
             }
         }
     }
-    
+
     @IBOutlet weak var audioBitrateField: UITextField! {
         didSet {
             if let rate = UserDefaults.standard.string(forKey: Constants.audioBitRate) {
@@ -132,7 +132,7 @@ class SettingsViewController: UIViewController {
             }
         }
     }
-    
+
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {

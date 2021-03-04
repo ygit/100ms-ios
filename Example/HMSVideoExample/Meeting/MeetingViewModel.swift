@@ -15,13 +15,13 @@ final class MeetingViewModel: NSObject,
 
     private(set) var hms: HMSInteractor!
 
-    private weak var collectionView: UICollectionView!
+    weak var collectionView: UICollectionView?
 
     private let sectionInsets = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
 
     internal var layout = Layout.grid {
         didSet {
-            collectionView.reloadData()
+            collectionView?.reloadData()
         }
     }
 
@@ -31,8 +31,8 @@ final class MeetingViewModel: NSObject,
 
         super.init()
 
-        hms = HMSInteractor(for: user, in: room, flow) { [weak self] (indexes) in
-            self?.updateUI(indexes)
+        hms = HMSInteractor(for: user, in: room, flow) { [weak self] state in
+            self?.updateView(for: state)
         }
 
         setup(collectionView)
@@ -48,54 +48,38 @@ final class MeetingViewModel: NSObject,
 
     // MARK: - View Modifiers
 
-    func updateUI(_ indexes: (Int, Int)?) {
-        guard let indexes = indexes else {
-            collectionView.reloadData()
-            return
-        }
+    func updateView(for state: VideoCellState) {
 
-        let oldIndex: IndexPath
-        let newIndex: IndexPath
+        switch state {
 
-        switch layout {
-        case .grid:
-            oldIndex = IndexPath(item: indexes.0, section: 0)
-            newIndex = IndexPath(item: indexes.1, section: 0)
-        case .portrait:
-            if indexes.0 == 0 {
-                oldIndex = IndexPath(item: 0, section: 0)
-            } else {
-                oldIndex = IndexPath(item: indexes.0 - 1, section: 1)
+        case .insert(let index):
+
+            print(#function, index)
+            collectionView?.insertItems(at: [IndexPath(item: index, section: 0)])
+
+        case .delete(let index):
+
+            print(#function, index)
+            collectionView?.deleteItems(at: [IndexPath(item: index, section: 0)])
+
+        case .refresh(let indexes):
+
+            print(#function, indexes)
+
+            let oldIndex = IndexPath(item: indexes.0, section: 0)
+            let newIndex = IndexPath(item: indexes.1, section: 0)
+
+            if let oldCell = collectionView?.cellForItem(at: oldIndex) as? VideoCollectionViewCell {
+                oldCell.isSpeaker = false
             }
-
-            if indexes.1 == 0 {
-                newIndex = IndexPath(item: 0, section: 0)
-            } else {
-                newIndex = IndexPath(item: indexes.1 - 1, section: 1)
+            if let newCell = collectionView?.cellForItem(at: newIndex) as? VideoCollectionViewCell {
+                newCell.isSpeaker = true
             }
         }
-
-        if let oldCell = collectionView.cellForItem(at: oldIndex) as? VideoCollectionViewCell,
-           let newCell = collectionView.cellForItem(at: newIndex) as? VideoCollectionViewCell {
-            oldCell.isSpeaker = false
-            newCell.isSpeaker = true
-        }
-    }
-
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        hms.videoTracks.count > 0 ? (layout == .grid ? 1 : 2) : 0
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch layout {
-        case .grid:
-            return hms.videoTracks.count
-        case .portrait:
-            if hms.videoTracks.count == 0 {
-                return 0
-            }
-            return section == 0 ? 1 : (hms.videoTracks.count - 1)
-        }
+        hms.videoTracks.count
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -108,12 +92,12 @@ final class MeetingViewModel: NSObject,
             return UICollectionViewCell()
         }
 
-        updateView(at: indexPath, for: cell)
+        updateCell(at: indexPath, for: cell)
 
         return cell
     }
 
-    func updateView(at indexPath: IndexPath, for cell: VideoCollectionViewCell) {
+    func updateCell(at indexPath: IndexPath, for cell: VideoCollectionViewCell) {
 
         let track = hms.videoTracks[indexPath.row]
 
@@ -134,7 +118,6 @@ final class MeetingViewModel: NSObject,
         cell.nameLabel.text = peer?.name
 
         cell.isSpeaker = track.trackId == hms.speakerVideoTrack?.trackId
-//        cell.isSpeaker = false
     }
 
     func collectionView(_ collectionView: UICollectionView,

@@ -75,7 +75,7 @@ final class LoginViewController: UIViewController {
 
         setupCameraPreview()
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         updateCameraView()
@@ -130,8 +130,9 @@ final class LoginViewController: UIViewController {
 
     func getDevice(position: AVCaptureDevice.Position) -> AVCaptureDevice? {
         let devices = AVCaptureDevice.devices()
-        for de in devices {
-            let deviceConverted = de
+//        let devices = AVCaptureDevice.DiscoverySession
+        for device in devices {
+            let deviceConverted = device
             if deviceConverted.position == position {
                 return deviceConverted
             }
@@ -141,7 +142,8 @@ final class LoginViewController: UIViewController {
 
     func updateCameraView() {
         let orientation = UIApplication.shared.statusBarOrientation
-        previewLayer?.connection?.videoOrientation = AVCaptureVideoOrientation(rawValue: orientation.rawValue) ?? .portrait
+        let videoOrientation = AVCaptureVideoOrientation(rawValue: orientation.rawValue) ?? .portrait
+        previewLayer?.connection?.videoOrientation = videoOrientation
         previewLayer?.frame = cameraPreview.bounds
     }
 

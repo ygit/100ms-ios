@@ -15,7 +15,7 @@ final class HMSInteractor {
 
     private let user: String
 
-    private var updateUI: ((Int, Int)?) -> Void
+    private var updateView: (VideoCellState) -> Void
 
     private(set) var localPeer: HMSPeer!
     private(set) var client: HMSClient!
@@ -28,11 +28,7 @@ final class HMSInteractor {
 
     private(set) var peers = [String: HMSPeer]()
     private(set) var remoteStreams = [HMSStream]()
-    private(set) var videoTracks = [HMSVideoTrack]() {
-        didSet {
-            updateUI(nil)
-        }
-    }
+    private(set) var videoTracks = [HMSVideoTrack]()
 
     private(set) var localStream: HMSStream?
     private(set) var localAudioTrack: HMSAudioTrack?
@@ -56,11 +52,11 @@ final class HMSInteractor {
                 if let oldValue = oldValue, let speakerVideoTrack = speakerVideoTrack {
                     if let oldIndex = videoTracks.firstIndex(of: oldValue),
                        let newIndex = videoTracks.firstIndex(of: speakerVideoTrack) {
-                        updateUI((oldIndex, newIndex))
-                        return
+                        if oldIndex != newIndex {
+                            updateView(.refresh(indexes: (oldIndex, newIndex)))
+                        }
                     }
                 }
-                updateUI(nil)
             }
         }
     }
@@ -109,11 +105,11 @@ final class HMSInteractor {
 
     // MARK: - Setup Stream
 
-    init(for user: String, in room: String, _ flow: MeetingFlow, _ callback: @escaping ((Int, Int)?) -> Void) {
+    init(for user: String, in room: String, _ flow: MeetingFlow, _ callback: @escaping (VideoCellState) -> Void) {
 
         self.user = user
         self.flow = flow
-        self.updateUI = callback
+        self.updateView = callback
 
         setup(room)
 
@@ -330,8 +326,20 @@ final class HMSInteractor {
         }
 
         client.onStreamRemove = { [weak self] room, peer, info in
+
             print("onStreamRemove: ", room.roomId, peer.name, info.streamId)
-            self?.videoTracks.removeAll { $0.streamId == info.streamId }
+
+            if let videoTracks = self?.videoTracks {
+
+                var indexes = [Int]()
+
+                for (index, track) in videoTracks.enumerated() where track.streamId == info.streamId {
+                    indexes.append(index)
+                    self?.videoTracks.remove(at: index)
+                }
+
+                indexes.forEach { self?.updateView(.delete(index: $0)) }
+            }
         }
 
         client.onBroadcast = { [weak self] room, peer, data in
@@ -365,23 +373,25 @@ final class HMSInteractor {
 
         peers[info.streamId] = peer
 
-        client.subscribe(info, room: room) { [weak self] (stream, _) in
+        client.subscribe(info, room: room) { [weak self] (stream, error) in
 
             guard let stream = stream,
                   let videoTrack = stream.videoTracks?.first
             else {
+                print(error?.localizedDescription ?? "Client Subscribe Error")
                 return
             }
 
             self?.remoteStreams.append(stream)
             self?.videoTracks.append(videoTrack)
+            self?.updateView(.insert(index: (self?.videoTracks.count ?? 1) - 1))
         }
     }
 
     func publish() {
 
         let userDefaults = UserDefaults.standard
-        
+
         let constraints = HMSMediaStreamConstraints()
         constraints.shouldPublishAudio = userDefaults.object(forKey: Constants.publishAudio) as? Bool ?? true
         constraints.shouldPublishVideo = userDefaults.object(forKey: Constants.publishVideo) as? Bool ?? true
@@ -390,7 +400,7 @@ final class HMSInteractor {
         constraints.frameRate = userDefaults.object(forKey: Constants.videoFrameRate) as? Int ?? 25
         constraints.resolution = resolution
         constraints.codec = codec
-        
+
         guard let localStream = try? client.getLocalStream(constraints) else {
             return
         }
@@ -429,9 +439,10 @@ final class HMSInteractor {
 
         if let track = localVideoTrack {
             videoTracks.append(track)
+            let lastIndex = videoTracks.count > 0 ? videoTracks.count : 1
+            updateView(.insert(index: lastIndex - 1))
         }
     }
-
 }
 
 // MARK: - Action Handlers
@@ -476,8 +487,6 @@ extension HMSInteractor {
             if let source = UserDefaults.standard.string(forKey: Constants.defaultVideoSource) {
                 self?.cameraSource = source
             }
-
-            self?.updateUI(nil)
 
             self?.setAudioDelay()
         }

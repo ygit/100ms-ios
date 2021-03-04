@@ -20,12 +20,12 @@ struct Constants {
 
     static let tokenQuery = UserDefaults.standard.string(forKey: tokenQueryKey) ?? "api/token"
     //    static let getToken = server + "?api=token"
-    
+
     static let getTokenURL = server + tokenQuery
 
     static let createRoomQuery = UserDefaults.standard.string(forKey: createRoomQueryKey) ?? "api/room_token"
     //    static let createRoom = server + "?api=room"
-    
+
     static let createRoomURL = server + createRoomQuery
 
     static let urlEmpty = "Token & Endpoint URLs cannot be nil!"
@@ -91,7 +91,7 @@ struct Constants {
     static let showVideoPreview = "showVideoPreview"
 
     static let videoFrameRate = "videoFrameRate"
-    
+
     static let audioBitRate = "audioBitRate"
 
     static let defaultVideoSource = "defaultVideoSource"

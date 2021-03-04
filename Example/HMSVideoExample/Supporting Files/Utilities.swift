@@ -63,3 +63,9 @@ enum MeetingFlow {
 enum Layout {
     case grid, portrait
 }
+
+enum VideoCellState {
+    case insert(index: Int)
+    case delete(index: Int)
+    case refresh(indexes: (Int, Int))
+}
