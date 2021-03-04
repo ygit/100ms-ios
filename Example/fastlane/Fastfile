@@ -10,7 +10,7 @@
 #     https://docs.fastlane.tools/plugins/available-plugins
 #
 
-ENV["FIREBASE_TOKEN"] = "1//0gKAKIORrd2OsCgYIARAAGBASNwF-L9IrhPMFFXJZvcPEtTODz3fnj66nCGIv_QCRkQNmIzW0r_phtoE9FesCSQodguO6-Tn0pzs"
+ENV["FIREBASE_TOKEN"] = "1//0gXmd2UmtDh6PCgYIARAAGBASNwF-L9IrahfukyD1EiteVSYNH-zhSSjWFbPly6hA1nGh4pxPMKR0ptadvl5ZesFWEOGn63obux8"
 
 update_fastlane
 
@@ -37,7 +37,7 @@ platform :ios do
     )
     
     firebase_app_distribution(
-      app: "1:1018747429814:ios:97b0916de004d8ad76d717"
+      app: "1:1018747429814:ios:1ea1d6ba732bf85976d717"
     )
   end
 end

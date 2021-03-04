@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1018747429814-2ln9mir28ivm34lltfqfdpje5t7lpq01.apps.googleusercontent.com</string>
+	<string>1018747429814-v3qeb6cfegmchc16grpono1s2a0vinvs.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1018747429814-2ln9mir28ivm34lltfqfdpje5t7lpq01</string>
+	<string>com.googleusercontent.apps.1018747429814-v3qeb6cfegmchc16grpono1s2a0vinvs</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDMUe5o2LPeP1GDPhFYG_wrQPLgsgxQIMs</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.yourorg.example</string>
+	<string>live.100ms.videoapp</string>
 	<key>PROJECT_ID</key>
 	<string>hms-public-sample</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1018747429814:ios:97b0916de004d8ad76d717</string>
+	<string>1:1018747429814:ios:1ea1d6ba732bf85976d717</string>
 </dict>
 </plist>
