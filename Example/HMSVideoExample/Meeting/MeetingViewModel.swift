@@ -152,12 +152,12 @@ final class MeetingViewModel: NSObject,
 
         switch layout {
         case .grid:
-            if hms.videoTracks.count < 4 {
+            if hms.videoTracks.count < 3 {
                 let count = CGFloat(hms.videoTracks.count)
                 return CGSize(width: collectionView.frame.size.width - widthInsets,
                               height: (collectionView.frame.size.height / count) - heightInsets)
             } else {
-                let rows = UserDefaults.standard.object(forKey: Constants.maximumRows) as? CGFloat ?? 3.0
+                let rows = UserDefaults.standard.object(forKey: Constants.maximumRows) as? CGFloat ?? 2.0
                 return CGSize(width: (collectionView.frame.size.width / 2) - widthInsets,
                               height: (collectionView.frame.size.height / rows) - heightInsets)
             }

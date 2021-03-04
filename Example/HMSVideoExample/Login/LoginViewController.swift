@@ -51,13 +51,13 @@ final class LoginViewController: UIViewController {
 
     @IBOutlet private weak var publishVideoButton: UIButton! {
         didSet {
-            UserDefaults.standard.set(false, forKey: Constants.publishVideo)
+            UserDefaults.standard.set(true, forKey: Constants.publishVideo)
         }
     }
 
     @IBOutlet private weak var publishAudioButton: UIButton! {
         didSet {
-            UserDefaults.standard.set(false, forKey: Constants.publishAudio)
+            UserDefaults.standard.set(true, forKey: Constants.publishAudio)
         }
     }
 

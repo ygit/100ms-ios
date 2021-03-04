@@ -44,19 +44,19 @@ class SettingsViewController: UIViewController {
             socketEndpointField.text = Constants.endpoint
         }
     }
-    
+
     @IBOutlet weak var tokenField: UITextField! {
         didSet {
-            tokenField.text = Constants.getToken
+            tokenField.text = Constants.tokenQuery
         }
     }
-    
+
     @IBOutlet weak var createRoomField: UITextField! {
         didSet {
-            createRoomField.text = Constants.createRoom
+            createRoomField.text = Constants.createRoomQuery
         }
     }
-    
+
     @IBOutlet weak var publishVideoSwitch: UISwitch! {
         didSet {
             if let isOn = UserDefaults.standard.object(forKey: Constants.publishVideo) as? Bool {
@@ -124,7 +124,15 @@ class SettingsViewController: UIViewController {
             }
         }
     }
-
+    
+    @IBOutlet weak var audioBitrateField: UITextField! {
+        didSet {
+            if let rate = UserDefaults.standard.string(forKey: Constants.audioBitRate) {
+                audioBitrateField.text = rate
+            }
+        }
+    }
+    
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
@@ -143,7 +151,7 @@ class SettingsViewController: UIViewController {
         let sourceIndex = defaultVideoSource.firstIndex(of: source) ?? 0
         videoSourcePicker.selectRow(sourceIndex, inComponent: 0, animated: false)
 
-        let codec = userDefaults.string(forKey: Constants.videoCodec) ?? "H264"
+        let codec = userDefaults.string(forKey: Constants.videoCodec) ?? "VP8"
         let codecIndex = videoCodecs.firstIndex(of: codec) ?? 0
         videoCodecPicker.selectRow(codecIndex, inComponent: 0, animated: false)
 
@@ -173,10 +181,10 @@ class SettingsViewController: UIViewController {
                          forKey: Constants.serverURLKey)
         userDefaults.set(!socketEndpointField.text!.isEmpty ? socketEndpointField.text : Constants.endpoint,
                          forKey: Constants.socketEndpointKey)
-        userDefaults.set(!tokenField.text!.isEmpty ? tokenField.text : Constants.getToken,
-                         forKey: Constants.getTokenKey)
-        userDefaults.set(!createRoomField.text!.isEmpty ? createRoomField.text : Constants.createRoom,
-                         forKey: Constants.createRoomKey)
+        userDefaults.set(!tokenField.text!.isEmpty ? tokenField.text : Constants.getTokenURL,
+                         forKey: Constants.tokenQueryKey)
+        userDefaults.set(!createRoomField.text!.isEmpty ? createRoomField.text : Constants.createRoomURL,
+                         forKey: Constants.createRoomQueryKey)
         userDefaults.set(publishVideoSwitch.isOn, forKey: Constants.publishVideo)
         userDefaults.set(publishAudioSwitch.isOn, forKey: Constants.publishAudio)
         userDefaults.set(!maximumRowsField.text!.isEmpty ? maximumRowsField.text : "2",
@@ -189,6 +197,8 @@ class SettingsViewController: UIViewController {
         userDefaults.set(showVideoPreviewSwitch.isOn, forKey: Constants.showVideoPreview)
         userDefaults.set(!videoFrameRateField.text!.isEmpty ? videoFrameRateField.text : "25",
                          forKey: Constants.videoFrameRate)
+        userDefaults.set(!audioBitrateField.text!.isEmpty ? audioBitrateField.text : "0",
+                         forKey: Constants.audioBitRate)
 
         let source = defaultVideoSource[videoSourcePicker.selectedRow(inComponent: 0)]
         userDefaults.set(source, forKey: Constants.defaultVideoSource)

@@ -18,11 +18,15 @@ struct Constants {
 
     static let endpoint = UserDefaults.standard.string(forKey: socketEndpointKey) ?? "wss://prod-in.100ms.live/ws"
 
-    static let getToken = UserDefaults.standard.string(forKey: getTokenKey) ?? server + "api/token"
+    static let tokenQuery = UserDefaults.standard.string(forKey: tokenQueryKey) ?? "api/token"
     //    static let getToken = server + "?api=token"
+    
+    static let getTokenURL = server + tokenQuery
 
-    static let createRoom = UserDefaults.standard.string(forKey: createRoomKey) ?? server + "api/room_token"
+    static let createRoomQuery = UserDefaults.standard.string(forKey: createRoomQueryKey) ?? "api/room_token"
     //    static let createRoom = server + "?api=room"
+    
+    static let createRoomURL = server + createRoomQuery
 
     static let urlEmpty = "Token & Endpoint URLs cannot be nil!"
 
@@ -65,10 +69,10 @@ struct Constants {
     static let serverURLKey = "serverURL"
 
     static let socketEndpointKey = "socketEndpoint"
-    
-    static let getTokenKey = "getToken"
-    
-    static let createRoomKey = "createRoom"
+
+    static let tokenQueryKey = "getToken"
+
+    static let createRoomQueryKey = "createRoom"
 
     static let roomName = "roomName"
 
@@ -87,6 +91,8 @@ struct Constants {
     static let showVideoPreview = "showVideoPreview"
 
     static let videoFrameRate = "videoFrameRate"
+    
+    static let audioBitRate = "audioBitRate"
 
     static let defaultVideoSource = "defaultVideoSource"
 

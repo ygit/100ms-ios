@@ -66,15 +66,15 @@ final class HMSInteractor {
     }
 
     private var codec: HMSVideoCodec {
-        let codecString = UserDefaults.standard.string(forKey: Constants.videoCodec) ?? "H264"
+        let codecString = UserDefaults.standard.string(forKey: Constants.videoCodec) ?? "VP8"
 
         switch codecString {
-        case "VP8":
-            return .VP8
+        case "H264":
+            return .H264
         case "VP9":
             return .VP9
         default:
-            return .H264
+            return .VP8
         }
     }
 
@@ -124,7 +124,7 @@ final class HMSInteractor {
 
         switch flow {
         case .join:
-            fetchToken(Constants.endpoint, Constants.getToken, room) { [weak self] token, error in
+            fetchToken(Constants.endpoint, Constants.getTokenURL, room) { [weak self] token, error in
 
                 guard error == nil, let token = token, let strongSelf = self
                 else {
@@ -148,7 +148,7 @@ final class HMSInteractor {
                     return
                 }
 
-                strongSelf.fetchToken(Constants.endpoint, Constants.getToken, roomID) { [weak self] token, error in
+                strongSelf.fetchToken(Constants.endpoint, Constants.getTokenURL, roomID) { [weak self] token, error in
                     guard error == nil, let token = token, let strongSelf = self
                     else {
                         let error = error ?? CustomError(title: "Fetch Token Error")
@@ -232,7 +232,7 @@ final class HMSInteractor {
 
     func createRoom(name: String, completion: @escaping (Bool, String?, Error?) -> Void) {
 
-        guard let createRoomURL = URL(string: Constants.createRoom)
+        guard let createRoomURL = URL(string: Constants.createRoomURL)
         else {
             completion(false, nil, CustomError(title: "Create Room URL Error"))
             return
@@ -381,15 +381,16 @@ final class HMSInteractor {
     func publish() {
 
         let userDefaults = UserDefaults.standard
-
+        
         let constraints = HMSMediaStreamConstraints()
         constraints.shouldPublishAudio = userDefaults.object(forKey: Constants.publishAudio) as? Bool ?? true
         constraints.shouldPublishVideo = userDefaults.object(forKey: Constants.publishVideo) as? Bool ?? true
-        constraints.codec = codec
         constraints.bitrate = userDefaults.object(forKey: Constants.videoBitRate) as? Int ?? 256
+        constraints.audioBitrate = userDefaults.object(forKey: Constants.audioBitRate) as? Int ?? 0
         constraints.frameRate = userDefaults.object(forKey: Constants.videoFrameRate) as? Int ?? 25
         constraints.resolution = resolution
-
+        constraints.codec = codec
+        
         guard let localStream = try? client.getLocalStream(constraints) else {
             return
         }
@@ -460,6 +461,7 @@ extension HMSInteractor {
             let constraints = HMSMediaStreamConstraints()
 
             constraints.bitrate = userDefaults.object(forKey: Constants.videoBitRate) as? Int ?? 256
+            constraints.audioBitrate = userDefaults.object(forKey: Constants.audioBitRate) as? Int ?? 0
             constraints.frameRate = userDefaults.object(forKey: Constants.videoFrameRate) as? Int ?? 25
             constraints.resolution = self?.resolution ?? .QHD
 

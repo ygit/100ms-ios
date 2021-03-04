@@ -32,7 +32,7 @@ final class MeetingViewController: UIViewController {
     @IBOutlet weak var publishVideoButton: UIButton! {
         didSet {
             if let publishVideo = UserDefaults.standard.object(forKey: Constants.publishVideo) as? Bool {
-                publishVideoButton.isSelected = publishVideo
+                publishVideoButton.isSelected = !publishVideo
             } else {
                 publishVideoButton.isSelected = false
             }
@@ -42,7 +42,7 @@ final class MeetingViewController: UIViewController {
     @IBOutlet weak var publishAudioButton: UIButton! {
         didSet {
             if let publishAudio = UserDefaults.standard.object(forKey: Constants.publishAudio) as? Bool {
-                publishAudioButton.isSelected = publishAudio
+                publishAudioButton.isSelected = !publishAudio
             } else {
                 publishAudioButton.isSelected = false
             }
