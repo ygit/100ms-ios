@@ -135,7 +135,9 @@ final class MeetingViewModel: NSObject,
 
         cell.pinButton.isSelected = model.isPinned
 
-        cell.muteButton.isSelected = model.isMuted
+        if let audioEnabled = model.stream.audioTracks?.first?.enabled {
+            cell.muteButton.isSelected = !audioEnabled
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -193,5 +195,14 @@ final class MeetingViewModel: NSObject,
         if let videoTrack = hms.localStream?.videoTracks?.first {
             videoTrack.enabled = isOn
         }
+    }
+    
+    func muteRemoteStreams(_ isMuted: Bool) {
+        var indexes = [IndexPath]()
+        for (index, model) in hms.model.enumerated() where model.stream.audioTracks?.first?.enabled != isMuted {
+            indexes.append(IndexPath(item: index, section: 0))
+        }
+        hms.model.forEach { $0.stream.audioTracks?.first?.enabled = isMuted }
+        collectionView?.reloadItems(at: indexes)
     }
 }

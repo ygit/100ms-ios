@@ -48,7 +48,7 @@ final class MeetingViewController: UIViewController {
             }
         }
     }
-
+    
     private var chatBadgeCount = 0
 
     // MARK: - View Lifecycle
@@ -131,17 +131,15 @@ final class MeetingViewController: UIViewController {
 
     @IBAction func switchLayoutTapped(_ sender: UIButton) {
 
-        sender.isSelected = !sender.isSelected
+//        sender.isSelected = !sender.isSelected
     }
 
-    @IBAction func volumeTapped(_ sender: UIButton) {
+    
+    @IBAction func muteRemoteStreamsTapped(_ sender: UIButton) {
+        viewModel.muteRemoteStreams(sender.isSelected)
         sender.isSelected = !sender.isSelected
-        let volumeView = MPVolumeView()
-        if let view = volumeView.subviews.first as? UISlider {
-            view.value = sender.isSelected ? 0.0 : 1.0
-        }
     }
-
+    
     @IBAction func switchCameraTapped(_ sender: UIButton) {
         viewModel.switchCamera()
     }

@@ -47,7 +47,6 @@ class VideoCollectionViewCell: UICollectionViewCell {
     }
 
     @IBAction func muteTapped(_ sender: UIButton) {
-        model?.isMuted = sender.isSelected
         model?.stream.audioTracks?.first?.enabled = sender.isSelected
         sender.isSelected = !sender.isSelected
         NotificationCenter.default.post(name: Constants.muteTapped,

@@ -21,8 +21,6 @@ class VideoModel {
 
     var isPinned = false
 
-    var isMuted = false
-
     var indexPath: IndexPath?
 
     init(_ peer: HMSPeer, _ stream: HMSStream, _ videoTrack: HMSVideoTrack) {

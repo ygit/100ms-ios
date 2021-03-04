@@ -20,6 +20,94 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dbh-7g-s3g">
+                                <rect key="frame" x="338" y="44" width="44" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="FBk-xL-BtU"/>
+                                    <constraint firstAttribute="width" constant="44" id="Kah-tw-fMH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <inset key="contentEdgeInsets" minX="12" minY="12" maxX="12" maxY="12"/>
+                                <state key="normal" image="settings">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                    </preferredSymbolConfiguration>
+                                </state>
+                                <connections>
+                                    <action selector="editSettingsTapped:" destination="mjG-Ba-if7" eventType="touchUpInside" id="10q-zp-9Fk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e9C-pq-ppt">
+                                <rect key="frame" x="294" y="44" width="44" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="JGd-Pu-Vel"/>
+                                </constraints>
+                                <state key="normal" image="arrow.triangle.2.circlepath.camera" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                    </preferredSymbolConfiguration>
+                                </state>
+                                <connections>
+                                    <action selector="switchCameraTapped:" destination="mjG-Ba-if7" eventType="touchUpInside" id="oYx-wA-9sj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="05R-Fu-pzL">
+                                <rect key="frame" x="250" y="44" width="44" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="dsa-av-Xnu"/>
+                                </constraints>
+                                <state key="normal" image="square.bottomhalf.fill" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                    </preferredSymbolConfiguration>
+                                </state>
+                                <state key="selected" image="rectangle.grid.2x2" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                    </preferredSymbolConfiguration>
+                                </state>
+                                <connections>
+                                    <action selector="switchLayoutTapped:" destination="mjG-Ba-if7" eventType="touchUpInside" id="WXT-y8-RXY"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i1F-BP-LLz">
+                                <rect key="frame" x="206" y="44" width="44" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="ll8-3i-2Qf"/>
+                                </constraints>
+                                <state key="normal" image="speaker.wave.3.fill" catalog="system">
+                                    <color key="titleColor" systemColor="linkColor"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                    </preferredSymbolConfiguration>
+                                </state>
+                                <state key="selected" image="speaker.slash.fill" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                    </preferredSymbolConfiguration>
+                                </state>
+                                <connections>
+                                    <action selector="muteRemoteStreamsTapped:" destination="mjG-Ba-if7" eventType="touchUpInside" id="Jbp-9w-rfQ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdt-Kd-OJO">
+                                <rect key="frame" x="8" y="44" width="198" height="44"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <state key="normal" title="Room ">
+                                    <color key="titleColor" systemColor="linkColor"/>
+                                    <imageReference key="image" image="chevron.down" catalog="system" symbolScale="medium"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                    </preferredSymbolConfiguration>
+                                </state>
+                                <connections>
+                                    <action selector="roomNameTapped:" destination="mjG-Ba-if7" eventType="touchUpInside" id="O68-VI-z7Y"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NKq-UE-p7N">
                                 <rect key="frame" x="0.0" y="88" width="390" height="1"/>
                                 <color key="backgroundColor" systemColor="separatorColor"/>
@@ -127,59 +215,6 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dbh-7g-s3g">
-                                <rect key="frame" x="338" y="44" width="44" height="44"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="FBk-xL-BtU"/>
-                                    <constraint firstAttribute="width" constant="44" id="Kah-tw-fMH"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <inset key="contentEdgeInsets" minX="12" minY="12" maxX="12" maxY="12"/>
-                                <state key="normal" image="settings">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                    </preferredSymbolConfiguration>
-                                </state>
-                                <connections>
-                                    <action selector="editSettingsTapped:" destination="mjG-Ba-if7" eventType="touchUpInside" id="10q-zp-9Fk"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="05R-Fu-pzL">
-                                <rect key="frame" x="250" y="44" width="44" height="44"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="dsa-av-Xnu"/>
-                                </constraints>
-                                <state key="normal" image="square.bottomhalf.fill" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                    </preferredSymbolConfiguration>
-                                </state>
-                                <state key="selected" image="rectangle.grid.2x2" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                    </preferredSymbolConfiguration>
-                                </state>
-                                <connections>
-                                    <action selector="switchLayoutTapped:" destination="mjG-Ba-if7" eventType="touchUpInside" id="WXT-y8-RXY"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e9C-pq-ppt">
-                                <rect key="frame" x="294" y="44" width="44" height="44"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="JGd-Pu-Vel"/>
-                                </constraints>
-                                <state key="normal" image="arrow.triangle.2.circlepath.camera" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                    </preferredSymbolConfiguration>
-                                </state>
-                                <connections>
-                                    <action selector="switchCameraTapped:" destination="mjG-Ba-if7" eventType="touchUpInside" id="oYx-wA-9sj"/>
-                                </connections>
-                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Tb2-3p-SS0">
                                 <rect key="frame" x="0.0" y="766" width="390" height="44"/>
                                 <subviews>
@@ -259,20 +294,6 @@
                                 </constraints>
                                 <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="0.0" right="8"/>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdt-Kd-OJO">
-                                <rect key="frame" x="8" y="44" width="242" height="44"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                <state key="normal" title="Room ">
-                                    <color key="titleColor" systemColor="linkColor"/>
-                                    <imageReference key="image" image="chevron.down" catalog="system" symbolScale="medium"/>
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                    </preferredSymbolConfiguration>
-                                </state>
-                                <connections>
-                                    <action selector="roomNameTapped:" destination="mjG-Ba-if7" eventType="touchUpInside" id="O68-VI-z7Y"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kDS-UD-GQA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -282,12 +303,15 @@
                             <constraint firstItem="kDS-UD-GQA" firstAttribute="trailing" secondItem="NKq-UE-p7N" secondAttribute="trailing" id="6G9-wL-MJg"/>
                             <constraint firstItem="kDS-UD-GQA" firstAttribute="trailing" secondItem="DyH-bp-NTF" secondAttribute="trailing" id="93z-Xv-J5z"/>
                             <constraint firstItem="e9C-pq-ppt" firstAttribute="top" secondItem="dbh-7g-s3g" secondAttribute="top" id="EaT-W8-Za3"/>
+                            <constraint firstItem="05R-Fu-pzL" firstAttribute="leading" secondItem="i1F-BP-LLz" secondAttribute="trailing" id="Ej2-oP-Aui"/>
                             <constraint firstItem="e9C-pq-ppt" firstAttribute="bottom" secondItem="dbh-7g-s3g" secondAttribute="bottom" id="H2q-rx-LEt"/>
                             <constraint firstItem="DyH-bp-NTF" firstAttribute="top" secondItem="kDS-UD-GQA" secondAttribute="top" id="Ny9-re-MbV"/>
                             <constraint firstItem="DyH-bp-NTF" firstAttribute="leading" secondItem="kDS-UD-GQA" secondAttribute="leading" id="OJf-s2-MkC"/>
+                            <constraint firstItem="i1F-BP-LLz" firstAttribute="bottom" secondItem="05R-Fu-pzL" secondAttribute="bottom" id="TXT-jg-zc0"/>
                             <constraint firstItem="05R-Fu-pzL" firstAttribute="bottom" secondItem="e9C-pq-ppt" secondAttribute="bottom" id="UX5-f1-Haq"/>
                             <constraint firstItem="kDS-UD-GQA" firstAttribute="trailing" secondItem="dbh-7g-s3g" secondAttribute="trailing" constant="8" id="XEz-uO-kgn"/>
                             <constraint firstItem="gdt-Kd-OJO" firstAttribute="bottom" secondItem="05R-Fu-pzL" secondAttribute="bottom" id="Xsz-6C-DUF"/>
+                            <constraint firstItem="i1F-BP-LLz" firstAttribute="leading" secondItem="gdt-Kd-OJO" secondAttribute="trailing" id="Y3D-QU-DJO"/>
                             <constraint firstItem="DyH-bp-NTF" firstAttribute="top" secondItem="dbh-7g-s3g" secondAttribute="bottom" id="ZNn-6N-Bo0"/>
                             <constraint firstItem="gdt-Kd-OJO" firstAttribute="top" secondItem="05R-Fu-pzL" secondAttribute="top" id="Zks-ng-9DW"/>
                             <constraint firstItem="NKq-UE-p7N" firstAttribute="top" secondItem="dbh-7g-s3g" secondAttribute="bottom" id="bSm-sI-jDc"/>
@@ -295,10 +319,10 @@
                             <constraint firstItem="NKq-UE-p7N" firstAttribute="leading" secondItem="kDS-UD-GQA" secondAttribute="leading" id="cli-Gu-K2b"/>
                             <constraint firstItem="kDS-UD-GQA" firstAttribute="top" secondItem="dbh-7g-s3g" secondAttribute="top" id="dhU-gY-ww1"/>
                             <constraint firstItem="gdt-Kd-OJO" firstAttribute="leading" secondItem="kDS-UD-GQA" secondAttribute="leading" constant="8" id="frJ-19-L9J"/>
-                            <constraint firstItem="05R-Fu-pzL" firstAttribute="leading" secondItem="gdt-Kd-OJO" secondAttribute="trailing" id="ieH-SV-bbx"/>
                             <constraint firstItem="Tb2-3p-SS0" firstAttribute="bottom" secondItem="kDS-UD-GQA" secondAttribute="bottom" id="kEC-yb-W5b"/>
                             <constraint firstItem="DyH-bp-NTF" firstAttribute="top" secondItem="dbh-7g-s3g" secondAttribute="bottom" constant="8" symbolic="YES" id="nva-4l-9tN"/>
                             <constraint firstItem="Tb2-3p-SS0" firstAttribute="top" secondItem="DyH-bp-NTF" secondAttribute="bottom" id="o75-dd-mk7"/>
+                            <constraint firstItem="i1F-BP-LLz" firstAttribute="top" secondItem="05R-Fu-pzL" secondAttribute="top" id="p5u-ce-yxk"/>
                             <constraint firstItem="Tb2-3p-SS0" firstAttribute="leading" secondItem="kDS-UD-GQA" secondAttribute="leading" id="qsD-NW-0k6"/>
                             <constraint firstItem="dbh-7g-s3g" firstAttribute="leading" secondItem="e9C-pq-ppt" secondAttribute="trailing" id="vck-dG-6af"/>
                             <constraint firstItem="kDS-UD-GQA" firstAttribute="trailing" secondItem="Tb2-3p-SS0" secondAttribute="trailing" id="vqV-8I-DxR"/>
@@ -355,6 +379,8 @@
         <image name="pin.slash.fill" catalog="system" width="116" height="128"/>
         <image name="rectangle.grid.2x2" catalog="system" width="128" height="99"/>
         <image name="settings" width="256" height="256"/>
+        <image name="speaker.slash.fill" catalog="system" width="124" height="128"/>
+        <image name="speaker.wave.3.fill" catalog="system" width="128" height="86"/>
         <image name="square.bottomhalf.fill" catalog="system" width="128" height="114"/>
         <image name="video.fill" catalog="system" width="128" height="82"/>
         <image name="video.slash.fill" catalog="system" width="128" height="106"/>
