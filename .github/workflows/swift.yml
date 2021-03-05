@@ -15,6 +15,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
     - name: Build Example app
+    - uses: webfactory/ssh-agent@v0.5.0
+              with:
+                  ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       run: cd Example ; bundle install ; pod install ; bundle exec fastlane build_example_app
 
 # name: "build-test"
