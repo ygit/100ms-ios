@@ -4,9 +4,59 @@ storage_mode("git")
 
 type("development") # The default type, can be: appstore, adhoc, enterprise or development
 # ENV['MATCH_GIT_BASIC_AUTHORIZATION'] = "MTAwbXN0ZWNoOmM4NjJkOGMyODdiMDRkZmNkMTNhMTU2ZWJhZjM1NDUzZDBiMTlhZWE="
-ENV["FASTLANE_PASSWORD"] = "c862d8c287b04dfcd13a156ebaf35453d0b19aea"
+# ENV["FASTLANE_PASSWORD"] = "c862d8c287b04dfcd13a156ebaf35453d0b19aea"
 app_identifier(["live.100ms.videoapp"])
 username("tech@100ms.live") # Your Apple Developer Portal username
+git_private_key("-----BEGIN OPENSSH PRIVATE KEY-----
+    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
+    -----END OPENSSH PRIVATE KEY-----
+    ")
 
 # For all available options run `fastlane match --help`
 # Remove the # in the beginning of the line to enable the other options
