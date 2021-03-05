@@ -25,7 +25,6 @@ platform :ios do
       type: "development",
       readonly: true,
       shallow_clone: true,
-      git_basic_authorization: Base64.strict_encode64("100mstech:c862d8c287b04dfcd13a156ebaf35453d0b19aea"),
       readonly: true
       # keychain_name: "login.keychain",
       # keychain_password: ENV["MATCH_PASSWORD"]
