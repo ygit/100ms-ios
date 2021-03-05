@@ -25,10 +25,7 @@ platform :ios do
 
     match(
       type: "development",
-      readonly: true,
-      shallow_clone: true,
-      readonly: true,
-      git_basic_authorization: Base64.strict_encode64("100mstech:038befa3f9e1c8cdf651fdd50faa4f7f91087df2"),
+      shallow_clone: true
     )
 
     gym(
