@@ -26,8 +26,6 @@ platform :ios do
       readonly: true,
       shallow_clone: true,
       readonly: true
-      # keychain_name: "login.keychain",
-      # keychain_password: ENV["MATCH_PASSWORD"]
     )
 
     gym(
