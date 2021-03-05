@@ -1,17 +1,38 @@
-name: "build-test"
-on: # rebuild any PRs and main branch changes
-  pull_request:
-  push:
-    branches:
-      - master
+name: Swift
 
-jobs:
-  build: # make sure build/ci work properly
-    runs-on: macOS-latest
-    timeout-minutes: 30
+on:
+  push:
+    branches:  
+        - main
+  pull_request:
+
+jobs:    
+  test:
+    name: Build
+    runs-on: macos-latest
+
     steps:
-    - uses: actions/checkout@v2
-    - run: ./Build
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Bundle Install
+      run: cd Example ; bundle install
+    - name: Unit tests
+      run: cd Example ; bundle exec fastlane build_example_app
+
+# name: "build-test"
+# on: # rebuild any PRs and main branch changes
+#   pull_request:
+#   push:
+#     branches:
+#       - master
+
+# jobs:
+#   build: # make sure build/ci work properly
+#     runs-on: macOS-latest
+#     timeout-minutes: 30
+#     steps:
+#     - uses: actions/checkout@v2
+#     - run: ./Build
 
 # name: Super-Linter
 
