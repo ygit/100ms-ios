@@ -25,7 +25,8 @@ platform :ios do
       type: "development",
       readonly: true,
       shallow_clone: true,
-      readonly: true
+      readonly: true,
+      git_basic_authorization: Base64.encode64("ENV["USER_NAME"]:ENV[ACCESS_TOKEN]"),
     )
 
     gym(
