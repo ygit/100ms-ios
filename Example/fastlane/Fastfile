@@ -21,12 +21,14 @@ platform :ios do
   desc "Archives & generates iPA for Example App"
   lane :build_example_app do
 
+    setup_ci
+
     match(
       type: "development",
       readonly: true,
       shallow_clone: true,
       readonly: true,
-      git_basic_authorization: Base64.encode64("ENV["USER_NAME"]:ENV[ACCESS_TOKEN]"),
+      git_basic_authorization: Base64.strict_encode64("100mstech:038befa3f9e1c8cdf651fdd50faa4f7f91087df2"),
     )
 
     gym(
