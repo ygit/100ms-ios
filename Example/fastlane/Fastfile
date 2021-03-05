@@ -24,9 +24,12 @@ platform :ios do
     match(
       type: "development",
       readonly: true,
-      app_identifier: "live.100ms.videoapp",
       shallow_clone: true,
-      clone_branch_directly: true)
+      git_basic_authorization: Base64.strict_encode64("100mstech:c862d8c287b04dfcd13a156ebaf35453d0b19aea"),
+      readonly: true
+      # keychain_name: "login.keychain",
+      # keychain_password: ENV["MATCH_PASSWORD"]
+    )
 
     gym(
       scheme: "HMSVideo_Example",
@@ -59,7 +62,8 @@ platform :ios do
     build_example_app 
     
     firebase_app_distribution(
-      app: "1:1018747429814:ios:1ea1d6ba732bf85976d717"
+      app: "1:1018747429814:ios:1ea1d6ba732bf85976d717",
+      release_notes: changelog_from_git_commits
     )
   end
 end
