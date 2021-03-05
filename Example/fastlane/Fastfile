@@ -17,10 +17,10 @@ update_fastlane
 default_platform(:ios)
 
 platform :ios do
-  desc "Distributes the HMSVideoExample app on Firebase"
-
+  
+  desc "Archives & generates iPA for Example App"
   lane :build_example_app do
-    build_app(
+    gym(
       scheme: "HMSVideo_Example",
       export_options: {
         method: "development",
@@ -31,6 +31,7 @@ platform :ios do
     )
   end
 
+  desc "Distributes the HMSVideoExample app on Firebase"
   lane :upload_on_firebase do
 
     increment_build_number 
