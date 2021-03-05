@@ -22,6 +22,8 @@ platform :ios do
   desc "Distributes the HMSVideoExample app on Firebase"
   lane :upload_on_firebase do
     
+    setup_ci
+    
     match(type: "development",
          readonly: true,
       clone_branch_directly: true,
