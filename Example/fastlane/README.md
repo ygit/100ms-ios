@@ -16,11 +16,16 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## iOS
+### ios build_example_app
+```
+fastlane ios build_example_app
+```
+Distributes the HMSVideoExample app on Firebase
 ### ios upload_on_firebase
 ```
 fastlane ios upload_on_firebase
 ```
-Distributes the HMSVideoExample app on Firebase
+
 
 ----
 
