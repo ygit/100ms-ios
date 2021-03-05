@@ -31,6 +31,14 @@ platform :ios do
     )
   end
 
+  # desc "Runs Unit Tests"
+  # lane :tests do
+  #   scan(scheme: "HMSVideo_Tests",
+  #       devices: ["iPhone 12", "iPhone 12 Pro"],
+  #       buildlog_path: "./fastlane/fastlane-buildlog",
+  #       derived_data_path: "~/Library/Developer/Xcode/DerivedData")
+  # end
+
   desc "Distributes the HMSVideoExample app on Firebase"
   lane :upload_on_firebase do
 
