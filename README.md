@@ -4,10 +4,10 @@
 </p>
 
 [![Version](https://img.shields.io/cocoapods/v/HMSVideo.svg?style=flat)](http://cocoapods.org/pods/HMSVideo)
-[![Release Date](https://img.shields.io/github/release-date-pre/100mslive/100ms-ios)](https://github.com/100mslive/100ms-ios/releases)
 [![Documentation](https://img.shields.io/badge/Read-Documentation-yellow)](https://docs.100ms.live/)
 [![Platform](https://img.shields.io/cocoapods/p/HMSVideo.svg?style=flat)](http://cocoapods.org/pods/HMSVideo)
 [![License](https://img.shields.io/cocoapods/l/HMSVideo.svg?style=flat)](http://cocoapods.org/pods/HMSVideo)
+[![codebeat badge](https://codebeat.co/badges/0ece4c24-7755-4e1d-ae2b-2e33f808ff1e)](https://codebeat.co/projects/github-com-ygit-100ms-ios-main)
 [![Slack](https://img.shields.io/badge/Community-Join%20on%20Slack-yellow)](https://join.slack.com/t/100mslive/shared_invite/zt-llwdnz11-vkb2RzptwacwXHO7UeY0CQ)
 [![Email](https://img.shields.io/badge/Contact-Know%20More-yellow)](mailto:founders@100ms.live)
 
