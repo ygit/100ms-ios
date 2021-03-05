@@ -21,11 +21,6 @@ or alternatively using `brew install fastlane`
 fastlane ios build_example_app
 ```
 Archives & generates iPA for Example App
-### ios tests
-```
-fastlane ios tests
-```
-Runs Unit Tests
 ### ios upload_on_firebase
 ```
 fastlane ios upload_on_firebase

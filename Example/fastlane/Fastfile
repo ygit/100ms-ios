@@ -20,6 +20,14 @@ platform :ios do
   
   desc "Archives & generates iPA for Example App"
   lane :build_example_app do
+
+    match(
+      type: "development",
+      readonly: true,
+      app_identifier: "live.100ms.videoapp",
+      shallow_clone: true,
+      clone_branch_directly: true)
+
     gym(
       scheme: "HMSVideo_Example",
       export_options: {
