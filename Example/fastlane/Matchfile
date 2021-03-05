@@ -1,9 +1,10 @@
-git_url("https://github.com/100mslive/apple_dev_certs.git")
+git_url("git@github.com:100mslive/apple_dev_certs.git")
 
 storage_mode("git")
 
 type("development") # The default type, can be: appstore, adhoc, enterprise or development
-ENV['MATCH_GIT_BASIC_AUTHORIZATION'] = "MTAwbXN0ZWNoOmM4NjJkOGMyODdiMDRkZmNkMTNhMTU2ZWJhZjM1NDUzZDBiMTlhZWE="
+# ENV['MATCH_GIT_BASIC_AUTHORIZATION'] = "MTAwbXN0ZWNoOmM4NjJkOGMyODdiMDRkZmNkMTNhMTU2ZWJhZjM1NDUzZDBiMTlhZWE="
+ENV["FASTLANE_PASSWORD"] = "c862d8c287b04dfcd13a156ebaf35453d0b19aea"
 app_identifier(["live.100ms.videoapp"])
 username("tech@100ms.live") # Your Apple Developer Portal username
 
