@@ -1,4 +1,4 @@
-git_url("git@github.com:100mslive/apple_dev_certs.git")
+git_url("https://github.com/100mslive/apple_dev_certs.git")
 
 storage_mode("git")
 
