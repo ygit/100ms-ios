@@ -3,7 +3,7 @@
 platform :ios, '10.0'
 
 target 'HMSVideo_Example' do
-  pod 'HMSVideo', :path => '../'
+  pod 'HMSVideo', :path => 'HMSVideo.podspec'
   
   pod 'Firebase/Crashlytics'
   # pod 'Firebase/Analytics'
