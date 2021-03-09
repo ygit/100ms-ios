@@ -15,8 +15,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Build Example app
-      run: | 
-              ls -al ~/.ssh
+      run: |
               cd Example
               bundle install
               pod install
