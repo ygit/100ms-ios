@@ -19,10 +19,6 @@ default_platform(:ios)
 platform :ios do
 
   lane :setup do
-    setup_project
-  end
-  
-  private_lane :setup_project do
     create_keychain(
       name: "action_keychain",
       password: "meow",
@@ -30,6 +26,11 @@ platform :ios do
       unlock: true,
       timeout: 3600,
       lock_when_sleeps: false
+    )
+    unlock_keychain( 
+      path: "action_keychain",
+      password: "meow",
+      set_default: true
     )
   end
   
