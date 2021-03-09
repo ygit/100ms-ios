@@ -41,6 +41,8 @@ platform :ios do
       readonly: true,
       type: "development", 
       app_identifier: "live.100ms.videoapp",
+      keychain_name: "action_keychain",
+      keychain_password: "meow",
       git_private_key: ENV["SSH_PRIVATE_KEY"]
     )
 
