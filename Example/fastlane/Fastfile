@@ -47,10 +47,9 @@ platform :ios do
       git_private_key: ENV["SSH_PRIVATE_KEY"]
     )
 
-    sync_code_signing
     get_certificates
     get_provisioning_profile
-    enable_automatic_code_signing(path: "HMSVideoExample.xcworkspace")
+    # enable_automatic_code_signing(path: "HMSVideoExample.xcworkspace")
 
     gym(
       scheme: "HMSVideo_Example",
