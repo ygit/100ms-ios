@@ -40,7 +40,7 @@ platform :ios do
       readonly: true,
       type: "development", 
       app_identifier: "live.100ms.videoapp",
-      git_basic_authorization: ENV["AUTH"])
+      git_basic_authorization: ENV["AUTH"]
     )
 
     gym(
