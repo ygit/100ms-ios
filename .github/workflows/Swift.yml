@@ -24,7 +24,6 @@ jobs:
               cd Example
               bundle install
               pod install
-              bundle exec fastlane setup
               bundle exec fastlane build_example_app --verbose
               
 # name: "build-test"
