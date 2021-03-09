@@ -15,14 +15,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Build Example app
-      env:
-        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
       run: |
               cd Example
               bundle install
               pod install
               bundle exec fastlane build_example_app
-
 # name: "build-test"
 # on: # rebuild any PRs and main branch changes
 #   pull_request:
