@@ -23,7 +23,7 @@ jobs:
               ls -al ~/.ssh
               cd Example
               bundle install
-              fast match development git_basic_authorization:ENV[\"AUTH\"] --readonly
+              bundle exec fastlane match development git_basic_authorization:ENV[\"AUTH\"] --readonly
               pod install
               bundle exec fastlane build_example_app
               
