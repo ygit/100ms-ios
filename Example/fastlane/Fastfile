@@ -47,8 +47,6 @@ platform :ios do
       scheme: "HMSVideo_Example",
       export_options: {
         method: "development",
-        skip_archive: true,
-        skip_package_ipa: true,
         provisioningProfiles: { 
           "live.100ms.videoapp" => "match Development live.100ms.videoapp"
         }

@@ -14,13 +14,10 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: webfactory/ssh-agent
-      uses: webfactory/ssh-agent@v0.5.0
-      with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
     - name: Build Example app
       env: 
         AUTH: ${{ secrets.AUTH }}
+        MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
       run: |
               ls -al ~/.ssh
               cd Example
