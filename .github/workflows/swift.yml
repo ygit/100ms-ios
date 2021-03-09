@@ -18,15 +18,22 @@ jobs:
       uses: webfactory/ssh-agent@v0.5.0
       with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+    - name: Run fastlane setup
+        env:
+          APPLE_ACCOUNT: ${{ secrets.APPLE_ACCOUNT }}
+          TEAM_ID: ${{ secrets.TEAM_ID }}
+        run: |
+              cd Example
+              bundle install
+              pod install --verbose
+              bundle exec fastlane setup --verbose
     - name: Build Example app
-      env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      env: 
+        AUTH:  ${{ secrets.AUTH }}
       run: |
               ls -al ~/.ssh
               cd Example
-              bundle install
-              pod install
-              bundle exec fastlane build_example_app
+              bundle exec fastlane build_example_app --verbose
               
 # name: "build-test"
 # on: # rebuild any PRs and main branch changes

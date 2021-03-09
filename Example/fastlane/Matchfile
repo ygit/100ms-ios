@@ -2,7 +2,6 @@ git_url("git@github.com:100mslive/apple_dev_certs.git")
 
 storage_mode("git")
 
-git_basic_authorization(Base64.encode64("ygit:879babb9e648e7d133c595eace16106706ac5933"))
 type("development") 
 app_identifier(["live.100ms.videoapp"])
 username("tech@100ms.live") 

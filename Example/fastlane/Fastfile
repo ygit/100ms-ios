@@ -17,6 +17,21 @@ update_fastlane
 default_platform(:ios)
 
 platform :ios do
+
+  lane :setup do
+    setup_project
+  end
+  
+  private_lane :setup_project do
+    create_keychain(
+      name: "action_keychain",
+      password: "meow",
+      default_keychain: true,
+      unlock: true,
+      timeout: 3600,
+      lock_when_sleeps: false
+    )
+  end
   
   desc "Archives & generates iPA for Example App"
   lane :build_example_app do
@@ -24,7 +39,8 @@ platform :ios do
     match(
       readonly: true,
       type: "development", 
-      app_identifier: "live.100ms.videoapp"
+      app_identifier: "live.100ms.videoapp",
+      git_basic_authorization: ENV["AUTH"])
     )
 
     gym(
