@@ -21,17 +21,12 @@ platform :ios do
   desc "Archives & generates iPA for Example App"
   lane :build_example_app do
 
-    setup_ci
-
-    match(
-      type: "development",
-      shallow_clone: true
-    )
-
     gym(
       scheme: "HMSVideo_Example",
       export_options: {
         method: "development",
+        skip_archive: true,
+        skip_package_ipa: true,
         provisioningProfiles: { 
           "live.100ms.videoapp" => "match Development live.100ms.videoapp"
         }
