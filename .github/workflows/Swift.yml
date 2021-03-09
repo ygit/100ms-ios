@@ -23,7 +23,9 @@ jobs:
               cd Example
               bundle install
               pod install
-              bundle exec fastlane build_example_app
+              cat ENV["AUTH"]
+              bundle exec fastlane setup
+              bundle exec fastlane build_example_app --verbose
               
 # name: "build-test"
 # on: # rebuild any PRs and main branch changes
