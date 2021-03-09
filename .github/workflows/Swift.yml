@@ -19,10 +19,10 @@ jobs:
       with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
     - name: Run fastlane setup
-        env:
+      env:
           APPLE_ACCOUNT: ${{ secrets.APPLE_ACCOUNT }}
           TEAM_ID: ${{ secrets.TEAM_ID }}
-        run: |
+      run: |
               cd Example
               bundle install
               pod install --verbose
