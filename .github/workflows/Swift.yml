@@ -18,12 +18,12 @@ jobs:
       env: 
         AUTH: ${{ secrets.AUTH }}
         MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       run: |
               ls -al ~/.ssh
               cd Example
               bundle install
               pod install
-              cat ENV["AUTH"]
               bundle exec fastlane setup
               bundle exec fastlane build_example_app --verbose
               
